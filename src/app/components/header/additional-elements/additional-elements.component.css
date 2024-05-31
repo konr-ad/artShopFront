@@ -1,0 +1,25 @@
+.additional-elements {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto; /* Center the additional elements */
+}
+
+.additional-elements .social-icon {
+  font-size: 1.5em;
+  color: #000;
+  margin-right: 0.5rem;
+}
+
+.additional-elements .pipe {
+  margin: 0 0.5rem;
+}
+
+.additional-elements .translate-button {
+  background-color: #007bff;
+  border: none;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  cursor: pointer;
+}
