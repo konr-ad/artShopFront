@@ -1,0 +1,67 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Painting</title>
+</head>
+<body>
+<form #paintingForm="ngForm" (ngSubmit)="onSubmit(paintingForm)" class="container mt-4">
+  <div class="form-group">
+    <label for="type">Type:</label>
+    <input type="text" id="type" name="type" class="form-control" [(ngModel)]="newPainting.type" required>
+  </div>
+
+  <div class="form-group">
+    <label for="state">State:</label>
+    <input type="text" id="state" name="state" class="form-control" [(ngModel)]="newPainting.state" required>
+  </div>
+
+  <div class="form-group">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" class="form-control" [(ngModel)]="newPainting.name" required>
+  </div>
+
+  <div class="form-group">
+    <label for="length">Length:</label>
+    <input type="number" id="length" name="length" class="form-control" [(ngModel)]="newPainting.length" min="1" required>
+  </div>
+
+  <div class="form-group">
+    <label for="width">Width:</label>
+    <input type="number" id="width" name="width" class="form-control" [(ngModel)]="newPainting.width" min="1" required>
+  </div>
+
+  <div class="form-group">
+    <label for="price">Price:</label>
+    <input type="number" id="price" name="price" class="form-control" [(ngModel)]="newPainting.price" min="1" step="1" required>
+  </div>
+
+  <div class="form-group">
+    <label for="image">Image:</label>
+    <input type="file" id="image" name="image" class="form-control-file" (change)="onFileChange($event)" required>
+  </div>
+
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-4 d-flex align-items-stretch mb-4" *ngFor="let painting of paintings">
+      <div class="card shadow-sm">
+        <img class="card-img-top img-fluid" [src]="painting.imageUrl" alt="{{ painting.name }}">
+        <div class="card-body d-flex flex-column">
+          <p class="card-text">{{ painting.name }}</p>
+          <div class="mt-auto d-flex justify-content-between align-items-center">
+            <small class="text-muted">{{ painting.price | currency }}</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!--</body>-->
+<!--</html>-->
