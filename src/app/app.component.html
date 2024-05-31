@@ -1,39 +1,7 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">
-    <img src="assets/logo.png" alt="Logo" class="logo">
-  </a>
-  <div class="collapse navbar-collapse" id="navbarNav">
-    <ul class="navbar-nav mx-auto">
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownShop" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Shop
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdownShop">
-          <a class="dropdown-item" href="#">All</a>
-          <a class="dropdown-item" href="#">Books</a>
-          <a class="dropdown-item" href="#">Pins</a>
-          <a class="dropdown-item" href="#">Prints</a>
-          <a class="dropdown-item" href="#">Paintings</a>
-          <a class="dropdown-item" href="#">Shipping</a>
-        </div>
-      </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownInfo" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Info
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdownInfo">
-          <a class="dropdown-item" href="#">About</a>
-          <a class="dropdown-item" href="#">Back to site</a>
-          <a class="dropdown-item" href="#">Contact</a>
-        </div>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Cart</a>
-      </li>
-    </ul>
-  </div>
-</nav>
-
 <div class="container mt-4">
+  <app-logo></app-logo>
+  <app-additional-elements></app-additional-elements>
+  <app-navbar></app-navbar>
   <router-outlet></router-outlet>
+  <app-footer></app-footer>
 </div>

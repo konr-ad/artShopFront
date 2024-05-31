@@ -1,19 +1,26 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ShopComponent } from './shop/shop.component';
-import { InfoComponent } from './info/info.component';
-import { CartComponent } from './cart/cart.component';
+import { HomeComponent } from './components/home/home.component';
+import { ShopComponent } from "./components/header/navbar/shop/shop.component";
+import {BrowserModule} from "@angular/platform-browser";
 
 const routes: Routes = [
+  { path: '', component: HomeComponent },
+  // Add routes for other components here if needed
   { path: 'shop', component: ShopComponent },
-  { path: 'info', component: InfoComponent },
-  { path: 'cart', component: CartComponent },
-  { path: '', redirectTo: '/shop', pathMatch: 'full' }
+  { path: '**', redirectTo: '', pathMatch: 'full' }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  declarations: [
+    ShopComponent
+  ],
+  imports: [
+    BrowserModule,
+    RouterModule.forRoot(routes)
+  ],
+  exports: [
+    RouterModule
+  ]
 })
 export class AppRoutingModule { }
-

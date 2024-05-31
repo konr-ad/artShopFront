@@ -1,15 +1,37 @@
-body {
+body, html {
+  height: 100%;
+  margin: 0;
   font-family: Arial, sans-serif;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.content {
+  flex: 1;
+}
+
+footer {
+  width: 100%;
+  text-align: center;
+  background-color: #343a40;
+  color: #ffffff;
+  padding: 1rem 0;
 }
 
 .navbar-brand {
   display: flex;
+  justify-content: center;
   align-items: center;
+  width: 100%;
 }
 
-.logo {
-  height: 50px;
-  margin-right: 10px;
+.navbar-brand .logo {
+  max-width: 30%;
+  height: auto;
 }
 
 .navbar-nav .nav-link {
@@ -31,12 +53,7 @@ body {
   color: green;
 }
 
-/*.dropdown-item:hover {*/
-/*  background-color: lightgray;*/
-/*}*/
-
-/* Enable dropdown on hover */
 .nav-item.dropdown:hover .dropdown-menu {
   display: block;
-  margin-top: 0; /* removes the gap so it doesn't close */
+  margin-top: 0;
 }
