@@ -1,0 +1,43 @@
+.header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #ffffff;
+    padding: 1rem;
+}
+
+.header-content {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.logo {
+    margin-bottom: 1rem; /* Add space below the logo */
+}
+
+.additional-elements {
+    margin-bottom: 1rem; /* Add space below the additional elements */
+}
+
+.navbar {
+    width: 100%;
+}
+
+/* Navbar styles */
+.navbar-nav {
+    display: flex;
+    justify-content: space-around;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.navbar-nav .nav-item .nav-link {
+    font-size: 1.25rem;
+    color: green;
+}
+
+.navbar-nav .nav-item .nav-link:hover {
+    color: darkgreen;
+}
