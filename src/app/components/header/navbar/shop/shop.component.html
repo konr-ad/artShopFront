@@ -1,1 +1,4 @@
-<p>shop works!</p>
+<div class="container">
+  <app-filters (filtersChange)="onFiltersChange($event)"></app-filters>
+  <app-product-list [filters]="filters"></app-product-list>
+</div>

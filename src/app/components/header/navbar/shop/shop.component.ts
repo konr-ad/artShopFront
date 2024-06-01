@@ -6,5 +6,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./shop.component.css']
 })
 export class ShopComponent {
+  filters: any = {
+    paintings: []
+  };
 
+  onFiltersChange(filters: any): void {
+    this.filters = filters;
+  }
 }
