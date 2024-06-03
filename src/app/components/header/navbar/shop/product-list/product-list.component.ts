@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Router } from '@angular/router';
 import { Painting, PaintingService } from 'src/app/services/painting.service';
 
 @Component({
@@ -11,7 +12,7 @@ export class ProductListComponent implements OnInit, OnChanges {
   paintings: Painting[] = [];
   filteredPaintings: Painting[] = [];
 
-  constructor(private paintingService: PaintingService) { }
+  constructor(private paintingService: PaintingService, private router: Router) { }
 
   ngOnInit(): void {
     this.fetchPaintings();
@@ -40,6 +41,12 @@ export class ProductListComponent implements OnInit, OnChanges {
       this.filteredPaintings = this.paintings.filter(painting =>
         this.filters.paintings.includes(painting.type)
       );
+    }
+  }
+
+  viewPainting(id: number | undefined): void {
+    if (id !== undefined) {
+      this.router.navigate(['/painting', id]);
     }
   }
 }

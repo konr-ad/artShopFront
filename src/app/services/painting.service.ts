@@ -26,6 +26,10 @@ export class PaintingService {
     return this.http.get<Painting[]>(this.apiUrl);
   }
 
+  getPaintingById(id: number): Observable<Painting> {
+    return this.http.get<Painting>(`${this.apiUrl}/${id}`);
+  }
+
   createPainting(painting: FormData): Observable<Painting> {
     return this.http.post<Painting>(this.apiUrl, painting);
   }

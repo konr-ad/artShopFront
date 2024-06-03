@@ -1,0 +1,14 @@
+<div *ngIf="painting" class="painting-detail">
+  <div class="breadcrumb">
+    Home / {{ painting.name }} "Huile sur toile, {{ painting.length }} cm x {{ painting.width }} cm"
+  </div>
+  <div class="painting-info">
+    <img class="painting-image" [src]="painting.imageUrl" alt="{{ painting.name }}">
+    <div class="painting-details">
+      <h2>{{ painting.name }}</h2>
+      <p>{{ painting.length }} cm x {{ painting.width }} cm</p>
+      <p class="price">{{ painting.price | currency:'EUR' }}</p>
+      <button class="add-to-cart">Add to Cart</button>
+    </div>
+  </div>
+</div>

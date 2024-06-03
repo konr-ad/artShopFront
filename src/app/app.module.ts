@@ -14,6 +14,7 @@ import { LogoComponent } from './components/header/logo/logo.component';
 import { FiltersComponent } from './components/header/navbar/shop/filters/filters.component';
 import { ProductListComponent } from './components/header/navbar/shop/product-list/product-list.component';
 import { ShopComponent } from './components/header/navbar/shop/shop.component';
+import { PaintingDetailComponent } from './components/painting-detail/painting-detail.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { ShopComponent } from './components/header/navbar/shop/shop.component';
     LogoComponent,
     ShopComponent,
     FiltersComponent,
-    ProductListComponent
+    ProductListComponent,
+    PaintingDetailComponent
   ],
   imports: [
     BrowserModule,
