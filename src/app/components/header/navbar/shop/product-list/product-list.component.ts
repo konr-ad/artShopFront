@@ -34,11 +34,11 @@ export class ProductListComponent implements OnInit, OnChanges {
   }
 
   applyFilters(): void {
-    if (!this.filters || !this.filters['paintings'] || !this.filters['paintings'].length) {
+    if (!this.filters || !this.filters.paintings.length) {
       this.filteredPaintings = this.paintings;
     } else {
       this.filteredPaintings = this.paintings.filter(painting =>
-        this.filters['paintings'].includes(painting.type)
+        this.filters.paintings.includes(painting.type)
       );
     }
   }

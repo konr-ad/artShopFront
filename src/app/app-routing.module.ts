@@ -6,15 +6,12 @@ import { BrowserModule } from "@angular/platform-browser";
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
-  // Add routes for other components here if needed
   { path: 'shop', component: ShopComponent },
   { path: 'all', component: ShopComponent },
   { path: '**', redirectTo: '', pathMatch: 'full' }
 ];
 
 @NgModule({
-  declarations: [
-  ],
   imports: [
     BrowserModule,
     RouterModule.forRoot(routes)

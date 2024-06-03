@@ -3,15 +3,15 @@
   <div>
     <h6>Paintings</h6>
     <div>
-      <input type="checkbox" id="oils" (change)="onFilterChange('paintings', 'OIL', $event)">
+      <input type="checkbox" id="oils" (change)="onFilterChange('paintings', 'OIL', $event)" [checked]="isChecked('paintings', 'OIL')">
       <label for="oils">Oils</label>
     </div>
     <div>
-      <input type="checkbox" id="monotype" (change)="onFilterChange('paintings', 'MONOTYPE', $event)">
+      <input type="checkbox" id="monotype" (change)="onFilterChange('paintings', 'MONOTYPE', $event)" [checked]="isChecked('paintings', 'MONOTYPE')">
       <label for="monotype">Monotype</label>
     </div>
     <div>
-      <input type="checkbox" id="print" (change)="onFilterChange('paintings', 'PRINT', $event)">
+      <input type="checkbox" id="print" (change)="onFilterChange('paintings', 'PRINT', $event)" [checked]="isChecked('paintings', 'PRINT')">
       <label for="print">Print</label>
     </div>
   </div>
