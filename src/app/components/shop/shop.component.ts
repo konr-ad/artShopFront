@@ -17,7 +17,7 @@ export class ShopComponent implements OnInit {
     this.route.queryParams.subscribe(params => {
       const type = params['type'];
       if (type) {
-        this.filters.paintings = [type];
+        this.filters.paintings = Array.isArray(type) ? type : [type];
       } else {
         this.filters.paintings = [];
       }
@@ -26,7 +26,7 @@ export class ShopComponent implements OnInit {
 
   onFiltersChange(filters: any): void {
     this.filters = filters;
-    const queryParams = this.filters.paintings.length ? { type: this.filters.paintings[0] } : {};
+    const queryParams = this.filters.paintings.length ? { type: this.filters.paintings } : {};
     this.router.navigate(['/shop'], { queryParams });
   }
 }

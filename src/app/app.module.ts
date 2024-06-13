@@ -11,10 +11,10 @@ import { HeaderComponent } from './components/header/header.component';
 import { AdditionalElementsComponent } from './components/header/additional-elements/additional-elements.component';
 import { NavbarComponent } from './components/header/navbar/navbar.component';
 import { LogoComponent } from './components/header/logo/logo.component';
-import { FiltersComponent } from './components/header/navbar/shop/filters/filters.component';
-import { ProductListComponent } from './components/header/navbar/shop/product-list/product-list.component';
-import { ShopComponent } from './components/header/navbar/shop/shop.component';
-import { PaintingDetailComponent } from './components/painting-detail/painting-detail.component';
+import { FiltersComponent } from './components/shop/filters/filters.component';
+import { ProductListComponent } from './components/shop/product-list/product-list.component';
+import { ShopComponent } from './components/shop/shop.component';
+import { PaintingDetailComponent } from './components/shop/painting-detail/painting-detail.component';
 
 @NgModule({
   declarations: [

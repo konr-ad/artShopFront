@@ -18,7 +18,7 @@ export class FiltersComponent implements OnInit {
     this.route.queryParams.subscribe(params => {
       const type = params['type'];
       if (type) {
-        this.filters.paintings = [type];
+        this.filters.paintings = Array.isArray(type) ? type : [type];
       } else {
         this.filters.paintings = [];
       }

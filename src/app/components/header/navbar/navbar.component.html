@@ -6,10 +6,10 @@
           Shop
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdownShop">
-          <a class="dropdown-item" routerLink="/shop" routerLinkActive="active">All</a>
-          <a class="dropdown-item" [routerLink]="['/shop']" [queryParams]="{ type: 'OIL' }" routerLinkActive="active">Oils</a>
-          <a class="dropdown-item" [routerLink]="['/shop']" [queryParams]="{ type: 'MONOTYPE' }" routerLinkActive="active">Monotypes</a>
-          <a class="dropdown-item" [routerLink]="['/shop']" [queryParams]="{ type: 'PRINT' }" routerLinkActive="active">Prints</a>
+          <a class="dropdown-item" href="/shop" [routerLink]="['/shop']">All</a>
+          <a class="dropdown-item" href="/shop?type=OIL" >Oils</a>
+          <a class="dropdown-item" href="/shop?type=MONOTYPE" >Monotypes</a>
+          <a class="dropdown-item" href="/shop?type=PRINT" >Prints</a>
         </div>
       </li>
       <li class="nav-item dropdown">
@@ -17,18 +17,18 @@
           Info
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdownInfo">
-          <a class="dropdown-item" routerLink="/bio">Bio</a>
-          <a class="dropdown-item" routerLink="/magazines">Magazines</a>
-          <a class="dropdown-item" routerLink="/exhibitions">Exhibitions</a>
-          <a class="dropdown-item" routerLink="/artistStatement">Artist Statement</a>
-          <a class="dropdown-item" routerLink="/contact">Contact</a>
+          <a class="dropdown-item" href="/bio" [routerLink]="['/bio']">Bio</a>
+          <a class="dropdown-item" href="/magazines" [routerLink]="['/magazines']">Magazines</a>
+          <a class="dropdown-item" href="/exhibitions" [routerLink]="['/exhibitions']">Exhibitions</a>
+          <a class="dropdown-item" href="/artistStatement" [routerLink]="['/artistStatement']">Artist Statement</a>
+          <a class="dropdown-item" href="/contact" [routerLink]="['/contact']">Contact</a>
         </div>
       </li>
       <li class="nav-item">
-        <a class="nav-link" routerLink="/gallery">Gallery</a>
+        <a class="nav-link" href="/gallery" [routerLink]="['/gallery']">Gallery</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" routerLink="/cart">Cart</a>
+        <a class="nav-link" href="/cart" [routerLink]="['/cart']">Cart</a>
       </li>
     </ul>
   </div>
