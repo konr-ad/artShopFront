@@ -1,15 +1,7 @@
-.footer-links a, .footer-social a {
+.footer a {
   text-decoration: none;
 }
 
-.footer-social i {
+.footer i {
   font-size: 1.5em;
-}
-
-.footer {
-  width: 100%;
-  text-align: center;
-  background-color: #343a40;
-  color: #ffffff;
-  padding: 1rem 0;
 }
