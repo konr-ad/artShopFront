@@ -1,35 +1,44 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <div class="collapse navbar-collapse" id="navbarNav">
-    <ul class="navbar-nav mx-auto">
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="/shop" id="navbarDropdownShop" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Shop
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdownShop">
-          <a class="dropdown-item" href="/shop" [routerLink]="['/shop']">All</a>
-          <a class="dropdown-item" href="/shop?type=OIL" >Oils</a>
-          <a class="dropdown-item" href="/shop?type=MONOTYPE" >Monotypes</a>
-          <a class="dropdown-item" href="/shop?type=PRINT" >Prints</a>
-        </div>
-      </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownInfo" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Info
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdownInfo">
-          <a class="dropdown-item" href="/bio" [routerLink]="['/bio']">Bio</a>
-          <a class="dropdown-item" href="/magazines" [routerLink]="['/magazines']">Magazines</a>
-          <a class="dropdown-item" href="/exhibitions" [routerLink]="['/exhibitions']">Exhibitions</a>
-          <a class="dropdown-item" href="/artistStatement" [routerLink]="['/artistStatement']">Artist Statement</a>
-          <a class="dropdown-item" href="/contact" [routerLink]="['/contact']">Contact</a>
-        </div>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/gallery" [routerLink]="['/gallery']">Gallery</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/cart" routerLink="/cart">Cart</a>
-      </li>
-    </ul>
+<nav class="bg-white shadow">
+  <div class="container mx-auto px-4">
+    <div class="flex justify-center items-center py-4">
+      <ul class="hidden md:flex space-x-8">
+        <li class="nav-item dropdown">
+          <a class="nav-link text-gray-700 hover:text-gray-900 focus:outline-none" href="/shop" id="navbarDropdownShop" role="button" aria-haspopup="true">
+            Shop
+          </a>
+          <div class="dropdown-menu absolute hidden group-hover:block bg-white shadow-lg mt-2 rounded">
+            <a class="block px-4 py-2 text-gray-700 hover:bg-gray-200" routerLink="/shop">All</a>
+            <a class="block px-4 py-2 text-gray-700 hover:bg-gray-200" routerLink="/shop" [queryParams]="{ type: 'OIL' }">Oils</a>
+            <a class="block px-4 py-2 text-gray-700 hover:bg-gray-200" routerLink="/shop" [queryParams]="{ type: 'MONOTYPE' }">Monotypes</a>
+            <a class="block px-4 py-2 text-gray-700 hover:bg-gray-200" routerLink="/shop" [queryParams]="{ type: 'PRINT' }">Prints</a>
+          </div>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link text-gray-700 hover:text-gray-900 focus:outline-none" href="#" id="navbarDropdownInfo" role="button" aria-haspopup="true">
+            Info
+          </a>
+          <div class="dropdown-menu absolute hidden group-hover:block bg-white shadow-lg mt-2 rounded">
+            <a class="block px-4 py-2 text-gray-700 hover:bg-gray-200" routerLink="/bio">Bio</a>
+            <a class="block px-4 py-2 text-gray-700 hover:bg-gray-200" routerLink="/magazines">Magazines</a>
+            <a class="block px-4 py-2 text-gray-700 hover:bg-gray-200" routerLink="/exhibitions">Exhibitions</a>
+            <a class="block px-4 py-2 text-gray-700 hover:bg-gray-200" routerLink="/artistStatement">Artist Statement</a>
+            <a class="block px-4 py-2 text-gray-700 hover:bg-gray-200" routerLink="/contact">Contact</a>
+          </div>
+        </li>
+        <li>
+          <a class="nav-link text-gray-700 hover:text-gray-900" routerLink="/gallery">Gallery</a>
+        </li>
+        <li>
+          <a class="nav-link text-gray-700 hover:text-gray-900" routerLink="/cart">Cart</a>
+        </li>
+      </ul>
+      <div class="md:hidden">
+        <button class="text-gray-700 hover:text-gray-900 focus:outline-none">
+          <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
   </div>
 </nav>

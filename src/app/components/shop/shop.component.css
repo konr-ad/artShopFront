@@ -1,13 +1,31 @@
 .container {
   display: flex;
+  flex-wrap: wrap;
+}
+
+.filters {
+  flex: 1 1 100%;
+  max-width: 300px;
+  margin-bottom: 1rem;
+}
+
+@media (min-width: 768px) {
+  .filters {
+    flex: 0 0 25%;
+    margin-bottom: 0;
+  }
 }
 
 .main-content {
-  display: flex;
-  flex-wrap: wrap;
+  flex: 1 1 100%;
   padding: 15px;
-  justify-content: space-between;
   gap: 15px; /* Add gap between items */
+}
+
+@media (min-width: 768px) {
+  .main-content {
+    flex: 0 0 75%;
+  }
 }
 
 .card {

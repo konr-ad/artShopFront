@@ -43,4 +43,15 @@ export class FiltersComponent implements OnInit {
   isChecked(filterType: string, filterValue: string): boolean {
     return this.filters[filterType].includes(filterValue);
   }
+
+  applyFilters(): void {
+    this.filtersChange.emit({ ...this.filters });
+  }
+
+  resetFilters(): void {
+    this.filters = {
+      paintings: []
+    };
+    this.filtersChange.emit({ ...this.filters });
+  }
 }

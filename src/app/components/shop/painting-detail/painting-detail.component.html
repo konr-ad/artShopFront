@@ -1,14 +1,14 @@
-<div *ngIf="painting" class="painting-detail">
-  <div class="breadcrumb">
+<div *ngIf="painting" class="painting-detail max-w-4xl mx-auto p-4">
+  <div class="breadcrumb text-sm text-gray-600 mb-4">
     Home / {{ painting.name }} "Huile sur toile, {{ painting.length }} cm x {{ painting.width }} cm"
   </div>
-  <div class="painting-info">
-    <img class="painting-image" [src]="painting.imageUrl" alt="{{ painting.name }}">
-    <div class="painting-details">
-      <h2>{{ painting.name }}</h2>
-      <p>{{ painting.length }} cm x {{ painting.width }} cm</p>
-      <p class="price">{{ painting.price | currency:'EUR' }}</p>
-      <button class="add-to-cart" (click)="addToCart()">Add to Cart</button> <!-- Bind to addToCart method -->
+  <div class="painting-info flex gap-6 items-start">
+    <img class="painting-image w-1/2 h-auto shadow-lg" [src]="painting.imageUrl" alt="{{ painting.name }}">
+    <div class="painting-details flex-1">
+      <h2 class="text-2xl font-bold mb-4">{{ painting.name }}</h2>
+      <p class="text-lg mb-4">{{ painting.length }} cm x {{ painting.width }} cm</p>
+      <p class="price text-xl text-red-600 mb-4">{{ painting.price | currency:'EUR' }}</p>
+      <button class="add-to-cart bg-red-600 text-white py-2 px-4 rounded hover:bg-red-700" (click)="addToCart()">Add to Cart</button>
     </div>
   </div>
 </div>

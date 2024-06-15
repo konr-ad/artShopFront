@@ -1,7 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 body, html {
   height: 100%;
   margin: 0;
   font-family: Arial, sans-serif;
+  font-weight: 500; /* Make the base font weight medium */
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 800; /* Make all headings extra bold */
 }
 
 .wrapper {
@@ -37,6 +46,7 @@ footer {
 .navbar-nav .nav-link {
   font-size: 1.25rem;
   color: green;
+  font-weight: 500; /* Make navbar links medium bold */
 }
 
 .navbar-nav .nav-link:hover {
@@ -45,12 +55,13 @@ footer {
 
 .dropdown-menu {
   background-color: white;
-  border: 1px solid lightgray;
+  border: 2px solid lightgray;
 }
 
 .dropdown-item {
   font-size: 1rem;
   color: green;
+  font-weight: 500; /* Make dropdown items medium bold */
 }
 
 .nav-item.dropdown:hover .dropdown-menu {

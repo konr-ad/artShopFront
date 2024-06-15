@@ -1,18 +1,20 @@
-<div class="sidebar">
-  <h4>Filters</h4>
+<div class="filters bg-white shadow-md p-4 rounded-lg">
+  <h4 class="text-lg font-semibold mb-4">Filters</h4>
   <div>
-    <h6>Paintings</h6>
-    <div>
+    <h6 class="text-md font-medium mb-2">Paintings</h6>
+    <div class="mb-2">
       <input type="checkbox" id="oil" (change)="onFilterChange('paintings', 'OIL', $event)" [checked]="isChecked('paintings', 'OIL')">
-      <label for="oil">Oil</label>
+      <label for="oil" class="ml-2">Oil</label>
     </div>
-    <div>
+    <div class="mb-2">
       <input type="checkbox" id="monotype" (change)="onFilterChange('paintings', 'MONOTYPE', $event)" [checked]="isChecked('paintings', 'MONOTYPE')">
-      <label for="monotype">Monotype</label>
+      <label for="monotype" class="ml-2">Monotype</label>
     </div>
-    <div>
+    <div class="mb-2">
       <input type="checkbox" id="print" (change)="onFilterChange('paintings', 'PRINT', $event)" [checked]="isChecked('paintings', 'PRINT')">
-      <label for="print">Print</label>
+      <label for="print" class="ml-2">Print</label>
     </div>
   </div>
+  <button (click)="applyFilters()" class="w-full bg-blue-600 text-white py-2 mt-4 rounded hover:bg-blue-700">Apply</button>
+  <button (click)="resetFilters()" class="w-full bg-gray-300 text-gray-700 py-2 mt-2 rounded hover:bg-gray-400">Reset</button>
 </div>
