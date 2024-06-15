@@ -1,6 +1,6 @@
-<div class="container mx-auto flex flex-col md:flex-row mt-4">
-  <app-filters (filtersChange)="onFiltersChange($event)" class="w-full md:w-1/4"></app-filters>
-  <div class="w-full md:w-3/4">
+<div class="flex">
+  <app-filters (filtersChange)="onFiltersChange($event)"></app-filters>
+  <div class="ml-64 mt-4 flex-grow">
     <app-product-list [filters]="filters"></app-product-list>
   </div>
 </div>

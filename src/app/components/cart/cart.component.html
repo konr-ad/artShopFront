@@ -1,10 +1,7 @@
 <div class="container mx-auto p-6">
   <div class="flex flex-col lg:flex-row justify-between">
     <div class="w-full lg:w-2/3">
-      <h1 class="text-3xl font-bold mb-6">Your bag</h1>
-      <div class="breadcrumb mb-4">
-        Home / Products / Shopping bag
-      </div>
+      <h1 class="text-3xl font-bold mb-6">Cart</h1>
       <div *ngFor="let item of cartItems" class="bg-white p-4 rounded-lg shadow-md mb-6">
         <div class="flex items-center mb-4">
           <img [src]="item.imageUrl" [alt]="item.productName" class="w-20 h-20 object-cover rounded-md mr-4">
