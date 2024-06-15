@@ -22,7 +22,7 @@ export class FiltersComponent implements OnInit {
       } else {
         this.filters.paintings = [];
       }
-      this.filtersChange.emit(this.filters);
+      this.applyFilters();
     });
   }
 
@@ -37,7 +37,6 @@ export class FiltersComponent implements OnInit {
         this.filters[filterType].splice(index, 1);
       }
     }
-    this.filtersChange.emit({ ...this.filters });
   }
 
   isChecked(filterType: string, filterValue: string): boolean {
