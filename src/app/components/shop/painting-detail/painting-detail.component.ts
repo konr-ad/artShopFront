@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Painting, PaintingService } from 'src/app/services/painting.service';
+import { CartService } from 'src/app/services/cart.service'; // Import CartService
 
 @Component({
   selector: 'app-painting-detail',
@@ -12,7 +13,8 @@ export class PaintingDetailComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private paintingService: PaintingService
+    private paintingService: PaintingService,
+    private cartService: CartService // Inject CartService
   ) {}
 
   ngOnInit(): void {
@@ -29,5 +31,11 @@ export class PaintingDetailComponent implements OnInit {
         imageUrl: 'data:image/jpeg;base64,' + painting.image
       };
     });
+  }
+
+  addToCart(): void {
+    if (this.painting) {
+      this.cartService.addItem(this.painting);
+    }
   }
 }

@@ -8,7 +8,7 @@
       <h2>{{ painting.name }}</h2>
       <p>{{ painting.length }} cm x {{ painting.width }} cm</p>
       <p class="price">{{ painting.price | currency:'EUR' }}</p>
-      <button class="add-to-cart">Add to Cart</button>
+      <button class="add-to-cart" (click)="addToCart()">Add to Cart</button> <!-- Bind to addToCart method -->
     </div>
   </div>
 </div>
