@@ -36,9 +36,9 @@
       </div>
       <div class="promo-code mt-6">
         <input type="text" placeholder="Please enter promo code" [(ngModel)]="promoCode" class="border p-2 w-full rounded mb-4">
-        <button (click)="applyDiscount()" [disabled]="isDiscountApplied" class="w-40 bg-blue-600 text-white py-1 px-3 rounded text-sm">Apply Discount</button>
       </div>
-      <button class="w-full bg-blue-600 text-white py-2 rounded-lg mt-6">Proceed to checkout</button>
+        <button (click)="applyDiscount()" [disabled]="isDiscountApplied" class="w-full bg-blue-500 text-white py-1 px-3 rounded text-sm">Apply Discount</button>
+      <button class="w-full bg-green-700 text-white py-2 rounded-lg mt-6">Proceed to checkout</button>
     </div>
   </div>
 </div>
