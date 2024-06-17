@@ -5,7 +5,7 @@
 body, html {
   height: 100%;
   margin: 0;
-  font-family: Arial, sans-serif;
+  font-family: Roboto, sans-serif;
   font-weight: 500; /* Make the base font weight medium */
 }
 
@@ -103,15 +103,25 @@ footer {
 .card-body {
   display: flex;
   flex-direction: column;
-  padding: 15px; /* Add some padding inside the card body */
+  padding: 15px;
 }
 
 .card-text {
-  font-size: 1rem; /* Adjust font size */
-  color: #333; /* Darker text color */
-  margin-bottom: 8px; /* Space below the text */
+  font-size: 1rem;
+  color: #333;
+  margin-bottom: 8px;
 }
 
 .text-muted {
-  color: #718096; /* Lighter text color for muted text */
+  color: #718096;
 }
+
+.cart-item-count {
+  color: #e3342f;
+  font-weight: bold;
+  margin-left: 0rem;
+  position: relative;
+  top: -10px;
+}
+
+
