@@ -1,21 +1,22 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { Painting } from './painting.service';
+import { Painting } from 'src/app/services/painting.service';
 
 export interface CartItem {
   productId: number;
   productName: string;
   price: number;
   quantity: number;
-  imageUrl?: string; // Add imageUrl to handle painting images
+  imageUrl?: string;
 }
 
 @Injectable({
   providedIn: 'root',
 })
 export class CartService {
-  private itemsSubject = new BehaviorSubject<CartItem[]>([]);
-  private totalAmountSubject = new BehaviorSubject<number>(0);
+  private itemsSubject = new BehaviorSubject<CartItem[]>(this.loadCartItems());
+  private totalAmountSubject = new BehaviorSubject<number>(this.calculateTotalAmount(this.itemsSubject.value));
+  private itemCountSubject = new BehaviorSubject<number>(this.calculateItemCount(this.itemsSubject.value));
 
   getItems() {
     return this.itemsSubject.asObservable();
@@ -25,8 +26,25 @@ export class CartService {
     return this.totalAmountSubject.asObservable();
   }
 
+  getItemCount() {
+    return this.itemCountSubject.asObservable();
+  }
+
   private calculateTotalAmount(items: CartItem[]): number {
     return items.reduce((total, item) => total + item.price * item.quantity, 0);
+  }
+
+  private calculateItemCount(items: CartItem[]): number {
+    return items.reduce((count, item) => count + item.quantity, 0);
+  }
+
+  private saveCartItems(items: CartItem[]) {
+    localStorage.setItem('cartItems', JSON.stringify(items));
+  }
+
+  private loadCartItems(): CartItem[] {
+    const savedItems = localStorage.getItem('cartItems');
+    return savedItems ? JSON.parse(savedItems) : [];
   }
 
   addItem(painting: Painting) {
@@ -46,6 +64,8 @@ export class CartService {
     }
     this.itemsSubject.next(currentItems);
     this.totalAmountSubject.next(this.calculateTotalAmount(currentItems));
+    this.itemCountSubject.next(this.calculateItemCount(currentItems));
+    this.saveCartItems(currentItems);
   }
 
   updateItem(item: CartItem) {
@@ -55,6 +75,8 @@ export class CartService {
       currentItems[index] = item;
       this.itemsSubject.next(currentItems);
       this.totalAmountSubject.next(this.calculateTotalAmount(currentItems));
+      this.itemCountSubject.next(this.calculateItemCount(currentItems));
+      this.saveCartItems(currentItems);
     }
   }
 
@@ -63,5 +85,7 @@ export class CartService {
     currentItems = currentItems.filter(item => item.productId !== productId);
     this.itemsSubject.next(currentItems);
     this.totalAmountSubject.next(this.calculateTotalAmount(currentItems));
+    this.itemCountSubject.next(this.calculateItemCount(currentItems));
+    this.saveCartItems(currentItems);
   }
 }

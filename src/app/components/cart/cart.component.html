@@ -4,7 +4,7 @@
       <h1 class="text-3xl font-bold mb-6">Cart</h1>
       <div *ngFor="let item of cartItems" class="bg-white p-4 rounded-lg shadow-md mb-6">
         <div class="flex items-center mb-4">
-          <img [src]="item.imageUrl" [alt]="item.productName" class="w-20 h-20 object-cover rounded-md mr-4">
+          <img [src]="item.imageUrl" [alt]="item.productName" class="w-40 h-50 object-cover rounded-md mr-4">
           <div class="flex-1">
             <h2 class="text-xl font-semibold">{{item.productName}}</h2>
             <p class="text-gray-500">$ {{item.price}}</p>

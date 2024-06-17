@@ -11,7 +11,7 @@ export class CartComponent implements OnInit {
   cartItems: CartItem[] = [];
   totalAmount: number = 0;
   isDiscountApplied: boolean = false;
-  promoCode: string = ''; // Add this property
+  promoCode: string = '';
 
   constructor(private cartService: CartService) {}
 
