@@ -1,6 +1,12 @@
 .dropdown-menu {
   display: none;
 }
+.group:hover .dropdown-menu,
+.group:focus-within .dropdown-menu,
+[aria-expanded="true"] + .dropdown-menu {
+  display: block;
+}
+
 .group:hover .dropdown-menu {
   display: block;
 }

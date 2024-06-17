@@ -1,23 +1,23 @@
 <nav class="bg-white shadow">
   <div class="container mx-auto px-4">
-    <div class="flex justify-center items-center py-4">
+    <div class="flex justify-between items-center py-4">
       <ul class="hidden md:flex space-x-8">
-        <li class="nav-item dropdown">
+        <li class="nav-item dropdown group relative">
           <a class="nav-link text-gray-700 hover:text-gray-900 focus:outline-none" href="/shop" id="navbarDropdownShop" role="button" aria-haspopup="true">
             Shop
           </a>
-          <div class="dropdown-menu absolute hidden group-hover:block bg-white shadow-lg mt-2 rounded">
+          <div class="dropdown-menu absolute hidden group-hover:block bg-white shadow-lg mt-2 rounded w-56">
             <a class="block px-4 py-2 text-gray-700 hover:bg-gray-200" routerLink="/shop">All</a>
             <a class="block px-4 py-2 text-gray-700 hover:bg-gray-200" routerLink="/shop" [queryParams]="{ type: 'OIL' }">Oils</a>
             <a class="block px-4 py-2 text-gray-700 hover:bg-gray-200" routerLink="/shop" [queryParams]="{ type: 'MONOTYPE' }">Monotypes</a>
             <a class="block px-4 py-2 text-gray-700 hover:bg-gray-200" routerLink="/shop" [queryParams]="{ type: 'PRINT' }">Prints</a>
           </div>
         </li>
-        <li class="nav-item dropdown">
+        <li class="nav-item dropdown group relative">
           <a class="nav-link text-gray-700 hover:text-gray-900 focus:outline-none" href="#" id="navbarDropdownInfo" role="button" aria-haspopup="true">
             Info
           </a>
-          <div class="dropdown-menu absolute hidden group-hover:block bg-white shadow-lg mt-2 rounded">
+          <div class="dropdown-menu absolute hidden group-hover:block bg-white shadow-lg mt-2 rounded w-56">
             <a class="block px-4 py-2 text-gray-700 hover:bg-gray-200" routerLink="/bio">Bio</a>
             <a class="block px-4 py-2 text-gray-700 hover:bg-gray-200" routerLink="/magazines">Magazines</a>
             <a class="block px-4 py-2 text-gray-700 hover:bg-gray-200" routerLink="/exhibitions">Exhibitions</a>
@@ -28,8 +28,9 @@
         <li>
           <a class="nav-link text-gray-700 hover:text-gray-900" routerLink="/gallery">Gallery</a>
         </li>
-        <li>
+        <li class="relative flex items-center">
           <a class="nav-link text-gray-700 hover:text-gray-900" routerLink="/cart">Cart</a>
+          <span *ngIf="cartItemCount > 0" class="cart-item-count">{{ cartItemCount }}</span>
         </li>
       </ul>
       <div class="md:hidden">
