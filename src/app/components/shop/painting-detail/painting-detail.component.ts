@@ -10,6 +10,8 @@ import { CartService } from 'src/app/services/cart.service'; // Import CartServi
 })
 export class PaintingDetailComponent implements OnInit {
   painting: Painting | undefined;
+  buttonText: string = "Add to Cart";
+  isButtonDisabled: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -36,6 +38,13 @@ export class PaintingDetailComponent implements OnInit {
   addToCart(): void {
     if (this.painting) {
       this.cartService.addItem(this.painting);
+      this.buttonText = "Added!";
+      this.isButtonDisabled = true;
+
+      setTimeout(() => {
+        this.buttonText = "Add to Cart";
+        this.isButtonDisabled = false;
+      }, 2000);
     }
   }
 }
