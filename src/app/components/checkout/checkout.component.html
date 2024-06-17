@@ -1,0 +1,117 @@
+<div class="wrapper bg-black text-white">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <img src="path/to/logo.png" alt="Logo" class="logo">
+    </div>
+    <div class="navbar-nav">
+      <a class="nav-link" href="#">Home</a>
+      <a class="nav-link" href="#">Products</a>
+      <a class="nav-link" href="#">Contact</a>
+    </div>
+  </nav>
+
+  <div class="content container mx-auto p-4">
+    <h1 class="text-3xl font-bold mb-4">Checkout</h1>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div class="md:col-span-2">
+        <div class="border-b border-gray-700 mb-6">
+          <h2 class="text-xl font-bold">Cart</h2>
+        </div>
+        <form>
+          <div class="mb-6">
+            <h3 class="text-lg font-bold">Contact information</h3>
+            <label for="email" class="block text-sm font-medium text-gray-300">Email address</label>
+            <input type="email" id="email" class="mt-1 block w-full rounded-md border-gray-600 bg-black text-white shadow-sm">
+          </div>
+
+          <div class="mb-6">
+            <h3 class="text-lg font-bold">Shipping address</h3>
+            <label for="country" class="block text-sm font-medium text-gray-300">Country</label>
+            <select id="country" class="mt-1 block w-full rounded-md border-gray-600 bg-black text-white shadow-sm">
+              <option>Germany</option>
+              <!-- Add more options as needed -->
+            </select>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+            <div>
+              <label for="firstName" class="block text-sm font-medium text-gray-300">First name</label>
+              <input type="text" id="firstName" class="mt-1 block w-full rounded-md border-gray-600 bg-black text-white shadow-sm">
+            </div>
+            <div>
+              <label for="lastName" class="block text-sm font-medium text-gray-300">Last name</label>
+              <input type="text" id="lastName" class="mt-1 block w-full rounded-md border-gray-600 bg-black text-white shadow-sm">
+            </div>
+          </div>
+
+          <div class="mb-6">
+            <label for="address" class="block text-sm font-medium text-gray-300">Address</label>
+            <input type="text" id="address" class="mt-1 block w-full rounded-md border-gray-600 bg-black text-white shadow-sm">
+          </div>
+
+          <div class="mb-6">
+            <label for="apartment" class="block text-sm font-medium text-gray-300">Apartment number, suite, etc (optional)</label>
+            <input type="text" id="apartment" class="mt-1 block w-full rounded-md border-gray-600 bg-black text-white shadow-sm">
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+            <div>
+              <label for="city" class="block text-sm font-medium text-gray-300">City</label>
+              <input type="text" id="city" class="mt-1 block w-full rounded-md border-gray-600 bg-black text-white shadow-sm">
+            </div>
+            <div>
+              <label for="state" class="block text-sm font-medium text-gray-300">State / Province</label>
+              <select id="state" class="mt-1 block w-full rounded-md border-gray-600 bg-black text-white shadow-sm">
+                <option>Select state / province</option>
+                <!-- Add more options as needed -->
+              </select>
+            </div>
+            <div>
+              <label for="zip" class="block text-sm font-medium text-gray-300">Postal code</label>
+              <input type="text" id="zip" class="mt-1 block w-full rounded-md border-gray-600 bg-black text-white shadow-sm">
+            </div>
+          </div>
+
+          <button type="submit" class="w-full bg-green-500 text-white py-2 px-4 rounded-md shadow hover:bg-green-700 transition duration-150">Next</button>
+        </form>
+      </div>
+
+      <div class="order-summary p-4 border border-gray-700 rounded-md">
+        <h2 class="text-xl font-bold mb-4">Order summary</h2>
+        <div class="flex items-center justify-between mb-4">
+          <img src="path/to/product-image.png" alt="Product" class="w-16 h-16 rounded-md">
+          <div class="ml-4">
+            <p class="text-sm font-medium">Soft Enamel Pin</p>
+            <p class="text-sm text-gray-400">€10.00</p>
+          </div>
+        </div>
+        <div class="mb-4">
+          <a href="#" class="text-sm text-green-500">Need to leave a note or instructions?</a>
+        </div>
+        <div class="border-t border-gray-700 pt-4">
+          <div class="flex items-center justify-between text-sm mb-2">
+            <span>Subtotal</span>
+            <span>€10.00</span>
+          </div>
+          <div class="flex items-center justify-between text-sm mb-2">
+            <span>Shipping</span>
+            <span>Pending</span>
+          </div>
+          <div class="flex items-center justify-between text-sm mb-2">
+            <span>Tax</span>
+            <span>Pending</span>
+          </div>
+          <div class="flex items-center justify-between text-lg font-bold">
+            <span>Total</span>
+            <span>EUR €10.00</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="mt-auto">
+    <div>© 2024 Your Company. All rights reserved.</div>
+  </footer>
+</div>

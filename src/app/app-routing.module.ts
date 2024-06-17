@@ -5,6 +5,7 @@ import { ShopComponent } from "./components/shop/shop.component";
 import { BrowserModule } from "@angular/platform-browser";
 import {PaintingDetailComponent} from "./components/shop/painting-detail/painting-detail.component";
 import { CartComponent } from './components/cart/cart.component';
+import {CheckoutComponent} from "./components/checkout/checkout.component";
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -12,6 +13,7 @@ const routes: Routes = [
   { path: 'shop', component: ShopComponent },
   { path: 'all', component: ShopComponent },
   { path: 'painting/:id', component: PaintingDetailComponent },
+  { path: 'checkout', component: CheckoutComponent },
   { path: '**', redirectTo: '', pathMatch: 'full' }
 ];
 
