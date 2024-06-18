@@ -25,27 +25,6 @@
   margin-bottom: 20px;
 }
 
-.checkout-steps {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 20px;
-}
-
-.step {
-  flex: 1;
-  text-align: center;
-  padding: 10px;
-  border-bottom: 2px solid #ccc;
-}
-
-.step.completed {
-  border-bottom: 2px solid #4caf50;
-}
-
-.step.active {
-  border-bottom: 2px solid #2196f3;
-}
-
 .checkout-warning {
   margin-bottom: 20px;
 }
@@ -69,7 +48,7 @@
 }
 
 .checkout-form {
-  background-color: #222;
+  background-color: lightgrey;
   padding: 20px;
   border-radius: 5px;
 }
@@ -96,7 +75,7 @@ select {
   padding: 10px;
   margin-bottom: 15px;
   border: none;
-  border-radius: 5px;
+  border-radius: 15px;
 }
 
 .name-fields,
@@ -127,9 +106,9 @@ select {
 }
 
 .order-summary {
-  background-color: #222;
+  background-color: #8c8f93;
   padding: 20px;
-  border-radius: 5px;
+  border-radius: 20px;
   margin-top: 20px;
   width: 300px;
 }

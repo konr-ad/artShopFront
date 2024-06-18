@@ -1,16 +1,16 @@
 <div class="sidebar p-4 bg-white shadow-md rounded">
-  <h4 class="font-bold mb-4">Filters</h4>
+  <h4 class="font-bold text-black mb-4">Filters</h4>
   <div>
-    <h6 class="font-semibold mb-2">Paintings</h6>
-    <div class="mb-2">
+    <h6 class="font-semibold text-black mb-2">Paintings</h6>
+    <div class="text-black mb-2">
       <input type="checkbox" id="oil" (change)="onFilterChange('paintings', 'OIL', $event)" [checked]="isChecked('paintings', 'OIL')" class="mr-2">
       <label for="oil">Oil</label>
     </div>
-    <div class="mb-2">
+    <div class="text-black mb-2">
       <input type="checkbox" id="monotype" (change)="onFilterChange('paintings', 'MONOTYPE', $event)" [checked]="isChecked('paintings', 'MONOTYPE')" class="mr-2">
       <label for="monotype">Monotype</label>
     </div>
-    <div class="mb-4">
+    <div class="text-black mb-4">
       <input type="checkbox" id="print" (change)="onFilterChange('paintings', 'PRINT', $event)" [checked]="isChecked('paintings', 'PRINT')" class="mr-2">
       <label for="print">Print</label>
     </div>
