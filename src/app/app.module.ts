@@ -17,6 +17,8 @@ import { ShopComponent } from './components/shop/shop.component';
 import { PaintingDetailComponent } from './components/shop/painting-detail/painting-detail.component';
 import { CartComponent } from './components/cart/cart.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {TuiRootModule} from '@taiga-ui/core';
 
 @NgModule({
   declarations: [
@@ -38,7 +40,9 @@ import { CheckoutComponent } from './components/checkout/checkout.component';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    BrowserAnimationsModule,
+    TuiRootModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
