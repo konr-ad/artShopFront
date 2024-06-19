@@ -61,10 +61,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "paintings-app:build:production"
+              "buildTarget": "paintings-app:build:production"
             },
             "development": {
-              "browserTarget": "paintings-app:build:development"
+              "buildTarget": "paintings-app:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -72,7 +72,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "paintings-app:build"
+            "buildTarget": "paintings-app:build"
           }
         },
         "test": {
