@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -18,29 +18,22 @@ import { PaintingDetailComponent } from './components/shop/painting-detail/paint
 import { CartComponent } from './components/cart/cart.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
 
-@NgModule({
-  declarations: [
-    AppComponent,
-    HomeComponent,
-    FooterComponent,
-    HeaderComponent,
-    AdditionalElementsComponent,
-    NavbarComponent,
-    LogoComponent,
-    ShopComponent,
-    FiltersComponent,
-    ProductListComponent,
-    PaintingDetailComponent,
-    CartComponent,
-    CheckoutComponent,
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    FormsModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
-})
+@NgModule({ declarations: [
+        AppComponent,
+        HomeComponent,
+        FooterComponent,
+        HeaderComponent,
+        AdditionalElementsComponent,
+        NavbarComponent,
+        LogoComponent,
+        ShopComponent,
+        FiltersComponent,
+        ProductListComponent,
+        PaintingDetailComponent,
+        CartComponent,
+        CheckoutComponent,
+    ],
+    bootstrap: [AppComponent], imports: [BrowserModule,
+        AppRoutingModule,
+        FormsModule], providers: [provideHttpClient(withInterceptorsFromDi())] })
 export class AppModule { }
