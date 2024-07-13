@@ -4,9 +4,9 @@ import { Observable } from 'rxjs';
 
 export interface Painting {
   id?: number;
-  name: string;
   type: string;
   state: string;
+  name: string;
   length: number;
   width: number;
   price: number;
@@ -18,7 +18,7 @@ export interface Painting {
   providedIn: 'root'
 })
 export class PaintingService {
-  private apiUrl = 'http://localhost:8080/api/paintings';
+  private apiUrl = 'http://25.53.71.208:8080/api/paintings';
 
   constructor(private http: HttpClient) {}
 
