@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CartService, CartItem } from 'src/app/services/cart.service';
 import { Painting } from 'src/app/services/painting.service';
+import {BehaviorSubject, Observable} from "rxjs";
 
 @Component({
   selector: 'app-cart',
@@ -12,12 +13,22 @@ export class CartComponent implements OnInit {
   totalAmount: number = 0;
   isDiscountApplied: boolean = false;
   promoCode: string = '';
+  private itemsSubject: BehaviorSubject<CartItem[]> = new BehaviorSubject<CartItem[]>([]);
+  private totalAmountSubject: BehaviorSubject<number> = new BehaviorSubject<number>(0);
 
   constructor(private cartService: CartService) {}
 
   ngOnInit(): void {
     this.cartService.getItems().subscribe(items => this.cartItems = items);
     this.cartService.getTotalAmount().subscribe(amount => this.totalAmount = amount);
+  }
+
+  getItems(): Observable<CartItem[]> {
+    return this.itemsSubject.asObservable();
+  }
+
+  getTotalAmount(): Observable<number> {
+    return this.totalAmountSubject.asObservable();
   }
 
   addItem(painting: Painting) {

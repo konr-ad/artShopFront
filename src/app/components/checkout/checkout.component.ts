@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {CartItem, CartService} from "../../services/cart.service";
 
 @Component({
   selector: 'app-checkout',
@@ -30,10 +31,18 @@ export class CheckoutComponent {
       "Ontario", "Prince Edward Island", "Quebec", "Saskatchewan"
     ]
   };
-
+  cartItems: CartItem[] = [];
+  totalAmount: number = 0;
   selectedCountry: string = '';
   availableStates: string[] = [];
   showNoteInput: boolean = false;
+
+  constructor(private cartService: CartService) {}
+
+  ngOnInit(): void {
+    this.cartService.getItems().subscribe(items => this.cartItems = items);
+    this.cartService.getTotalAmount().subscribe(amount => this.totalAmount = amount);
+  }
 
   onCountryChange(event: any) {
     this.selectedCountry = event.target.value;
