@@ -13,24 +13,8 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 800; /* Make all headings extra bold */
 }
 
-.wrapper {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  background-color: white;
-  color: white;
-}
-
 .content {
   flex: 1;
-}
-
-footer {
-  width: 100%;
-  text-align: center;
-  background-color: #343a40;
-  color: #ffffff;
-  padding: 1rem 0;
 }
 
 .navbar {
@@ -56,13 +40,13 @@ footer {
 
 .navbar-nav .nav-link {
   font-size: 1.25rem;
-  color: green;
+  color: gray;
   font-weight: 500; /* Make navbar links medium bold */
   scale: 120%;
 }
 
 .navbar-nav .nav-link:hover {
-  color: darkgreen;
+  color: gray;
 }
 
 .dropdown-menu {
@@ -72,7 +56,7 @@ footer {
 
 .dropdown-item {
   font-size: 1rem;
-  color: green;
+  color: gray;
   font-weight: 500; /* Make dropdown items medium bold */
 }
 

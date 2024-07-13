@@ -35,9 +35,9 @@
 
 .navbar-nav .nav-item .nav-link {
     font-size: 1.25rem;
-    color: green;
+    color: gray;
 }
 
 .navbar-nav .nav-item .nav-link:hover {
-    color: darkgreen;
+    color: gray;
 }
