@@ -50,7 +50,7 @@ footer {
 }
 
 .navbar-brand .logo {
-  max-width: 30%;
+  max-width: 150%;
   height: auto;
 }
 
@@ -58,6 +58,7 @@ footer {
   font-size: 1.25rem;
   color: green;
   font-weight: 500; /* Make navbar links medium bold */
+  scale: 120%;
 }
 
 .navbar-nav .nav-link:hover {

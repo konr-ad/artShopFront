@@ -59,6 +59,12 @@
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "host": "0.0.0.0",
+            "port": 4200,
+            "allowedHosts": ["0.0.0.0", "localhost", "25.53.71.208"],
+            "disableHostCheck": true
+          },
           "configurations": {
             "production": {
               "buildTarget": "paintings-app:build:production"
