@@ -1,41 +1,49 @@
-<nav class="bg-white shadow">
-  <div class="container mx-auto px-4">
-    <div class="flex justify-between items-center py-4">
+<nav class="bg-white shadow half-w-screen-lg">
+  <div class="container mx-auto px-4 half-w-screen-lg">
+    <div class="flex justify-between items-center py-8">
       <ul class="hidden md:flex space-x-8">
         <li class="nav-item dropdown group relative">
-          <a class="nav-link text-gray-700 hover:text-gray-900 focus:outline-none" href="/shop" id="navbarDropdownShop" role="button" aria-haspopup="true">
+          <a class="nav-link text-gray-700 hover:text-gray-900 focus:outline-none text-2xl" href="/shop" id="navbarDropdownShop" role="button" aria-haspopup="true">
             Shop
           </a>
           <div class="dropdown-menu absolute hidden group-hover:block bg-white shadow-lg mt-2 rounded w-56">
-            <a class="block px-4 py-2 text-gray-700 hover:bg-gray-200" routerLink="/shop">All</a>
-            <a class="block px-4 py-2 text-gray-700 hover:bg-gray-200" routerLink="/shop" [queryParams]="{ type: 'OIL' }">Oils</a>
-            <a class="block px-4 py-2 text-gray-700 hover:bg-gray-200" routerLink="/shop" [queryParams]="{ type: 'MONOTYPE' }">Monotypes</a>
-            <a class="block px-4 py-2 text-gray-700 hover:bg-gray-200" routerLink="/shop" [queryParams]="{ type: 'PRINT' }">Prints</a>
+            <a class="block px-8 py-4 text-gray-700 hover:bg-gray-200 text-xl" routerLink="/shop">
+              All
+            </a>
+            <a class="block px-8 py-4 text-gray-700 hover:bg-gray-200 text-xl" routerLink="/shop" [queryParams]="{ type: 'OIL' }">
+              Oils
+            </a>
+            <a class="block px-8 py-4 text-gray-700 hover:bg-gray-200 text-xl" routerLink="/shop" [queryParams]="{ type: 'MONOTYPE' }">
+              Monotypes
+            </a>
+            <a class="block px-8 py-4 text-gray-700 hover:bg-gray-200 text-xl" routerLink="/shop" [queryParams]="{ type: 'PRINT' }">
+              Prints
+            </a>
           </div>
         </li>
         <li class="nav-item dropdown group relative">
-          <a class="nav-link text-gray-700 hover:text-gray-900 focus:outline-none" href="#" id="navbarDropdownInfo" role="button" aria-haspopup="true">
+          <a class="text-gray-700 hover:text-gray-900 focus:outline-none text-2xl" id="navbarDropdownInfo" aria-haspopup="true">
             Info
           </a>
           <div class="dropdown-menu absolute hidden group-hover:block bg-white shadow-lg mt-2 rounded w-56">
-            <a class="block px-4 py-2 text-gray-700 hover:bg-gray-200" routerLink="/bio">Bio</a>
-            <a class="block px-4 py-2 text-gray-700 hover:bg-gray-200" routerLink="/magazines">Magazines</a>
-            <a class="block px-4 py-2 text-gray-700 hover:bg-gray-200" routerLink="/exhibitions">Exhibitions</a>
-            <a class="block px-4 py-2 text-gray-700 hover:bg-gray-200" routerLink="/artistStatement">Artist Statement</a>
-            <a class="block px-4 py-2 text-gray-700 hover:bg-gray-200" routerLink="/contact">Contact</a>
+            <a class="block px-8 py-4 text-gray-700 hover:bg-gray-200 text-xl" routerLink="/bio">Bio</a>
+            <a class="block px-8 py-4 text-gray-700 hover:bg-gray-200 text-xl" routerLink="/magazines">Magazines</a>
+            <a class="block px-8 py-4 text-gray-700 hover:bg-gray-200 text-xl" routerLink="/exhibitions">Exhibitions</a>
+            <a class="block px-8 py-4 text-gray-700 hover:bg-gray-200 text-xl" routerLink="/artistStatement">Artist Statement</a>
+            <a class="block px-8 py-4 text-gray-700 hover:bg-gray-200 text-xl" routerLink="/contact">Contact</a>
           </div>
         </li>
         <li>
-          <a class="nav-link text-gray-700 hover:text-gray-900" routerLink="/gallery">Gallery</a>
+          <a class="nav-link text-gray-700 hover:text-gray-900 text-2xl" routerLink="/gallery">Gallery</a>
         </li>
         <li class="relative flex items-center">
-          <a class="nav-link text-gray-700 hover:text-gray-900" routerLink="/cart">Cart</a>
-          <span *ngIf="cartItemCount > 0" class="cart-item-count">{{ cartItemCount }}</span>
+          <a class="nav-link text-gray-700 hover:text-gray-900 text-2xl" routerLink="/cart">Cart</a>
+          <span *ngIf="cartItemCount > 0" class="cart-item-count text-xl">{{ cartItemCount }}</span>
         </li>
       </ul>
       <div class="md:hidden">
         <button class="text-gray-700 hover:text-gray-900 focus:outline-none">
-          <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <svg class="h-12 w-12" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
           </svg>
         </button>
