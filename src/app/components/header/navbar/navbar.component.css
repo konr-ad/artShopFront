@@ -34,6 +34,8 @@
   background-color: white;
   border: 2px solid lightgray;
   padding: 1rem;
+  z-index: 20; /* Set higher z-index for dropdown menu */
+  transition: all 0.3s ease; /* Add smooth transition */
 }
 
 .dropdown-item {

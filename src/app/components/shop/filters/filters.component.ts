@@ -9,7 +9,9 @@ import { ActivatedRoute } from '@angular/router';
 export class FiltersComponent implements OnInit {
   @Output() filtersChange = new EventEmitter<any>();
   filters: any = {
-    paintings: []
+    paintings: [],
+    priceFrom: null,
+    priceTo: null
   };
 
   constructor(private route: ActivatedRoute) {}
@@ -17,26 +19,38 @@ export class FiltersComponent implements OnInit {
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
       const type = params['type'];
+      const priceFrom = params['priceFrom'];
+      const priceTo = params['priceTo'];
+
       if (type) {
         this.filters.paintings = Array.isArray(type) ? type : [type];
       } else {
         this.filters.paintings = [];
       }
+
+      this.filters.priceFrom = priceFrom ? +priceFrom : null;
+      this.filters.priceTo = priceTo ? +priceTo : null;
       this.applyFilters();
     });
   }
 
-  onFilterChange(filterType: string, filterValue: string, event: any): void {
-    if (event.target.checked) {
-      if (!this.filters[filterType].includes(filterValue)) {
-        this.filters[filterType].push(filterValue);
-      }
+  onFilterChange(filterType: string, event: any): void {
+    const filterValue = event.target.value;
+    if (filterType === 'priceFrom' || filterType === 'priceTo') {
+      this.filters[filterType] = filterValue ? +filterValue : null;
     } else {
-      const index = this.filters[filterType].indexOf(filterValue);
-      if (index > -1) {
-        this.filters[filterType].splice(index, 1);
+      if (event.target.checked) {
+        if (!this.filters[filterType].includes(filterValue)) {
+          this.filters[filterType].push(filterValue);
+        }
+      } else {
+        const index = this.filters[filterType].indexOf(filterValue);
+        if (index > -1) {
+          this.filters[filterType].splice(index, 1);
+        }
       }
     }
+    this.applyFilters();
   }
 
   isChecked(filterType: string, filterValue: string): boolean {
@@ -49,8 +63,15 @@ export class FiltersComponent implements OnInit {
 
   resetFilters(): void {
     this.filters = {
-      paintings: []
+      paintings: [],
+      priceFrom: null,
+      priceTo: null
     };
     this.filtersChange.emit({ ...this.filters });
+  }
+
+  onInputChange(filterType: string, event: Event): void {
+    const inputElement = event.target as HTMLInputElement;
+    this.onFilterChange(filterType, { target: inputElement });
   }
 }

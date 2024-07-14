@@ -7,30 +7,30 @@
             Shop
           </a>
           <div class="dropdown-menu absolute hidden group-hover:block bg-white shadow-lg mt-2 rounded w-56">
-            <a class="block px-6 py-3 text-gray-700 hover:bg-gray-200 text-xl" routerLink="/shop">
+            <a class="block px-6 py-3 text-gray-700 hover:bg-gray-200 text-xl" (click)="navigateWithFilters('')">
               All
             </a>
-            <a class="block px-6 py-3 text-gray-700 hover:bg-gray-200 text-xl" routerLink="/shop" [queryParams]="{ type: 'OIL' }">
+            <a class="block px-6 py-3 text-gray-700 hover:bg-gray-200 text-xl" (click)="navigateWithFilters('OIL')">
               Oils
             </a>
-            <a class="block px-6 py-3 text-gray-700 hover:bg-gray-200 text-xl" routerLink="/shop" [queryParams]="{ type: 'MONOTYPE' }">
+            <a class="block px-6 py-3 text-gray-700 hover:bg-gray-200 text-xl" (click)="navigateWithFilters('MONOTYPE')">
               Monotypes
             </a>
-            <a class="block px-6 py-3 text-gray-700 hover:bg-gray-200 text-xl" routerLink="/shop" [queryParams]="{ type: 'PRINT' }">
+            <a class="block px-6 py-3 text-gray-700 hover:bg-gray-200 text-xl" (click)="navigateWithFilters('PRINT')">
               Prints
             </a>
           </div>
         </li>
         <li class="nav-item dropdown group relative">
-          <a class="text-gray-700 hover:text-gray-900 focus:outline-none text-2xl" id="navbarDropdownInfo" aria-haspopup="true">
+          <a class="nav-link text-gray-700 hover:text-gray-900 focus:outline-none text-2xl" href="#" id="navbarDropdownInfo" role="button" aria-haspopup="true">
             Info
           </a>
           <div class="dropdown-menu absolute hidden group-hover:block bg-white shadow-lg mt-2 rounded w-56">
-            <a class="block px-6 py-3 text-gray-700 hover:bg-gray-200 text-xl" routerLink="/bio">Bio</a>
-            <a class="block px-6 py-3 text-gray-700 hover:bg-gray-200 text-xl" routerLink="/magazines">Magazines</a>
-            <a class="block px-6 py-3 text-gray-700 hover:bg-gray-200 text-xl" routerLink="/exhibitions">Exhibitions</a>
-            <a class="block px-6 py-3 text-gray-700 hover:bg-gray-200 text-xl" routerLink="/artistStatement">Artist Statement</a>
-            <a class="block px-6 py-3 text-gray-700 hover:bg-gray-200 text-xl" routerLink="/contact">Contact</a>
+            <a class="block px-6 py-3 text-gray-700 hover:bg-gray-200 text-xl" routerLink="/bio" (click)="closeDropdown()">Bio</a>
+            <a class="block px-6 py-3 text-gray-700 hover:bg-gray-200 text-xl" routerLink="/magazines" (click)="closeDropdown()">Magazines</a>
+            <a class="block px-6 py-3 text-gray-700 hover:bg-gray-200 text-xl" routerLink="/exhibitions" (click)="closeDropdown()">Exhibitions</a>
+            <a class="block px-6 py-3 text-gray-700 hover:bg-gray-200 text-xl" routerLink="/artistStatement" (click)="closeDropdown()">Artist Statement</a>
+            <a class="block px-6 py-3 text-gray-700 hover:bg-gray-200 text-xl" routerLink="/contact" (click)="closeDropdown()">Contact</a>
           </div>
         </li>
         <li>

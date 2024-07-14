@@ -35,11 +35,23 @@ export class ProductListComponent implements OnInit, OnChanges {
   }
 
   applyFilters(): void {
-    if (!this.filters || !this.filters.paintings.length) {
-      this.filteredPaintings = this.paintings;
-    } else {
-      this.filteredPaintings = this.paintings.filter(painting =>
+    this.filteredPaintings = this.paintings;
+
+    if (this.filters.paintings.length) {
+      this.filteredPaintings = this.filteredPaintings.filter(painting =>
         this.filters.paintings.includes(painting.type)
+      );
+    }
+
+    if (this.filters.priceFrom) {
+      this.filteredPaintings = this.filteredPaintings.filter(painting =>
+        painting.price >= this.filters.priceFrom
+      );
+    }
+
+    if (this.filters.priceTo) {
+      this.filteredPaintings = this.filteredPaintings.filter(painting =>
+        painting.price <= this.filters.priceTo
       );
     }
   }

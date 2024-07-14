@@ -26,7 +26,9 @@ export class ShopComponent implements OnInit {
 
   onFiltersChange(filters: any): void {
     this.filters = filters;
-    const queryParams = this.filters.paintings.length ? { type: this.filters.paintings } : {};
+    const queryParams: any = this.filters.paintings.length ? { type: this.filters.paintings } : {};
+    if (this.filters.priceFrom) queryParams.priceFrom = this.filters.priceFrom;
+    if (this.filters.priceTo) queryParams.priceTo = this.filters.priceTo;
     this.router.navigate(['/shop'], { queryParams });
   }
 }
