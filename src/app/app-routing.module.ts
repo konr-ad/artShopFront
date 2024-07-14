@@ -7,6 +7,11 @@ import { PaintingDetailComponent } from "./components/shop/painting-detail/paint
 import { CartComponent } from './components/cart/cart.component';
 import { CheckoutComponent } from "./components/checkout/checkout.component";
 import { AddPaintingComponent } from './add-painting/add-painting.component';
+import {BioComponent} from "./components/info/bio/bio.component";
+import {MagazinesComponent} from "./components/info/magazines/magazines.component";
+import {ExhibitionsComponent} from "./components/info/exhibitions/exhibitions.component";
+import {ArtistStatementComponent} from "./components/info/artist-statement/artist-statement.component";
+import {ContactComponent} from "./components/info/contact/contact.component";
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -15,6 +20,11 @@ const routes: Routes = [
   { path: 'all', component: ShopComponent },
   { path: 'painting/:id', component: PaintingDetailComponent },
   { path: 'checkout', component: CheckoutComponent },
+  { path: 'bio', component: BioComponent },
+  { path: 'magazines', component: MagazinesComponent },
+  { path: 'exhibitions', component: ExhibitionsComponent },
+  { path: 'artistStatement', component: ArtistStatementComponent },
+  { path: 'contact', component: ContactComponent },
   { path: 'add', component: AddPaintingComponent },
   { path: '**', redirectTo: '', pathMatch: 'full' }
 ];
