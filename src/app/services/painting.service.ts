@@ -7,10 +7,11 @@ export interface Painting {
   type: string;
   state: string;
   name: string;
+  description: string;
   length: number;
   width: number;
   price: number;
-  image: File;
+  image: string;
   imageUrl?: string;
 }
 

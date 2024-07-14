@@ -6,8 +6,8 @@
     <img class="painting-image w-1/2 h-auto shadow-lg" [src]="painting.imageUrl" alt="{{ painting.name }}">
     <div class="painting-details flex-1">
       <h2 class="text-2xl font-bold text-black mb-4">{{ painting.name }}</h2>
-      <p class="text-lg text-black mb-4">{{ painting.length }} cm x {{ painting.width }} cm</p>
-      <p class="price text-xl black mb-4">{{ painting.price | currency:'EUR' }}</p>
+      <p class="text-lg text-black mb-4">{{ painting.description }}</p>
+      <p class="price text-xl black font-bold mb-4">{{ painting.price | currency:'EUR' }}</p>
       <button
         class="add-to-cart bg-red-600 text-white py-2 px-4 rounded hover:bg-red-700 w-32 text-center"
         (click)="addToCart()"
