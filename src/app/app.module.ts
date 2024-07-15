@@ -17,6 +17,7 @@ import { ShopComponent } from './components/shop/shop.component';
 import { PaintingDetailComponent } from './components/shop/painting-detail/painting-detail.component';
 import { CartComponent } from './components/cart/cart.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
+import { StepperComponent } from "./components/stepper/stepper.component";
 
 @NgModule({ declarations: [
         AppComponent,
@@ -32,8 +33,10 @@ import { CheckoutComponent } from './components/checkout/checkout.component';
         PaintingDetailComponent,
         CartComponent,
         CheckoutComponent,
+        StepperComponent
+
     ],
     bootstrap: [AppComponent], imports: [BrowserModule,
-        AppRoutingModule,
-        FormsModule], providers: [provideHttpClient(withInterceptorsFromDi())] })
+    AppRoutingModule,
+    FormsModule], providers: [provideHttpClient(withInterceptorsFromDi())] })
 export class AppModule { }
