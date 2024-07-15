@@ -1,12 +1,14 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {CartItem, CartService} from "../../services/cart.service";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-checkout',
   templateUrl: './checkout.component.html',
   styleUrls: ['./checkout.component.css']
 })
-export class CheckoutComponent {
+export class CheckoutComponent implements  OnInit {
 
   countries: string[] = [
     "Albania", "Andorra", "Armenia", "Austria", "Azerbaijan", "Belarus", "Belgium", "Bosnia and Herzegovina",
@@ -36,8 +38,21 @@ export class CheckoutComponent {
   selectedCountry: string = '';
   availableStates: string[] = [];
   showNoteInput: boolean = false;
+  checkoutForm: FormGroup;
 
-  constructor(private cartService: CartService) {}
+  constructor(private fb: FormBuilder, private cartService: CartService, private router: Router) {
+    this.checkoutForm = this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
+      country: ['', Validators.required],
+      state: ['', Validators.required],
+      address: ['', Validators.required],
+      apartmentNumber: [''],
+      city: ['', Validators.required],
+      zip: ['', Validators.required]
+    });
+  }
 
   ngOnInit(): void {
     this.cartService.getItems().subscribe(items => this.cartItems = items);
@@ -52,4 +67,12 @@ export class CheckoutComponent {
   toggleNoteInput() {
     this.showNoteInput = !this.showNoteInput;
   }
+
+  onSubmit() {
+    if (this.checkoutForm.valid) {
+      this.router.navigate(['/payment'], { state: { ...this.checkoutForm.value } });
+    }
+  }
 }
+
+

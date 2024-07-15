@@ -12,10 +12,12 @@ import {MagazinesComponent} from "./components/info/magazines/magazines.componen
 import {ExhibitionsComponent} from "./components/info/exhibitions/exhibitions.component";
 import {ArtistStatementComponent} from "./components/info/artist-statement/artist-statement.component";
 import {ContactComponent} from "./components/info/contact/contact.component";
+import {PaymentComponent} from "./components/payment/payment.component";
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'cart', component: CartComponent },
+  { path: 'payment', component: PaymentComponent },
   { path: 'shop', component: ShopComponent },
   { path: 'all', component: ShopComponent },
   { path: 'painting/:id', component: PaintingDetailComponent },

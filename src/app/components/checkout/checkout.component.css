@@ -48,7 +48,7 @@
 }
 
 .checkout-form {
-  background-color: lightgray;
+  background-color: white;
   padding: 20px;
   border-radius: 5px;
 }
@@ -106,7 +106,7 @@ select {
 }
 
 .order-summary {
-  background-color: #8c8f93;
+  background-color: white;
   padding: 20px;
   border-radius: 20px;
   margin-top: 20px;

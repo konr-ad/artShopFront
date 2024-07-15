@@ -18,6 +18,8 @@ import { PaintingDetailComponent } from './components/shop/painting-detail/paint
 import { CartComponent } from './components/cart/cart.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
 import { StepperComponent } from "./components/stepper/stepper.component";
+import { PaymentComponent } from "./components/payment/payment.component";
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({ declarations: [
         AppComponent,
@@ -33,10 +35,11 @@ import { StepperComponent } from "./components/stepper/stepper.component";
         PaintingDetailComponent,
         CartComponent,
         CheckoutComponent,
-        StepperComponent
+        StepperComponent,
+        PaymentComponent
 
     ],
     bootstrap: [AppComponent], imports: [BrowserModule,
-    AppRoutingModule,
+    AppRoutingModule, ReactiveFormsModule,
     FormsModule], providers: [provideHttpClient(withInterceptorsFromDi())] })
 export class AppModule { }

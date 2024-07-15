@@ -4,22 +4,22 @@
     <h1 class="text-3xl font-bold text-black mb-4">Checkout</h1>
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
       <div class="md:col-span-2">
-        <form>
+        <form [formGroup]="checkoutForm" (ngSubmit)="onSubmit()">
           <div class="mb-6">
             <h3 class="text-lg font-bold text-black">Contact Information</h3>
             <label for="email" class="block text-sm font-medium text-black">Email address</label>
-            <input type="email" id="email"
+            <input type="email" id="email" formControlName="email"
                    class="mt-1 block w-full rounded-md border-gray-600 bg-slate-300 text-black shadow-sm">
           </div>
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
             <div>
               <label for="firstName" class="block text-sm font-medium text-black">First name</label>
-              <input type="text" id="firstName"
+              <input type="text" id="firstName" formControlName="firstName"
                      class="mt-1 block w-full rounded-md border-gray-600 bg-slate-300 text-black shadow-sm">
             </div>
             <div>
               <label for="lastName" class="block text-sm font-medium text-black">Last name</label>
-              <input type="text" id="lastName"
+              <input type="text" id="lastName" formControlName="lastName"
                      class="mt-1 block w-full rounded-md border-gray-600 bg-slate-300 text-black shadow-sm">
             </div>
           </div>
@@ -27,7 +27,7 @@
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
             <div>
               <label for="country" class="block text-sm font-medium text-black">Country</label>
-              <select id="country"
+              <select id="country" formControlName="country"
                       class="mt-1 block w-full rounded-md border-gray-600 bg-blend-lighten text-black shadow-sm"
                       (change)="onCountryChange($event)">
                 <option>Select country</option>
@@ -36,7 +36,7 @@
             </div>
             <div>
               <label for="state" class="block text-sm font-medium text-black">State / Province</label>
-              <select id="state"
+              <select id="state" formControlName="state"
                       class="mt-1 block w-full rounded-md border-gray-600 bg-blend-lighten text-black shadow-sm">
                 <option>Select state / province</option>
                 <option *ngFor="let state of availableStates">{{ state }}</option>
@@ -46,34 +46,33 @@
           <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
             <div class="md:col-span-2">
               <label for="address" class="block text-sm font-medium text-black">Address</label>
-              <input type="text" id="address"
+              <input type="text" id="address" formControlName="address"
                      class="mt-1 block w-full rounded-md border-gray-600 bg-slate-300 text-black shadow-sm">
             </div>
             <div>
               <label for="apartmentNumber" class="block text-sm font-medium text-black">Apartment number</label>
-              <input type="text" id="apartmentNumber"
+              <input type="text" id="apartmentNumber" formControlName="apartmentNumber"
                      class="mt-1 block w-full rounded-md border-gray-600 bg-slate-300 text-black shadow-sm">
             </div>
           </div>
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
             <div>
               <label for="city" class="block text-sm font-medium text-black">City</label>
-              <input type="text" id="city"
+              <input type="text" id="city" formControlName="city"
                      class="mt-1 block w-full rounded-md border-gray-600 bg-slate-300 text-black shadow-sm">
             </div>
             <div>
               <label for="zip" class="block text-sm font-medium text-black">Postal code</label>
-              <input type="text" id="zip"
+              <input type="text" id="zip" formControlName="zip"
                      class="mt-1 block w-full rounded-md border-gray-600 bg-slate-300 text-black shadow-sm">
             </div>
           </div>
           <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
             <div></div>
             <div>
-              <a routerLink="/payment"
-                      class="w-full bg-gray-600 text-gray-100 py-1 px-3 hover:bg-gray-500 text-center rounded">
+              <button type="submit" class="w-full bg-gray-600 text-gray-100 py-1 px-3 hover:bg-gray-500 text-center rounded">
                 Proceed to payment
-              </a>
+              </button>
             </div>
             <div></div>
           </div>
@@ -90,10 +89,10 @@
           </div>
         </div>
         <div class="mb-4">
-          <a class="text-sm text-gray-300" (click)="toggleNoteInput()">Need to leave a note or instructions?</a>
+          <a class="text-sm underline" (click)="toggleNoteInput()">Need to leave a note or instructions?</a>
         </div>
         <div *ngIf="showNoteInput">
-          <textarea id="note" class="mt-1 block w-full rounded-md border-gray-600 bg-blend-lighten text-black shadow-sm" placeholder="Enter your note here" rows="2"></textarea>
+          <textarea id="note" class="mt-1 block w-full rounded-md border-gray-600 bg-blend-lighten text-black text- shadow-sm" placeholder="Enter your note here" rows="3"></textarea>
         </div>
         <div class="border-t border-gray-700 pt-4">
           <div class="flex items-center justify-between text-sm mb-2">
