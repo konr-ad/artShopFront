@@ -5,7 +5,7 @@
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
       <div class="md:col-span-2">
         <div class="mb-6">
-          <h3 class="text-lg font-bold text-black">Contact Information</h3>
+          <h3 class="text-lg font-bold text-black py-3">Contact Information</h3>
           <p class="text-sm text-black"><strong>Email address:</strong> {{ email }}</p>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
@@ -16,7 +16,7 @@
             <p class="text-sm text-black"><strong>Last name:</strong> {{ lastName }}</p>
           </div>
         </div>
-        <h3 class="text-lg font-bold text-black">Shipping Address</h3>
+        <h3 class="text-lg font-bold text-black py-3">Shipping Address</h3>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
           <div>
             <p class="text-sm text-black"><strong>Country:</strong> {{ country }}</p>
@@ -25,8 +25,8 @@
             <p class="text-sm text-black"><strong>State / Province:</strong> {{ state }}</p>
           </div>
         </div>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
-          <div class="md:col-span-2">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+          <div>
             <p class="text-sm text-black"><strong>Address:</strong> {{ address }}</p>
           </div>
           <div>
@@ -41,7 +41,13 @@
             <p class="text-sm text-black"><strong>Postal code:</strong> {{ zip }}</p>
           </div>
         </div>
+        <div class="grid grid-cols-1 mb-6">
+          <div class="flex justify-center">
+            <a routerLink="/payment" class="bg-gray-600 text-gray-100 py-1 px-3 hover:bg-gray-500 text-center rounded">Proceed to payment</a>
+          </div>
+        </div>
       </div>
+
       <div class="order-summary p-4 border border-gray-700 rounded-md">
         <h2 class="text-xl font-bold mb-4">Order summary</h2>
         <div *ngFor="let item of cartItems" class="flex items-center justify-between mb-4">
