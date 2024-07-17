@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CartService, CartItem } from '../../services/cart.service';
+import { PayuService } from '../../services/payu.service';
 
 @Component({
   selector: 'app-payment',
@@ -20,7 +21,7 @@ export class PaymentComponent implements OnInit {
   cartItems: CartItem[] = [];
   totalAmount: number = 0;
 
-  constructor(private router: Router, private cartService: CartService) {
+  constructor(private router: Router, private cartService: CartService, private payuService: PayuService) {
     const navigation = this.router.getCurrentNavigation();
     const state = navigation?.extras.state as {
       email: string,
@@ -47,5 +48,43 @@ export class PaymentComponent implements OnInit {
   ngOnInit(): void {
     this.cartService.getItems().subscribe(items => this.cartItems = items);
     this.cartService.getTotalAmount().subscribe(amount => this.totalAmount = amount);
+  }
+
+  createOrderData() {
+    const products = this.cartItems.map(item => ({
+      name: item.productName,
+      unitPrice: (item.price * 100).toString(),
+      quantity: item.quantity.toString()
+    }));
+    const totalAmount = this.cartItems.reduce((sum, item) => sum + (item.price * item.quantity * 100), 0).toString();
+
+    return {
+      continueUrl: 'http://www.google.pl',
+      notifyUrl: 'http://localhost:4200/notify',
+      customerIp: '127.0.0.1',
+      merchantPosId: 'merchantPosId',
+      description: this.cartItems.map(item => item.productName).join(' + '),
+      currencyCode: 'PLN',
+      totalAmount: totalAmount,
+      extOrderId: 'abc' + Math.floor(Math.random() * 10000).toString(),
+      email: this.email,
+      firstName: this.firstName,
+      lastName: this.lastName,
+      products: products
+    };
+  }
+
+  proceedToPayment() {
+    const orderData = this.createOrderData();
+    this.payuService.initiatePayment(orderData).subscribe({
+      next: (response) => {
+        console.log(orderData)
+        const redirectUri = response.redirectUri;
+        window.location.href = redirectUri;
+      },
+      error: () => {
+        alert('Przepraszamy, płatność niedostępna - spróbuj później');
+      }
+    });
   }
 }
