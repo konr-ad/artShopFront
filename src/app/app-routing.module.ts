@@ -13,6 +13,7 @@ import {ExhibitionsComponent} from "./components/info/exhibitions/exhibitions.co
 import {ArtistStatementComponent} from "./components/info/artist-statement/artist-statement.component";
 import {ContactComponent} from "./components/info/contact/contact.component";
 import {PaymentComponent} from "./components/payment/payment.component";
+import {GalleryComponent} from "./components/gallery/gallery.component";
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -28,6 +29,7 @@ const routes: Routes = [
   { path: 'artistStatement', component: ArtistStatementComponent },
   { path: 'contact', component: ContactComponent },
   { path: 'add', component: AddPaintingComponent },
+  { path: 'gallery', component: GalleryComponent },
   { path: '**', redirectTo: '', pathMatch: 'full' }
 ];
 
