@@ -1,22 +1,24 @@
-import { Component } from '@angular/core';
-import {NgClass} from "@angular/common";
+import { Component, OnInit } from '@angular/core';
+import { Painting, PaintingService } from '../../services/painting.service';
 
 @Component({
   selector: 'app-gallery',
-  standalone: true,
-  imports: [
-    NgClass
-  ],
   templateUrl: './gallery.component.html',
-  styleUrl: './gallery.component.css'
+  styleUrls: ['./gallery.component.css']
 })
 export class GalleryComponent {
   lightboxOpen = false;
   lightboxImage: string | null = null;
 
-  openLightbox(src: string) {
-    this.lightboxImage = src;
-    this.lightboxOpen = true;
+  constructor(private paintingService: PaintingService) {}
+
+  openLightbox(imageUrl: string | undefined): void {
+    if (imageUrl) {
+      this.lightboxImage = imageUrl;
+      this.lightboxOpen = true;
+    } else {
+      console.error('Image URL is undefined');
+    }
   }
 
   closeLightbox() {
