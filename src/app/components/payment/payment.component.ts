@@ -59,10 +59,6 @@ export class PaymentComponent implements OnInit {
     const totalAmount = this.cartItems.reduce((sum, item) => sum + (item.price * item.quantity * 100), 0).toString();
 
     return {
-      continueUrl: 'http://www.google.pl',
-      notifyUrl: 'http://localhost:4200/notify',
-      customerIp: '127.0.0.1',
-      merchantPosId: 'merchantPosId',
       description: this.cartItems.map(item => item.productName).join(' + '),
       currencyCode: 'PLN',
       totalAmount: totalAmount,
@@ -78,11 +74,16 @@ export class PaymentComponent implements OnInit {
     const orderData = this.createOrderData();
     this.payuService.initiatePayment(orderData).subscribe({
       next: (response) => {
-        console.log(orderData)
+        console.log(response); // Ensure you're logging the response, not the request data
         const redirectUri = response.redirectUri;
-        window.location.href = redirectUri;
+        if (redirectUri) {
+          window.location.href = redirectUri;
+        } else {
+          alert('No redirect URL provided');
+        }
       },
-      error: () => {
+      error: (error) => {
+        console.error('Payment initiation error:', error);
         alert('Przepraszamy, płatność niedostępna - spróbuj później');
       }
     });
