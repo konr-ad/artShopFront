@@ -14,6 +14,7 @@ import {ArtistStatementComponent} from "./components/info/artist-statement/artis
 import {ContactComponent} from "./components/info/contact/contact.component";
 import {PaymentComponent} from "./components/payment/payment.component";
 import {GalleryComponent} from "./components/gallery/gallery.component";
+import {ThankyouComponent} from "./components/thankyou/thankyou.component";
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -30,6 +31,7 @@ const routes: Routes = [
   { path: 'contact', component: ContactComponent },
   { path: 'add', component: AddPaintingComponent },
   { path: 'gallery', component: GalleryComponent },
+  { path: 'thankyou', component: ThankyouComponent },
   { path: '**', redirectTo: '', pathMatch: 'full' }
 ];
 
