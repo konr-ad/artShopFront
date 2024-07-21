@@ -1,1 +1,55 @@
-<p>exhibitions works!</p>
+<div class="bg-gray-100 text-gray-900">
+  <div class="flex items-center justify-center pt-12">
+    <div class="max-w-5xl p-6 bg-white shadow-lg text-left">
+      <div class="flex flex-col lg:flex-row lg:items-start mb-6">
+        <div>
+          <h1 class="text-4xl font-bold text-gray-900 mb-4 py-4">Wystawy</h1>
+          <p class="text-lg text-gray-700 mb-4">
+            Kamila Białkowska-Ismail uczestniczyła w wielu wystawach zbiorowych i indywidualnych.
+          </p>
+          <ul class="list-disc pl-5 text-lg text-gray-700 mb-6">
+            <li class="mb-2">W latach 1996 - 1998 coroczne ogólnorosyjskie wystawy artystów - Art Maneż, Moskwa.</li>
+            <li class="mb-2">W 1996 roku prezentowała indywidualną wystawę malarstwa i grafiki w Centrum Kultury
+              Polskiej, Moskwa.
+            </li>
+            <li class="mb-2">W 2001 uczestniczyła w zbiorowej wystawie "Polska sztuka współczesna" w Clermont-Ferrand,
+              Francja.
+            </li>
+            <li class="mb-2">W 2002 prezentowała indywidualną wystawę w Rotterdamie, Holandia.</li>
+            <li class="mb-2">2005 wystawa indywidualna "Sztuka nie jest obowiązkowa", Warszawa.</li>
+            <li class="mb-2">2006 wystawa indywidualna - Stara Prochownia, Warszawa.</li>
+            <li class="mb-2">2007 wystawa indywidualna - "Klechdy Polskie", malarstwa inspirowane twórczością Bolesława
+              Leśmiana, Warszawa.
+            </li>
+            <li class="mb-2">2008 wystawa indywidualna "Między Aniołami, legendy bosem podszyte", Casinos Poland,
+              Warszawa Marriott.
+            </li>
+            <li class="mb-2">2012 "Świat Idealny" Skwer - Fabryka Trzciny ul. Krakowskie Przedmieście 60a Warszawa.</li>
+          </ul>
+          <p class="text-lg text-gray-700 mb-10">
+            Jej prace znajdują się w wielu prywatnych zbiorach Polski, Rosji, Japonii, Anglii, Francji, Niemczech,
+            Holandii i USA.
+          </p>
+        </div>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+        <img src="assets/exhibitions/Wystawa1.jpg" alt="Exhibition Image 1" class="w-full h-auto rounded-lg shadow-lg cursor-pointer" (click)="openLightbox(0)">
+        <img src="assets/exhibitions/Wystawa2.jpg" alt="Exhibition Image 2" class="w-full h-auto rounded-lg shadow-lg cursor-pointer" (click)="openLightbox(1)">
+        <img src="assets/exhibitions/Wystawa3.jpg" alt="Exhibition Image 3" class="w-full h-auto rounded-lg shadow-lg cursor-pointer" (click)="openLightbox(2)">
+        <img src="assets/exhibitions/Wystawa4.jpg" alt="Exhibition Image 4" class="w-full h-auto rounded-lg shadow-lg cursor-pointer" (click)="openLightbox(3)">
+        <img src="assets/exhibitions/Wystawa5.jpg" alt="Exhibition Image 5" class="w-full h-auto rounded-lg shadow-lg cursor-pointer" (click)="openLightbox(4)">
+        <img src="assets/exhibitions/Wystawa6.jpg" alt="Exhibition Image 6" class="w-full h-auto rounded-lg shadow-lg cursor-pointer" (click)="openLightbox(5)">
+        <img src="assets/exhibitions/Wystawa7.jpg" alt="Exhibition Image 7" class="w-full h-auto rounded-lg shadow-lg cursor-pointer" (click)="openLightbox(6)">
+        <img src="assets/exhibitions/Wystawa8.jpg" alt="Exhibition Image 8" class="w-full h-auto rounded-lg shadow-lg cursor-pointer" (click)="openLightbox(7)">
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Lightbox Modal -->
+<div id="lightbox" class="fixed inset-0 bg-black bg-opacity-75 hidden justify-center items-center" [ngClass]="{'flex': lightboxOpen, 'hidden': !lightboxOpen}">
+  <span class="absolute top-0 right-0 p-4 text-white text-2xl cursor-pointer" (click)="closeLightbox()">&times;</span>
+  <img id="lightbox-img" class="max-w-full max-h-full rounded-lg" [src]="lightboxImage" alt="Lightbox Image">
+  <button class="absolute left-0 top-1/2 transform -translate-y-1/2 p-6 text-white bg-gray-800 rounded-full" (click)="prevImage()">&#10094;</button>
+  <button class="absolute right-0 top-1/2 transform -translate-y-1/2 p-6 text-white bg-gray-800 rounded-full" (click)="nextImage()">&#10095;</button>
+</div>
