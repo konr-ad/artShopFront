@@ -44,23 +44,8 @@
   font-weight: 500; /* Make dropdown items medium bold */
 }
 
-.nav-item.dropdown:hover .dropdown-menu {
-  display: block;
-  margin-top: 0;
-}
-
 .dropdown-menu {
   display: none;
-}
-
-.group:hover .dropdown-menu,
-.group:focus-within .dropdown-menu,
-[aria-expanded="true"] + .dropdown-menu {
-  display: block;
-}
-
-.group:hover .dropdown-menu {
-  display: block;
 }
 
 /* Additional styles for larger navbar */
