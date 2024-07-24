@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {CartItem, CartService} from "../../services/cart.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {Router} from "@angular/router";
+import { Router, ActivatedRoute } from "@angular/router";
 
 @Component({
   selector: 'app-checkout',
@@ -39,8 +39,9 @@ export class CheckoutComponent implements  OnInit {
   availableStates: string[] = [];
   showNoteInput: boolean = false;
   checkoutForm: FormGroup;
+  formSubmitted: boolean = false;
 
-  constructor(private fb: FormBuilder, private cartService: CartService, private router: Router) {
+  constructor(private fb: FormBuilder, private cartService: CartService, private router: Router, private route: ActivatedRoute) {
     this.checkoutForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       firstName: ['', Validators.required],
@@ -57,7 +58,23 @@ export class CheckoutComponent implements  OnInit {
   ngOnInit(): void {
     this.cartService.getItems().subscribe(items => this.cartItems = items);
     this.cartService.getTotalAmount().subscribe(amount => this.totalAmount = amount);
+
+    // Populate form with data from query parameters
+    this.route.queryParams.subscribe(params => {
+      this.checkoutForm.patchValue({
+        email: params['email'] || '',
+        firstName: params['firstName'] || '',
+        lastName: params['lastName'] || '',
+        country: params['country'] || '',
+        state: params['state'] || '',
+        address: params['address'] || '',
+        apartmentNumber: params['apartmentNumber'] || '',
+        city: params['city'] || '',
+        zip: params['zip'] || ''
+      });
+    });
   }
+
 
   onCountryChange(event: any) {
     this.selectedCountry = event.target.value;
