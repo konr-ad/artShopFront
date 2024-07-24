@@ -13,8 +13,6 @@ export class HomeComponent implements OnInit {
     type: '',
     state: '',
     name: '',
-    length: 0,
-    width: 0,
     price: 0,
     image: undefined
   };
@@ -42,8 +40,6 @@ export class HomeComponent implements OnInit {
     formData.append('type', this.newPainting.type || '');
     formData.append('state', this.newPainting.state || '');
     formData.append('name', this.newPainting.name || '');
-    formData.append('length', this.newPainting.length?.toString() || '0');
-    formData.append('width', this.newPainting.width?.toString() || '0');
     formData.append('price', this.newPainting.price?.toString() || '0');
     if (this.selectedFile) {
       formData.append('image', this.selectedFile);

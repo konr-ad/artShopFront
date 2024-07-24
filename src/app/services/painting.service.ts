@@ -8,8 +8,6 @@ export interface Painting {
   state: string;
   name: string;
   description: string;
-  length: number;
-  width: number;
   price: number;
   image: string;
   imageUrl?: string;
