@@ -41,9 +41,26 @@
             <p class="text-sm text-black"><strong>Postal code:</strong> {{ zip }}</p>
           </div>
         </div>
-        <div class="grid grid-cols-1 mb-6">
-          <div class="flex justify-center">
-            <button (click)="proceedToPayment()" class="bg-gray-600 text-gray-100 py-1 px-3 hover:bg-gray-500 text-center rounded">Proceed to payment</button>
+        <div class="grid grid-cols-2 gap-4 mb-6">
+          <div class="col-span-1">
+            <a [routerLink]="['/checkout']"
+               [queryParams]="{
+                  email: email,
+                  firstName: firstName,
+                  lastName: lastName,
+                  country: country,
+                  state: state,
+                  address: address,
+                  apartmentNumber: apartmentNumber,
+                  city: city,
+                  zip: zip
+               }"
+               class="w-full block bg-gray-600 text-gray-100 py-1 px-3 hover:bg-gray-500 text-center rounded">Back to
+              checkout</a>
+
+          </div>
+          <div class="col-span-1">
+            <button (click)="proceedToPayment()" class="w-full bg-gray-600 text-gray-100 py-1 px-3 hover:bg-gray-500 text-center rounded">Pay with payU</button>
           </div>
         </div>
       </div>
