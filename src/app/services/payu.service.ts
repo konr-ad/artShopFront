@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class PayuService {
-  private backendUrl = 'http://localhost:8080/api/orders';
+  private backendUrl = 'http://25.53.71.208:8080/api/orders';
 
   constructor(private http: HttpClient) {}
 
