@@ -4,6 +4,7 @@
     <h1 class="text-3xl font-bold text-black mb-4">Checkout</h1>
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
       <div class="md:col-span-2">
+        <button (click)="fillTestData()" class="mb-4 bg-blue-500 text-white py-2 px-4 rounded">Fill Test Data</button>
         <form [formGroup]="checkoutForm" (ngSubmit)="onSubmit()">
           <div class="mb-6">
             <h3 class="text-lg font-bold text-black">Contact Information</h3>
@@ -109,7 +110,7 @@
           </div>
         </div>
         <div class="mb-4">
-          <a class="text-sm underline cursor-pointer" (click)="toggleNoteInput()">Need to leave a note or instructions?</a>
+          <a class="text-sm">Need to leave a note or instructions? Write an email to dsk.bis&#64;wp.pl</a>
         </div>
         <div *ngIf="showNoteInput">
           <textarea id="note"

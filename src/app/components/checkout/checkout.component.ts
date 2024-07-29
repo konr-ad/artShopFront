@@ -81,13 +81,25 @@ export class CheckoutComponent implements  OnInit {
     this.availableStates = this.statesProvinces[this.selectedCountry] || [];
   }
 
-  toggleNoteInput() {
-    this.showNoteInput = !this.showNoteInput;
-  }
-
   onSubmit() {
     if (this.checkoutForm.valid) {
       this.router.navigate(['/payment'], { state: { ...this.checkoutForm.value } });
     }
+  }
+
+  fillTestData() {
+    this.checkoutForm.patchValue({
+      email: 'test@example.com',
+      firstName: 'John',
+      lastName: 'Doe',
+      country: 'United States',
+      state: 'California',
+      address: '123 Main St',
+      apartmentNumber: 'Apt 1',
+      city: 'Los Angeles',
+      zip: '90001'
+    });
+    this.selectedCountry = 'United States';
+    this.availableStates = this.statesProvinces[this.selectedCountry];
   }
 }
