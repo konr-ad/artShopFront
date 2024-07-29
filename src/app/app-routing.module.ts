@@ -17,6 +17,7 @@ import {GalleryComponent} from "./components/gallery/gallery.component";
 import {ThankyouComponent} from "./components/thankyou/thankyou.component";
 import {LoginComponent} from "./components/admin-panel/login/login.component";
 import {DashboardComponent} from "./components/admin-panel/dashboard.component";
+import {OrdersComponent} from "./components/admin-panel/orders/orders.component";
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -36,6 +37,7 @@ const routes: Routes = [
   { path: 'thankyou', component: ThankyouComponent },
   { path: 'login', component: LoginComponent },
   { path: 'admin', component: DashboardComponent },
+  { path: 'admin/orders', component: OrdersComponent },
   { path: '**', redirectTo: '', pathMatch: 'full' }
 ];
 

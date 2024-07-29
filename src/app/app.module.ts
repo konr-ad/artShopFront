@@ -21,6 +21,7 @@ import {StepperComponent} from "./components/stepper/stepper.component";
 import {PaymentComponent} from "./components/payment/payment.component";
 import {ReactiveFormsModule} from '@angular/forms';
 import {GalleryComponent} from "./components/gallery/gallery.component";
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,7 @@ import {GalleryComponent} from "./components/gallery/gallery.component";
   ],
   bootstrap: [AppComponent], imports: [BrowserModule,
     AppRoutingModule, ReactiveFormsModule,
-    FormsModule], providers: [provideHttpClient(withInterceptorsFromDi())]
+    FormsModule, CommonModule], providers: [provideHttpClient(withInterceptorsFromDi())]
 })
 export class AppModule {
 }
