@@ -36,8 +36,9 @@ const routes: Routes = [
   { path: 'gallery', component: GalleryComponent },
   { path: 'thankyou', component: ThankyouComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'admin', component: DashboardComponent },
+  { path: 'admin/dashboard', component: DashboardComponent },
   { path: 'admin/orders', component: OrdersComponent },
+  // { path: 'admin/products', component:  },
   { path: '**', redirectTo: '', pathMatch: 'full' }
 ];
 
