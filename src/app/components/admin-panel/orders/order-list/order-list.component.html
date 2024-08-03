@@ -1,20 +1,16 @@
 <div class="flex flex-col items-center justify-center w-full bg-white">
   <div class="w-full p-6 bg-white text-black shadow-lg rounded-lg">
-    <div class="flex flex-col lg:flex-row lg:items-start mb-6">
-      <h1 class="text-4xl font-bold text-black mb-4">Orders</h1>
-    </div>
-    <p class="text-lg text-gray-600 mb-4">
-      Recent orders from your store.
-    </p>
+    <h1 class="text-4xl font-bold text-black mb-4">Zamówienia</h1>
     <div class="overflow-x-auto">
       <table class="min-w-full bg-white text-black rounded-lg">
         <thead>
         <tr class="w-full bg-gray-200 text-left">
-          <th class="py-2 px-4">Customer</th>
-          <th class="py-2 px-4">Type</th>
-          <th class="py-2 px-4">Status</th>
-          <th class="py-2 px-4">Date</th>
-          <th class="py-2 px-4 text-right">Amount</th>
+          <th class="py-2 px-4">ID</th>
+          <th class="py-2 px-4">Klient</th>
+          <th class="py-2 px-4">Produkty</th>
+          <th class="py-2 px-4">Status płatności</th>
+          <th class="py-2 px-4">Data złożenia</th>
+          <th class="py-2 px-4 text-right">Wartość</th>
         </tr>
         </thead>
         <tbody>
@@ -26,20 +22,21 @@
                 'hover:bg-gray-200': selectedOrderId !== order.id,
                 'hover:bg-gray-400': selectedOrderId === order.id
               }">
+          <td class="py-2 px-4">{{ order.id }}</td>
           <td class="py-2 px-4">
-            <div class="font-medium">{{ order.firstName }} {{ order.lastName }}</div>
-            <div class="text-sm text-gray-600">{{ order.email }}</div>
+            <div class="font-medium">{{ order.customer.firstName }} {{ order.customer.lastName }}</div>
+            <div class="text-sm text-gray-600">{{ order.customer.email }}</div>
           </td>
           <td class="py-2 px-4">{{ order.description }}</td>
           <td class="py-2 px-4">
               <span class="py-1 px-2 rounded-lg" [ngClass]="{
-                'bg-green-100 text-green-800': order.paymentStatus === 'Fulfilled',
+                'bg-green-100 text-green-800': order.paymentStatus === 'SUCCESS',
                 'bg-red-100 text-red-800': order.paymentStatus === 'Declined'
               }">
                 {{ order.paymentStatus }}
               </span>
           </td>
-          <td class="py-2 px-4">{{ order.date }}</td>
+          <td class="py-2 px-4">{{ order.creationDate | date }}</td>
           <td class="py-2 px-4 text-right">{{ order.totalAmount }}</td>
         </tr>
         </tbody>

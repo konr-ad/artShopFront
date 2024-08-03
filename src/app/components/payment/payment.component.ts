@@ -57,24 +57,27 @@ export class PaymentComponent implements OnInit {
       quantity: item.quantity.toString()
     }));
     const totalAmount = this.cartItems.reduce((sum, item) => sum + (item.price * item.quantity * 100), 0).toString();
-
-    return {
+    const orderData = {
       description: this.cartItems.map(item => item.productName).join(' + '),
-      currencyCode: 'PLN',
-      totalAmount: totalAmount,
+      currencyCode: 'PLN', // Currency code
+      totalAmount: totalAmount, // Total amount
       extOrderId: 'abc' + Math.floor(Math.random() * 10000).toString(),
-      email: this.email,
-      firstName: this.firstName,
-      lastName: this.lastName,
+      customer: {
+        email: this.email,
+        firstName: this.firstName,
+        lastName: this.lastName
+      },
       products: products
     };
+    // console.log('Order Data:', orderData);
+    return orderData;
   }
 
   proceedToPayment() {
     const orderData = this.createOrderData();
     this.payuService.initiatePayment(orderData).subscribe({
       next: (response) => {
-        console.log(response); // Ensure you're logging the response, not the request data
+        console.log(response);
         const redirectUri = response.redirectUri;
         if (redirectUri) {
           window.location.href = redirectUri;

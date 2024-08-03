@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 
 @Component({
   selector: 'app-order-detail',
@@ -6,6 +6,12 @@ import { Component, Input } from '@angular/core';
   templateUrl: './order-detail.component.html',
   styleUrl: './order-detail.component.css'
 })
-export class OrderDetailComponent {
-  @Input() order: any; //TODO do dokonczenia
+export class OrderDetailComponent implements OnChanges {
+  @Input() order: any;
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['order']) {
+      console.log('Order detail input:', this.order);
+    }
+  }
 }
