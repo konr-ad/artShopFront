@@ -80,6 +80,7 @@ export class PaymentComponent implements OnInit {
         console.log(response);
         const redirectUri = response.redirectUri;
         if (redirectUri) {
+        console.log(response);
           window.location.href = redirectUri;
         } else {
           alert('No redirect URL provided');

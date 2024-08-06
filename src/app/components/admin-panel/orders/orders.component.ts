@@ -21,5 +21,6 @@ export class OrdersComponent {
 
   onOrderSelected(order: any) {
     this.selectedOrder = order;
+    console.log('Selected order:', order); // Debug log
   }
 }

@@ -1,57 +1,61 @@
-<div class="w-full p-6 bg-white text-black shadow-lg rounded-lg">
-  <h2 class="text-2xl font-bold mb-4">Order Details</h2>
+<div *ngIf="order; else noOrder" class="w-full p-6 bg-white text-black shadow-lg rounded-lg">
+  <h2 class="text-2xl font-bold mb-4">Szczegóły Zamówienia</h2>
   <div class="border-t border-gray-200 pt-4">
     <div class="mb-4">
-      <h3 class="font-semibold">Order Items</h3>
+      <h3 class="font-semibold">Przedmioty w Zamówieniu</h3>
       <ul>
-        <li *ngFor="let order of order.paintings" class="flex justify-between">
-          <span>{{ order.description }} x 1</span>
+        <li *ngFor="let painting of order.paintings" class="flex justify-between">
+          <span>{{ painting.name }} x {{ painting.quantity || '1' }}</span>
+          <span>{{ painting.price | currency:'PLN':'symbol-narrow':'1.0-2' }}</span>
         </li>
       </ul>
     </div>
     <div class="border-t border-gray-200 pt-4">
       <div class="flex justify-between mb-4">
-        <span>Subtotal</span>
-        <span>{{ order.totalAmount }}</span>
+        <span>Kwota netto</span>
+        <span>{{ order.totalAmount | currency:'PLN':'symbol-narrow':'1.0-2' }}</span>
       </div>
       <div class="flex justify-between mb-4">
-        <span>Shipping</span>
-        <span>{{ order.shipping || '0' }}</span>>
+        <span>Wysyłka</span>
+        <span>{{ order.shipping || '0' | currency:'PLN':'symbol-narrow':'1.0-2' }}</span>
       </div>
       <div class="flex justify-between mb-4">
-        <span>Tax</span>
-        <span>{{ order.tax || '0' }}</span>
+        <span>Podatek</span>
+        <span>{{ order.tax || '0' | currency:'PLN':'symbol-narrow':'1.0-2' }}</span>
       </div>
       <div class="flex justify-between font-semibold">
-        <span>Total</span>
-        <span>{{ order.totalAmount }}</span>
+        <span>Kwota całkowita</span>
+        <span>{{ order.totalAmount | currency:'PLN':'symbol-narrow':'1.0-2' }}</span>
       </div>
     </div>
   </div>
   <div class="border-t border-gray-200 pt-4">
-    <div class="flex justify-between mb-4">
-      <h3 class="font-semibold">Shipping Information</h3>
+    <div class="mb-4">
+      <h3 class="font-semibold">Informacje o Wysyłce</h3>
       <address class="not-italic">
         <span>{{ order.customer.firstName }} {{ order.customer.lastName }}</span><br>
-        <span>{{ order.shippingAddress.address }}</span><br> <!-- Updated to use ShippingAddress -->
-        <span>{{ order.shippingAddress.city }}, {{ order.shippingAddress.state }} {{ order.shippingAddress.zip }}</span>
+        <span>{{ order.shippingAddress?.address }}</span><br>
+        <span>{{ order.shippingAddress?.city }}, {{ order.shippingAddress?.state }} {{ order.shippingAddress?.zip }}</span>
       </address>
     </div>
   </div>
   <div class="border-t border-gray-200 pt-4">
-    <div class="flex justify-between mb-4">
-      <h3 class="font-semibold">Customer Information</h3>
+    <div class="mb-4">
+      <h3 class="font-semibold">Informacje o Kliencie</h3>
       <dl>
-        <dt>Customer</dt>
+        <dt>Klient</dt>
         <dd>{{ order.customer.firstName }} {{ order.customer.lastName }}</dd>
         <dt>Email</dt>
         <dd>{{ order.customer.email }}</dd>
-        <dt>Phone</dt>
+        <dt>Telefon</dt>
         <dd>{{ order.customer.phone || 'N/A' }}</dd>
       </dl>
     </div>
   </div>
 </div>
-<div *ngIf="!order" class="w-full p-6 bg-white text-black shadow-lg rounded-lg">
-  <h2 class="text-2xl font-bold mb-4">No Order Selected</h2>
-</div>
+
+<ng-template #noOrder>
+  <div class="w-full p-6 bg-white text-black shadow-lg rounded-lg">
+    <h2 class="text-2xl font-bold mb-4">Brak Wybranego Zamówienia</h2>
+  </div>
+</ng-template>

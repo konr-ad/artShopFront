@@ -1,6 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { OrderService } from '../../../../services/order.service';
-import {CommonModule} from "@angular/common";
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-order-list',
@@ -25,5 +25,6 @@ export class OrderListComponent implements OnInit {
   selectOrder(order: any) {
     this.selectedOrderId = order.id;
     this.orderSelected.emit(order);
+    console.log('Emitting order:', order); // Debug log
   }
 }

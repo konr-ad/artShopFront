@@ -18,10 +18,10 @@
             class="border-t border-gray-200 cursor-pointer"
             (click)="selectOrder(order)"
             [ngClass]="{
-                'bg-gray-300': selectedOrderId === order.id,
-                'hover:bg-gray-200': selectedOrderId !== order.id,
-                'hover:bg-gray-400': selectedOrderId === order.id
-              }">
+                  'bg-gray-300': selectedOrderId === order.id,
+                  'hover:bg-gray-200': selectedOrderId !== order.id,
+                  'hover:bg-gray-400': selectedOrderId === order.id
+                }">
           <td class="py-2 px-4">{{ order.id }}</td>
           <td class="py-2 px-4">
             <div class="font-medium">{{ order.customer.firstName }} {{ order.customer.lastName }}</div>
