@@ -1,5 +1,5 @@
 <div *ngIf="order; else noOrder" class="w-full p-6 bg-white text-black shadow-lg rounded-lg">
-  <h2 class="text-2xl font-bold mb-4">Szczegóły Zamówienia</h2>
+  <h2 class="text-2xl font-bold mb-4 text-center">Szczegóły Zamówienia</h2>
   <div class="border-t border-gray-200 pt-4">
     <div class="mb-4">
       <h3 class="font-semibold">Przedmioty w Zamówieniu</h3>
@@ -32,10 +32,10 @@
   <div class="border-t border-gray-200 pt-4">
     <div class="mb-4">
       <h3 class="font-semibold">Informacje o Wysyłce</h3>
-      <address class="not-italic">
+      <address class="not-italic text-right">
         <span>{{ order.customer.firstName }} {{ order.customer.lastName }}</span><br>
-        <span>{{ order.shippingAddress?.address }}</span><br>
-        <span>{{ order.shippingAddress?.city }}, {{ order.shippingAddress?.state }} {{ order.shippingAddress?.zip }}</span>
+        <span>{{ order.customer?.address }}</span><br>
+        <span>{{ order.customer?.city }}, {{ order.customer?.state }} {{ order.customer?.zip }}</span>
       </address>
     </div>
   </div>
@@ -43,11 +43,8 @@
     <div class="mb-4">
       <h3 class="font-semibold">Informacje o Kliencie</h3>
       <dl>
-        <dt>Klient</dt>
         <dd>{{ order.customer.firstName }} {{ order.customer.lastName }}</dd>
-        <dt>Email</dt>
         <dd>{{ order.customer.email }}</dd>
-        <dt>Telefon</dt>
         <dd>{{ order.customer.phone || 'N/A' }}</dd>
       </dl>
     </div>
@@ -55,7 +52,7 @@
 </div>
 
 <ng-template #noOrder>
-  <div class="w-full p-6 bg-white text-black shadow-lg rounded-lg">
-    <h2 class="text-2xl font-bold mb-4">Brak Wybranego Zamówienia</h2>
+  <div class="w-full p-12 bg-white text-black shadow-lg rounded-lg">
+    <h2 class="text-3xl font-bold mb-4 text-center">Brak Wybranego Zamówienia</h2>
   </div>
 </ng-template>

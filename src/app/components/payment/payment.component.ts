@@ -65,7 +65,13 @@ export class PaymentComponent implements OnInit {
       customer: {
         email: this.email,
         firstName: this.firstName,
-        lastName: this.lastName
+        lastName: this.lastName,
+        country: this.country,
+        state: this.state,
+        address: this.address,
+        apartmentNumber: this.apartmentNumber,
+        city: this.city,
+        zip: this.zip
       },
       products: products
     };
