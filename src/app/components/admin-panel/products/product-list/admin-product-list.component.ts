@@ -1,17 +1,19 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Painting, PaintingService } from 'src/app/services/painting.service';
+import {AddProductModalComponent} from "../add-product-modal/add-product-modal.component";
 
 @Component({
   selector: 'app-admin-product-list',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, AddProductModalComponent],
   templateUrl: './admin-product-list.component.html',
   styleUrls: ['./admin-product-list.component.css']
 })
 export class AdminProductListComponent implements OnInit {
   products: any[] = [];
   selectedProductId: any;
+  isModalOpen = false;
   @Output() productSelected = new EventEmitter<any>();
 
   constructor(private paintingService: PaintingService) {}
@@ -29,5 +31,9 @@ export class AdminProductListComponent implements OnInit {
     this.selectedProductId = product.id;
     this.productSelected.emit(product);
     console.log('Emitting product:', product); // Debug log
+  }
+
+  openModal() {
+    this.isModalOpen = true;
   }
 }
