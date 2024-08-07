@@ -18,6 +18,7 @@ import {ThankyouComponent} from "./components/thankyou/thankyou.component";
 import {LoginComponent} from "./components/admin-panel/login/login.component";
 import {DashboardComponent} from "./components/admin-panel/dashboard.component";
 import {OrdersComponent} from "./components/admin-panel/orders/orders.component";
+import {ProductsComponent} from "./components/admin-panel/products/products.component";
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -38,6 +39,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'admin/dashboard', component: DashboardComponent },
   { path: 'admin/orders', component: OrdersComponent },
+  { path: 'admin/products', component: ProductsComponent },
   // { path: 'admin/products', component:  },
   { path: '**', redirectTo: '', pathMatch: 'full' }
 ];

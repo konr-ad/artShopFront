@@ -1,0 +1,11 @@
+<div class="flex min-h-screen w-full flex-col bg-white">
+  <app-sidebar></app-sidebar>
+  <div class="flex flex-1 px-20">
+    <div class="w-2/3">
+      <app-admin-product-list (productSelected)="onProductSelected($event)"></app-admin-product-list>
+    </div>
+    <div class="w-1/3 pl-6">
+      <app-admin-product-details [product]="selectedProduct"></app-admin-product-details>
+    </div>
+  </div>
+</div>

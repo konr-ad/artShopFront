@@ -1,0 +1,20 @@
+<div *ngIf="product; else noProduct" class="w-full p-6 bg-white text-black shadow-lg rounded-lg">
+  <h2 class="text-2xl font-bold mb-4 text-center">{{ product.name }}</h2>
+  <div class="flex justify-center items-center">
+    <img [src]="product.imageUrl" alt="{{ product.name }}" class="w-1/2 mb-4 rounded-lg shadow-md">
+  </div>
+  <div class="flex justify-between mb-4">
+    <span>Opis</span>
+    <span>{{ product.description }}</span>
+  </div>
+  <div class="flex justify-between mb-4">
+    <span>Cena</span>
+    <span>{{ product.price | currency:'PLN':'symbol':'1.0-2' }}</span>
+  </div>
+</div>
+
+<ng-template #noProduct>
+  <div class="w-full p-12 bg-white text-black shadow-lg rounded-lg">
+    <h2 class="text-3xl font-bold mb-4 text-center">Brak Wybranego Produktu</h2>
+  </div>
+</ng-template>
