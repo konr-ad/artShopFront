@@ -2,7 +2,9 @@
   <app-sidebar></app-sidebar>
   <div class="flex flex-1 px-20">
     <div class="w-2/3">
-      <app-admin-product-list (productSelected)="onProductSelected($event)"></app-admin-product-list>
+      <app-admin-product-list
+        (productSelected)="onProductSelected($event)"
+        (addProduct)="openAddProductModal()"></app-admin-product-list>
       <app-add-product-modal
         [isOpen]="isAddProductModalOpen"
         (productAdded)="handleProductAdded($event)"

@@ -13,7 +13,7 @@ import {AddProductModalComponent} from "../add-product-modal/add-product-modal.c
 export class AdminProductListComponent implements OnInit {
   products: any[] = [];
   selectedProductId: any;
-  isModalOpen = false;
+  @Output() addProduct = new EventEmitter<void>();
   @Output() productSelected = new EventEmitter<any>();
 
   constructor(private paintingService: PaintingService) {}
@@ -33,7 +33,7 @@ export class AdminProductListComponent implements OnInit {
     console.log('Emitting product:', product); // Debug log
   }
 
-  openModal() {
-    this.isModalOpen = true;
+  addNewProduct() {
+    this.addProduct.emit();
   }
 }

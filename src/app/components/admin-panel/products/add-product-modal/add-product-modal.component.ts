@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import {Component, Output, EventEmitter, booleanAttribute, Input} from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { PaintingService, Painting } from 'src/app/services/painting.service';
 import { AbstractModalComponent } from "../../../abstract/AbstractModal";
@@ -15,6 +15,7 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./add-product-modal.component.css']
 })
 export class AddProductModalComponent extends AbstractModalComponent {
+  // @Input() isOpen = false;
   productForm: FormGroup;
 
   @Output() productAdded = new EventEmitter<Painting>();
@@ -34,15 +35,13 @@ export class AddProductModalComponent extends AbstractModalComponent {
   onSubmit() {
     if (this.productForm.valid) {
       const formData = new FormData();
-
-      // Safely append each field to FormData
       Object.entries(this.productForm.value).forEach(([key, value]) => {
         if (value !== null && value !== undefined) {
-          // Check for the image field and ensure it's a File type
+          // Handle image separately
           if (key === 'image' && value instanceof File) {
             formData.append(key, value);
           } else {
-            formData.append(key, value as string); // Cast as string if not a File
+            formData.append(key, value as string);
           }
         }
       });

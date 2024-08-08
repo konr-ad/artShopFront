@@ -1,4 +1,4 @@
-import { Input, Output, EventEmitter, Directive } from '@angular/core';
+import {Directive, EventEmitter, Input, Output} from '@angular/core';
 
 @Directive()
 export abstract class AbstractModalComponent {
