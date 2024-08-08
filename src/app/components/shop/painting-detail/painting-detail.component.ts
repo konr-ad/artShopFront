@@ -16,7 +16,7 @@ export class PaintingDetailComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private paintingService: PaintingService,
-    private cartService: CartService // Inject CartService
+    private cartService: CartService
   ) {}
 
   ngOnInit(): void {

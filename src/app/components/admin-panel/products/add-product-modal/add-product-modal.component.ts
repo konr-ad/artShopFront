@@ -17,6 +17,7 @@ import { CommonModule } from '@angular/common';
 export class AddProductModalComponent extends AbstractModalComponent {
   productForm: FormGroup;
   selectedFile: File | null = null;
+  additionalFiles: File[] = []
 
   @Output() productAdded = new EventEmitter<Painting>();
 
@@ -43,6 +44,10 @@ export class AddProductModalComponent extends AbstractModalComponent {
         formData.append('image', this.selectedFile);
       }
 
+      this.additionalFiles.forEach((file, index) => {
+        formData.append(`additionalImages`, file); // Append each additional image
+      });
+
       this.paintingService.createPainting(formData).subscribe(
         (newPainting) => {
           this.productAdded.emit(newPainting);
@@ -60,6 +65,13 @@ export class AddProductModalComponent extends AbstractModalComponent {
     if (input.files?.length) {
       this.selectedFile = input.files[0];
       this.productForm.patchValue({ image: this.selectedFile });
+    }
+  }
+
+  onAdditionalImagesChange(event: Event) {
+    const input = event.target as HTMLInputElement;
+    if (input.files?.length) {
+      this.additionalFiles = Array.from(input.files);
     }
   }
 }
