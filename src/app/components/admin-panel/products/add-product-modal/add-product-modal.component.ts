@@ -1,4 +1,4 @@
-import {Component, Output, EventEmitter, booleanAttribute, Input} from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { PaintingService, Painting } from 'src/app/services/painting.service';
 import { AbstractModalComponent } from "../../../abstract/AbstractModal";
@@ -15,8 +15,8 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./add-product-modal.component.css']
 })
 export class AddProductModalComponent extends AbstractModalComponent {
-  // @Input() isOpen = false;
   productForm: FormGroup;
+  selectedFile: File | null = null;
 
   @Output() productAdded = new EventEmitter<Painting>();
 
@@ -25,8 +25,7 @@ export class AddProductModalComponent extends AbstractModalComponent {
     this.productForm = this.fb.group({
       name: ['', Validators.required],
       description: ['', Validators.required],
-      type: ['', Validators.required],
-      state: ['', Validators.required],
+      type: ['', [Validators.required, Validators.pattern(/^(?!\s*$).+/)]],
       price: [0, [Validators.required, Validators.min(0)]],
       image: [null, Validators.required]
     });
@@ -35,28 +34,32 @@ export class AddProductModalComponent extends AbstractModalComponent {
   onSubmit() {
     if (this.productForm.valid) {
       const formData = new FormData();
-      Object.entries(this.productForm.value).forEach(([key, value]) => {
-        if (value !== null && value !== undefined) {
-          // Handle image separately
-          if (key === 'image' && value instanceof File) {
-            formData.append(key, value);
-          } else {
-            formData.append(key, value as string);
-          }
-        }
-      });
+      formData.append('name', this.productForm.get('name')?.value || '');
+      formData.append('description', this.productForm.get('description')?.value || '');
+      formData.append('type', this.productForm.get('type')?.value || '');
+      formData.append('price', this.productForm.get('price')?.value.toString() || '0');
 
-      this.paintingService.createPainting(formData).subscribe((newPainting) => {
-        this.productAdded.emit(newPainting);
-        this.close();
-      });
+      if (this.selectedFile) {
+        formData.append('image', this.selectedFile);
+      }
+
+      this.paintingService.createPainting(formData).subscribe(
+        (newPainting) => {
+          this.productAdded.emit(newPainting);
+          this.close();
+        },
+        (error) => {
+          console.error('Failed to create product', error);
+        }
+      );
     }
   }
 
   onImageChange(event: Event) {
     const input = event.target as HTMLInputElement;
     if (input.files?.length) {
-      this.productForm.patchValue({ image: input.files[0] });
+      this.selectedFile = input.files[0];
+      this.productForm.patchValue({ image: this.selectedFile });
     }
   }
 }

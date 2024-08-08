@@ -1,8 +1,8 @@
 <div *ngIf="isOpen" class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-  <div class="bg-white p-6 rounded shadow-lg w-full max-w-md">
+  <div class="bg-white p-6 rounded-2xl shadow-lg w-full max-w-md">
     <h2 class="text-xl font-bold mb-4">Dodaj Nowy Produkt</h2>
     <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
-      <div class="mb-4">
+      <div class="py-4 mb-4">
         <label for="name" class="block text-sm font-medium text-gray-700">Nazwa</label>
         <input id="name" formControlName="name" type="text" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" />
       </div>
@@ -12,18 +12,11 @@
       </div>
       <div class="mb-4">
         <label for="type" class="block text-sm font-medium text-gray-700">Typ</label>
-        <select id="type" formControlName="type" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
-          <option value="">Wybierz typ</option>
-          <option value="MONOTYPE">Monotypia</option>
+        <select id="type" formControlName="type" class="mt-2 block w-full border-gray-300 rounded-md shadow-sm">
+          <option value="" disabled selected hidden class="text-gray-500">Wybierz typ</option>
+          <option value="MONOTYPE">Monotyp</option>
           <option value="PRINT">Druk</option>
-        </select>
-      </div>
-      <div class="mb-4">
-        <label for="state" class="block text-sm font-medium text-gray-700">Stan</label>
-        <select id="state" formControlName="state" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
-          <option value="">Wybierz stan</option>
-          <option value="AVAILABLE">Dostępny</option>
-          <option value="SOLD">Sprzedany</option>
+          <option value="OIL">Olej</option>
         </select>
       </div>
       <div class="mb-4">
