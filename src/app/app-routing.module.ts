@@ -6,7 +6,6 @@ import { BrowserModule } from "@angular/platform-browser";
 import { PaintingDetailComponent } from "./components/shop/painting-detail/painting-detail.component";
 import { CartComponent } from './components/cart/cart.component';
 import { CheckoutComponent } from "./components/checkout/checkout.component";
-import { AddPaintingComponent } from './add-painting/add-painting.component';
 import {BioComponent} from "./components/info/bio/bio.component";
 import {MagazinesComponent} from "./components/info/magazines/magazines.component";
 import {ExhibitionsComponent} from "./components/info/exhibitions/exhibitions.component";
@@ -33,7 +32,6 @@ const routes: Routes = [
   { path: 'exhibitions', component: ExhibitionsComponent },
   { path: 'artistStatement', component: ArtistStatementComponent },
   { path: 'contact', component: ContactComponent },
-  { path: 'add', component: AddPaintingComponent },
   { path: 'gallery', component: GalleryComponent },
   { path: 'thankyou', component: ThankyouComponent },
   { path: 'login', component: LoginComponent },
