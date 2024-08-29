@@ -11,7 +11,8 @@
             <label for="email" class="block text-sm font-medium text-black">Email address</label>
             <input type="email" id="email" formControlName="email"
                    class="mt-1 block w-full rounded-md border-gray-600 bg-slate-300 text-black shadow-sm">
-            <div *ngIf="checkoutForm.get('email')?.invalid && (checkoutForm.get('email')?.touched || formSubmitted)" class="text-red-600 text-sm mt-1">
+            <div *ngIf="checkoutForm.get('email')?.invalid && (checkoutForm.get('email')?.touched || formSubmitted)"
+                 class="text-red-600 text-sm mt-1">
               Please enter a valid email address.
             </div>
           </div>
@@ -20,7 +21,9 @@
               <label for="firstName" class="block text-sm font-medium text-black">First name</label>
               <input type="text" id="firstName" formControlName="firstName"
                      class="mt-1 block w-full rounded-md border-gray-600 bg-slate-300 text-black shadow-sm">
-              <div *ngIf="checkoutForm.get('firstName')?.invalid && (checkoutForm.get('firstName')?.touched || formSubmitted)" class="text-red-600 text-sm mt-1">
+              <div
+                *ngIf="checkoutForm.get('firstName')?.invalid && (checkoutForm.get('firstName')?.touched || formSubmitted)"
+                class="text-red-600 text-sm mt-1">
                 First name is required.
               </div>
             </div>
@@ -28,7 +31,9 @@
               <label for="lastName" class="block text-sm font-medium text-black">Last name</label>
               <input type="text" id="lastName" formControlName="lastName"
                      class="mt-1 block w-full rounded-md border-gray-600 bg-slate-300 text-black shadow-sm">
-              <div *ngIf="checkoutForm.get('lastName')?.invalid && (checkoutForm.get('lastName')?.touched || formSubmitted)" class="text-red-600 text-sm mt-1">
+              <div
+                *ngIf="checkoutForm.get('lastName')?.invalid && (checkoutForm.get('lastName')?.touched || formSubmitted)"
+                class="text-red-600 text-sm mt-1">
                 Last name is required.
               </div>
             </div>
@@ -43,7 +48,9 @@
                 <option>Select country</option>
                 <option *ngFor="let country of countries">{{ country }}</option>
               </select>
-              <div *ngIf="checkoutForm.get('country')?.invalid && (checkoutForm.get('country')?.touched || formSubmitted)" class="text-red-600 text-sm mt-1">
+              <div
+                *ngIf="checkoutForm.get('country')?.invalid && (checkoutForm.get('country')?.touched || formSubmitted)"
+                class="text-red-600 text-sm mt-1">
                 Country is required.
               </div>
             </div>
@@ -51,7 +58,8 @@
               <label for="state" class="block text-sm font-medium text-black">State / Province</label>
               <input type="text" id="state" formControlName="state"
                      class="mt-1 block w-full rounded-md border-gray-600 bg-slate-300 text-black shadow-sm">
-              <div *ngIf="checkoutForm.get('state')?.invalid && (checkoutForm.get('state')?.touched || formSubmitted)" class="text-red-600 text-sm mt-1">
+              <div *ngIf="checkoutForm.get('state')?.invalid && (checkoutForm.get('state')?.touched || formSubmitted)"
+                   class="text-red-600 text-sm mt-1">
                 State / Province is required.
               </div>
             </div>
@@ -61,7 +69,9 @@
               <label for="address" class="block text-sm font-medium text-black">Address</label>
               <input type="text" id="address" formControlName="address"
                      class="mt-1 block w-full rounded-md border-gray-600 bg-slate-300 text-black shadow-sm">
-              <div *ngIf="checkoutForm.get('address')?.invalid && (checkoutForm.get('address')?.touched || formSubmitted)" class="text-red-600 text-sm mt-1">
+              <div
+                *ngIf="checkoutForm.get('address')?.invalid && (checkoutForm.get('address')?.touched || formSubmitted)"
+                class="text-red-600 text-sm mt-1">
                 Address is required.
               </div>
             </div>
@@ -76,7 +86,8 @@
               <label for="city" class="block text-sm font-medium text-black">City</label>
               <input type="text" id="city" formControlName="city"
                      class="mt-1 block w-full rounded-md border-gray-600 bg-slate-300 text-black shadow-sm">
-              <div *ngIf="checkoutForm.get('city')?.invalid && (checkoutForm.get('city')?.touched || formSubmitted)" class="text-red-600 text-sm mt-1">
+              <div *ngIf="checkoutForm.get('city')?.invalid && (checkoutForm.get('city')?.touched || formSubmitted)"
+                   class="text-red-600 text-sm mt-1">
                 City is required.
               </div>
             </div>
@@ -84,22 +95,28 @@
               <label for="zip" class="block text-sm font-medium text-black">Postal code</label>
               <input type="text" id="zip" formControlName="zip"
                      class="mt-1 block w-full rounded-md border-gray-600 bg-slate-300 text-black shadow-sm">
-              <div *ngIf="checkoutForm.get('zip')?.invalid && (checkoutForm.get('zip')?.touched || formSubmitted)" class="text-red-600 text-sm mt-1">
+              <div *ngIf="checkoutForm.get('zip')?.invalid && (checkoutForm.get('zip')?.touched || formSubmitted)"
+                   class="text-red-600 text-sm mt-1">
                 Postal code is required.
               </div>
             </div>
           </div>
           <div class="grid grid-cols-2 gap-4 mb-6">
             <div class="col-span-1">
-              <a href="/cart" class="w-full block bg-gray-500 text-gray-100 py-1 px-3 hover:bg-gray-500 text-center rounded">Back to cart</a>
+              <a href="/cart"
+                 class="w-full block bg-gray-500 text-gray-100 py-4 px-3 sm:py-1 hover:bg-gray-500 text-center rounded-xl">Back to
+                cart</a>
             </div>
             <div class="col-span-1">
-              <button type="submit" class="w-full bg-gray-600 text-gray-100 py-1 px-3 hover:bg-gray-500 text-center rounded">Proceed to payment</button>
+              <button type="submit"
+                      class="w-full bg-gray-600 text-gray-100 py-4 px-3  sm:py-1 hover:bg-gray-500 text-center rounded-xl">Proceed
+                to payment
+              </button>
             </div>
           </div>
         </form>
       </div>
-      <div class="order-summary p-4 border border-gray-700 rounded-md">
+      <div class="p-4 bg-white border border-gray-700 rounded-md">
         <h2 class="text-xl font-bold mb-4">Order summary</h2>
         <div *ngFor="let item of cartItems" class="flex items-center justify-between mb-4">
           <img [src]="item.imageUrl" [alt]="item.productName" class="w-16 h-16 rounded-md">
@@ -112,11 +129,11 @@
         <div class="mb-4">
           <a class="text-sm">Need to leave a note or instructions? Write an email to dsk.bis&#64;wp.pl</a>
         </div>
-        <div *ngIf="showNoteInput">
-          <textarea id="note"
-                    class="mt-1 block w-full rounded-md border-gray-600 bg-slate-300 text-black shadow-sm"
-                    placeholder="Enter your note here" rows="3"></textarea>
-        </div>
+<!--        <div *ngIf="showNoteInput">-->
+<!--          <textarea id="note"-->
+<!--                    class="mt-1 block w-full rounded-md border-gray-600 bg-slate-300 text-black shadow-sm"-->
+<!--                    placeholder="Enter your note here" rows="3"></textarea>-->
+<!--        </div>-->
         <div class="border-t border-gray-700 pt-4">
           <div class="flex items-center justify-between text-sm mb-2">
             <span>Subtotal</span>
