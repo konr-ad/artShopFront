@@ -1,7 +1,7 @@
-<div *ngIf="painting" class="painting-detail max-w-4xl mx-auto py-16">
-  <div class="painting-info flex gap-6 items-start">
-    <img class="painting-image w-1/2 h-auto shadow-lg" [src]="painting.imageUrl" alt="{{ painting.name }}">
-    <div class="painting-details flex-1">
+<div *ngIf="painting" class="painting-detail max-w-4xl mx-auto py-16 sm:flex sm:flex-col sm:items-center">
+  <div class="painting-info md:flex md:gap-6 sm:flex sm:flex-col sm:items-center">
+    <img class="painting-image w-1/2 h-auto shadow-lg mb-4 sm:w-full sm:max-w-xs" [src]="painting.imageUrl" alt="{{ painting.name }}">
+    <div class="painting-details md:flex-1 sm:text-center">
       <h2 class="text-2xl font-bold text-black mb-4">{{ painting.name }}</h2>
       <p class="text-lg text-black mb-4">{{ painting.description }}</p>
       <p class="price text-xl black font-bold mb-4">{{ painting.price | currency:'EUR' }}</p>
