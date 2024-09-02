@@ -1,20 +1,3 @@
-.header {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: #ffffff;
-    padding: 1rem;
-}
-
-.header-content {
-    display: flex;
-    align-items: center;
-    margin-bottom: 1rem;
-}
-
-.logo {
-    margin-bottom: 1rem; /* Add space below the logo */
-}
 
 .additional-elements {
     margin-bottom: 1rem; /* Add space below the additional elements */
