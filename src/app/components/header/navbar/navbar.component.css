@@ -36,6 +36,7 @@
   padding: 1rem;
   z-index: 20; /* Set higher z-index for dropdown menu */
   transition: all 0.3s ease; /* Add smooth transition */
+  box-shadow: 0 8px 16px rgba(0,0,0,0.1);
 }
 
 .dropdown-item {
@@ -44,9 +45,9 @@
   font-weight: 500; /* Make dropdown items medium bold */
 }
 
-.dropdown-menu {
-  display: none;
-}
+/*.dropdown-menu {*/
+/*  display: none;*/
+/*}*/
 
 /* Additional styles for larger navbar */
 .navbar {
@@ -60,4 +61,9 @@
 button svg {
   width: 3rem; /* Increase button icon size */
   height: 3rem;
+}
+
+.dropdown-menu.show {
+  display: block;
+  transform: scaleY(1);
 }

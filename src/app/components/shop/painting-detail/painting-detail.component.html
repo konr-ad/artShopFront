@@ -1,12 +1,14 @@
-<div *ngIf="painting" class="painting-detail max-w-4xl mx-auto py-16">
-  <div class="painting-info flex gap-6 items-start">
-    <img class="painting-image w-1/2 h-auto shadow-lg" [src]="painting.imageUrl" alt="{{ painting.name }}">
-    <div class="painting-details flex-1">
+<div *ngIf="painting" class="mx-auto py-16 lg:mt-4 lg:flex lg:justify-center">
+  <div class="lg:flex gap-6 lg:flex-col-2">
+    <div class="w-full lg:flex-col-1 lg:justify-items-center">
+      <img class="w-full p-4" [src]="painting.imageUrl" alt="{{ painting.name }}">
+    </div>
+    <div class="flex-1 w-full text-center mt-10">
       <h2 class="text-2xl font-bold text-black mb-4">{{ painting.name }}</h2>
       <p class="text-lg text-black mb-4">{{ painting.description }}</p>
-      <p class="price text-xl black font-bold mb-4">{{ painting.price | currency:'EUR' }}</p>
+      <p class="price text-xl black font-bold mb-4">{{ painting.price | currency:'PLN' }}</p>
       <button
-        class="add-to-cart bg-red-600 text-white py-2 px-4 rounded hover:bg-red-700 w-32 text-center"
+        class="bg-red-600 text-white py-2 px-4 rounded transition hover:bg-red-700 w-32 text-center"
         (click)="addToCart()"
         [disabled]="isButtonDisabled">
         {{ buttonText }}
