@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import { CartService } from 'src/app/services/cart.service';
 import { Router } from '@angular/router';
 
@@ -9,8 +9,9 @@ import { Router } from '@angular/router';
 })
 export class NavbarComponent implements OnInit {
   cartItemCount: number = 0;
+  menuOpen: boolean = false;
 
-  constructor(private cartService: CartService, private router: Router) {}
+  constructor(private cartService: CartService, private router: Router, private changeDetector: ChangeDetectorRef) {}
 
   ngOnInit(): void {
     this.cartService.getItemCount().subscribe(count => {
@@ -29,5 +30,13 @@ export class NavbarComponent implements OnInit {
     dropdowns.forEach(dropdown => {
       dropdown.classList.add('hidden');
     });
+    this.menuOpen = false;
+    this.changeDetector.detectChanges();
+  }
+
+  toggleMenu() {
+    this.menuOpen = !this.menuOpen;  // Toggle the mobile menu open state
+    this.changeDetector.detectChanges();
+    console.log('Menu toggled:', this.menuOpen);
   }
 }

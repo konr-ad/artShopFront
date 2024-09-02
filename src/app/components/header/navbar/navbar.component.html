@@ -1,5 +1,5 @@
-<nav class="bg-white shadow half-w-screen-lg">
-  <div class="container mx-auto px-4 half-w-screen-lg">
+<nav class="bg-white shadow">
+  <div class="container mx-auto px-4">
     <div class="flex justify-between items-center py-6">
       <ul class="hidden md:flex space-x-8">
         <li class="nav-item dropdown group relative">
@@ -27,9 +27,7 @@
           </a>
           <div class="dropdown-menu absolute hidden group-hover:block bg-white shadow-lg mt-2 rounded w-56">
             <a class="block px-6 py-3 text-gray-700 hover:bg-gray-200 text-xl" routerLink="/bio">Bio</a>
-            <a class="block px-6 py-3 text-gray-700 hover:bg-gray-200 text-xl" routerLink="/magazines">Magazines</a>
             <a class="block px-6 py-3 text-gray-700 hover:bg-gray-200 text-xl" routerLink="/exhibitions">Exhibitions</a>
-            <a class="block px-6 py-3 text-gray-700 hover:bg-gray-200 text-xl" routerLink="/artistStatement">Artist Statement</a>
             <a class="block px-6 py-3 text-gray-700 hover:bg-gray-200 text-xl" routerLink="/contact">Contact</a>
           </div>
         </li>
@@ -41,13 +39,25 @@
           <span *ngIf="cartItemCount > 0" class="cart-item-count text-xl">{{ cartItemCount }}</span>
         </li>
       </ul>
-      <div class="md:hidden">
-        <button class="text-gray-700 hover:text-gray-900 focus:outline-none">
-          <svg class="h-12 w-12" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
-          </svg>
-        </button>
-      </div>
+      <!-- Hamburger Icon for Mobile -->
+      <button class="md:hidden flex items-center justify-center text-gray-700 hover:text-gray-900 focus:outline-none w-full h-full" (click)="toggleMenu()">
+        <span class="material-icons">menu</span>
+      </button>
+
+
+    </div>
+    <!-- Mobile Menu -->
+    <div class="dropdown-menu" [class.hidden]="!menuOpen" [ngStyle]="{ 'display': menuOpen ? 'block' : 'none' }">
+      <ul class="flex flex-col items-center space-y-2 p-4">
+        <li><a href="/shop" class="text-gray-700 hover:text-gray-900 text-xl" (click)="navigateWithFilters('')">Shop</a></li>
+        <li><a href="/bio" class="text-gray-700 hover:text-gray-900 text-xl" routerLink="/bio">Bio</a></li>
+        <li><a href="/exhibitions" class="text-gray-700 hover:text-gray-900 text-xl" routerLink="/exhibitions">Exhibitions</a></li>
+        <li><a href="/contact" class="text-gray-700 hover:text-gray-900 text-xl" routerLink="/contact">Contact</a></li>
+        <li class="relative flex items-center">
+          <a class="nav-link text-gray-700 hover:text-gray-900 text-xl" routerLink="/cart">Cart</a>
+          <span *ngIf="cartItemCount > 0" class="cart-item-count text-l">{{ cartItemCount }}</span>
+        </li>
+      </ul>
     </div>
   </div>
 </nav>

@@ -13,6 +13,8 @@ export class FiltersComponent implements OnInit {
     priceFrom: null,
     priceTo: null
   };
+  paintingTypeDropdownOpen: boolean = false;
+  priceDropdownOpen: boolean = false;
 
   constructor(private route: ActivatedRoute) {}
 
@@ -32,6 +34,14 @@ export class FiltersComponent implements OnInit {
       this.filters.priceTo = priceTo ? +priceTo : null;
       this.applyFilters();
     });
+  }
+
+  togglePaintingTypeDropdown(): void {
+    this.paintingTypeDropdownOpen = !this.paintingTypeDropdownOpen;
+  }
+
+  togglePriceDropdown(): void {  // Method to toggle price dropdown
+    this.priceDropdownOpen = !this.priceDropdownOpen;
   }
 
   onFilterChange(filterType: string, event: any): void {
