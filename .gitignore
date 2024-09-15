@@ -41,6 +41,6 @@ testem.log
 .DS_Store
 Thumbs.db
 
-/src/assets/config/config.json
+**/config.json
 
 
