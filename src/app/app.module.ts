@@ -1,6 +1,6 @@
 import {BrowserModule} from '@angular/platform-browser';
-import {NgModule} from '@angular/core';
-import {provideHttpClient, withInterceptorsFromDi} from '@angular/common/http';
+import {APP_INITIALIZER, NgModule} from '@angular/core';
+import {HttpClientModule, provideHttpClient, withInterceptorsFromDi} from '@angular/common/http';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
@@ -22,7 +22,12 @@ import {PaymentComponent} from "./components/payment/payment.component";
 import {ReactiveFormsModule} from '@angular/forms';
 import {GalleryComponent} from "./components/gallery/gallery.component";
 import { CommonModule } from '@angular/common';
+import {ConfigService} from "./services/config/ConfigService";
 
+// Function to load configuration before app starts
+export function loadConfig(configService: ConfigService) {
+  return () => configService.loadConfig().toPromise();
+}
 @NgModule({
   declarations: [
     AppComponent,
@@ -44,8 +49,16 @@ import { CommonModule } from '@angular/common';
 
   ],
   bootstrap: [AppComponent], imports: [BrowserModule,
-    AppRoutingModule, ReactiveFormsModule,
-    FormsModule, CommonModule], providers: [provideHttpClient(withInterceptorsFromDi())]
+    AppRoutingModule, ReactiveFormsModule, HttpClientModule,
+    FormsModule, CommonModule], providers: [
+      provideHttpClient(withInterceptorsFromDi()),
+    {
+      provide: APP_INITIALIZER,
+      useFactory: loadConfig,
+      deps: [ConfigService],
+      multi: true
+    }
+  ]
 })
 export class AppModule {
 }

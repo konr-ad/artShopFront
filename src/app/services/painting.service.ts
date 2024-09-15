@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import {ConfigService} from "./config/ConfigService";
 
 export interface Painting {
   id?: number;
@@ -17,19 +18,21 @@ export interface Painting {
   providedIn: 'root'
 })
 export class PaintingService {
-  private apiUrl = 'http://25.53.71.208:8080/api/paintings';
+  private backendUrl :string;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private configService: ConfigService) {
+    this.backendUrl = this.configService.getConfig('API_URL') + '/api/paintings';
+  }
 
   getPaintings(): Observable<Painting[]> {
-    return this.http.get<Painting[]>(this.apiUrl);
+    return this.http.get<Painting[]>(this.backendUrl);
   }
 
   getPaintingById(id: number): Observable<Painting> {
-    return this.http.get<Painting>(`${this.apiUrl}/${id}`);
+    return this.http.get<Painting>(`${this.backendUrl}/${id}`);
   }
 
   createPainting(painting: FormData): Observable<Painting> {
-    return this.http.post<Painting>(this.apiUrl, painting);
+    return this.http.post<Painting>(this.backendUrl, painting);
   }
 }

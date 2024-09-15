@@ -1,36 +1,35 @@
-# Use official node image as the base image
+# Stage 1: Build Angular App
 FROM node:lts as build
-
-# Set the working directory in the container
 WORKDIR /app
-
-# Copy the package.json files from your host to your current location.
-COPY package*.json ./
-
-# Install all dependencies
-RUN npm install --legacy-peer-deps
 
 # Install Angular CLI globally
 RUN npm install -g @angular/cli
 
-# Copy the remaining source code from the host to the container
+# Copy package.json and package-lock.json
+COPY package*.json ./
+
+# Install dependencies
+RUN npm install --legacy-peer-deps
+
+# Copy the rest of the application code
 COPY . .
 
-# Build the Angular app in production mode and output the files in dist directory
+# Build the Angular app in production mode
 RUN ng build --configuration=production
 
-# Stage 2: Serve app with nginx server
-# Use official nginx image as the base image
+# Stage 2: Serve Angular App with NGINX
 FROM nginx:latest
 
-# Copy the build output from the 'build' stage to replace the default nginx contents
-COPY --from=build app/dist/paintings-app /usr/share/nginx/html
+# Copy the build output to Nginx
+COPY --from=build /app/dist/paintings-app /usr/share/nginx/html
 
-# Overwrite the default nginx configuration file with our custom file
+# Copy the config.json template (with placeholder)
+COPY src/assets/config/config.json /usr/share/nginx/html/assets/config.json.template
+
+# Copy nginx.conf
 COPY nginx.conf /etc/nginx/nginx.conf
 
-# Inform Docker that the container listens on the specified network ports at runtime.
-EXPOSE 80
+# Replace ENV_API_URL in the config.json using envsubst when the container starts
+CMD ["/bin/sh", "-c", "envsubst < /usr/share/nginx/html/assets/config.json.template > /usr/share/nginx/html/assets/config.json && nginx -g 'daemon off;'"]
 
-# Command to run when starting the container
-CMD ["nginx", "-g", "daemon off;"]
+EXPOSE 80
