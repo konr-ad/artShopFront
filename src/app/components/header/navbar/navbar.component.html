@@ -1,38 +1,38 @@
-<nav class="bg-white shadow">
+<nav class="bg-white shadow rounded-lg">
   <div class="container mx-auto px-4">
     <div class="flex justify-between items-center py-6">
       <ul class="hidden md:flex space-x-8">
-        <li class="nav-item dropdown group relative">
+        <li class="nav-item dropdown group relative transition">
           <a class="nav-link text-gray-700 hover:text-gray-900 focus:outline-none text-2xl" href="/shop" id="navbarDropdownShop" role="button" aria-haspopup="true">
             Shop
           </a>
-          <div class="dropdown-menu absolute hidden group-hover:block bg-white shadow-lg mt-2 rounded w-56">
-            <a class="block px-6 py-3 text-gray-700 hover:bg-gray-200 text-xl" (click)="navigateWithFilters('')">
+          <div class="dropdown-menu absolute hidden group-hover:block bg-white shadow-lg mt-2 w-56 transition rounded-lg">
+            <a class="block px-6 py-3 text-gray-700 hover:bg-gray-200 text-xl transition border-b" (click)="navigateWithFilters('')">
               All
             </a>
-            <a class="block px-6 py-3 text-gray-700 hover:bg-gray-200 text-xl" (click)="navigateWithFilters('OIL')">
+            <a class="block px-6 py-3 text-gray-700 hover:bg-gray-200 text-xl transition border-b" (click)="navigateWithFilters('OIL')">
               Oils
             </a>
-            <a class="block px-6 py-3 text-gray-700 hover:bg-gray-200 text-xl" (click)="navigateWithFilters('MONOTYPE')">
+            <a class="block px-6 py-3 text-gray-700 hover:bg-gray-200 text-xl transition border-b" (click)="navigateWithFilters('MONOTYPE')">
               Monotypes
             </a>
-            <a class="block px-6 py-3 text-gray-700 hover:bg-gray-200 text-xl" (click)="navigateWithFilters('PRINT')">
+            <a class="block px-6 py-3 text-gray-700 hover:bg-gray-200 text-xl transition" (click)="navigateWithFilters('PRINT')">
               Prints
             </a>
           </div>
         </li>
-        <li class="nav-item dropdown group relative">
+        <li class="nav-item dropdown group relative transition rounded-lg">
           <a class="nav-link text-gray-700 hover:text-gray-900 focus:outline-none text-2xl" id="navbarDropdownInfo" role="button" aria-haspopup="true">
             Info
           </a>
-          <div class="dropdown-menu absolute hidden group-hover:block bg-white shadow-lg mt-2 rounded w-56">
-            <a class="block px-6 py-3 text-gray-700 hover:bg-gray-200 text-xl" routerLink="/bio">Bio</a>
-            <a class="block px-6 py-3 text-gray-700 hover:bg-gray-200 text-xl" routerLink="/exhibitions">Exhibitions</a>
-            <a class="block px-6 py-3 text-gray-700 hover:bg-gray-200 text-xl" routerLink="/contact">Contact</a>
+          <div class="dropdown-menu absolute hidden group-hover:block bg-white shadow-lg mt-2 rounded w-56 transition">
+            <a class="block px-6 py-3 text-gray-700 hover:bg-gray-200 text-xl transition border-b" routerLink="/bio">Bio</a>
+            <a class="block px-6 py-3 text-gray-700 hover:bg-gray-200 text-xl transition border-b" routerLink="/exhibitions">Exhibitions</a>
+            <a class="block px-6 py-3 text-gray-700 hover:bg-gray-200 text-xl transition border-b" routerLink="/contact">Contact</a>
           </div>
         </li>
         <li>
-          <a href="/shop" class="nav-link text-gray-700 hover:text-gray-900 text-2xl" routerLink="/gallery">Gallery</a>
+          <a href="/gallery" class="nav-link text-gray-700 hover:text-gray-900 text-2xl" routerLink="/gallery">Gallery</a>
         </li>
         <li class="relative flex items-center">
           <a class="nav-link text-gray-700 hover:text-gray-900 text-2xl" routerLink="/cart">Cart</a>
@@ -49,12 +49,12 @@
     <!-- Mobile Menu -->
     <div class="dropdown-menu" [class.hidden]="!menuOpen" [ngStyle]="{ 'display': menuOpen ? 'block' : 'none' }">
       <ul class="flex flex-col items-center space-y-2 p-4">
-        <li><a href="/shop" class="text-gray-700 hover:text-gray-900 text-xl" (click)="navigateWithFilters('')">Shop</a></li>
-        <li><a href="/bio" class="text-gray-700 hover:text-gray-900 text-xl" routerLink="/bio">Bio</a></li>
-        <li><a href="/exhibitions" class="text-gray-700 hover:text-gray-900 text-xl" routerLink="/exhibitions">Exhibitions</a></li>
-        <li><a href="/contact" class="text-gray-700 hover:text-gray-900 text-xl" routerLink="/contact">Contact</a></li>
+        <li><a href="/shop" class="text-gray-700 hover:text-gray-900 text-xl transition" (click)="navigateWithFilters('')">Shop</a></li>
+        <li><a href="/bio" class="text-gray-700 hover:text-gray-900 text-xl transition" routerLink="/bio">Bio</a></li>
+        <li><a href="/exhibitions" class="text-gray-700 hover:text-gray-900 text-xl transition" routerLink="/exhibitions">Exhibitions</a></li>
+        <li><a href="/contact" class="text-gray-700 hover:text-gray-900 text-xl transition" routerLink="/contact">Contact</a></li>
         <li class="relative flex items-center">
-          <a class="nav-link text-gray-700 hover:text-gray-900 text-xl" routerLink="/cart">Cart</a>
+          <a class="nav-link text-gray-700 hover:text-gray-900 text-xl transition" routerLink="/cart">Cart</a>
           <span *ngIf="cartItemCount > 0" class="cart-item-count text-l">{{ cartItemCount }}</span>
         </li>
       </ul>
