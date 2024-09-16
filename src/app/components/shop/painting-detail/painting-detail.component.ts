@@ -12,6 +12,7 @@ export class PaintingDetailComponent implements OnInit {
   painting: Painting | undefined;
   buttonText: string = "Add to Cart";
   isButtonDisabled: boolean = false;
+  isExpanded: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -46,5 +47,10 @@ export class PaintingDetailComponent implements OnInit {
         this.isButtonDisabled = false;
       }, 2000);
     }
+  }
+
+
+  toggleList() {
+    this.isExpanded = !this.isExpanded;
   }
 }
