@@ -1,5 +1,5 @@
 <div class="container grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
-  <div class="shadow-sm" *ngFor="let painting of filteredPaintings" (click)="painting.id && viewPainting(painting.id)">
+  <div class="shadow-sm cursor-pointer border-2" *ngFor="let painting of filteredPaintings" (click)="painting.id && viewPainting(painting.id)">
     <img class="md:flex-1 w-full h-64 object-cover" [src]="painting.imageUrl" alt="{{ painting.name }}">
     <div class="flex flex-col p-4">
       <p class="text-lg font-semibold">{{ painting.name }}</p>
