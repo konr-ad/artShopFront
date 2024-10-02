@@ -84,6 +84,7 @@ export class CheckoutComponent implements  OnInit {
   }
 
   onSubmit() {
+    this.checkoutForm.markAllAsTouched();
     if (this.checkoutForm.valid) {
       this.router.navigate(['/payment'], { state: { ...this.checkoutForm.value } });
     }
