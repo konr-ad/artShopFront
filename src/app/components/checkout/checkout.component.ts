@@ -47,11 +47,12 @@ export class CheckoutComponent implements  OnInit {
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       country: ['', Validators.required],
-      state: ['', Validators.required],
+      state: [''],
       address: ['', Validators.required],
       apartmentNumber: [''],
       city: ['', Validators.required],
-      zip: ['', Validators.required]
+      zip: ['', Validators.required],
+      phone: ['', Validators.required]
     });
   }
 
@@ -70,7 +71,8 @@ export class CheckoutComponent implements  OnInit {
         address: params['address'] || '',
         apartmentNumber: params['apartmentNumber'] || '',
         city: params['city'] || '',
-        zip: params['zip'] || ''
+        zip: params['zip'] || '',
+        phone: params['phone'] || ''
       });
     });
   }
@@ -97,7 +99,8 @@ export class CheckoutComponent implements  OnInit {
       address: '123 Main St',
       apartmentNumber: 'Apt 1',
       city: 'Los Angeles',
-      zip: '90001'
+      zip: '90001',
+      phone: '933330001'
     });
     this.selectedCountry = 'United States';
     this.availableStates = this.statesProvinces[this.selectedCountry];

@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { CartService, CartItem } from 'src/app/services/cart.service';
-import { Painting } from 'src/app/services/painting.service';
-import {BehaviorSubject, Observable} from "rxjs";
 
 @Component({
   selector: 'app-cart',
@@ -11,10 +9,7 @@ import {BehaviorSubject, Observable} from "rxjs";
 export class CartComponent implements OnInit {
   cartItems: CartItem[] = [];
   totalAmount: number = 0;
-  isDiscountApplied: boolean = false;
-  promoCode: string = '';
-  private itemsSubject: BehaviorSubject<CartItem[]> = new BehaviorSubject<CartItem[]>([]);
-  private totalAmountSubject: BehaviorSubject<number> = new BehaviorSubject<number>(0);
+  quantities = Array.from({ length: 8 }, (_, i) => i + 1); // Array [1,2,3,4,5,6,7,8]
 
   constructor(private cartService: CartService) {}
 
@@ -23,38 +18,11 @@ export class CartComponent implements OnInit {
     this.cartService.getTotalAmount().subscribe(amount => this.totalAmount = amount);
   }
 
-  getItems(): Observable<CartItem[]> {
-    return this.itemsSubject.asObservable();
-  }
-
-  getTotalAmount(): Observable<number> {
-    return this.totalAmountSubject.asObservable();
-  }
-
-  addItem(painting: Painting) {
-    this.cartService.addItem(painting);
-  }
-
   removeItem(productId: number) {
     this.cartService.removeItem(productId);
   }
 
-  incrementQuantity(item: CartItem) {
-    item.quantity += 1;
+  updateItem(item: CartItem) {
     this.cartService.updateItem(item);
-  }
-
-  decrementQuantity(item: CartItem) {
-    if (item.quantity > 1) {
-      item.quantity -= 1;
-      this.cartService.updateItem(item);
-    }
-  }
-
-  applyDiscount() {
-    if (!this.isDiscountApplied) {
-      this.totalAmount -= this.totalAmount * 0.1; // Apply 10% discount
-      this.isDiscountApplied = true;
-    }
   }
 }

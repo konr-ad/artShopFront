@@ -1,61 +1,87 @@
-<app-stepper></app-stepper>
-<div class="container mx-auto lg:p-6">
-  <h1 class="text-3xl font-bold text-black m-4">Cart</h1>
-  <div class="flex flex-col lg:flex-row lg:space-x-4">
-    <div class="w-full lg:w-2/3">
-      <div *ngFor="let item of cartItems" class="bg-white p-4 rounded-lg shadow-md mb-6">
-        <div class="flex items-center mb-4">
-          <img [src]="item.imageUrl" [alt]="item.productName" class="w-40 h-50 object-cover rounded-md mr-4">
-          <div class="flex-1">
-            <h2 class="text-xl font-semibold text-black">{{ item.productName }}</h2>
-            <p class="text-gray-500">$ {{ item.price }}</p>
-          </div>
-          <div class="flex flex-row lg:items-center">
-            <button (click)="decrementQuantity(item)" class="border px-2 py-1">-</button>
-            <span class="px-4 mt-1.5 lg:m-0 text-black">{{ item.quantity }}</span>
-            <button (click)="incrementQuantity(item)" class="border px-2 py-1">+</button>
-            <button (click)="removeItem(item.productId)" class="ml-4 text-red-500">x</button>
-          </div>
-        </div>
-      </div>
-    </div>
+<div class="bg-white">
+  <div class="mx-auto max-w-2xl px-4 pb-24 pt-16 sm:px-6 lg:max-w-7xl lg:px-8">
+    <h1 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl text-center">Shopping Cart</h1>
+    <form class="mt-12 lg:grid lg:grid-cols-12 lg:items-start lg:gap-x-12 xl:gap-x-16">
+      <section aria-labelledby="cart-heading" class="lg:col-span-7">
+        <h2 id="cart-heading" class="sr-only">Items in your shopping cart</h2>
 
-    <div class="w-full lg:w-1/3 p-5 bg-white rounded-lg shadow-md">
-      <h2 class="text-2xl font-semibold text-black mb-6">Order Summary</h2>
-      <div class="flex justify-between text-black mb-4">
-        <span>Subtotal</span>
-        <div *ngFor="let item of cartItems" class="align-right">
-          <p class="text-xl font-semibold text-black">{{ item.productName }}</p>
-          <p class="text-gray-500">$ {{ item.price }}</p>
-        </div>
-      </div>
-      <div class="border-t pt-4">
-        <div class="flex justify-between text-xl font-semibold text-black">
-          <span>Total Price</span>
-          <span>$ {{ totalAmount }}</span>
-        </div>
-      </div>
-      <div class="promo-code mt-6">
-        <input type="text" placeholder="Please enter promo code" [(ngModel)]="promoCode"
-               class="border outline-none p-2 w-full rounded-lg mb-4">
-      </div>
-      <div class="grid grid-cols-1 justify-items-center mt-3">
-        <div>
-          <button (click)="applyDiscount()" [disabled]="isDiscountApplied"
-                  class="w-48 bg-gray-500 text-white py-1.5 px-3 hover:bg-gray-600 text-center rounded-lg mb-2">
-            Apply Discount
-          </button>
-        </div>
-        <div>
-          <button routerLink="/checkout"
-                  class="w-48 bg-gray-600 text-white py-1.5 px-3 hover:bg-gray-700 text-center rounded-lg mb-2">
-            Proceed to checkout
-          </button>
-        </div>
-      </div>
-    </div>
+        <ul role="list" class="divide-y divide-gray-200 border-b border-t border-gray-200">
+          <li *ngFor="let item of cartItems; let i = index" class="flex py-6 sm:py-10">
+            <div class="flex-shrink-0">
+              <img [src]="item.imageUrl" [alt]="item.productName" class="h-24 w-24 rounded-md object-cover object-center sm:h-48 sm:w-48">
+            </div>
+
+            <div class="ml-4 flex flex-1 flex-col justify-between sm:ml-6">
+              <div class="relative pr-9 sm:grid sm:grid-cols-2 sm:gap-x-6 sm:pr-0">
+                <div>
+                  <div class="flex justify-between">
+                    <h3 class="text-sm">
+                      <a href="#" class="font-medium text-gray-700 hover:text-gray-800">{{ item.productName }}</a>
+                    </h3>
+                  </div>
+                  <p class="mt-1 text-sm font-medium text-gray-900">$ {{ item.price }}</p>
+                </div>
+
+                <div class="mt-4 sm:mt-0 sm:pr-9">
+                  <label class="sr-only">Quantity, {{ item.productName }}</label>
+                  <select [(ngModel)]="item.quantity" (change)="updateItem(item)" name="quantity-{{i}}" class="max-w-full rounded-md border border-gray-300 p-1.5 text-left text-base font-medium leading-5 text-gray-700 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm">
+                    <option *ngFor="let quantity of quantities" [value]="quantity">{{ quantity }}</option>
+                  </select>
+
+                  <div class="absolute right-0 top-0">
+                    <button type="button" (click)="removeItem(item.productId)" class="-m-2 inline-flex p-2 text-red-400 hover:text-red-500">
+                      <span class="sr-only">Remove</span>
+                      <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                        <path d="M6.28 5.22a.75.75 0 00-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 101.06 1.06L10 11.06l3.72 3.72a.75.75 0 101.06-1.06L11.06 10l3.72-3.72a.75.75 0 00-1.06-1.06L10 8.94 6.28 5.22z" />
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </section>
+
+      <!-- Order summary -->
+      <section aria-labelledby="summary-heading" class="mt-16 rounded-lg bg-gray-50 px-4 py-6 sm:p-6 lg:col-span-5 lg:mt-0 lg:p-8 border border-gray-200">
+        <h2 id="summary-heading" class="text-lg border-b pb-4 font-medium text-gray-900">Order summary</h2>
+
+        <dl class="mt-6 space-y-4">
+          <ul role="list" class="divide-y divide-gray-200">
+            <div *ngFor="let item of cartItems" class="flex items-center m-2 p-4">
+              <img [src]="item.imageUrl" [alt]="item.productName" class="w-24 h-24 rounded-md">
+              <div>
+                <p class="text-sm text-black font-bold px-3">{{ item.productName }}</p>
+                <p class="text-sm text-gray-500 px-3">€{{ item.price }}</p>
+                <p class="text-sm text-gray-500 px-3">Quantity: {{ item.quantity }}</p>
+              </div>
+            </div>
+          </ul>
+          <div class="flex items-center justify-between border-t border-gray-200 pt-4">
+            <dt class="flex items-center text-sm text-gray-600">
+              <span>Shipping estimate</span>
+            </dt>
+            <dd class="text-sm font-medium text-gray-900">$5.00</dd>
+          </div>
+          <div class="flex items-center justify-between border-t border-gray-200 pt-4">
+            <dt class="flex text-sm text-gray-600">
+              <span>Tax estimate</span>
+            </dt>
+            <dd class="text-sm font-medium text-gray-900">$8.32</dd>
+          </div>
+          <div class="flex items-center justify-between border-t border-gray-200 pt-4">
+            <dt class="text-base font-medium text-gray-900">Order total</dt>
+            <dd class="text-base font-medium text-gray-900">$ {{ totalAmount }}</dd>
+          </div>
+        </dl>
+
+        <button routerLink="/checkout"
+                class="w-full bg-gray-600 text-white mt-6 py-1.5 px-3 hover:bg-gray-700 text-center rounded-lg mb-2">Proceed
+          to
+          checkout
+        </button>
+      </section>
+    </form>
   </div>
 </div>
-
-
-
