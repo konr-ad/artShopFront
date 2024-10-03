@@ -16,7 +16,7 @@ export class AppComponent implements OnInit{
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         const noHeaderFooterRoutes = ['/login', '/admin'];
-        const isAdminRoute = event.urlAfterRedirects.startsWith('/admin');
+        const isAdminRoute = event.urlAfterRedirects.startsWith('/admin') || event.urlAfterRedirects.startsWith('/login');
         this.showHeader = !noHeaderFooterRoutes.some(route =>
           event.urlAfterRedirects.startsWith(route)
         );
