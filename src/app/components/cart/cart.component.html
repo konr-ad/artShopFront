@@ -8,7 +8,8 @@
         <ul role="list" class="divide-y divide-gray-200 border-b border-t border-gray-200">
           <li *ngFor="let item of cartItems; let i = index" class="flex py-6 sm:py-10">
             <div class="flex-shrink-0">
-              <img [src]="item.imageUrl" [alt]="item.productName" class="h-24 w-24 rounded-md object-cover object-center sm:h-48 sm:w-48">
+              <img [src]="item.imageUrl" [alt]="item.productName"
+                   class="h-24 w-24 rounded-md object-cover object-center sm:h-48 sm:w-48">
             </div>
 
             <div class="ml-4 flex flex-1 flex-col justify-between sm:ml-6">
@@ -33,7 +34,8 @@
       </section>
 
       <!-- Order summary -->
-      <section aria-labelledby="summary-heading" class="mt-16 rounded-lg bg-gray-50 px-4 py-6 sm:p-6 lg:col-span-5 lg:mt-0 lg:p-8 border border-gray-200">
+      <section aria-labelledby="summary-heading"
+               class="mt-16 rounded-lg bg-gray-50 px-4 py-6 sm:p-6 lg:col-span-5 lg:mt-0 lg:p-8 border border-gray-200">
         <h2 id="summary-heading" class="text-lg border-b pb-4 font-medium text-gray-900">Order summary</h2>
 
         <dl class="mt-6 space-y-4">
@@ -64,12 +66,32 @@
             <dd class="text-base font-medium text-gray-900">$ {{ totalAmount }}</dd>
           </div>
         </dl>
-
-        <button routerLink="/checkout"
-                class="w-full bg-gray-600 text-white mt-6 py-1.5 px-3 hover:bg-gray-700 text-center rounded-lg mb-2">Proceed
-          to
-          checkout
-        </button>
+        <div class="border-t border-gray-200 pt-4 my-4">
+          <p>Do you have a discount code?</p>
+          <button (click)="showDiscountCode()" class="text-indigo-600 font-medium hover:text-indigo-800 transition duration-700 ease-in-out flex items-center" >
+            <span>Add discount code</span>
+          </button>
+        </div>
+        <div *ngIf="isDiscountCodeVisible">
+          <input type="text" id="discountCode" [(ngModel)]="discountCode" name="Enter Discount Code"
+                 placeholder="Enter code here"
+                 class="block w-full rounded-md border-0 p-1.5 text-gray-900 shadow-sm ring-1 ring-gray-300 outline-none placeholder:text-gray-400 sm:text-sm sm:leading-6">
+          <p *ngIf="resultMessage"
+             [ngClass]="{
+        'text-green-500': isDiscountCodeValid,
+        'text-red-500': !isDiscountCodeValid
+     }">{{ resultMessage }}</p>
+          <button (click)="applyDiscountCode()"
+                  class="w-full bg-gray-400 text-white mt-6 py-1.5 px-3 hover:bg-gray-500 text-center rounded-lg ">
+            Apply Code
+          </button>
+        </div>
+        <div>
+          <button routerLink="/checkout"
+                  class="w-full bg-gray-600 text-white mt-6 py-1.5 px-3 hover:bg-gray-700 text-center rounded-lg mb-2">
+            Proceed to checkout
+          </button>
+        </div>
       </section>
     </form>
   </div>
