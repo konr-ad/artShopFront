@@ -19,6 +19,7 @@ import {DashboardComponent} from "./components/admin-panel/dashboard.component";
 import {OrdersComponent} from "./components/admin-panel/orders/orders.component";
 import {ProductsComponent} from "./components/admin-panel/products/products.component";
 import {NotfoundComponent} from "./components/notfound/notfound.component";
+import {DiscountCodesComponent} from "./components/admin-panel/discount-codes/discount-codes.component";
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -39,6 +40,7 @@ const routes: Routes = [
   { path: 'admin/dashboard', component: DashboardComponent },
   { path: 'admin/orders', component: OrdersComponent },
   { path: 'admin/products', component: ProductsComponent },
+  { path: 'admin/discountcodes', component: DiscountCodesComponent },
   // { path: 'admin/products', component:  },
   { path: '**', component: NotfoundComponent  }
 ];
