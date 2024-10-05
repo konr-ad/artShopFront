@@ -24,8 +24,9 @@ import {FormsModule} from "@angular/forms";
 })
 export class DiscountCodesComponent implements OnInit {
   discountCodes: DiscountCodeDto[] = [];
-  discountCodesToRemove: DiscountCodeDto[] = [];
   checkedIndexes: boolean[] = [];
+  message: string | null = null;
+
 
   constructor(private discountCodeService: DiscountCodeService) {
   }
@@ -43,12 +44,12 @@ export class DiscountCodesComponent implements OnInit {
           this.checkedIndexes = new Array(codes.length).fill(false);
         },
         (error) => {
-          console.error("Error fetching discount codes:", error)
+          this.message = "Error fetching discount codes"
         }
       )
   }
 
-  getCheckedItems(): DiscountCodeDto[] {
+  getSelectedDiscountCodes(): DiscountCodeDto[] {
     return this.discountCodes.filter((_, index) => this.checkedIndexes[index]);
   }
 
@@ -57,7 +58,25 @@ export class DiscountCodesComponent implements OnInit {
   }
 
   removeCheckedItems(): void {
-    this.discountCodesToRemove = this.discountCodes.filter((_, index) => this.checkedIndexes[index]);
-    console.log(this.discountCodesToRemove)
+    const selectedDiscountCodes = this.getSelectedDiscountCodes();
+
+    const selectedIds = selectedDiscountCodes.map((code) => code.id);
+
+    this.discountCodeService.deleteDiscountCodes(selectedIds).subscribe(
+      () => {
+        this.discountCodes = this.discountCodes.filter((code) => !selectedIds.includes(code.id));
+        this.checkedIndexes = new Array(this.discountCodes.length).fill(false);
+        this.message = "Selected discount codes deleted successfully";
+        setTimeout(() => {
+          this.message = null;
+        }, 5000);
+      },
+      () => {
+        this.message = "Error deleting discount codes";
+        setTimeout(() => {
+          this.message = null;
+        }, 5000);
+      },
+    );
   }
 }

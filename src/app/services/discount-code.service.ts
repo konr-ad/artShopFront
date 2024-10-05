@@ -5,6 +5,7 @@ import {ConfigService} from "./config/ConfigService";
 import {List} from "postcss/lib/list";
 
 export interface DiscountCodeDto {
+  id: number;
   code: string;
   valid: boolean;
   message: string;
@@ -17,6 +18,7 @@ export interface DiscountCodeDto {
   validTo: Date;
   validFrom: Date;
 }
+
 @Injectable({
   providedIn: 'root'
 })
@@ -36,5 +38,12 @@ export class DiscountCodeService {
 
   getAllDiscountCodes(): Observable<DiscountCodeDto[]> {
     return this.http.get<DiscountCodeDto[]>(this.backendUrl);
+  }
+
+  deleteDiscountCodes(ids: number[]): Observable<void> {
+    const body = {
+      body: ids
+    };
+    return this.http.delete<void>(this.backendUrl + "/delete", body)
   }
 }
