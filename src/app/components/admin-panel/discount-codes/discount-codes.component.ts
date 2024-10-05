@@ -66,16 +66,16 @@ export class DiscountCodesComponent implements OnInit {
       () => {
         this.discountCodes = this.discountCodes.filter((code) => !selectedIds.includes(code.id));
         this.checkedIndexes = new Array(this.discountCodes.length).fill(false);
-        this.message = "Selected discount codes deleted successfully";
+        this.message = "Wybrane kody zostały pomyślnie umunięte.";
         setTimeout(() => {
           this.message = null;
-        }, 5000);
+        }, 4000);
       },
       () => {
-        this.message = "Error deleting discount codes";
+        this.message = "Wystąpił błąd przy usuwaniu kodów.";
         setTimeout(() => {
           this.message = null;
-        }, 5000);
+        }, 4000);
       },
     );
   }
