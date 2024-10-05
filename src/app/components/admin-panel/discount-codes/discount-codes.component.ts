@@ -66,7 +66,7 @@ export class DiscountCodesComponent implements OnInit {
       () => {
         this.discountCodes = this.discountCodes.filter((code) => !selectedIds.includes(code.id));
         this.checkedIndexes = new Array(this.discountCodes.length).fill(false);
-        this.message = "Wybrane kody zostały pomyślnie umunięte.";
+        this.message = "Wybrane kody zostały pomyślnie usunięte.";
         setTimeout(() => {
           this.message = null;
         }, 4000);
