@@ -1,10 +1,11 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {SidebarComponent} from "../sidebar/sidebar.component";
 import {OrderDetailComponent} from "../orders/order-detail/order-detail.component";
 import {OrderListComponent} from "../orders/order-list/order-list.component";
 import {DiscountCodeDto, DiscountCodeService} from "../../../services/discount-code.service";
 import {CurrencyPipe, DatePipe, NgForOf, NgIf} from "@angular/common";
 import {FormsModule} from "@angular/forms";
+import {AddCodeModalComponent} from "./add-code-modal/add-code-modal.component";
 
 @Component({
   selector: 'app-discount-codes',
@@ -17,7 +18,8 @@ import {FormsModule} from "@angular/forms";
     DatePipe,
     NgForOf,
     FormsModule,
-    NgIf
+    NgIf,
+    AddCodeModalComponent
   ],
   templateUrl: './discount-codes.component.html',
   styleUrl: './discount-codes.component.css'
@@ -27,12 +29,22 @@ export class DiscountCodesComponent implements OnInit {
   checkedIndexes: boolean[] = [];
   message: string | null = null;
 
+  @ViewChild(AddCodeModalComponent) addCodeModal!: AddCodeModalComponent;
+
 
   constructor(private discountCodeService: DiscountCodeService) {
   }
 
   ngOnInit(): void {
     this.getDiscountCodes();
+  }
+
+  openAddCodeModal() {
+    this.addCodeModal.open()
+  }
+
+  onModalClosed() {
+    this.getDiscountCodes(); // Example: refresh the discount codes list
   }
 
   getDiscountCodes(): void {

@@ -3,6 +3,7 @@ import {Observable} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {ConfigService} from "./config/ConfigService";
 import {List} from "postcss/lib/list";
+import {Painting} from "./painting.service";
 
 export interface DiscountCodeDto {
   id: number;
@@ -27,6 +28,12 @@ export class DiscountCodeService {
 
   constructor(private http: HttpClient, private configService: ConfigService) {
     this.backendUrl = configService.getConfig("API_URL") + "/api/discountcodes"
+  }
+
+  createDiscountCode(discountCode: any): Observable<DiscountCodeDto> {
+    return this.http.post<DiscountCodeDto>(this.backendUrl + "/add", discountCode, {
+      headers: { 'Content-Type': 'application/json' }
+    });
   }
 
   validateDiscountCode(code: string): Observable<DiscountCodeDto> {
