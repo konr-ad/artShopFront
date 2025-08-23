@@ -1,0 +1,120 @@
+diff --git a/src/app/app.component.ts b/src/app/app.component.ts
+index 0000000..1111111 100644
+--- a/src/app/app.component.ts
++++ b/src/app/app.component.ts
+@@ -1,13 +1,29 @@
+-import { Component } from '@angular/core';
++import { Component } from '@angular/core';
++import { CommonModule } from '@angular/common';
++import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
+
+ @Component({
+-  selector: 'app-root',
+-  templateUrl: './app.component.html',
+-  styleUrls: ['./app.component.css']
++  selector: 'app-root',
++  standalone: true,
++  imports: [CommonModule, RouterOutlet, RouterLink, RouterLinkActive],
++  templateUrl: './app.component.html',
++  styleUrls: ['./app.component.css']
+ })
+ export class AppComponent {
+   title = 'paintings-app';
+ }
+diff --git a/src/app/app.module.ts b/src/app/app.module.ts
+deleted file mode 100644
+index 2222222..0000000
+--- a/src/app/app.module.ts
++++ /dev/null
+@@ -1,33 +0,0 @@
+-import { NgModule } from '@angular/core';
+-import { BrowserModule } from '@angular/platform-browser';
+-import { AppRoutingModule } from './app-routing.module';
+-import { AppComponent } from './app.component';
+-
+-@NgModule({
+-  declarations: [AppComponent],
+-  imports: [BrowserModule, AppRoutingModule],
+-  providers: [],
+-  bootstrap: [AppComponent],
+-})
+-export class AppModule {}
+diff --git a/src/app/app-routing.module.ts b/src/app/app-routing.module.ts
+deleted file mode 100644
+index 3333333..0000000
+--- a/src/app/app-routing.module.ts
++++ /dev/null
+@@ -1,23 +0,0 @@
+-import { NgModule } from '@angular/core';
+-import { RouterModule, Routes } from '@angular/router';
+-
+-const routes: Routes = [
+-  // przykładowe trasy były tutaj
+-];
+-
+-@NgModule({
+-  imports: [RouterModule.forRoot(routes)],
+-  exports: [RouterModule],
+-})
+-export class AppRoutingModule {}
+diff --git a/src/app/app.routes.ts b/src/app/app.routes.ts
+new file mode 100644
+index 0000000..4444444
+--- /dev/null
++++ b/src/app/app.routes.ts
+@@ -0,0 +1,20 @@
++import { Routes } from '@angular/router';
++// Importuj tu Twoje komponenty, np.:
++// import { HomeComponent } from './home/home.component';
++
++export const routes: Routes = [
++  // Przykład tras:
++  // { path: '', component: HomeComponent },
++  // { path: 'products', loadComponent: () => import('./products/products.component').then(m => m.ProductsComponent) },
++  { path: '', pathMatch: 'full', redirectTo: 'home' },
++  {
++    path: 'home',
++    loadComponent: () =>
++      import('./home/home.component').then((m) => m.HomeComponent),
++  },
++  { path: '**', redirectTo: 'home' },
++];
+diff --git a/src/app/app.config.ts b/src/app/app.config.ts
+new file mode 100644
+index 0000000..5555555
+--- /dev/null
++++ b/src/app/app.config.ts
+@@ -0,0 +1,29 @@
++import { ApplicationConfig, importProvidersFrom } from '@angular/core';
++import { provideRouter, withInMemoryScrolling } from '@angular/router';
++import { provideClientHydration } from '@angular/platform-browser';
++import { provideAnimations } from '@angular/platform-browser/animations';
++import { routes } from './app.routes';
++
++// Jeśli używasz ng-bootstrap w całej aplikacji:
++// import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
++
++export const appConfig: ApplicationConfig = {
++  providers: [
++    provideRouter(routes, withInMemoryScrolling({ scrollPositionRestoration: 'enabled' })),
++    provideClientHydration(),
++    provideAnimations(),
++    // Użyj importProvidersFrom gdy potrzebujesz „starych” modułów globalnie:
++    // importProvidersFrom(NgbModule),
++  ],
++};
+diff --git a/src/main.ts b/src/main.ts
+index 6666666..7777777 100644
+--- a/src/main.ts
++++ b/src/main.ts
+@@ -1,12 +1,16 @@
+-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+-import { AppModule } from './app/app.module';
++import { bootstrapApplication } from '@angular/platform-browser';
++import { AppComponent } from './app/app.component';
++import { appConfig } from './app/app.config';
+
+-platformBrowserDynamic()
+-  .bootstrapModule(AppModule)
+-  .catch((err) => console.error(err));
++bootstrapApplication(AppComponent, appConfig).catch((err) => console.error(err));
