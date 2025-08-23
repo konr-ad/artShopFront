@@ -1,34 +1,34 @@
 import { Component, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { PaintingService, Painting } from 'src/app/services/painting.service';
-import { AbstractModalComponent } from "../../../abstract/AbstractModal";
+import { AbstractModalComponent } from '../../../abstract/AbstractModal';
 import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-add-product-modal',
   standalone: true,
-  imports: [
-    CommonModule,
-    ReactiveFormsModule
-  ],
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './add-product-modal.component.html',
-  styleUrls: ['./add-product-modal.component.css']
+  styleUrls: ['./add-product-modal.component.css'],
 })
 export class AddProductModalComponent extends AbstractModalComponent {
   productForm: FormGroup;
   selectedFile: File | null = null;
-  additionalFiles: File[] = []
+  additionalFiles: File[] = [];
 
   @Output() productAdded = new EventEmitter<Painting>();
 
-  constructor(private fb: FormBuilder, private paintingService: PaintingService) {
+  constructor(
+    private fb: FormBuilder,
+    private paintingService: PaintingService
+  ) {
     super();
     this.productForm = this.fb.group({
       name: ['', Validators.required],
       description: ['', Validators.required],
       type: ['', [Validators.required, Validators.pattern(/^(?!\s*$).+/)]],
       price: [0, [Validators.required, Validators.min(0)]],
-      image: [null, Validators.required]
+      image: [null, Validators.required],
     });
   }
 

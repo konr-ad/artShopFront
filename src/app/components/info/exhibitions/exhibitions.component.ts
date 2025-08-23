@@ -1,14 +1,12 @@
 import { Component } from '@angular/core';
-import {NgClass} from "@angular/common";
+import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-exhibitions',
   standalone: true,
-  imports: [
-    NgClass
-  ],
+  imports: [NgClass],
   templateUrl: './exhibitions.component.html',
-  styleUrl: './exhibitions.component.css'
+  styleUrl: './exhibitions.component.css',
 })
 export class ExhibitionsComponent {
   lightboxOpen = false;
@@ -22,7 +20,7 @@ export class ExhibitionsComponent {
     'assets/exhibitions/Wystawa5.jpg',
     'assets/exhibitions/Wystawa6.jpg',
     'assets/exhibitions/Wystawa7.jpg',
-    'assets/exhibitions/Wystawa8.jpg'
+    'assets/exhibitions/Wystawa8.jpg',
   ];
 
   openLightbox(index: number): void {
@@ -36,12 +34,14 @@ export class ExhibitionsComponent {
   }
 
   prevImage(): void {
-    this.currentImageIndex = (this.currentImageIndex === 0) ? this.images.length - 1 : this.currentImageIndex - 1;
+    this.currentImageIndex =
+      this.currentImageIndex === 0 ? this.images.length - 1 : this.currentImageIndex - 1;
     this.lightboxImage = this.images[this.currentImageIndex];
   }
 
   nextImage(): void {
-    this.currentImageIndex = (this.currentImageIndex === this.images.length - 1) ? 0 : this.currentImageIndex + 1;
+    this.currentImageIndex =
+      this.currentImageIndex === this.images.length - 1 ? 0 : this.currentImageIndex + 1;
     this.lightboxImage = this.images[this.currentImageIndex];
   }
 }

@@ -8,7 +8,7 @@ describe('CheckoutComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [CheckoutComponent]
+      declarations: [CheckoutComponent],
     });
     fixture = TestBed.createComponent(CheckoutComponent);
     component = fixture.componentInstance;

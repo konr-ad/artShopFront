@@ -6,11 +6,11 @@ import { CartService } from 'src/app/services/cart.service'; // Import CartServi
 @Component({
   selector: 'app-painting-detail',
   templateUrl: './painting-detail.component.html',
-  styleUrls: ['./painting-detail.component.css']
+  styleUrls: ['./painting-detail.component.css'],
 })
 export class PaintingDetailComponent implements OnInit {
   painting: Painting | undefined;
-  buttonText: string = "Add to Cart";
+  buttonText: string = 'Add to Cart';
   isButtonDisabled: boolean = false;
   isExpanded: boolean = false;
 
@@ -21,7 +21,7 @@ export class PaintingDetailComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.route.params.subscribe(params => {
+    this.route.params.subscribe((params) => {
       const paintingId = +params['id'];
       this.loadPainting(paintingId);
     });
@@ -31,7 +31,7 @@ export class PaintingDetailComponent implements OnInit {
     this.paintingService.getPaintingById(id).subscribe((painting: Painting) => {
       this.painting = {
         ...painting,
-        imageUrl: 'data:image/jpeg;base64,' + painting.image
+        imageUrl: 'data:image/jpeg;base64,' + painting.image,
       };
     });
   }
@@ -39,16 +39,15 @@ export class PaintingDetailComponent implements OnInit {
   addToCart(): void {
     if (this.painting) {
       this.cartService.addItem(this.painting);
-      this.buttonText = "Added!";
+      this.buttonText = 'Added!';
       this.isButtonDisabled = true;
 
       setTimeout(() => {
-        this.buttonText = "Add to Cart";
+        this.buttonText = 'Add to Cart';
         this.isButtonDisabled = false;
       }, 2000);
     }
   }
-
 
   toggleList() {
     this.isExpanded = !this.isExpanded;

@@ -1,4 +1,7 @@
-<div *ngIf="isOpen" class="fixed min-w-5 inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+<div
+  *ngIf="isOpen"
+  class="fixed min-w-5 inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50"
+>
   <div
     class="bg-white p-6 rounded-lg shadow-lg transform transition-transform duration-300 ease-in-out scale-95 opacity-0 w-full max-w-3xl"
     [ngClass]="{ 'scale-100 opacity-100': isOpen }"
@@ -9,23 +12,43 @@
     <form [formGroup]="discountCodeForm" (ngSubmit)="onSubmit()">
       <div class="mb-4">
         <label class="block text-sm font-medium text-gray-700">Code</label>
-        <input type="text" formControlName="code" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" />
-        <div *ngIf="discountCodeForm.get('code')?.invalid && discountCodeForm.get('code')?.touched" class="text-red-500 text-sm">
+        <input
+          type="text"
+          formControlName="code"
+          class="mt-1 block w-full p-2 border border-gray-300 rounded-md"
+        />
+        <div
+          *ngIf="discountCodeForm.get('code')?.invalid && discountCodeForm.get('code')?.touched"
+          class="text-red-500 text-sm"
+        >
           Code is required.
         </div>
       </div>
 
       <div class="mb-4">
         <label class="block text-sm font-medium text-gray-700">Discount Value</label>
-        <input type="number" formControlName="discountValue" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" />
-        <div *ngIf="discountCodeForm.get('discountValue')?.invalid && discountCodeForm.get('discountValue')?.touched" class="text-red-500 text-sm">
+        <input
+          type="number"
+          formControlName="discountValue"
+          class="mt-1 block w-full p-2 border border-gray-300 rounded-md"
+        />
+        <div
+          *ngIf="
+            discountCodeForm.get('discountValue')?.invalid &&
+            discountCodeForm.get('discountValue')?.touched
+          "
+          class="text-red-500 text-sm"
+        >
           Discount value must be at least 1.
         </div>
       </div>
 
       <div class="mb-4">
         <label class="block text-sm font-medium text-gray-700">Discount Type</label>
-        <select formControlName="discountType" class="mt-1 block w-full p-2 border border-gray-300 rounded-md">
+        <select
+          formControlName="discountType"
+          class="mt-1 block w-full p-2 border border-gray-300 rounded-md"
+        >
           <option value="PERCENTAGE">Percentage</option>
           <option value="FIXED">Fixed</option>
         </select>
@@ -33,27 +56,49 @@
 
       <div class="mb-4">
         <label class="block text-sm font-medium text-gray-700">Minimum Order Value</label>
-        <input type="number" formControlName="minimumOrderValue" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" />
+        <input
+          type="number"
+          formControlName="minimumOrderValue"
+          class="mt-1 block w-full p-2 border border-gray-300 rounded-md"
+        />
       </div>
 
       <div class="mb-4">
         <label class="block text-sm font-medium text-gray-700">Usage Limit</label>
-        <input type="number" formControlName="usageLimit" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" />
+        <input
+          type="number"
+          formControlName="usageLimit"
+          class="mt-1 block w-full p-2 border border-gray-300 rounded-md"
+        />
       </div>
 
       <div class="mb-4">
         <label class="block text-sm font-medium text-gray-700">Valid From</label>
-        <input type="date" formControlName="validFrom" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" />
+        <input
+          type="date"
+          formControlName="validFrom"
+          class="mt-1 block w-full p-2 border border-gray-300 rounded-md"
+        />
       </div>
 
       <div class="mb-4">
         <label class="block text-sm font-medium text-gray-700">Valid To</label>
-        <input type="date" formControlName="validTo" class="mt-1 block w-full p-2 border border-gray-300 rounded-md" />
+        <input
+          type="date"
+          formControlName="validTo"
+          class="mt-1 block w-full p-2 border border-gray-300 rounded-md"
+        />
       </div>
 
       <div class="relative flex items-start">
         <div class="flex h-6 items-center">
-          <input id="comments" aria-describedby="comments-description" name="comments" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600">
+          <input
+            id="comments"
+            aria-describedby="comments-description"
+            name="comments"
+            type="checkbox"
+            class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
+          />
         </div>
         <div class="ml-3 text-sm leading-6">
           <label for="comments" class="font-medium text-gray-900">Ważny od dzisiaj</label>
@@ -61,7 +106,10 @@
       </div>
 
       <div class="flex justify-end">
-        <button type="submit" class="px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700">
+        <button
+          type="submit"
+          class="px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700"
+        >
           Submit
         </button>
       </div>

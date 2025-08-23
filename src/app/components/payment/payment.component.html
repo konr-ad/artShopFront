@@ -30,7 +30,9 @@
             <p class="text-sm text-black"><strong>Address:</strong> {{ address }}</p>
           </div>
           <div>
-            <p class="text-sm text-black"><strong>Apartment number:</strong> {{ apartmentNumber }}</p>
+            <p class="text-sm text-black">
+              <strong>Apartment number:</strong> {{ apartmentNumber }}
+            </p>
           </div>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
@@ -43,24 +45,30 @@
         </div>
         <div class="grid grid-cols-1 justify-items-center mt-3">
           <div>
-            <a [routerLink]="['/checkout']"
-               [queryParams]="{
-                  email: email,
-                  firstName: firstName,
-                  lastName: lastName,
-                  country: country,
-                  state: state,
-                  address: address,
-                  apartmentNumber: apartmentNumber,
-                  city: city,
-                  zip: zip
-               }"
-               class="w-48 block bg-gray-600 text-white py-1.5 px-3 hover:bg-gray-700 text-center rounded-lg mb-2">Back to
-              checkout</a>
-
+            <a
+              [routerLink]="['/checkout']"
+              [queryParams]="{
+                email: email,
+                firstName: firstName,
+                lastName: lastName,
+                country: country,
+                state: state,
+                address: address,
+                apartmentNumber: apartmentNumber,
+                city: city,
+                zip: zip,
+              }"
+              class="w-48 block bg-gray-600 text-white py-1.5 px-3 hover:bg-gray-700 text-center rounded-lg mb-2"
+              >Back to checkout</a
+            >
           </div>
           <div>
-            <button (click)="proceedToPayment()" class="w-48 bg-red-600 text-white py-1.5 px-3 hover:bg-red-700 text-center rounded-lg mb-2">Pay with payU</button>
+            <button
+              (click)="proceedToPayment()"
+              class="w-48 bg-red-600 text-white py-1.5 px-3 hover:bg-red-700 text-center rounded-lg mb-2"
+            >
+              Pay with payU
+            </button>
           </div>
         </div>
       </div>
@@ -68,7 +76,7 @@
       <div class="order-summary p-4 border border-gray-700 rounded-md">
         <h2 class="text-xl font-bold mb-4">Order summary</h2>
         <div *ngFor="let item of cartItems" class="flex items-center justify-between mb-4">
-          <img [src]="item.imageUrl" [alt]="item.productName" class="w-16 h-16 rounded-md">
+          <img [src]="item.imageUrl" [alt]="item.productName" class="w-16 h-16 rounded-md" />
           <div class="ml-4">
             <p class="text-sm text-black">{{ item.productName }}</p>
             <p class="text-sm text-black">€{{ item.price }}</p>

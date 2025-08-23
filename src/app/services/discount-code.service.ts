@@ -1,9 +1,9 @@
-import {Injectable} from '@angular/core';
-import {Observable} from "rxjs";
-import {HttpClient} from "@angular/common/http";
-import {ConfigService} from "./config/ConfigService";
-import {List} from "postcss/lib/list";
-import {Painting} from "./painting.service";
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { ConfigService } from './config/ConfigService';
+import { List } from 'postcss/lib/list';
+import { Painting } from './painting.service';
 
 export interface DiscountCodeDto {
   id: number;
@@ -21,26 +21,29 @@ export interface DiscountCodeDto {
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class DiscountCodeService {
   private backendUrl: string;
 
-  constructor(private http: HttpClient, private configService: ConfigService) {
-    this.backendUrl = configService.getConfig("API_URL") + "/api/discountcodes"
+  constructor(
+    private http: HttpClient,
+    private configService: ConfigService
+  ) {
+    this.backendUrl = configService.getConfig('API_URL') + '/api/discountcodes';
   }
 
   createDiscountCode(discountCode: any): Observable<DiscountCodeDto> {
-    return this.http.post<DiscountCodeDto>(this.backendUrl + "/add", discountCode, {
-      headers: { 'Content-Type': 'application/json' }
+    return this.http.post<DiscountCodeDto>(this.backendUrl + '/add', discountCode, {
+      headers: { 'Content-Type': 'application/json' },
     });
   }
 
   validateDiscountCode(code: string): Observable<DiscountCodeDto> {
     const body = {
-      code: code
+      code: code,
     };
-    return this.http.post<DiscountCodeDto>(this.backendUrl + "/validate", body)
+    return this.http.post<DiscountCodeDto>(this.backendUrl + '/validate', body);
   }
 
   getAllDiscountCodes(): Observable<DiscountCodeDto[]> {
@@ -49,8 +52,8 @@ export class DiscountCodeService {
 
   deleteDiscountCodes(ids: number[]): Observable<void> {
     const body = {
-      body: ids
+      body: ids,
     };
-    return this.http.delete<void>(this.backendUrl + "/delete", body)
+    return this.http.delete<void>(this.backendUrl + '/delete', body);
   }
 }

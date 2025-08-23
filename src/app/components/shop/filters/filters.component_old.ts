@@ -4,18 +4,18 @@ import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-filters',
   templateUrl: './filters.component.html',
-  styleUrls: ['./filters.component.css']
+  styleUrls: ['./filters.component.css'],
 })
 export class FiltersComponent implements OnInit {
   @Output() filtersChange = new EventEmitter<any>();
   filters: any = {
-    paintings: []
+    paintings: [],
   };
 
   constructor(private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    this.route.queryParams.subscribe(params => {
+    this.route.queryParams.subscribe((params) => {
       const type = params['type'];
       if (type) {
         this.filters.paintings = Array.isArray(type) ? type : [type];
@@ -49,7 +49,7 @@ export class FiltersComponent implements OnInit {
 
   resetFilters(): void {
     this.filters = {
-      paintings: []
+      paintings: [],
     };
     this.filtersChange.emit({ ...this.filters });
   }

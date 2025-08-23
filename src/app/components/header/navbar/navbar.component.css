@@ -36,7 +36,7 @@
   padding: 1rem;
   z-index: 20; /* Set higher z-index for dropdown menu */
   transition: all 0.3s ease; /* Add smooth transition */
-  box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
 }
 
 .dropdown-item {

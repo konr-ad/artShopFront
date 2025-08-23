@@ -1,22 +1,47 @@
 <app-stepper></app-stepper>
 <div class="">
-  <div class="mx-auto max-w-2xl px-4 pb-24 pt-16 sm:px-6 lg:max-w-7xl lg:px-8 bg-gray-50 border-gray-200 border-2 rounded-md">
-    <h1 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl text-center mb-8 ">Checkout</h1>
+  <div
+    class="mx-auto max-w-2xl px-4 pb-24 pt-16 sm:px-6 lg:max-w-7xl lg:px-8 bg-gray-50 border-gray-200 border-2 rounded-md"
+  >
+    <h1 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl text-center mb-8">
+      Checkout
+    </h1>
 
-    <form [formGroup]="checkoutForm" (ngSubmit)="onSubmit()" class="lg:grid lg:grid-cols-2 lg:gap-x-12 xl:gap-x-16">
+    <form
+      [formGroup]="checkoutForm"
+      (ngSubmit)="onSubmit()"
+      class="lg:grid lg:grid-cols-2 lg:gap-x-12 xl:gap-x-16"
+    >
       <div>
         <div>
           <h2 class="text-lg font-bold text-gray-900 border-1">Contact information</h2>
 
           <div class="mt-4">
-            <label for="email-address" class="block text-sm font-bold text-gray-700">Email address</label>
+            <label for="email-address" class="block text-sm font-bold text-gray-700"
+              >Email address</label
+            >
             <div class="mt-1">
-              <input type="email" id="email-address" formControlName="email" name="email-address" autocomplete="email"
-                     class="block w-full rounded-md border-gray-200 outline-none shadow-sm p-2 sm:text-sm border-2"
-                     [ngClass]="{'border-red-400': checkoutForm.get('email')?.invalid && (checkoutForm.get('email')?.touched || formSubmitted)}">
+              <input
+                type="email"
+                id="email-address"
+                formControlName="email"
+                name="email-address"
+                autocomplete="email"
+                class="block w-full rounded-md border-gray-200 outline-none shadow-sm p-2 sm:text-sm border-2"
+                [ngClass]="{
+                  'border-red-400':
+                    checkoutForm.get('email')?.invalid &&
+                    (checkoutForm.get('email')?.touched || formSubmitted),
+                }"
+              />
             </div>
-            <div *ngIf="checkoutForm.get('email')?.invalid && (checkoutForm.get('email')?.touched || formSubmitted)"
-                 class="text-red-600 text-sm mt-1">
+            <div
+              *ngIf="
+                checkoutForm.get('email')?.invalid &&
+                (checkoutForm.get('email')?.touched || formSubmitted)
+              "
+              class="text-red-600 text-sm mt-1"
+            >
               Please enter a valid email address.
             </div>
           </div>
@@ -28,14 +53,31 @@
           <div class="mt-4 grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-4">
             <!-- First Name -->
             <div>
-              <label for="first-name" class="block text-sm font-bold text-gray-700">First name</label>
+              <label for="first-name" class="block text-sm font-bold text-gray-700"
+                >First name</label
+              >
               <div class="mt-1">
-                <input type="text" id="first-name" formControlName="firstName" name="first-name" autocomplete="given-name"
-                       class="block w-full rounded-md border-gray-200 outline-none shadow-sm p-2 border-2 sm:text-sm"
-                       [ngClass]="{'border-red-400': checkoutForm.get('firstName')?.invalid && (checkoutForm.get('firstName')?.touched || formSubmitted)}">
+                <input
+                  type="text"
+                  id="first-name"
+                  formControlName="firstName"
+                  name="first-name"
+                  autocomplete="given-name"
+                  class="block w-full rounded-md border-gray-200 outline-none shadow-sm p-2 border-2 sm:text-sm"
+                  [ngClass]="{
+                    'border-red-400':
+                      checkoutForm.get('firstName')?.invalid &&
+                      (checkoutForm.get('firstName')?.touched || formSubmitted),
+                  }"
+                />
               </div>
-              <div *ngIf="checkoutForm.get('firstName')?.invalid && (checkoutForm.get('firstName')?.touched || formSubmitted)"
-                   class="text-red-600 text-sm mt-1">
+              <div
+                *ngIf="
+                  checkoutForm.get('firstName')?.invalid &&
+                  (checkoutForm.get('firstName')?.touched || formSubmitted)
+                "
+                class="text-red-600 text-sm mt-1"
+              >
                 First name is required.
               </div>
             </div>
@@ -44,12 +86,27 @@
             <div>
               <label for="last-name" class="block text-sm font-bold text-gray-700">Last name</label>
               <div class="mt-1">
-                <input type="text" id="last-name" formControlName="lastName" name="last-name" autocomplete="family-name"
-                       class="block w-full rounded-md border-gray-200 outline-none shadow-sm p-2 border-2 sm:text-sm"
-                       [ngClass]="{'border-red-400': checkoutForm.get('lastName')?.invalid && (checkoutForm.get('lastName')?.touched || formSubmitted)}">
+                <input
+                  type="text"
+                  id="last-name"
+                  formControlName="lastName"
+                  name="last-name"
+                  autocomplete="family-name"
+                  class="block w-full rounded-md border-gray-200 outline-none shadow-sm p-2 border-2 sm:text-sm"
+                  [ngClass]="{
+                    'border-red-400':
+                      checkoutForm.get('lastName')?.invalid &&
+                      (checkoutForm.get('lastName')?.touched || formSubmitted),
+                  }"
+                />
               </div>
-              <div *ngIf="checkoutForm.get('lastName')?.invalid && (checkoutForm.get('lastName')?.touched || formSubmitted)"
-                   class="text-red-600 text-sm mt-1">
+              <div
+                *ngIf="
+                  checkoutForm.get('lastName')?.invalid &&
+                  (checkoutForm.get('lastName')?.touched || formSubmitted)
+                "
+                class="text-red-600 text-sm mt-1"
+              >
                 Last name is required.
               </div>
             </div>
@@ -58,22 +115,44 @@
             <div class="sm:col-span-2">
               <label for="address" class="block text-sm font-bold text-gray-700">Address</label>
               <div class="mt-1">
-                <input type="text" formControlName="address" name="address" id="address" autocomplete="street-address"
-                       class="block w-full rounded-md border-gray-200 outline-none shadow-sm sm:text-sm p-2 border-2"
-                       [ngClass]="{'border-red-400': checkoutForm.get('address')?.invalid && (checkoutForm.get('address')?.touched || formSubmitted)}">
+                <input
+                  type="text"
+                  formControlName="address"
+                  name="address"
+                  id="address"
+                  autocomplete="street-address"
+                  class="block w-full rounded-md border-gray-200 outline-none shadow-sm sm:text-sm p-2 border-2"
+                  [ngClass]="{
+                    'border-red-400':
+                      checkoutForm.get('address')?.invalid &&
+                      (checkoutForm.get('address')?.touched || formSubmitted),
+                  }"
+                />
               </div>
-              <div *ngIf="checkoutForm.get('address')?.invalid && (checkoutForm.get('address')?.touched || formSubmitted)"
-                   class="text-red-600 text-sm mt-1">
+              <div
+                *ngIf="
+                  checkoutForm.get('address')?.invalid &&
+                  (checkoutForm.get('address')?.touched || formSubmitted)
+                "
+                class="text-red-600 text-sm mt-1"
+              >
                 Address is required.
               </div>
             </div>
 
             <!-- Apartment number-->
             <div class="sm:col-span-2">
-              <label for="apartment" class="block text-sm font-bold text-gray-700">Apartment number.</label>
+              <label for="apartment" class="block text-sm font-bold text-gray-700"
+                >Apartment number.</label
+              >
               <div class="mt-1">
-                <input type="text" formControlName="apartmentNumber" name="apartment" id="apartment"
-                       class="block w-full rounded-md border-gray-200 outline-none shadow-sm sm:text-sm p-2 border-2">
+                <input
+                  type="text"
+                  formControlName="apartmentNumber"
+                  name="apartment"
+                  id="apartment"
+                  class="block w-full rounded-md border-gray-200 outline-none shadow-sm sm:text-sm p-2 border-2"
+                />
               </div>
             </div>
 
@@ -81,12 +160,27 @@
             <div>
               <label for="city" class="block text-sm font-bold text-gray-700">City</label>
               <div class="mt-1">
-                <input type="text" formControlName="city" name="city" id="city" autocomplete="address-level2"
-                       class="block w-full rounded-md border-gray-200 outline-none shadow-sm sm:text-sm p-2 border-2"
-                       [ngClass]="{'border-red-400': checkoutForm.get('city')?.invalid && (checkoutForm.get('city')?.touched || formSubmitted)}">
+                <input
+                  type="text"
+                  formControlName="city"
+                  name="city"
+                  id="city"
+                  autocomplete="address-level2"
+                  class="block w-full rounded-md border-gray-200 outline-none shadow-sm sm:text-sm p-2 border-2"
+                  [ngClass]="{
+                    'border-red-400':
+                      checkoutForm.get('city')?.invalid &&
+                      (checkoutForm.get('city')?.touched || formSubmitted),
+                  }"
+                />
               </div>
-              <div *ngIf="checkoutForm.get('city')?.invalid && (checkoutForm.get('city')?.touched || formSubmitted)"
-                   class="text-red-600 text-sm mt-1">
+              <div
+                *ngIf="
+                  checkoutForm.get('city')?.invalid &&
+                  (checkoutForm.get('city')?.touched || formSubmitted)
+                "
+                class="text-red-600 text-sm mt-1"
+              >
                 City is required.
               </div>
             </div>
@@ -95,44 +189,91 @@
             <div>
               <label for="country" class="block text-sm font-bold text-gray-700">Country</label>
               <div class="mt-1">
-                <select formControlName="country" id="country" name="country" autocomplete="country-name"
-                        class="block w-full rounded-md border-gray-200 outline-none shadow-sm sm:text-sm p-2 border-2"
-                        [ngClass]="{'border-red-400': checkoutForm.get('country')?.invalid && (checkoutForm.get('country')?.touched || formSubmitted)}">
-                  <option *ngFor="let country of countries">{{country}}</option>
+                <select
+                  formControlName="country"
+                  id="country"
+                  name="country"
+                  autocomplete="country-name"
+                  class="block w-full rounded-md border-gray-200 outline-none shadow-sm sm:text-sm p-2 border-2"
+                  [ngClass]="{
+                    'border-red-400':
+                      checkoutForm.get('country')?.invalid &&
+                      (checkoutForm.get('country')?.touched || formSubmitted),
+                  }"
+                >
+                  <option *ngFor="let country of countries">{{ country }}</option>
                 </select>
               </div>
-              <div *ngIf="checkoutForm.get('country')?.invalid && (checkoutForm.get('country')?.touched || formSubmitted)"
-                   class="text-red-600 text-sm mt-1">
+              <div
+                *ngIf="
+                  checkoutForm.get('country')?.invalid &&
+                  (checkoutForm.get('country')?.touched || formSubmitted)
+                "
+                class="text-red-600 text-sm mt-1"
+              >
                 Country is required.
               </div>
             </div>
 
             <!-- State/Province -->
             <div>
-              <label for="state" class="block text-sm font-bold text-gray-700">State / Province</label>
+              <label for="state" class="block text-sm font-bold text-gray-700"
+                >State / Province</label
+              >
               <div class="mt-1">
-                <select formControlName="state" id="state" name="state" autocomplete="address-level1"
-                        class="block w-full rounded-md border-gray-200 outline-none shadow-sm sm:text-sm p-2 border-2"
-                        [ngClass]="{'border-red-400': checkoutForm.get('state')?.invalid && (checkoutForm.get('state')?.touched || formSubmitted)}">
-                  <option *ngFor="let state of availableStates">{{state}}</option>
+                <select
+                  formControlName="state"
+                  id="state"
+                  name="state"
+                  autocomplete="address-level1"
+                  class="block w-full rounded-md border-gray-200 outline-none shadow-sm sm:text-sm p-2 border-2"
+                  [ngClass]="{
+                    'border-red-400':
+                      checkoutForm.get('state')?.invalid &&
+                      (checkoutForm.get('state')?.touched || formSubmitted),
+                  }"
+                >
+                  <option *ngFor="let state of availableStates">{{ state }}</option>
                 </select>
               </div>
-              <div *ngIf="checkoutForm.get('state')?.invalid && (checkoutForm.get('state')?.touched || formSubmitted)"
-                   class="text-red-600 text-sm mt-1">
+              <div
+                *ngIf="
+                  checkoutForm.get('state')?.invalid &&
+                  (checkoutForm.get('state')?.touched || formSubmitted)
+                "
+                class="text-red-600 text-sm mt-1"
+              >
                 State/Province is required.
               </div>
             </div>
 
             <!-- Postal Code -->
             <div>
-              <label for="postal-code" class="block text-sm font-bold text-gray-700">Postal code</label>
+              <label for="postal-code" class="block text-sm font-bold text-gray-700"
+                >Postal code</label
+              >
               <div class="mt-1">
-                <input type="text" formControlName="zip" name="postal-code" id="postal-code" autocomplete="postal-code"
-                       class="block w-full rounded-md border-gray-200 outline-none shadow-sm sm:text-sm p-2 border-2"
-                       [ngClass]="{'border-red-400': checkoutForm.get('zip')?.invalid && (checkoutForm.get('zip')?.touched || formSubmitted)}">
+                <input
+                  type="text"
+                  formControlName="zip"
+                  name="postal-code"
+                  id="postal-code"
+                  autocomplete="postal-code"
+                  class="block w-full rounded-md border-gray-200 outline-none shadow-sm sm:text-sm p-2 border-2"
+                  [ngClass]="{
+                    'border-red-400':
+                      checkoutForm.get('zip')?.invalid &&
+                      (checkoutForm.get('zip')?.touched || formSubmitted),
+                  }"
+                />
               </div>
-              <div *ngIf="checkoutForm.get('zip')?.invalid && (checkoutForm.get('zip')?.touched || formSubmitted)"
-                   class="text-red-600 text-sm mt-1">
+              <div
+                *ngIf="
+                  checkoutForm.get('zip')?.invalid &&
+                  (checkoutForm.get('zip')?.touched || formSubmitted)
+                "
+                class="text-red-600 text-sm mt-1"
+              >
                 Postal code is required.
               </div>
             </div>
@@ -141,15 +282,35 @@
             <div class="sm:col-span-2">
               <label for="phone" class="block text-sm font-bold text-gray-700">Phone</label>
               <div class="mt-1">
-                <input type="text" formControlName="phone" name="phone" id="phone" autocomplete="tel"
-                       class="block w-full rounded-md border-gray-200 outline-none shadow-sm sm:text-sm p-2 border-2"
-                       [ngClass]="{'border-red-400': checkoutForm.get('phone')?.invalid && (checkoutForm.get('phone')?.touched || formSubmitted)}">
+                <input
+                  type="text"
+                  formControlName="phone"
+                  name="phone"
+                  id="phone"
+                  autocomplete="tel"
+                  class="block w-full rounded-md border-gray-200 outline-none shadow-sm sm:text-sm p-2 border-2"
+                  [ngClass]="{
+                    'border-red-400':
+                      checkoutForm.get('phone')?.invalid &&
+                      (checkoutForm.get('phone')?.touched || formSubmitted),
+                  }"
+                />
               </div>
-              <div *ngIf="checkoutForm.get('phone')?.invalid && (checkoutForm.get('phone')?.touched || formSubmitted)"
-                   class="text-red-600 text-sm mt-1">
+              <div
+                *ngIf="
+                  checkoutForm.get('phone')?.invalid &&
+                  (checkoutForm.get('phone')?.touched || formSubmitted)
+                "
+                class="text-red-600 text-sm mt-1"
+              >
                 Phone number is required.
               </div>
-              <button (click)="fillTestData()" class="mb-4 bg-blue-500 text-white mt-6 py-2 px-4 rounded">Fill Test Data</button>
+              <button
+                (click)="fillTestData()"
+                class="mb-4 bg-blue-500 text-white mt-6 py-2 px-4 rounded"
+              >
+                Fill Test Data
+              </button>
             </div>
           </div>
         </div>
@@ -163,7 +324,7 @@
           <h3 class="sr-only">Items in your cart</h3>
           <ul role="list" class="divide-y divide-gray-200">
             <div *ngFor="let item of cartItems" class="flex items-center m-4 p-4">
-              <img [src]="item.imageUrl" [alt]="item.productName" class="w-24 h-24 rounded-md">
+              <img [src]="item.imageUrl" [alt]="item.productName" class="w-24 h-24 rounded-md" />
               <div>
                 <p class="text-sm text-black font-bold px-3">{{ item.productName }}</p>
                 <p class="text-sm text-gray-500 px-3">€{{ item.price }}</p>
@@ -192,8 +353,11 @@
           </dl>
 
           <div class="border-t border-gray-200 px-4 py-6 sm:px-6">
-            <button type="submit"
-                    class="w-full block bg-gray-600 text-white py-1.5 px-3 transition hover:bg-gray-700 text-center rounded-lg mb-2">Payment
+            <button
+              type="submit"
+              class="w-full block bg-gray-600 text-white py-1.5 px-3 transition hover:bg-gray-700 text-center rounded-lg mb-2"
+            >
+              Payment
             </button>
           </div>
         </div>
