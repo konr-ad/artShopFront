@@ -1,8 +1,8 @@
-import {Component, ViewChild} from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SidebarComponent } from '../sidebar/sidebar.component';
 import { AdminProductListComponent } from './product-list/admin-product-list.component';
-import { AdminProductDetailsComponent } from "./admin-product-details/admin-product-details.component";
+import { AdminProductDetailsComponent } from './admin-product-details/admin-product-details.component';
 import { AddProductModalComponent } from './add-product-modal/add-product-modal.component';
 
 @Component({
@@ -13,10 +13,10 @@ import { AddProductModalComponent } from './add-product-modal/add-product-modal.
     SidebarComponent,
     AdminProductListComponent,
     AdminProductDetailsComponent,
-    AddProductModalComponent
+    AddProductModalComponent,
   ],
   templateUrl: './products.component.html',
-  styleUrls: ['./products.component.css']
+  styleUrls: ['./products.component.css'],
 })
 export class ProductsComponent {
   @ViewChild(AddProductModalComponent) addProductModal!: AddProductModalComponent;

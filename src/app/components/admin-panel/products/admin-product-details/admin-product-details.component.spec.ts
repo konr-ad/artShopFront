@@ -8,9 +8,8 @@ describe('AdminProductDetailsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AdminProductDetailsComponent]
-    })
-    .compileComponents();
+      imports: [AdminProductDetailsComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(AdminProductDetailsComponent);
     component = fixture.componentInstance;

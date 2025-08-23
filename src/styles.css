@@ -2,14 +2,20 @@
 @tailwind components;
 @tailwind utilities;
 
-body, html {
+body,
+html {
   height: 100%;
   margin: 0;
   font-family: Roboto, sans-serif;
   font-weight: 500; /* Make the base font weight medium */
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-weight: 800; /* Make all headings extra bold */
 }
 

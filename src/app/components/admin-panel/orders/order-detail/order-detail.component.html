@@ -6,26 +6,26 @@
       <ul>
         <li *ngFor="let painting of order.paintings" class="flex justify-between">
           <span>{{ painting.name }} x {{ painting.quantity || '1' }}</span>
-          <span>{{ painting.price | currency:'PLN':'symbol-narrow':'1.0-2' }}</span>
+          <span>{{ painting.price | currency: 'PLN' : 'symbol-narrow' : '1.0-2' }}</span>
         </li>
       </ul>
     </div>
     <div class="border-t border-gray-200 pt-4">
       <div class="flex justify-between mb-4">
         <span>Kwota netto</span>
-        <span>{{ order.totalAmount | currency:'PLN':'symbol-narrow':'1.0-2' }}</span>
+        <span>{{ order.totalAmount | currency: 'PLN' : 'symbol-narrow' : '1.0-2' }}</span>
       </div>
       <div class="flex justify-between mb-4">
         <span>Wysyłka</span>
-        <span>{{ order.shipping || '0' | currency:'PLN':'symbol-narrow':'1.0-2' }}</span>
+        <span>{{ order.shipping || '0' | currency: 'PLN' : 'symbol-narrow' : '1.0-2' }}</span>
       </div>
       <div class="flex justify-between mb-4">
         <span>Podatek</span>
-        <span>{{ order.tax || '0' | currency:'PLN':'symbol-narrow':'1.0-2' }}</span>
+        <span>{{ order.tax || '0' | currency: 'PLN' : 'symbol-narrow' : '1.0-2' }}</span>
       </div>
       <div class="flex justify-between font-semibold">
         <span>Kwota całkowita</span>
-        <span>{{ order.totalAmount | currency:'PLN':'symbol-narrow':'1.0-2' }}</span>
+        <span>{{ order.totalAmount | currency: 'PLN' : 'symbol-narrow' : '1.0-2' }}</span>
       </div>
     </div>
   </div>
@@ -33,9 +33,13 @@
     <div class="mb-4">
       <h3 class="font-semibold">Informacje o Wysyłce</h3>
       <address class="not-italic text-right">
-        <span>{{ order.customer.firstName }} {{ order.customer.lastName }}</span><br>
-        <span>{{ order.customer?.address }}</span><br>
-        <span>{{ order.customer?.city }}, {{ order.customer?.state }} {{ order.customer?.zip }}</span>
+        <span>{{ order.customer.firstName }} {{ order.customer.lastName }}</span
+        ><br />
+        <span>{{ order.customer?.address }}</span
+        ><br />
+        <span
+          >{{ order.customer?.city }}, {{ order.customer?.state }} {{ order.customer?.zip }}</span
+        >
       </address>
     </div>
   </div>

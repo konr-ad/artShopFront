@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-import {ConfigService} from "./config/ConfigService";
+import { HttpClient } from '@angular/common/http';
+import { ConfigService } from './config/ConfigService';
 
 export interface Customer {
   id: number;
@@ -16,12 +16,15 @@ export interface Customer {
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CustomerService {
-  private backendUrl :string;
+  private backendUrl: string;
 
-  constructor(private http: HttpClient, private configService: ConfigService) {
+  constructor(
+    private http: HttpClient,
+    private configService: ConfigService
+  ) {
     this.backendUrl = this.configService.getConfig('API_URL') + '/api/paintings';
   }
 }

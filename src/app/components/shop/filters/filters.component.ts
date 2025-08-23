@@ -4,14 +4,14 @@ import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-filters',
   templateUrl: './filters.component.html',
-  styleUrls: ['./filters.component.css']
+  styleUrls: ['./filters.component.css'],
 })
 export class FiltersComponent implements OnInit {
   @Output() filtersChange = new EventEmitter<any>();
   filters: any = {
     paintings: [],
     priceFrom: null,
-    priceTo: null
+    priceTo: null,
   };
   paintingTypeDropdownOpen: boolean = false;
   priceDropdownOpen: boolean = false;
@@ -19,7 +19,7 @@ export class FiltersComponent implements OnInit {
   constructor(private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    this.route.queryParams.subscribe(params => {
+    this.route.queryParams.subscribe((params) => {
       const type = params['type'];
       const priceFrom = params['priceFrom'];
       const priceTo = params['priceTo'];
@@ -40,7 +40,8 @@ export class FiltersComponent implements OnInit {
     this.paintingTypeDropdownOpen = !this.paintingTypeDropdownOpen;
   }
 
-  togglePriceDropdown(): void {  // Method to toggle price dropdown
+  togglePriceDropdown(): void {
+    // Method to toggle price dropdown
     this.priceDropdownOpen = !this.priceDropdownOpen;
   }
 
@@ -75,7 +76,7 @@ export class FiltersComponent implements OnInit {
     this.filters = {
       paintings: [],
       priceFrom: null,
-      priceTo: null
+      priceTo: null,
     };
     this.filtersChange.emit({ ...this.filters });
   }

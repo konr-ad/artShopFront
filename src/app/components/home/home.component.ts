@@ -5,7 +5,7 @@ import { NgForm } from '@angular/forms';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
   paintings: Painting[] = [];
@@ -14,7 +14,7 @@ export class HomeComponent implements OnInit {
     state: '',
     name: '',
     price: 0,
-    image: undefined
+    image: undefined,
   };
   selectedFile: File | undefined;
 
@@ -22,9 +22,9 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.paintingService.getPaintings().subscribe((data: Painting[]) => {
-      this.paintings = data.map(painting => ({
+      this.paintings = data.map((painting) => ({
         ...painting,
-        imageUrl: 'data:image/jpeg;base64,' + painting.image
+        imageUrl: 'data:image/jpeg;base64,' + painting.image,
       }));
     });
   }
@@ -50,7 +50,7 @@ export class HomeComponent implements OnInit {
         console.log('Painting created successfully', response);
         this.paintings.push({
           ...response,
-          imageUrl: 'data:image/jpeg;base64,' + response.image
+          imageUrl: 'data:image/jpeg;base64,' + response.image,
         }); // Add the new painting to the list with image URL
         form.reset(); // Reset the form
         this.selectedFile = undefined; // Reset the file input

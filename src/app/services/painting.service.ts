@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import {ConfigService} from "./config/ConfigService";
+import { ConfigService } from './config/ConfigService';
 
 export interface Painting {
   id?: number;
@@ -15,12 +15,15 @@ export interface Painting {
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class PaintingService {
-  private backendUrl :string;
+  private backendUrl: string;
 
-  constructor(private http: HttpClient, private configService: ConfigService) {
+  constructor(
+    private http: HttpClient,
+    private configService: ConfigService
+  ) {
     this.backendUrl = this.configService.getConfig('API_URL') + '/api/paintings';
   }
 

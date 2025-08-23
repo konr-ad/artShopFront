@@ -5,14 +5,17 @@ import { Painting, PaintingService } from 'src/app/services/painting.service';
 @Component({
   selector: 'app-product-list',
   templateUrl: './product-list.component.html',
-  styleUrls: ['./product-list.component.css']
+  styleUrls: ['./product-list.component.css'],
 })
 export class ProductListComponent implements OnInit, OnChanges {
   @Input() filters: any;
   paintings: Painting[] = [];
   filteredPaintings: Painting[] = [];
 
-  constructor(private paintingService: PaintingService, private router: Router) { }
+  constructor(
+    private paintingService: PaintingService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.fetchPaintings();
@@ -26,9 +29,9 @@ export class ProductListComponent implements OnInit, OnChanges {
 
   fetchPaintings(): void {
     this.paintingService.getPaintings().subscribe((data: Painting[]) => {
-      this.paintings = data.map(painting => ({
+      this.paintings = data.map((painting) => ({
         ...painting,
-        imageUrl: 'data:image/jpeg;base64,' + painting.image
+        imageUrl: 'data:image/jpeg;base64,' + painting.image,
       }));
       this.applyFilters();
     });
@@ -38,20 +41,20 @@ export class ProductListComponent implements OnInit, OnChanges {
     this.filteredPaintings = this.paintings;
 
     if (this.filters.paintings.length) {
-      this.filteredPaintings = this.filteredPaintings.filter(painting =>
+      this.filteredPaintings = this.filteredPaintings.filter((painting) =>
         this.filters.paintings.includes(painting.type)
       );
     }
 
     if (this.filters.priceFrom) {
-      this.filteredPaintings = this.filteredPaintings.filter(painting =>
-        painting.price >= this.filters.priceFrom
+      this.filteredPaintings = this.filteredPaintings.filter(
+        (painting) => painting.price >= this.filters.priceFrom
       );
     }
 
     if (this.filters.priceTo) {
-      this.filteredPaintings = this.filteredPaintings.filter(painting =>
-        painting.price <= this.filters.priceTo
+      this.filteredPaintings = this.filteredPaintings.filter(
+        (painting) => painting.price <= this.filters.priceTo
       );
     }
   }

@@ -1,25 +1,25 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
-import { ShopComponent } from "./components/shop/shop.component";
-import { BrowserModule } from "@angular/platform-browser";
-import { PaintingDetailComponent } from "./components/shop/painting-detail/painting-detail.component";
+import { ShopComponent } from './components/shop/shop.component';
+import { BrowserModule } from '@angular/platform-browser';
+import { PaintingDetailComponent } from './components/shop/painting-detail/painting-detail.component';
 import { CartComponent } from './components/cart/cart.component';
-import { CheckoutComponent } from "./components/checkout/checkout.component";
-import {BioComponent} from "./components/info/bio/bio.component";
-import {MagazinesComponent} from "./components/info/magazines/magazines.component";
-import {ExhibitionsComponent} from "./components/info/exhibitions/exhibitions.component";
-import {ArtistStatementComponent} from "./components/info/artist-statement/artist-statement.component";
-import {ContactComponent} from "./components/info/contact/contact.component";
-import {PaymentComponent} from "./components/payment/payment.component";
-import {GalleryComponent} from "./components/gallery/gallery.component";
-import {ThankyouComponent} from "./components/thankyou/thankyou.component";
-import {LoginComponent} from "./components/admin-panel/login/login.component";
-import {DashboardComponent} from "./components/admin-panel/dashboard.component";
-import {OrdersComponent} from "./components/admin-panel/orders/orders.component";
-import {ProductsComponent} from "./components/admin-panel/products/products.component";
-import {NotfoundComponent} from "./components/notfound/notfound.component";
-import {DiscountCodesComponent} from "./components/admin-panel/discount-codes/discount-codes.component";
+import { CheckoutComponent } from './components/checkout/checkout.component';
+import { BioComponent } from './components/info/bio/bio.component';
+import { MagazinesComponent } from './components/info/magazines/magazines.component';
+import { ExhibitionsComponent } from './components/info/exhibitions/exhibitions.component';
+import { ArtistStatementComponent } from './components/info/artist-statement/artist-statement.component';
+import { ContactComponent } from './components/info/contact/contact.component';
+import { PaymentComponent } from './components/payment/payment.component';
+import { GalleryComponent } from './components/gallery/gallery.component';
+import { ThankyouComponent } from './components/thankyou/thankyou.component';
+import { LoginComponent } from './components/admin-panel/login/login.component';
+import { DashboardComponent } from './components/admin-panel/dashboard.component';
+import { OrdersComponent } from './components/admin-panel/orders/orders.component';
+import { ProductsComponent } from './components/admin-panel/products/products.component';
+import { NotfoundComponent } from './components/notfound/notfound.component';
+import { DiscountCodesComponent } from './components/admin-panel/discount-codes/discount-codes.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -42,16 +42,11 @@ const routes: Routes = [
   { path: 'admin/products', component: ProductsComponent },
   { path: 'admin/discountcodes', component: DiscountCodesComponent },
   // { path: 'admin/products', component:  },
-  { path: '**', component: NotfoundComponent  }
+  { path: '**', component: NotfoundComponent },
 ];
 
 @NgModule({
-  imports: [
-    BrowserModule,
-    RouterModule.forRoot(routes)
-  ],
-  exports: [
-    RouterModule
-  ]
+  imports: [BrowserModule, RouterModule.forRoot(routes)],
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

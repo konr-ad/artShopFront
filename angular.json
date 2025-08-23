@@ -29,8 +29,7 @@
             "styles": [
               "src/styles.css"
             ],
-            "scripts": [
-            ],
+            "scripts": [],
             "browser": "src/main.ts"
           },
           "configurations": {
@@ -63,7 +62,11 @@
           "options": {
             "host": "0.0.0.0",
             "port": 4200,
-            "allowedHosts": ["0.0.0.0", "localhost", "25.53.71.208"],
+            "allowedHosts": [
+              "0.0.0.0",
+              "localhost",
+              "25.53.71.208"
+            ],
             "disableHostCheck": true
           },
           "configurations": {
@@ -99,11 +102,23 @@
             ],
             "scripts": []
           }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "src/**/*.ts",
+              "src/**/*.html"
+            ]
+          }
         }
       }
     }
   },
   "cli": {
-    "analytics": false
+    "analytics": false,
+    "schematicCollections": [
+      "@angular-eslint/schematics"
+    ]
   }
 }

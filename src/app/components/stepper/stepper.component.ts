@@ -4,7 +4,7 @@ import { Router, NavigationEnd } from '@angular/router';
 @Component({
   selector: 'app-stepper',
   templateUrl: './stepper.component.html',
-  styleUrls: ['./stepper.component.css']
+  styleUrls: ['./stepper.component.css'],
 })
 export class StepperComponent implements OnInit {
   activeStep: string = '';

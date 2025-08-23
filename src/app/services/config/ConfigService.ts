@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ConfigService {
   private config: any = null;
@@ -14,7 +14,7 @@ export class ConfigService {
   // Load config.json from assets directory
   loadConfig(): Observable<any> {
     return this.http.get('/assets/config/config.json').pipe(
-      map(config => {
+      map((config) => {
         this.config = config;
         return config;
       })

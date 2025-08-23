@@ -1,11 +1,11 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {SidebarComponent} from "../sidebar/sidebar.component";
-import {OrderDetailComponent} from "../orders/order-detail/order-detail.component";
-import {OrderListComponent} from "../orders/order-list/order-list.component";
-import {DiscountCodeDto, DiscountCodeService} from "../../../services/discount-code.service";
-import {CurrencyPipe, DatePipe, NgForOf, NgIf} from "@angular/common";
-import {FormsModule} from "@angular/forms";
-import {AddCodeModalComponent} from "./add-code-modal/add-code-modal.component";
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { SidebarComponent } from '../sidebar/sidebar.component';
+import { OrderDetailComponent } from '../orders/order-detail/order-detail.component';
+import { OrderListComponent } from '../orders/order-list/order-list.component';
+import { DiscountCodeDto, DiscountCodeService } from '../../../services/discount-code.service';
+import { CurrencyPipe, DatePipe, NgForOf, NgIf } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { AddCodeModalComponent } from './add-code-modal/add-code-modal.component';
 
 @Component({
   selector: 'app-discount-codes',
@@ -19,10 +19,10 @@ import {AddCodeModalComponent} from "./add-code-modal/add-code-modal.component";
     NgForOf,
     FormsModule,
     NgIf,
-    AddCodeModalComponent
+    AddCodeModalComponent,
   ],
   templateUrl: './discount-codes.component.html',
-  styleUrl: './discount-codes.component.css'
+  styleUrl: './discount-codes.component.css',
 })
 export class DiscountCodesComponent implements OnInit {
   discountCodes: DiscountCodeDto[] = [];
@@ -31,16 +31,14 @@ export class DiscountCodesComponent implements OnInit {
 
   @ViewChild(AddCodeModalComponent) addCodeModal!: AddCodeModalComponent;
 
-
-  constructor(private discountCodeService: DiscountCodeService) {
-  }
+  constructor(private discountCodeService: DiscountCodeService) {}
 
   ngOnInit(): void {
     this.getDiscountCodes();
   }
 
   openAddCodeModal() {
-    this.addCodeModal.open()
+    this.addCodeModal.open();
   }
 
   onModalClosed() {
@@ -48,17 +46,16 @@ export class DiscountCodesComponent implements OnInit {
   }
 
   getDiscountCodes(): void {
-    this.discountCodeService.getAllDiscountCodes()
-      .subscribe(
-        (codes) => {
-          console.log(codes)
-          this.discountCodes = codes;
-          this.checkedIndexes = new Array(codes.length).fill(false);
-        },
-        (error) => {
-          this.message = "Error fetching discount codes"
-        }
-      )
+    this.discountCodeService.getAllDiscountCodes().subscribe(
+      (codes) => {
+        console.log(codes);
+        this.discountCodes = codes;
+        this.checkedIndexes = new Array(codes.length).fill(false);
+      },
+      (error) => {
+        this.message = 'Error fetching discount codes';
+      }
+    );
   }
 
   getSelectedDiscountCodes(): DiscountCodeDto[] {
@@ -66,7 +63,7 @@ export class DiscountCodesComponent implements OnInit {
   }
 
   isRemoveButtonVisible(): boolean {
-    return this.checkedIndexes.some(checked => checked);
+    return this.checkedIndexes.some((checked) => checked);
   }
 
   removeCheckedItems(): void {
@@ -78,17 +75,17 @@ export class DiscountCodesComponent implements OnInit {
       () => {
         this.discountCodes = this.discountCodes.filter((code) => !selectedIds.includes(code.id));
         this.checkedIndexes = new Array(this.discountCodes.length).fill(false);
-        this.message = "Wybrane kody zostały pomyślnie usunięte.";
+        this.message = 'Wybrane kody zostały pomyślnie usunięte.';
         setTimeout(() => {
           this.message = null;
         }, 4000);
       },
       () => {
-        this.message = "Wystąpił błąd przy usuwaniu kodów.";
+        this.message = 'Wystąpił błąd przy usuwaniu kodów.';
         setTimeout(() => {
           this.message = null;
         }, 4000);
-      },
+      }
     );
   }
 }

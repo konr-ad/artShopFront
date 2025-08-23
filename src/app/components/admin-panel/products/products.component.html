@@ -4,10 +4,12 @@
     <div class="w-2/3">
       <app-admin-product-list
         (productSelected)="onProductSelected($event)"
-        (addProduct)="openAddProductModal()"></app-admin-product-list>
+        (addProduct)="openAddProductModal()"
+      ></app-admin-product-list>
       <app-add-product-modal
         (productAdded)="handleProductAdded($event)"
-        (close)="addProductModal.close()">
+        (close)="addProductModal.close()"
+      >
       </app-add-product-modal>
     </div>
     <div class="w-1/3 pl-6">

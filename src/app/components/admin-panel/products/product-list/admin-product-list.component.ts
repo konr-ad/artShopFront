@@ -7,7 +7,7 @@ import { Painting, PaintingService } from 'src/app/services/painting.service';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './admin-product-list.component.html',
-  styleUrls: ['./admin-product-list.component.css']
+  styleUrls: ['./admin-product-list.component.css'],
 })
 export class AdminProductListComponent implements OnInit {
   products: any[] = [];
@@ -18,14 +18,14 @@ export class AdminProductListComponent implements OnInit {
   constructor(private paintingService: PaintingService) {}
 
   ngOnInit(): void {
-    this.loadProducts()
+    this.loadProducts();
   }
 
   loadProducts(): void {
     this.paintingService.getPaintings().subscribe((products: Painting[]) => {
-      this.products = products.map(product => ({
+      this.products = products.map((product) => ({
         ...product,
-        imageUrl: 'data:image/jpeg;base64,' + product.image
+        imageUrl: 'data:image/jpeg;base64,' + product.image,
       }));
     });
   }

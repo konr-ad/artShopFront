@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import {Order, OrderService} from '../../../../services/order.service';
+import { Order, OrderService } from '../../../../services/order.service';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -7,7 +7,7 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './order-list.component.html',
-  styleUrl: './order-list.component.css'
+  styleUrl: './order-list.component.css',
 })
 export class OrderListComponent implements OnInit {
   orders: Order[] = [];
