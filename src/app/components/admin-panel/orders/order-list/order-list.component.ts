@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { OrderService } from '../../../../services/order.service';
+import {Order, OrderService} from '../../../../services/order.service';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -10,19 +10,19 @@ import { CommonModule } from '@angular/common';
   styleUrl: './order-list.component.css'
 })
 export class OrderListComponent implements OnInit {
-  orders: any[] = [];
+  orders: Order[] = [];
   selectedOrderId: any;
   @Output() orderSelected = new EventEmitter<any>();
 
   constructor(private orderService: OrderService) {}
 
   ngOnInit(): void {
-    this.orderService.getOrders().subscribe((data: any[]) => {
+    this.orderService.getOrders().subscribe((data: Order[]) => {
       this.orders = data;
     });
   }
 
-  selectOrder(order: any) {
+  selectOrder(order: Order) {
     this.selectedOrderId = order.id;
     this.orderSelected.emit(order);
     console.log('Emitting order:', order); // Debug log
