@@ -20,6 +20,7 @@ import { OrdersComponent } from './components/admin-panel/orders/orders.componen
 import { ProductsComponent } from './components/admin-panel/products/products.component';
 import { NotfoundComponent } from './components/notfound/notfound.component';
 import { DiscountCodesComponent } from './components/admin-panel/discount-codes/discount-codes.component';
+import {TermsComponent} from "./components/terms/terms.component";
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -37,6 +38,7 @@ const routes: Routes = [
   { path: 'gallery', component: GalleryComponent },
   { path: 'thankyou', component: ThankyouComponent },
   { path: 'login', component: LoginComponent },
+  { path: 'terms', component: TermsComponent },
   { path: 'admin/dashboard', component: DashboardComponent },
   { path: 'admin/orders', component: OrdersComponent },
   { path: 'admin/products', component: ProductsComponent },
