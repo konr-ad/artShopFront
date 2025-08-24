@@ -1,0 +1,79 @@
+diff --git a/src/app/components/admin-panel/discount-codes/add-code-modal/add-code-modal.component.ts b/src/app/components/admin-panel/discount-codes/add-code-modal/add-code-modal.component.ts
+index 1111111..2222222 100644
+--- a/src/app/components/admin-panel/discount-codes/add-code-modal/add-code-modal.component.ts
++++ b/src/app/components/admin-panel/discount-codes/add-code-modal/add-code-modal.component.ts
+@@ -1,7 +1,6 @@
+ import { Component } from '@angular/core';
+-// ❌ 'Painting' było zdefiniowane, ale nigdzie nieużywane – usuwamy import
+-import { Painting } from 'src/app/models/painting.model';
+ @Component({
+   selector: 'app-add-code-modal',
+   templateUrl: './add-code-modal.component.html',
+   styleUrls: ['./add-code-modal.component.css'],
+ })
+ export class AddCodeModalComponent {}
+diff --git a/src/app/components/admin-panel/discount-codes/add-code-modal/add-code-modal.component.html b/src/app/components/admin-panel/discount-codes/add-code-modal/add-code-modal.component.html
+index 3333333..4444444 100644
+--- a/src/app/components/admin-panel/discount-codes/add-code-modal/add-code-modal.component.html
++++ b/src/app/components/admin-panel/discount-codes/add-code-modal/add-code-modal.component.html
+@@ -1,40 +1,52 @@
+ <!--
+  Naprawa reguły a11y: "A label component must be associated with a form element".
+  Każdy <label> ma teraz atrybut for="..." i odpowiadający mu <input id="...">.
+ -->
+-<form>
+-  <div class="mb-4">
+-    <label>Discount code</label>
+-    <input type="text" class="form-control" [(ngModel)]="form.code" name="code" />
+-  </div>
+-  <div class="mb-4">
+-    <label>Percent</label>
+-    <input type="number" class="form-control" [(ngModel)]="form.percent" name="percent" />
+-  </div>
+-  <div class="mb-4">
+-    <label>Start date</label>
+-    <input type="date" class="form-control" [(ngModel)]="form.startDate" name="startDate" />
+-  </div>
+-  <div class="mb-4">
+-    <label>End date</label>
+-    <input type="date" class="form-control" [(ngModel)]="form.endDate" name="endDate" />
+-  </div>
+-  <div class="mb-4">
+-    <label>Usage limit</label>
+-    <input type="number" class="form-control" [(ngModel)]="form.limit" name="limit" />
+-  </div>
+-</form>
++<form>
++  <div class="mb-4">
++    <label for="dc-code">Discount code</label>
++    <input id="dc-code" type="text" class="form-control" [(ngModel)]="form.code" name="code" />
++  </div>
++  <div class="mb-4">
++    <label for="dc-percent">Percent</label>
++    <input id="dc-percent" type="number" class="form-control" [(ngModel)]="form.percent" name="percent" />
++  </div>
++  <div class="mb-4">
++    <label for="dc-start">Start date</label>
++    <input id="dc-start" type="date" class="form-control" [(ngModel)]="form.startDate" name="startDate" />
++  </div>
++  <div class="mb-4">
++    <label for="dc-end">End date</label>
++    <input id="dc-end" type="date" class="form-control" [(ngModel)]="form.endDate" name="endDate" />
++  </div>
++  <div class="mb-4">
++    <label for="dc-limit">Usage limit</label>
++    <input id="dc-limit" type="number" class="form-control" [(ngModel)]="form.limit" name="limit" />
++  </div>
++</form>
+diff --git a/src/app/app.component.ts b/src/app/app.component.ts
+index 5555555..6666666 100644
+--- a/src/app/app.component.ts
++++ b/src/app/app.component.ts
+@@ -8,8 +8,8 @@ export class AppComponent {
+-  // ESLint: "Type boolean trivially inferred from a boolean literal, remove type annotation"
+-  isMenuOpen: boolean = false;
+-  isLoading: boolean = false;
++  // Typ bool jest oczywisty z literału – adnotacje zbędne
++  isMenuOpen = false;
++  isLoading = false;
+ }

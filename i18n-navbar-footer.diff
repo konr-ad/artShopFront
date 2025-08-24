@@ -1,0 +1,145 @@
+diff --git a/src/assets/i18n/en.json b/src/assets/i18n/en.json
+new file mode 100644
+index 0000000..1111111
+--- /dev/null
++++ b/src/assets/i18n/en.json
+@@ -0,0 +1,56 @@
++{
++  "nav": {
++    "home": "Home",
++    "shop": "Shop",
++    "gallery": "Gallery",
++    "cart": "Cart",
++    "terms": "Terms",
++    "contact": "Contact",
++    "language": "Language"
++  },
++  "hero": {
++    "title": "Art by Kamila Białkowska-Ismaił",
++    "subtitle": "Paintings that tell stories"
++  },
++  "shop": {
++    "filters": "Filters",
++    "price": "Price",
++    "size": "Size",
++    "search": "Search",
++    "no_results": "No results",
++    "add_to_cart": "Add to cart"
++  },
++  "cart": {
++    "title": "Cart",
++    "empty": "Your cart is empty",
++    "total": "Total",
++    "checkout": "Proceed to checkout"
++  },
++  "checkout": {
++    "title": "Checkout",
++    "payment": "Payment",
++    "address": "Shipping address",
++    "summary": "Summary"
++  },
++  "terms": {
++    "title": "TERMS AND CONDITIONS OF THE ONLINE STORE OF KAMILA BIAŁKOWSKA-ISMAIŁ"
++  },
++  "footer": {
++    "contact": "Contact",
++    "rights": "All rights reserved"
++  },
++  "buttons": {
++    "buy_now": "Buy now",
++    "continue": "Continue",
++    "back": "Back"
++  },
++  "messages": {
++    "loading": "Loading...",
++    "error": "An error occurred"
++  }
++}
+diff --git a/src/assets/i18n/pl.json b/src/assets/i18n/pl.json
+new file mode 100644
+index 0000000..2222222
+--- /dev/null
++++ b/src/assets/i18n/pl.json
+@@ -0,0 +1,56 @@
++{
++  "nav": {
++    "home": "Strona główna",
++    "shop": "Sklep",
++    "gallery": "Galeria",
++    "cart": "Koszyk",
++    "terms": "Regulamin",
++    "contact": "Kontakt",
++    "language": "Język"
++  },
++  "hero": {
++    "title": "Sztuka Kamili Białkowskiej-Ismaił",
++    "subtitle": "Obrazy, które opowiadają historie"
++  },
++  "shop": {
++    "filters": "Filtry",
++    "price": "Cena",
++    "size": "Rozmiar",
++    "search": "Szukaj",
++    "no_results": "Brak wyników",
++    "add_to_cart": "Dodaj do koszyka"
++  },
++  "cart": {
++    "title": "Koszyk",
++    "empty": "Twój koszyk jest pusty",
++    "total": "Łącznie",
++    "checkout": "Przejdź do zamówienia"
++  },
++  "checkout": {
++    "title": "Zamówienie",
++    "payment": "Płatność",
++    "address": "Adres dostawy",
++    "summary": "Podsumowanie"
++  },
++  "terms": {
++    "title": "REGULAMIN SKLEPU INTERNETOWEGO KAMILI BIAŁKOWSKIEJ-ISMAIŁ"
++  },
++  "footer": {
++    "contact": "Kontakt",
++    "rights": "Wszelkie prawa zastrzeżone"
++  },
++  "buttons": {
++    "buy_now": "Kup teraz",
++    "continue": "Kontynuuj",
++    "back": "Powrót"
++  },
++  "messages": {
++    "loading": "Ładowanie...",
++    "error": "Wystąpił błąd"
++  }
++}
+diff --git a/src/app/components/header/navbar/navbar.component.html b/src/app/components/header/navbar/navbar.component.html
+index 3333333..4444444 100644
+--- a/src/app/components/header/navbar/navbar.component.html
++++ b/src/app/components/header/navbar/navbar.component.html
+@@ -1,50 +1,50 @@
+-<!-- stara zawartość (zastąpiona przez i18n) -->
+-<!-- ... -->
++<!-- Navbar z tłumaczeniami -->
++<nav class="flex items-center gap-4">
++  <a routerLink="/" routerLinkActive="active">{{ 'nav.home' | translate }}</a>
++  <a routerLink="/shop" routerLinkActive="active">{{ 'nav.shop' | translate }}</a>
++  <a routerLink="/gallery" routerLinkActive="active">{{ 'nav.gallery' | translate }}</a>
++  <a routerLink="/cart" routerLinkActive="active">{{ 'nav.cart' | translate }}</a>
++  <a routerLink="/terms" routerLinkActive="active">{{ 'nav.terms' | translate }}</a>
++</nav>
+diff --git a/src/app/components/footer/footer.component.html b/src/app/components/footer/footer.component.html
+index 5555555..6666666 100644
+--- a/src/app/components/footer/footer.component.html
++++ b/src/app/components/footer/footer.component.html
+@@ -1,30 +1,30 @@
+-<!-- stara zawartość (zastąpiona przez i18n) -->
+-<!-- ... -->
++<footer class="text-center text-sm text-gray-700 py-6">
++  <div class="mb-2">
++    {{ 'footer.contact' | translate }}:
++    <a href="mailto:dsk.bis&#64;wp.pl" class="underline">dsk.bis&#64;wp.pl</a>
++  </div>
++  <div>
++    © {{ 'footer.rights' | translate }}
++  </div>
++</footer>

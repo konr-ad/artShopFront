@@ -1,0 +1,51 @@
+{
+  "nav": {
+    "home": "Strona główna",
+    "shop": "Sklep",
+    "gallery": "Galeria",
+    "cart": "Koszyk",
+    "terms": "Regulamin",
+    "contact": "Kontakt",
+    "language": "Język"
+  },
+  "hero": {
+    "title": "Sztuka Kamili Białkowskiej-Ismaił",
+    "subtitle": "Obrazy, które opowiadają historie"
+  },
+  "shop": {
+    "filters": "Filtry",
+    "price": "Cena",
+    "size": "Rozmiar",
+    "search": "Szukaj",
+    "no_results": "Brak wyników",
+    "add_to_cart": "Dodaj do koszyka"
+  },
+  "cart": {
+    "title": "Koszyk",
+    "empty": "Twój koszyk jest pusty",
+    "total": "Łącznie",
+    "checkout": "Przejdź do zamówienia"
+  },
+  "checkout": {
+    "title": "Zamówienie",
+    "payment": "Płatność",
+    "address": "Adres dostawy",
+    "summary": "Podsumowanie"
+  },
+  "terms": {
+    "title": "REGULAMIN"
+  },
+  "footer": {
+    "contact": "Kontakt",
+    "rights": "Wszelkie prawa zastrzeżone"
+  },
+  "buttons": {
+    "buy_now": "Kup teraz",
+    "continue": "Kontynuuj",
+    "back": "Powrót"
+  },
+  "messages": {
+    "loading": "Ładowanie...",
+    "error": "Wystąpił błąd"
+  }
+}

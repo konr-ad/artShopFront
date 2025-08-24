@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, inject, OnInit} from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
+import { LanguageService } from './services/language.service';
 
 @Component({
   selector: 'app-root',
@@ -10,6 +11,7 @@ export class AppComponent implements OnInit {
   showHeader: boolean = true;
   showFooter: boolean = true;
   title = 'paintings-app';
+  lang = inject(LanguageService);
 
   constructor(private router: Router) {}
   ngOnInit() {

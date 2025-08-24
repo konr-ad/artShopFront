@@ -3,7 +3,6 @@ import { AbstractModalComponent } from '../../../abstract/AbstractModal';
 import { NgClass, NgIf } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { DiscountCodeDto, DiscountCodeService } from '../../../../services/discount-code.service';
-import { Painting } from '../../../../services/painting.service';
 
 @Component({
   selector: 'app-add-code-modal',

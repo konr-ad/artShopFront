@@ -1,0 +1,51 @@
+{
+  "nav": {
+    "home": "Home",
+    "shop": "Shop",
+    "gallery": "Gallery",
+    "cart": "Cart",
+    "terms": "Terms",
+    "contact": "Contact",
+    "language": "Language"
+  },
+  "hero": {
+    "title": "Art by Kamila Białkowska-Ismaił",
+    "subtitle": "Paintings that tell stories"
+  },
+  "shop": {
+    "filters": "Filters",
+    "price": "Price",
+    "size": "Size",
+    "search": "Search",
+    "no_results": "No results",
+    "add_to_cart": "Add to cart"
+  },
+  "cart": {
+    "title": "Cart",
+    "empty": "Your cart is empty",
+    "total": "Total",
+    "checkout": "Proceed to checkout"
+  },
+  "checkout": {
+    "title": "Checkout",
+    "payment": "Payment",
+    "address": "Shipping address",
+    "summary": "Summary"
+  },
+  "terms": {
+    "title": "TERMS AND CONDITIONS"
+  },
+  "footer": {
+    "contact": "Contact",
+    "rights": "All rights reserved"
+  },
+  "buttons": {
+    "buy_now": "Buy now",
+    "continue": "Continue",
+    "back": "Back"
+  },
+  "messages": {
+    "loading": "Loading...",
+    "error": "An error occurred"
+  }
+}

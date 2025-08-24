@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { APP_INITIALIZER, NgModule } from '@angular/core';
-import { HttpClientModule, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import {HttpClient, HttpClientModule, provideHttpClient, withInterceptorsFromDi} from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -23,6 +23,14 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { GalleryComponent } from './components/gallery/gallery.component';
 import { CommonModule } from '@angular/common';
 import { ConfigService } from './services/config/ConfigService';
+
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+
+// fabryka loadera (czyta JSON-y z /assets/i18n/)
+export function httpLoaderFactory() {
+  return new TranslateHttpLoader();
+}
 
 // Function to load configuration before app starts
 export function loadConfig(configService: ConfigService) {
@@ -55,6 +63,14 @@ export function loadConfig(configService: ConfigService) {
     HttpClientModule,
     FormsModule,
     CommonModule,
+    TranslateModule.forRoot({
+      defaultLanguage: 'pl',
+      loader: {
+        provide: TranslateLoader,
+        useFactory: httpLoaderFactory,
+        deps: [HttpClient],
+      },
+    }),
   ],
   providers: [
     provideHttpClient(withInterceptorsFromDi()),

@@ -7,5 +7,5 @@
     <i class="fab fa-instagram"></i>
   </a>
   <span class="pipe mx-2">|</span>
-  <button class="bg-white text-black px-2 py-1">PL</button>
+  <button (click)="lang.toggle()" class="bg-white text-black px-2 py-1">{{ lang.current() === 'en' ? 'PL' : 'EN' }}</button>
 </div>
