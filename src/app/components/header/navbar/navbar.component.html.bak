@@ -1,43 +1,43 @@
-﻿<nav class="bg-white shadow rounded-lg">
+<nav class="bg-white shadow rounded-lg">
   <div class="container mx-auto px-4">
     <div class="flex justify-between items-center py-6">
       <ul class="hidden md:flex space-x-8">
-        <li class="nav-item dropdown group relative transition focus:outline-none">
+        <li class="nav-item dropdown group relative transition">
           <a
             class="nav-link text-gray-700 hover:text-gray-900 focus:outline-none text-2xl"
-            routerLink="/shop"
+            href="/shop"
             id="navbarDropdownShop"
             role="button"
             aria-haspopup="true"
           >
-            {{ 'nav.shop._' | translate }}
+            {{ 'nav.shop' | translate }}
           </a>
           <div
-            class="dropdown-menu absolute hidden group-hover:block  bg-white shadow-lg mt-2 w-56 transition rounded-lg"
+            class="dropdown-menu absolute hidden group-hover:block bg-white shadow-lg mt-2 w-56 transition rounded-lg"
           >
             <a
               class="block px-6 py-3 text-gray-700 hover:bg-gray-200 text-xl transition border-b"
               (click)="navigateWithFilters('')"
             >
-              {{ 'nav.shop.menu.all' | translate }}
+              All
             </a>
             <a
               class="block px-6 py-3 text-gray-700 hover:bg-gray-200 text-xl transition border-b"
               (click)="navigateWithFilters('OIL')"
             >
-              {{ 'nav.shop.menu.oils' | translate }}
+              Oils
             </a>
             <a
               class="block px-6 py-3 text-gray-700 hover:bg-gray-200 text-xl transition border-b"
               (click)="navigateWithFilters('MONOTYPE')"
             >
-              {{ 'nav.shop.menu.monotypes' | translate }}
+              Monotypes
             </a>
             <a
               class="block px-6 py-3 text-gray-700 hover:bg-gray-200 text-xl transition"
               (click)="navigateWithFilters('PRINT')"
             >
-              {{ 'nav.shop.menu.prints' | translate }}
+              Prints
             </a>
           </div>
         </li>
@@ -48,7 +48,7 @@
             role="button"
             aria-haspopup="true"
           >
-            {{ 'nav.about._' | translate }}
+            Info
           </a>
           <div
             class="dropdown-menu absolute hidden group-hover:block bg-white shadow-lg mt-2 rounded w-56 transition"
@@ -56,17 +56,17 @@
             <a
               class="block px-6 py-3 text-gray-700 hover:bg-gray-200 text-xl transition border-b"
               routerLink="/bio"
-            >{{ 'nav.about.menu.bio' | translate }}</a
+              >Bio</a
             >
             <a
               class="block px-6 py-3 text-gray-700 hover:bg-gray-200 text-xl transition border-b"
               routerLink="/exhibitions"
-            >{{ 'nav.about.menu.exhibitions' | translate }}</a
+              >Exhibitions</a
             >
             <a
               class="block px-6 py-3 text-gray-700 hover:bg-gray-200 text-xl transition"
               routerLink="/contact"
-            >{{ 'nav.about.menu.contact' | translate }}</a
+              >Contact</a
             >
           </div>
         </li>
@@ -74,11 +74,12 @@
           <a
             routerLink="/gallery"
             class="nav-link text-gray-700 hover:text-gray-900 text-2xl"
-          >{{ 'nav.gallery' | translate }}</a
+            routerLink="/gallery"
+            >Gallery</a
           >
         </li>
         <li class="relative flex items-center">
-          <a class="nav-link text-gray-700 hover:text-gray-900 text-2xl" routerLink="/cart">{{ 'nav.cart' | translate }}</a>
+          <a class="nav-link text-gray-700 hover:text-gray-900 text-2xl" routerLink="/cart">Cart</a>
           <span *ngIf="cartItemCount > 0" class="cart-item-count text-xl">{{ cartItemCount }}</span>
         </li>
       </ul>
@@ -102,7 +103,7 @@
             routerLink="/shop"
             class="text-gray-700 hover:text-gray-900 text-xl transition"
             (click)="navigateWithFilters('')"
-          >Shop</a
+            >Shop</a
           >
         </li>
         <li>
@@ -110,7 +111,7 @@
             routerLink="/bio"
             class="text-gray-700 hover:text-gray-900 text-xl transition"
             routerLink="/bio"
-          >Bio</a
+            >Bio</a
           >
         </li>
         <li>
@@ -118,7 +119,7 @@
             routerLink="/exhibitions"
             class="text-gray-700 hover:text-gray-900 text-xl transition"
             routerLink="/exhibitions"
-          >Exhibitions</a
+            >Exhibitions</a
           >
         </li>
         <li>
@@ -126,14 +127,14 @@
             routerLink="/contact"
             class="text-gray-700 hover:text-gray-900 text-xl transition"
             routerLink="/contact"
-          >Contact</a
+            >Contact</a
           >
         </li>
         <li class="relative flex items-center">
           <a
             class="nav-link text-gray-700 hover:text-gray-900 text-xl transition"
             routerLink="/cart"
-          >{{ 'nav.cart' | translate }}</a
+            >Cart</a
           >
           <span *ngIf="cartItemCount > 0" class="cart-item-count text-l">{{ cartItemCount }}</span>
         </li>

@@ -1,12 +1,18 @@
-<footer class="bg-gray-300 text-black font-medium p-8">
+﻿<footer class="bg-gray-300 text-black font-medium p-8">
   <div class="container mx-auto text-center">
     <div class="flex justify-center space-x-6 mb-4">
-      <a routerLink="/terms" class="text-black font-medium hover:text-gray-700">Terms</a>
+      <a routerLink="/terms" class="text-black font-medium hover:text-gray-700">{{ 'footer.terms' | translate }}</a>
       <a routerLink="/payment-shipping" class="text-black font-medium hover:text-gray-700"
-        >Payments</a
+      >{{ 'footer.payments' | translate }}</a
       >
-      <a routerLink="/returns" class="text-black font-medium hover:text-gray-700">Returns</a>
+      <a routerLink="/returns" class="text-black font-medium hover:text-gray-700">{{ 'footer.returns' | translate }}</a>
     </div>
-    <p class="text-sm">&copy; 2024 Kamila Białkowska-Ismaił | All rights reserved</p>
+    <p class="text-sm">&copy; 2024 Kamila Białkowska-Ismaił | {{ 'footer.rights' | translate }}</p>
   </div>
+</footer>
+
+<footer>
+  <span>&copy; {{ 'footer.rights' | translate }}</span>
+  <a routerLink="/privacy">{{ 'footer.privacy' | translate }}</a>
+  <a routerLink="/terms">{{ 'footer.terms' | translate }}</a>
 </footer>

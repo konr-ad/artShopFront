@@ -1,6 +1,8 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { CartService } from 'src/app/services/cart.service';
 import { Router } from '@angular/router';
+import {TranslateService} from "@ngx-translate/core";
+import {LanguageService} from "../../../services/language.service";
 
 @Component({
   selector: 'app-navbar',
@@ -14,7 +16,7 @@ export class NavbarComponent implements OnInit {
   constructor(
     private cartService: CartService,
     private router: Router,
-    private changeDetector: ChangeDetectorRef
+    private changeDetector: ChangeDetectorRef,
   ) {}
 
   ngOnInit(): void {

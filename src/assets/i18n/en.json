@@ -1,0 +1,241 @@
+﻿{
+  "nav": {
+    "shop": {
+      "_": "Shop",
+      "paintingType": "Painting type",
+      "price": "Price",
+      "menu": {
+        "all": "All",
+        "oils": "Oils",
+        "monotypes": "Monotypes",
+        "prints": "Prints"
+      }
+    },
+    "gallery": "Gallery",
+    "about": {
+      "_": "About me",
+      "menu": {
+        "bio": "Biography",
+        "exhibitions": "Exhibitions",
+        "contact": "Contact"
+      }
+    },
+    "cart": "Cart"
+  },
+  "bio": {
+    "p1": "Born in Poland in 1969, where she currently works. From 1989 to 1995 she studied at the Moscow Higher Institute of Monumental and Decorative Applied Arts. There she graduated with a rector’s distinction in the specialty of conservation of monumental painting, obtaining the qualification of conservation artist and the academic title of Master of Art History.",
+    "p2": "From 1996 to 1998 she pursued doctoral studies at the Russian State University for the Humanities in Moscow, Faculty of Museology. She works in painting, drawing, printmaking, and illustration. In her creative practice she does not impose uniform boundaries or use standard technologies. She has developed her own technique, combining monotype prints with painting.",
+    "p3": "Human and private visions of objects and the world are the themes she most willingly explores. Since 1999, Kamila Białkowska-Ismaił has been a member of the graphics section of the Association of Polish Artists and Designers."
+  },
+  "checkout": {
+    "title": "Checkout",
+    "contactInfo": {
+      "title": "Contact information",
+      "email": {
+        "label": "Email address",
+        "error": "Please enter a valid email address."
+      }
+    },
+    "shippingInfo": {
+      "title": "Shipping information",
+      "firstName": {
+        "label": "First name",
+        "error": "First name is required."
+      },
+      "lastName": {
+        "label": "Last name",
+        "error": "Last name is required."
+      },
+      "address": {
+        "label": "Address",
+        "error": "Address is required."
+      },
+      "apartmentNumber": {
+        "label": "Apartment number"
+      },
+      "city": {
+        "label": "City",
+        "error": "City is required."
+      },
+      "country": {
+        "label": "Country",
+        "error": "Country is required."
+      },
+      "state": {
+        "label": "State / Province",
+        "error": "State/Province is required."
+      },
+      "postalCode": {
+        "label": "Postal code",
+        "error": "Postal code is required."
+      },
+      "phone": {
+        "label": "Phone",
+        "error": "Phone number is required."
+      },
+      "fillTestData": "Fill Test Data"
+    },
+    "summary": {
+      "title": "Order summary",
+      "itemsSrOnly": "Items in your cart",
+      "quantity": "Quantity",
+      "subtotal": "Subtotal",
+      "shipping": "Shipping",
+      "taxes": "Taxes",
+      "total": "Total",
+      "payment": "Payment"
+    }
+  },
+  "payment": {
+    "title": "Payment Information",
+    "contact": {
+      "title": "Contact Information",
+      "email": "Email address",
+      "firstName": "First name",
+      "lastName": "Last name"
+    },
+    "shipping": {
+      "title": "Shipping Address",
+      "country": "Country",
+      "state": "State / Province",
+      "address": "Address",
+      "apartmentNumber": "Apartment number",
+      "city": "City",
+      "postalCode": "Postal code"
+    },
+    "actions": {
+      "backToCheckout": "Back to checkout",
+      "payWithPayU": "Pay with PayU"
+    },
+    "summary": {
+      "title": "Order summary",
+      "quantity": "Quantity",
+      "subtotal": "Subtotal",
+      "shipping": "Shipping",
+      "pending": "Pending",
+      "tax": "Tax",
+      "total": "Total",
+      "currencyPrefix": "EUR"
+    }
+  },
+  "stepper": {
+    "cart": "Cart",
+    "checkout": "Checkout",
+    "payment": "Payment",
+    "srOnlySteps": "Steps"
+  },
+  "exhibitions": {
+    "title": "Exhibitions",
+    "intro": "Kamila Białkowska-Ismail has taken part in numerous group and solo exhibitions.",
+    "list": {
+      "l1": "1996–1998 annual All-Russian artists’ exhibitions – Art Manege, Moscow.",
+      "l2": "1996 solo exhibition of painting and graphics at the Polish Cultural Center, Moscow.",
+      "l3": "2001 group exhibition “Polish Contemporary Art”, Clermont-Ferrand, France.",
+      "l4": "2002 solo exhibition in Rotterdam, the Netherlands.",
+      "l5": "2005 solo exhibition “Art Is Not Compulsory”, Warsaw.",
+      "l6": "2006 solo exhibition – Stara Prochownia, Warsaw.",
+      "l7": "2007 solo exhibition “Polish Folktales”, paintings inspired by the works of Bolesław Leśmian, Warsaw.",
+      "l8": "2008 solo exhibition “Between Angels, Legends Lined with Bare Feet”, Casinos Poland, Warsaw Marriott.",
+      "l9": "2012 “The Ideal World”, Skwer – Fabryka Trzciny, 60a Krakowskie Przedmieście St., Warsaw."
+    },
+    "outro": "Her works are held in many private collections in Poland, Russia, Japan, England, France, Germany, the Netherlands and the USA.",
+    "images": {
+      "thumbAlt": "Exhibition image {{index}}",
+      "lightboxAlt": "Lightbox image"
+    },
+    "lightbox": {
+      "prev": "Previous",
+      "next": "Next",
+      "close": "Close"
+    }
+  },
+  "notFound": {
+    "code": "404",
+    "title": "Page not found",
+    "message": "Sorry, we couldn’t find the page you’re looking for.",
+    "backHome": "Go back home"
+  },
+  "terms": {
+    "toc": {
+      "title": "Table of contents",
+      "items": {
+        "intro": "1. General information",
+        "payments": "2. Conclusion of contract and payments",
+        "delivery": "3. Delivery",
+        "claims": "4. Complaints, returns and exchanges",
+        "final": "5. Final provisions"
+      }
+    },
+
+    "title": "TERMS AND CONDITIONS OF KAMILA BIAŁKOWSKA-ISMAIŁ ONLINE STORE",
+
+    "s1": {
+      "heading": "1. GENERAL INFORMATION",
+      "p1_html": "The online store available at <a href=\"https://bialkowskaismail.com\" class=\"text-blue-600 underline\">https://bialkowskaismail.com</a> (hereinafter the “Store”) is operated by:<br>K-BIS STUDIO<br>ul. Matejki 7/14, 05-400 Otwock, Poland<br>VAT ID (NIP): 5321748319<br>e-mail: <a href=\"mailto:dsk.bis&#64;wp.pl\" class=\"text-blue-600 underline\">dsk.bis&#64;wp.pl</a><br>Bank account: &lt;&lt;accountProvidedByPayUOrNotApplicable&gt;&gt;",
+      "p2": "The buyer may be an adult natural person, a legal person or an organisational unit without legal personality (hereinafter the “Client”).",
+      "p3": "Using the Store constitutes acceptance of these Terms and Conditions.",
+      "p4": "Copyright notice: All paintings available in the Store are original works by Kamila Białkowska-Ismaił and are protected by copyright. Copying, reproduction or distribution of images of the works without the Store’s consent is prohibited.",
+      "p5": "Prices in the Store are expressed in EUR and include VAT (where applicable)."
+    },
+
+    "s2": {
+      "heading": "2. CONCLUSION OF CONTRACT AND PAYMENTS",
+      "p1": "The sales contract is concluded when the Client makes payment and receives confirmation at the provided e-mail address.",
+      "p2": "Payment methods:",
+      "li1": "Online payments via PayU (payment cards, BLIK, bank transfers).",
+      "p3": "Order fulfilment:",
+      "li2": "Paintings are dispatched within 7 business days from receipt of payment."
+    },
+
+    "s3": {
+      "heading": "3. DELIVERY",
+      "p1": "Delivery methods:",
+      "li1": "The Client will be informed by e-mail or phone about the selected delivery method.",
+      "li2_html": "Personal pickup (by prior arrangement – studio address: ul. Matejki 7/14, 05-400 Otwock, Poland).",
+      "p2": "Delivery cost:",
+      "li3": "Within Poland, delivery cost is included in the price of the painting.",
+      "li4": "Outside Poland, delivery cost is determined individually via e-mail contact.",
+      "p3": "Important information about paintings:",
+      "li5": "Each painting is packed with due care (protection against mechanical damage and moisture).",
+      "li6": "For international delivery the Client may be charged additional customs duties."
+    },
+
+    "s4": {
+      "heading": "4. COMPLAINTS, RETURNS AND EXCHANGES",
+      "p1": "Complaints:",
+      "li1": "The Client has the right to file a complaint in the event of damage during transport or non-conformity with the description.",
+      "li2_html": "A complaint must be submitted within 2 days of receiving the shipment, including photos of the damage sent to: <a href=\"mailto:dsk.bis&#64;wp.pl\" class=\"text-blue-600 underline\">dsk.bis&#64;wp.pl</a>.",
+      "li3": "If the complaint is accepted, the purchased painting should be returned to the Store at the Client’s expense. After receiving the return, the Seller will refund the payment within 14 days.",
+      "p2": "Right of withdrawal:",
+      "li4": "The Client may withdraw from the contract within 14 days of receiving the shipment without giving reasons.",
+      "li5": "Return conditions:",
+      "li5a": "The painting must be intact and in its original packaging,",
+      "li5b": "The Client bears the cost of return shipping,",
+      "li5c": "Please contact us by e-mail before sending the return.",
+      "p3": "Exchange:",
+      "li6": "Exchange for another painting is possible upon prior e-mail or phone arrangement. The Client bears the cost of return shipping."
+    },
+
+    "s5": {
+      "heading": "5. FINAL PROVISIONS",
+      "li1_html": "<strong>Personal data protection:</strong> Clients’ data are processed in accordance with the GDPR and the Privacy Policy available in the Store.",
+      "li2_html": "<strong>Changes to the Terms:</strong> The Terms may be amended. The current version together with the effective date is available on the Store’s website.",
+      "li3_html": "<strong>Dispute resolution:</strong> Disputes are resolved by the court having jurisdiction over the Seller’s registered office.",
+      "contact_html": "<strong>Contact:</strong><br><a href=\"https://bialkowskaismail.com\" class=\"text-blue-600 underline\">https://bialkowskaismail.com</a><br>Phone: +48 600 855 431<br>E-mail: <a href=\"mailto:dsk.bis&#64;wp.pl\" class=\"text-blue-600 underline\">dsk.bis&#64;wp.pl</a>",
+      "effectiveDate": "Effective date: {{date}}"
+    }
+  },
+  "footer": {
+    "rights": "All rights reserved",
+    "privacy": "Privacy Policy",
+    "terms": "Terms & Conditions",
+    "returns": "Returns",
+    "payments": "Payments"
+  },
+  "lang": {
+    "switchTo": {
+      "pl": "Switch to Polish",
+      "en": "Switch to English"
+    }
+  }
+}

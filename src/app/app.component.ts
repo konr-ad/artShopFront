@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
+import {LanguageService} from "./services/language.service";
 
 @Component({
   selector: 'app-root',
@@ -11,7 +12,8 @@ export class AppComponent implements OnInit {
   showFooter: boolean = true;
   title = 'paintings-app';
 
-  constructor(private router: Router) {}
+  constructor(private router: Router,
+              private lang: LanguageService) {}
   ngOnInit() {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {

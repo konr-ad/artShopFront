@@ -3,18 +3,18 @@
 
     <!-- SPIS TREŚCI -->
     <nav class="mb-6 border rounded-lg p-4 bg-gray-50">
-      <h2 class="text-lg font-semibold mb-2">Spis treści</h2>
+      <h2 class="text-lg font-semibold mb-2">{{ 'terms.toc.title' | translate }}</h2>
       <ol class="list-decimal pl-5 space-y-1 text-sm sm:text-base">
-        <li><a class="text-blue-600 underline" href="#wstep">1. Informacje wstępne</a></li>
-        <li><a class="text-blue-600 underline" href="#platnosci">2. Zawarcie umowy i płatności</a></li>
-        <li><a class="text-blue-600 underline" href="#dostawa">3. Dostawa</a></li>
-        <li><a class="text-blue-600 underline" href="#reklamacje">4. Reklamacje, zwroty i wymiany</a></li>
-        <li><a class="text-blue-600 underline" href="#final">5. Postanowienia końcowe</a></li>
+        <li><a class="text-blue-600 underline" href="#wstep">{{ 'terms.toc.items.intro' | translate }}</a></li>
+        <li><a class="text-blue-600 underline" href="#platnosci">{{ 'terms.toc.items.payments' | translate }}</a></li>
+        <li><a class="text-blue-600 underline" href="#dostawa">{{ 'terms.toc.items.delivery' | translate }}</a></li>
+        <li><a class="text-blue-600 underline" href="#reklamacje">{{ 'terms.toc.items.claims' | translate }}</a></li>
+        <li><a class="text-blue-600 underline" href="#final">{{ 'terms.toc.items.final' | translate }}</a></li>
       </ol>
     </nav>
 
     <h1 class="text-2xl font-bold mb-6">
-      REGULAMIN SKLEPU INTERNETOWEGO KAMILI BIAŁKOWSKIEJ-ISMAIŁ
+      {{ 'terms.title' | translate }}
     </h1>
 
     <!-- 1 -->
@@ -22,22 +22,14 @@
         class="sticky top-0 sm:top-12 z-10 -mx-4 sm:-mx-6 px-4 sm:px-6 py-2
                bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/60
                border-b border-gray-200 text-xl font-semibold">
-      1. INFORMACJE WSTĘPNE
+      {{ 'terms.s1.heading' | translate }}
     </h2>
     <div class="mt-3 space-y-3">
-      <p><strong>1.1</strong> Sklep internetowy dostępny pod adresem
-        <a href="https://bialkowskaismail.com" class="text-blue-600 underline">https://bialkowskaismail.com</a>
-        (zwany dalej „Sklepem”) prowadzony jest przez:<br>
-        K-BIS STUDIO<br>
-        ul. Matejki 7/14, 05-400 Otwock<br>
-        NIP: 5321748319<br>
-        e-mail: <a href="mailto:dsk.bis&#64;wp.pl" class="text-blue-600 underline">dsk.bis&#64;wp.pl</a><br>
-        Konto bankowe: &lt;&lt;kontoKtoreDostaniemyOdPayUAlboTegoNieBedzie&gt;&gt;
-      </p>
-      <p><strong>1.2</strong> Kupującym może być pełnoletnia osoba fizyczna, osoba prawna lub jednostka organizacyjna nieposiadająca osobowości prawnej (dalej „Klient”).</p>
-      <p><strong>1.3</strong> Korzystanie ze Sklepu oznacza akceptację niniejszego Regulaminu.</p>
-      <p><strong>1.4</strong> Ochrona praw autorskich: Wszystkie obrazy dostępne w Sklepie są oryginalnymi dziełami autorstwa Kamili Białkowskiej-Ismaił i objęte są prawami autorskimi. Kopiowanie, reprodukcja lub rozpowszechnianie wizerunków dzieł bez zgody Sklepu jest zabronione.</p>
-      <p><strong>1.5</strong> Ceny podane w Sklepie wyrażone są w EUR i zawierają podatek VAT (jeśli dotyczy).</p>
+      <p [innerHTML]="'terms.s1.p1_html' | translate"></p>
+      <p>{{ 'terms.s1.p2' | translate }}</p>
+      <p>{{ 'terms.s1.p3' | translate }}</p>
+      <p>{{ 'terms.s1.p4' | translate }}</p>
+      <p>{{ 'terms.s1.p5' | translate }}</p>
     </div>
 
     <!-- 2 -->
@@ -45,17 +37,17 @@
         class="sticky top-0 sm:top-12 z-10 -mx-4 sm:-mx-6 px-4 sm:px-6 py-2
                bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/60
                border-b border-gray-200 text-xl font-semibold mt-8">
-      2. ZAWARCIE UMOWY I PŁATNOŚCI
+      {{ 'terms.s2.heading' | translate }}
     </h2>
     <div class="mt-3 space-y-3">
-      <p><strong>2.1</strong> Umowa sprzedaży zawierana jest w momencie dokonania płatności przez Klienta i otrzymania potwierdzenia na podany adres e-mail.</p>
-      <p><strong>2.2</strong> Metody płatności:</p>
+      <p>{{ 'terms.s2.p1' | translate }}</p>
+      <p>{{ 'terms.s2.p2' | translate }}</p>
       <ul class="list-disc pl-6">
-        <li>Płatności online przez PayU (karty płatnicze, BLIK, przelewy bankowe).</li>
+        <li>{{ 'terms.s2.li1' | translate }}</li>
       </ul>
-      <p><strong>2.3</strong> Realizacja zamówienia:</p>
+      <p>{{ 'terms.s2.p3' | translate }}</p>
       <ul class="list-disc pl-6">
-        <li>Obrazy wysyłane są w ciągu 7 dni roboczych od zaksięgowania płatności.</li>
+        <li>{{ 'terms.s2.li2' | translate }}</li>
       </ul>
     </div>
 
@@ -64,23 +56,23 @@
         class="sticky top-0 sm:top-12 z-10 -mx-4 sm:-mx-6 px-4 sm:px-6 py-2
                bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/60
                border-b border-gray-200 text-xl font-semibold mt-8">
-      3. DOSTAWA
+      {{ 'terms.s3.heading' | translate }}
     </h2>
     <div class="mt-3 space-y-3">
-      <p><strong>3.1</strong> Metody dostawy:</p>
+      <p>{{ 'terms.s3.p1' | translate }}</p>
       <ul class="list-disc pl-6">
-        <li>O wybranej metodzie dostawy Klient zostanie poinformowany drogą mailową lub telefoniczną.</li>
-        <li>Odbiór osobisty (po wcześniejszym umówieniu – adres pracowni: ul. Matejki 7/14, 05-400 Otwock).</li>
+        <li>{{ 'terms.s3.li1' | translate }}</li>
+        <li [innerHTML]="'terms.s3.li2_html' | translate"></li>
       </ul>
-      <p><strong>3.2</strong> Koszt dostawy:</p>
+      <p>{{ 'terms.s3.p2' | translate }}</p>
       <ul class="list-disc pl-6">
-        <li>Na terytorium Polski koszt dostawy jest wliczony w cenę obrazu.</li>
-        <li>Poza Polską koszt dostawy wyznaczany jest indywidualnie przy kontakcie mailowym.</li>
+        <li>{{ 'terms.s3.li3' | translate }}</li>
+        <li>{{ 'terms.s3.li4' | translate }}</li>
       </ul>
-      <p><strong>3.3</strong> Uwaga dotycząca obrazów:</p>
+      <p>{{ 'terms.s3.p3' | translate }}</p>
       <ul class="list-disc pl-6">
-        <li>Każdy obraz jest pakowany z należytą starannością (zabezpieczenie przed uszkodzeniami mechanicznymi i wilgocią).</li>
-        <li>W przypadku dostawy międzynarodowej Klient może zostać obciążony dodatkowymi opłatami celnymi.</li>
+        <li>{{ 'terms.s3.li5' | translate }}</li>
+        <li>{{ 'terms.s3.li6' | translate }}</li>
       </ul>
     </div>
 
@@ -89,29 +81,30 @@
         class="sticky top-0 sm:top-12 z-10 -mx-4 sm:-mx-6 px-4 sm:px-6 py-2
                bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/60
                border-b border-gray-200 text-xl font-semibold mt-8">
-      4. REKLAMACJE, ZWROTY I WYMIANY
+      {{ 'terms.s4.heading' | translate }}
     </h2>
     <div class="mt-3 space-y-3">
-      <p><strong>4.1 Reklamacje:</strong></p>
+      <p><strong>{{ 'terms.s4.p1' | translate }}</strong></p>
       <ul class="list-disc pl-6">
-        <li>Klient ma prawo zgłosić reklamację w przypadku uszkodzenia obrazu podczas transportu lub niezgodności z opisem.</li>
-        <li>Reklamację należy zgłosić w ciągu 2 dni od otrzymania przesyłki, przesyłając zdjęcia uszkodzeń na adres: <a href="mailto:dsk.bis&#64;wp.pl" class="text-blue-600 underline">dsk.bis&#64;wp.pl</a>.</li>
-        <li>W przypadku uznania reklamacji zakupiony obraz powinien być zwrócony na koszt Klienta do Sklepu. Sprzedający po otrzymaniu zwrotu zwraca środki w ciągu 14 dni.</li>
+        <li>{{ 'terms.s4.li1' | translate }}</li>
+        <li [innerHTML]="'terms.s4.li2_html' | translate"></li>
+        <li>{{ 'terms.s4.li3' | translate }}</li>
       </ul>
-      <p><strong>4.2 Prawo do odstąpienia od umowy:</strong></p>
+
+      <p><strong>{{ 'terms.s4.p2' | translate }}</strong></p>
       <ul class="list-disc pl-6">
-        <li>Klient może odstąpić od umowy w ciągu 14 dni od otrzymania przesyłki, bez podania przyczyny.</li>
-        <li>Warunki zwrotu:
-          <ul class="list-disc pl-10">
-            <li>Obraz musi być nienaruszony, w oryginalnym opakowaniu,</li>
-            <li>Klient pokrywa koszt zwrotu,</li>
-            <li>Prosimy o kontakt mailowy przed odesłaniem przesyłki.</li>
-          </ul>
-        </li>
+        <li>{{ 'terms.s4.li4' | translate }}</li>
+        <li>{{ 'terms.s4.li5' | translate }}</li>
+        <ul class="list-disc pl-10">
+          <li>{{ 'terms.s4.li5a' | translate }}</li>
+          <li>{{ 'terms.s4.li5b' | translate }}</li>
+          <li>{{ 'terms.s4.li5c' | translate }}</li>
+        </ul>
       </ul>
-      <p><strong>4.3 Wymiana:</strong></p>
+
+      <p><strong>{{ 'terms.s4.p3' | translate }}</strong></p>
       <ul class="list-disc pl-6">
-        <li>Wymiana na inny obraz możliwa jest po uzgodnieniu mailowym lub telefonicznym. Koszt przesyłki zwrotnej ponosi Klient.</li>
+        <li>{{ 'terms.s4.li6' | translate }}</li>
       </ul>
     </div>
 
@@ -120,25 +113,20 @@
         class="sticky top-0 sm:top-12 z-10 -mx-4 sm:-mx-6 px-4 sm:px-6 py-2
                bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/60
                border-b border-gray-200 text-xl font-semibold mt-8">
-      5. POSTANOWIENIA KOŃCOWE
+      {{ 'terms.s5.heading' | translate }}
     </h2>
     <div class="mt-3 space-y-3">
       <ul class="list-disc pl-6">
-        <li><strong>5.1 Ochrona danych osobowych:</strong> Dane Klientów przetwarzane są zgodnie z RODO i Polityką Prywatności dostępną w Sklepie.</li>
-        <li><strong>5.2 Zmiany w Regulaminie:</strong> Regulamin może ulec zmianie. Aktualna wersja Regulaminu wraz z datą dostępna jest na stronie Sklepu.</li>
-        <li><strong>5.3 Rozstrzyganie sporów:</strong> Spory rozstrzygane są przez sąd właściwy dla siedziby Sprzedającego.</li>
+        <li [innerHTML]="'terms.s5.li1_html' | translate"></li>
+        <li [innerHTML]="'terms.s5.li2_html' | translate"></li>
+        <li [innerHTML]="'terms.s5.li3_html' | translate"></li>
       </ul>
 
       <div class="mt-6">
-        <p><strong>Kontakt:</strong><br>
-          <a href="https://bialkowskaismail.com" class="text-blue-600 underline">https://bialkowskaismail.com</a><br>
-          Tel. +48 600 855 431<br>
-          E-mail:
-          <a href="mailto:dsk.bis&#64;wp.pl" class="text-blue-600 underline">
-            dsk.bis&#64;wp.pl
-          </a>
+        <p [innerHTML]="'terms.s5.contact_html' | translate"></p>
+        <p class="mt-2">
+          {{ 'terms.s5.effectiveDate' | translate:{ date: effectiveDate } }}
         </p>
-        <p class="mt-2">Data wejścia w życie: &lt;&lt;dataDoWstawieniaWDniuReleasu&gt;&gt;</p>
       </div>
     </div>
 

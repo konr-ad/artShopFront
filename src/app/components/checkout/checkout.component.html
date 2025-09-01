@@ -1,10 +1,10 @@
 <app-stepper></app-stepper>
+
 <div class="">
-  <div
-    class="mx-auto max-w-2xl px-4 pb-24 pt-16 sm:px-6 lg:max-w-7xl lg:px-8 bg-gray-50 border-gray-200 border-2 rounded-md"
-  >
+  <div class="mx-auto max-w-2xl px-4 pb-24 pt-16 sm:px-6 lg:max-w-7xl lg:px-8 bg-gray-50 border-gray-200 border-2 rounded-md">
+
     <h1 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl text-center mb-8">
-      Checkout
+      {{ 'checkout.title' | translate }}
     </h1>
 
     <form
@@ -14,12 +14,14 @@
     >
       <div>
         <div>
-          <h2 class="text-lg font-bold text-gray-900 border-1">Contact information</h2>
+          <h2 class="text-lg font-bold text-gray-900 border-1">
+            {{ 'checkout.contactInfo.title' | translate }}
+          </h2>
 
           <div class="mt-4">
-            <label for="email-address" class="block text-sm font-bold text-gray-700"
-              >Email address</label
-            >
+            <label for="email-address" class="block text-sm font-bold text-gray-700">
+              {{ 'checkout.contactInfo.email.label' | translate }}
+            </label>
             <div class="mt-1">
               <input
                 type="email"
@@ -31,31 +33,30 @@
                 [ngClass]="{
                   'border-red-400':
                     checkoutForm.get('email')?.invalid &&
-                    (checkoutForm.get('email')?.touched || formSubmitted),
+                    (checkoutForm.get('email')?.touched || formSubmitted)
                 }"
               />
             </div>
             <div
-              *ngIf="
-                checkoutForm.get('email')?.invalid &&
-                (checkoutForm.get('email')?.touched || formSubmitted)
-              "
+              *ngIf="checkoutForm.get('email')?.invalid && (checkoutForm.get('email')?.touched || formSubmitted)"
               class="text-red-600 text-sm mt-1"
             >
-              Please enter a valid email address.
+              {{ 'checkout.contactInfo.email.error' | translate }}
             </div>
           </div>
         </div>
 
         <div class="mt-10 border-t border-gray-200 pt-10">
-          <h2 class="text-lg font-bold text-gray-900">Shipping information</h2>
+          <h2 class="text-lg font-bold text-gray-900">
+            {{ 'checkout.shippingInfo.title' | translate }}
+          </h2>
 
           <div class="mt-4 grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-4">
             <!-- First Name -->
             <div>
-              <label for="first-name" class="block text-sm font-bold text-gray-700"
-                >First name</label
-              >
+              <label for="first-name" class="block text-sm font-bold text-gray-700">
+                {{ 'checkout.shippingInfo.firstName.label' | translate }}
+              </label>
               <div class="mt-1">
                 <input
                   type="text"
@@ -67,24 +68,23 @@
                   [ngClass]="{
                     'border-red-400':
                       checkoutForm.get('firstName')?.invalid &&
-                      (checkoutForm.get('firstName')?.touched || formSubmitted),
+                      (checkoutForm.get('firstName')?.touched || formSubmitted)
                   }"
                 />
               </div>
               <div
-                *ngIf="
-                  checkoutForm.get('firstName')?.invalid &&
-                  (checkoutForm.get('firstName')?.touched || formSubmitted)
-                "
+                *ngIf="checkoutForm.get('firstName')?.invalid && (checkoutForm.get('firstName')?.touched || formSubmitted)"
                 class="text-red-600 text-sm mt-1"
               >
-                First name is required.
+                {{ 'checkout.shippingInfo.firstName.error' | translate }}
               </div>
             </div>
 
             <!-- Last Name -->
             <div>
-              <label for="last-name" class="block text-sm font-bold text-gray-700">Last name</label>
+              <label for="last-name" class="block text-sm font-bold text-gray-700">
+                {{ 'checkout.shippingInfo.lastName.label' | translate }}
+              </label>
               <div class="mt-1">
                 <input
                   type="text"
@@ -96,24 +96,23 @@
                   [ngClass]="{
                     'border-red-400':
                       checkoutForm.get('lastName')?.invalid &&
-                      (checkoutForm.get('lastName')?.touched || formSubmitted),
+                      (checkoutForm.get('lastName')?.touched || formSubmitted)
                   }"
                 />
               </div>
               <div
-                *ngIf="
-                  checkoutForm.get('lastName')?.invalid &&
-                  (checkoutForm.get('lastName')?.touched || formSubmitted)
-                "
+                *ngIf="checkoutForm.get('lastName')?.invalid && (checkoutForm.get('lastName')?.touched || formSubmitted)"
                 class="text-red-600 text-sm mt-1"
               >
-                Last name is required.
+                {{ 'checkout.shippingInfo.lastName.error' | translate }}
               </div>
             </div>
 
             <!-- Address -->
             <div class="sm:col-span-2">
-              <label for="address" class="block text-sm font-bold text-gray-700">Address</label>
+              <label for="address" class="block text-sm font-bold text-gray-700">
+                {{ 'checkout.shippingInfo.address.label' | translate }}
+              </label>
               <div class="mt-1">
                 <input
                   type="text"
@@ -125,26 +124,23 @@
                   [ngClass]="{
                     'border-red-400':
                       checkoutForm.get('address')?.invalid &&
-                      (checkoutForm.get('address')?.touched || formSubmitted),
+                      (checkoutForm.get('address')?.touched || formSubmitted)
                   }"
                 />
               </div>
               <div
-                *ngIf="
-                  checkoutForm.get('address')?.invalid &&
-                  (checkoutForm.get('address')?.touched || formSubmitted)
-                "
+                *ngIf="checkoutForm.get('address')?.invalid && (checkoutForm.get('address')?.touched || formSubmitted)"
                 class="text-red-600 text-sm mt-1"
               >
-                Address is required.
+                {{ 'checkout.shippingInfo.address.error' | translate }}
               </div>
             </div>
 
-            <!-- Apartment number-->
+            <!-- Apartment number -->
             <div class="sm:col-span-2">
-              <label for="apartment" class="block text-sm font-bold text-gray-700"
-                >Apartment number.</label
-              >
+              <label for="apartment" class="block text-sm font-bold text-gray-700">
+                {{ 'checkout.shippingInfo.apartmentNumber.label' | translate }}
+              </label>
               <div class="mt-1">
                 <input
                   type="text"
@@ -158,7 +154,9 @@
 
             <!-- City -->
             <div>
-              <label for="city" class="block text-sm font-bold text-gray-700">City</label>
+              <label for="city" class="block text-sm font-bold text-gray-700">
+                {{ 'checkout.shippingInfo.city.label' | translate }}
+              </label>
               <div class="mt-1">
                 <input
                   type="text"
@@ -170,24 +168,23 @@
                   [ngClass]="{
                     'border-red-400':
                       checkoutForm.get('city')?.invalid &&
-                      (checkoutForm.get('city')?.touched || formSubmitted),
+                      (checkoutForm.get('city')?.touched || formSubmitted)
                   }"
                 />
               </div>
               <div
-                *ngIf="
-                  checkoutForm.get('city')?.invalid &&
-                  (checkoutForm.get('city')?.touched || formSubmitted)
-                "
+                *ngIf="checkoutForm.get('city')?.invalid && (checkoutForm.get('city')?.touched || formSubmitted)"
                 class="text-red-600 text-sm mt-1"
               >
-                City is required.
+                {{ 'checkout.shippingInfo.city.error' | translate }}
               </div>
             </div>
 
             <!-- Country -->
             <div>
-              <label for="country" class="block text-sm font-bold text-gray-700">Country</label>
+              <label for="country" class="block text-sm font-bold text-gray-700">
+                {{ 'checkout.shippingInfo.country.label' | translate }}
+              </label>
               <div class="mt-1">
                 <select
                   formControlName="country"
@@ -198,28 +195,25 @@
                   [ngClass]="{
                     'border-red-400':
                       checkoutForm.get('country')?.invalid &&
-                      (checkoutForm.get('country')?.touched || formSubmitted),
+                      (checkoutForm.get('country')?.touched || formSubmitted)
                   }"
                 >
                   <option *ngFor="let country of countries">{{ country }}</option>
                 </select>
               </div>
               <div
-                *ngIf="
-                  checkoutForm.get('country')?.invalid &&
-                  (checkoutForm.get('country')?.touched || formSubmitted)
-                "
+                *ngIf="checkoutForm.get('country')?.invalid && (checkoutForm.get('country')?.touched || formSubmitted)"
                 class="text-red-600 text-sm mt-1"
               >
-                Country is required.
+                {{ 'checkout.shippingInfo.country.error' | translate }}
               </div>
             </div>
 
             <!-- State/Province -->
             <div>
-              <label for="state" class="block text-sm font-bold text-gray-700"
-                >State / Province</label
-              >
+              <label for="state" class="block text-sm font-bold text-gray-700">
+                {{ 'checkout.shippingInfo.state.label' | translate }}
+              </label>
               <div class="mt-1">
                 <select
                   formControlName="state"
@@ -230,28 +224,25 @@
                   [ngClass]="{
                     'border-red-400':
                       checkoutForm.get('state')?.invalid &&
-                      (checkoutForm.get('state')?.touched || formSubmitted),
+                      (checkoutForm.get('state')?.touched || formSubmitted)
                   }"
                 >
                   <option *ngFor="let state of availableStates">{{ state }}</option>
                 </select>
               </div>
               <div
-                *ngIf="
-                  checkoutForm.get('state')?.invalid &&
-                  (checkoutForm.get('state')?.touched || formSubmitted)
-                "
+                *ngIf="checkoutForm.get('state')?.invalid && (checkoutForm.get('state')?.touched || formSubmitted)"
                 class="text-red-600 text-sm mt-1"
               >
-                State/Province is required.
+                {{ 'checkout.shippingInfo.state.error' | translate }}
               </div>
             </div>
 
             <!-- Postal Code -->
             <div>
-              <label for="postal-code" class="block text-sm font-bold text-gray-700"
-                >Postal code</label
-              >
+              <label for="postal-code" class="block text-sm font-bold text-gray-700">
+                {{ 'checkout.shippingInfo.postalCode.label' | translate }}
+              </label>
               <div class="mt-1">
                 <input
                   type="text"
@@ -263,24 +254,23 @@
                   [ngClass]="{
                     'border-red-400':
                       checkoutForm.get('zip')?.invalid &&
-                      (checkoutForm.get('zip')?.touched || formSubmitted),
+                      (checkoutForm.get('zip')?.touched || formSubmitted)
                   }"
                 />
               </div>
               <div
-                *ngIf="
-                  checkoutForm.get('zip')?.invalid &&
-                  (checkoutForm.get('zip')?.touched || formSubmitted)
-                "
+                *ngIf="checkoutForm.get('zip')?.invalid && (checkoutForm.get('zip')?.touched || formSubmitted)"
                 class="text-red-600 text-sm mt-1"
               >
-                Postal code is required.
+                {{ 'checkout.shippingInfo.postalCode.error' | translate }}
               </div>
             </div>
 
             <!-- Phone -->
             <div class="sm:col-span-2">
-              <label for="phone" class="block text-sm font-bold text-gray-700">Phone</label>
+              <label for="phone" class="block text-sm font-bold text-gray-700">
+                {{ 'checkout.shippingInfo.phone.label' | translate }}
+              </label>
               <div class="mt-1">
                 <input
                   type="text"
@@ -292,24 +282,20 @@
                   [ngClass]="{
                     'border-red-400':
                       checkoutForm.get('phone')?.invalid &&
-                      (checkoutForm.get('phone')?.touched || formSubmitted),
+                      (checkoutForm.get('phone')?.touched || formSubmitted)
                   }"
                 />
               </div>
               <div
-                *ngIf="
-                  checkoutForm.get('phone')?.invalid &&
-                  (checkoutForm.get('phone')?.touched || formSubmitted)
-                "
+                *ngIf="checkoutForm.get('phone')?.invalid && (checkoutForm.get('phone')?.touched || formSubmitted)"
                 class="text-red-600 text-sm mt-1"
               >
-                Phone number is required.
+                {{ 'checkout.shippingInfo.phone.error' | translate }}
               </div>
-              <button
-                (click)="fillTestData()"
-                class="mb-4 bg-blue-500 text-white mt-6 py-2 px-4 rounded"
-              >
-                Fill Test Data
+
+              <button (click)="fillTestData()"
+                      class="mb-4 bg-blue-500 text-white mt-6 py-2 px-4 rounded">
+                {{ 'checkout.shippingInfo.fillTestData' | translate }}
               </button>
             </div>
           </div>
@@ -318,36 +304,41 @@
 
       <!-- Order summary -->
       <div class="mt-10 lg:mt-0">
-        <h2 class="text-lg font-bold text-gray-900">Order summary</h2>
+        <h2 class="text-lg font-bold text-gray-900">
+          {{ 'checkout.summary.title' | translate }}
+        </h2>
 
         <div class="mt-4 rounded-lg border border-gray-200 bg-white shadow-sm">
-          <h3 class="sr-only">Items in your cart</h3>
+          <h3 class="sr-only">{{ 'checkout.summary.itemsSrOnly' | translate }}</h3>
+
           <ul role="list" class="divide-y divide-gray-200">
             <div *ngFor="let item of cartItems" class="flex items-center m-4 p-4">
               <img [src]="item.imageUrl" [alt]="item.productName" class="w-24 h-24 rounded-md" />
               <div>
                 <p class="text-sm text-black font-bold px-3">{{ item.productName }}</p>
                 <p class="text-sm text-gray-500 px-3">€{{ item.price }}</p>
-                <p class="text-sm text-gray-500 px-3">Quantity: {{ item.quantity }}</p>
+                <p class="text-sm text-gray-500 px-3">
+                  {{ 'checkout.summary.quantity' | translate }}: {{ item.quantity }}
+                </p>
               </div>
             </div>
           </ul>
 
           <dl class="space-y-6 border-t border-gray-200 px-4 py-6 sm:px-6">
             <div class="flex items-center justify-between">
-              <dt class="text-sm">Subtotal</dt>
+              <dt class="text-sm">{{ 'checkout.summary.subtotal' | translate }}</dt>
               <dd class="text-sm font-bold text-gray-900">$64.00</dd>
             </div>
             <div class="flex items-center justify-between">
-              <dt class="text-sm">Shipping</dt>
+              <dt class="text-sm">{{ 'checkout.summary.shipping' | translate }}</dt>
               <dd class="text-sm font-bold text-gray-900">$5.00</dd>
             </div>
             <div class="flex items-center justify-between">
-              <dt class="text-sm">Taxes</dt>
+              <dt class="text-sm">{{ 'checkout.summary.taxes' | translate }}</dt>
               <dd class="text-sm font-bold text-gray-900">$5.52</dd>
             </div>
             <div class="flex items-center justify-between border-t border-gray-200 pt-6">
-              <dt class="text-base font-bold">Total</dt>
+              <dt class="text-base font-bold">{{ 'checkout.summary.total' | translate }}</dt>
               <dd class="text-base font-bold text-gray-900">${{ totalAmount }}</dd>
             </div>
           </dl>
@@ -357,7 +348,7 @@
               type="submit"
               class="w-full block bg-gray-600 text-white py-1.5 px-3 transition hover:bg-gray-700 text-center rounded-lg mb-2"
             >
-              Payment
+              {{ 'checkout.summary.payment' | translate }}
             </button>
           </div>
         </div>

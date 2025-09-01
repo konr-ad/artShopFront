@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { APP_INITIALIZER, NgModule } from '@angular/core';
-import { HttpClientModule, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -23,8 +23,10 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { GalleryComponent } from './components/gallery/gallery.component';
 import { CommonModule } from '@angular/common';
 import { ConfigService } from './services/config/ConfigService';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { HttpClient } from '@angular/common/http';
+import {AppTranslateLoader} from "./i18n/AppTranslateLoader";
 
-// Function to load configuration before app starts
 export function loadConfig(configService: ConfigService) {
   return () => configService.loadConfig().toPromise();
 }
@@ -55,9 +57,15 @@ export function loadConfig(configService: ConfigService) {
     HttpClientModule,
     FormsModule,
     CommonModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useClass: AppTranslateLoader,
+        deps: [HttpClient]
+      },
+    }),
   ],
   providers: [
-    provideHttpClient(withInterceptorsFromDi()),
     {
       provide: APP_INITIALIZER,
       useFactory: loadConfig,
