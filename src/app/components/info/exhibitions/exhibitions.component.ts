@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { NgClass } from '@angular/common';
+import {TranslatePipe} from "@ngx-translate/core";
 
 @Component({
   selector: 'app-exhibitions',
   standalone: true,
-  imports: [NgClass],
+  imports: [NgClass, TranslatePipe],
   templateUrl: './exhibitions.component.html',
   styleUrl: './exhibitions.component.css',
 })

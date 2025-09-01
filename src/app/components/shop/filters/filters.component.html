@@ -6,7 +6,7 @@
         (click)="togglePaintingTypeDropdown()"
         class="flex cursor-pointer items-center gap-2 border-b border-gray-400 pb-1 text-gray-900 transition hover:border-gray-600"
       >
-        <span class="text-sm font-medium"> Painting Type </span>
+        <span class="text-sm font-medium"> {{ 'nav.shop.paintingType' | translate }}</span>
         <span class="transition" [ngClass]="{ '-rotate-180': paintingTypeDropdownOpen }">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -35,7 +35,7 @@
                 class="size-5 rounded border-gray-300"
                 value="OIL"
               />
-              <span class="text-sm font-medium text-gray-700">Oil</span>
+              <span class="text-sm font-medium text-gray-700">{{ 'nav.shop.menu.oils' | translate }}</span>
             </label>
           </li>
           <li>
@@ -48,7 +48,7 @@
                 class="size-5 rounded border-gray-300"
                 value="MONOTYPE"
               />
-              <span class="text-sm font-medium text-gray-700">Monotype</span>
+              <span class="text-sm font-medium text-gray-700">{{ 'nav.shop.menu.monotypes' | translate }}</span>
             </label>
           </li>
           <li>
@@ -61,7 +61,7 @@
                 class="size-5 rounded border-gray-300"
                 value="PRINT"
               />
-              <span class="text-sm font-medium text-gray-700">Print</span>
+              <span class="text-sm font-medium text-gray-700">{{ 'nav.shop.menu.prints' | translate }}</span>
             </label>
           </li>
         </ul>
@@ -74,7 +74,7 @@
         (click)="togglePriceDropdown()"
         class="flex cursor-pointer items-center gap-2 border-b border-gray-400 pb-1 text-gray-900 transition hover:border-gray-600"
       >
-        <span class="text-sm font-medium"> Price </span>
+        <span class="text-sm font-medium"> {{ 'nav.shop.price' | translate }} </span>
         <span
           class="transition group-hover:-rotate-180"
           [ngClass]="{ '-rotate-180': priceDropdownOpen }"

@@ -1,0 +1,252 @@
+﻿{
+  "nav": {
+    "shop": {
+      "_": "Sklep",
+      "paintingType": "Typ obrazu",
+      "price": "Cena",
+      "menu": {
+        "all": "Wszystko",
+        "oils": "Oleje",
+        "monotypes": "Monotypy",
+        "prints": "Druki"
+      }
+    },
+    "gallery": "Galeria",
+    "about": {
+      "_": "O mnie",
+      "menu": {
+        "bio": "Biografia",
+        "exhibitions": "Wystawy",
+        "contact": "Kontakt"
+      }
+    },
+    "cart": "Koszyk"
+  },
+  "bio": {
+    "p1": "Urodzona w Polsce w 1969, gdzie obecnie pracuje. W latach 1989 -1995 studiowała w Wyższym Moskiewskim Instytucie Sztuki Monumentalno-Dekoracyjnej i Stosowanej. Uzyskała tam dyplom z wyróżnieniem rektorskim w specjalności konserwacja malarstwa monumentalnego i otrzymała kwalifikację artysty konserwatora oraz tytuł naukowy magistra historii sztuki. ",
+    "p2": "W latach 1996-1998 studia doktoranckie w Państwowym Rosyjskim Uniwersytecie humanistycznym w Moskwie na Wydziale Muzeologii. Zajmuje się malarstwem, rysunkiem, grafiką i ilustracją. W swojej twórczości nie wyznacza jednakowych granic i nie stosuje typowych technologii. Wypracowała własną technikę, łącząc monotypowe odbitki z malarstwem. ",
+    "p3": "Człowiecze i prywatne wizje przedmiotów i świata to najchętniej wybierane przez nią tematy prac. Kamila Białkowska-Ismaił od 1999 roku jest członkiem sekcji grafiki Związku Polskich Artystów Plastyków. "
+  },
+  "cart": {
+    "_": "Koszyk",
+    "orderSummary": "Podsumowanie zamówienia",
+    "quantity": "Ilość",
+    "shipping": "Dostawa",
+    "orderTotal": "Razem",
+    "doYouHaveDiscountCode": "Czy posiadasz kod zniżkowy?",
+    "addDiscountCode": "Dodaj kod zniżkowy",
+    "applyCode": "Zastosuj kod zniżkowy",
+    "proceed": "Do kasy"
+  },
+  "checkout": {
+    "title": "Do kasy",
+    "contactInfo": {
+      "title": "Dane kontaktowe",
+      "email": {
+        "label": "Adres e-mail",
+        "error": "Podaj poprawny adres e-mail."
+      }
+    },
+    "shippingInfo": {
+      "title": "Dane do wysyłki",
+      "firstName": {
+        "label": "Imię",
+        "error": "Imię jest wymagane."
+      },
+      "lastName": {
+        "label": "Nazwisko",
+        "error": "Nazwisko jest wymagane."
+      },
+      "address": {
+        "label": "Adres",
+        "error": "Adres jest wymagany."
+      },
+      "apartmentNumber": {
+        "label": "Numer mieszkania"
+      },
+      "city": {
+        "label": "Miasto",
+        "error": "Miasto jest wymagane."
+      },
+      "country": {
+        "label": "Kraj",
+        "error": "Kraj jest wymagany."
+      },
+      "state": {
+        "label": "Województwo / region",
+        "error": "Województwo/region jest wymagane."
+      },
+      "postalCode": {
+        "label": "Kod pocztowy",
+        "error": "Kod pocztowy jest wymagany."
+      },
+      "phone": {
+        "label": "Telefon",
+        "error": "Numer telefonu jest wymagany."
+      },
+      "fillTestData": "Wypełnij danymi testowymi"
+    },
+    "summary": {
+      "title": "Podsumowanie zamówienia",
+      "itemsSrOnly": "Pozycje w koszyku",
+      "quantity": "Ilość",
+      "subtotal": "Suma częściowa",
+      "shipping": "Dostawa",
+      "taxes": "Podatki",
+      "total": "Razem",
+      "payment": "Płatność"
+    }
+  },
+  "payment": {
+    "title": "Płatność",
+    "contact": {
+      "title": "Dane kontaktowe",
+      "email": "Adres e-mail",
+      "firstName": "Imię",
+      "lastName": "Nazwisko"
+    },
+    "shipping": {
+      "title": "Adres dostawy",
+      "country": "Kraj",
+      "state": "Województwo / region",
+      "address": "Adres",
+      "apartmentNumber": "Numer mieszkania",
+      "city": "Miasto",
+      "postalCode": "Kod pocztowy"
+    },
+    "actions": {
+      "backToCheckout": "Powrót do kasy",
+      "payWithPayU": "Zapłać przez PayU"
+    },
+    "summary": {
+      "title": "Podsumowanie zamówienia",
+      "quantity": "Ilość",
+      "subtotal": "Suma częściowa",
+      "shipping": "Dostawa",
+      "pending": "Wycena w toku",
+      "tax": "Podatek",
+      "total": "Razem",
+      "currencyPrefix": "EUR"
+    }
+  },
+  "stepper": {
+    "cart": "Koszyk",
+    "checkout": "Kasa",
+    "payment": "Płatność",
+    "srOnlySteps": "Kroki"
+  },
+  "exhibitions": {
+    "title": "Wystawy",
+    "intro": "Kamila Białkowska-Ismail uczestniczyła w wielu wystawach zbiorowych i indywidualnych.",
+    "list": {
+      "l1": "W latach 1996–1998 coroczne ogólnorosyjskie wystawy artystów – Art Maneż, Moskwa.",
+      "l2": "W 1996 roku prezentowała indywidualną wystawę malarstwa i grafiki w Centrum Kultury Polskiej, Moskwa.",
+      "l3": "W 2001 uczestniczyła w zbiorowej wystawie „Polska sztuka współczesna” w Clermont-Ferrand, Francja.",
+      "l4": "W 2002 prezentowała indywidualną wystawę w Rotterdamie, Holandia.",
+      "l5": "2005 wystawa indywidualna „Sztuka nie jest obowiązkowa”, Warszawa.",
+      "l6": "2006 wystawa indywidualna – Stara Prochownia, Warszawa.",
+      "l7": "2007 wystawa indywidualna – „Klechdy Polskie”, malarstwa inspirowane twórczością Bolesława Leśmiana, Warszawa.",
+      "l8": "2008 wystawa indywidualna „Między Aniołami, legendy bosem podszyte”, Casinos Poland, Warszawa Marriott.",
+      "l9": "2012 „Świat Idealny” Skwer – Fabryka Trzciny, ul. Krakowskie Przedmieście 60a, Warszawa."
+    },
+    "outro": "Jej prace znajdują się w wielu prywatnych zbiorach Polski, Rosji, Japonii, Anglii, Francji, Niemczech, Holandii i USA.",
+    "images": {
+      "thumbAlt": "Zdjęcie z wystawy {{index}}",
+      "lightboxAlt": "Podgląd zdjęcia z wystawy"
+    },
+    "lightbox": {
+      "prev": "Poprzednie",
+      "next": "Następne",
+      "close": "Zamknij"
+    }
+  },
+  "notFound": {
+    "code": "404",
+    "title": "Strona nie została znaleziona",
+    "message": "Przykro nam, nie udało się znaleźć szukanej strony.",
+    "backHome": "Wróć na stronę główną"
+  },
+  "terms": {
+    "toc": {
+      "title": "Spis treści",
+      "items": {
+        "intro": "1. Informacje wstępne",
+        "payments": "2. Zawarcie umowy i płatności",
+        "delivery": "3. Dostawa",
+        "claims": "4. Reklamacje, zwroty i wymiany",
+        "final": "5. Postanowienia końcowe"
+      }
+    },
+
+    "title": "REGULAMIN SKLEPU INTERNETOWEGO KAMILI BIAŁKOWSKIEJ-ISMAIŁ",
+
+    "s1": {
+      "heading": "1. INFORMACJE WSTĘPNE",
+      "p1_html": "Sklep internetowy dostępny pod adresem <a href=\"https://bialkowskaismail.com\" class=\"text-blue-600 underline\">https://bialkowskaismail.com</a> (zwany dalej „Sklepem”) prowadzony jest przez:<br>K-BIS STUDIO<br>ul. Matejki 7/14, 05-400 Otwock<br>NIP: 5321748319<br>e-mail: <a href=\"mailto:dsk.bis&#64;wp.pl\" class=\"text-blue-600 underline\">dsk.bis&#64;wp.pl</a><br>Konto bankowe: &lt;&lt;kontoKtoreDostaniemyOdPayUAlboTegoNieBedzie&gt;&gt;",
+      "p2": "Kupującym może być pełnoletnia osoba fizyczna, osoba prawna lub jednostka organizacyjna nieposiadająca osobowości prawnej (dalej „Klient”).",
+      "p3": "Korzystanie ze Sklepu oznacza akceptację niniejszego Regulaminu.",
+      "p4": "Ochrona praw autorskich: Wszystkie obrazy dostępne w Sklepie są oryginalnymi dziełami autorstwa Kamili Białkowskiej-Ismaił i objęte są prawami autorskimi. Kopiowanie, reprodukcja lub rozpowszechnianie wizerunków dzieł bez zgody Sklepu jest zabronione.",
+      "p5": "Ceny podane w Sklepie wyrażone są w EUR i zawierają podatek VAT (jeśli dotyczy)."
+    },
+
+    "s2": {
+      "heading": "2. ZAWARCIE UMOWY I PŁATNOŚCI",
+      "p1": "Umowa sprzedaży zawierana jest w momencie dokonania płatności przez Klienta i otrzymania potwierdzenia na podany adres e-mail.",
+      "p2": "Metody płatności:",
+      "li1": "Płatności online przez PayU (karty płatnicze, BLIK, przelewy bankowe).",
+      "p3": "Realizacja zamówienia:",
+      "li2": "Obrazy wysyłane są w ciągu 7 dni roboczych od zaksięgowania płatności."
+    },
+
+    "s3": {
+      "heading": "3. DOSTAWA",
+      "p1": "Metody dostawy:",
+      "li1": "O wybranej metodzie dostawy Klient zostanie poinformowany drogą mailową lub telefoniczną.",
+      "li2_html": "Odbiór osobisty (po wcześniejszym umówieniu – adres pracowni: ul. Matejki 7/14, 05-400 Otwock).",
+      "p2": "Koszt dostawy:",
+      "li3": "Na terytorium Polski koszt dostawy jest wliczony w cenę obrazu.",
+      "li4": "Poza Polską koszt dostawy wyznaczany jest indywidualnie przy kontakcie mailowym.",
+      "p3": "Uwaga dotycząca obrazów:",
+      "li5": "Każdy obraz jest pakowany z należytą starannością (zabezpieczenie przed uszkodzeniami mechanicznymi i wilgocią).",
+      "li6": "W przypadku dostawy międzynarodowej Klient może zostać obciążony dodatkowymi opłatami celnymi."
+    },
+
+    "s4": {
+      "heading": "4. REKLAMACJE, ZWROTY I WYMIANY",
+      "p1": "Reklamacje:",
+      "li1": "Klient ma prawo zgłosić reklamację w przypadku uszkodzenia obrazu podczas transportu lub niezgodności z opisem.",
+      "li2_html": "Reklamację należy zgłosić w ciągu 2 dni od otrzymania przesyłki, przesyłając zdjęcia uszkodzeń na adres: <a href=\"mailto:dsk.bis&#64;wp.pl\" class=\"text-blue-600 underline\">dsk.bis&#64;wp.pl</a>.",
+      "li3": "W przypadku uznania reklamacji zakupiony obraz powinien być zwrócony na koszt Klienta do Sklepu. Sprzedający po otrzymaniu zwrotu zwraca środki w ciągu 14 dni.",
+      "p2": "Prawo do odstąpienia od umowy:",
+      "li4": "Klient może odstąpić od umowy w ciągu 14 dni od otrzymania przesyłki, bez podania przyczyny.",
+      "li5": "Warunki zwrotu:",
+      "li5a": "Obraz musi być nienaruszony, w oryginalnym opakowaniu,",
+      "li5b": "Klient pokrywa koszt zwrotu,",
+      "li5c": "Prosimy o kontakt mailowy przed odesłaniem przesyłki.",
+      "p3": "Wymiana:",
+      "li6": "Wymiana na inny obraz możliwa jest po uzgodnieniu mailowym lub telefonicznym. Koszt przesyłki zwrotnej ponosi Klient."
+    },
+
+    "s5": {
+      "heading": "5. POSTANOWIENIA KOŃCOWE",
+      "li1_html": "<strong>Ochrona danych osobowych:</strong> Dane Klientów przetwarzane są zgodnie z RODO i Polityką Prywatności dostępną w Sklepie.",
+      "li2_html": "<strong>Zmiany w Regulaminie:</strong> Regulamin może ulec zmianie. Aktualna wersja Regulaminu wraz z datą dostępna jest na stronie Sklepu.",
+      "li3_html": "<strong>Rozstrzyganie sporów:</strong> Spory rozstrzygane są przez sąd właściwy dla siedziby Sprzedającego.",
+      "contact_html": "<strong>Kontakt:</strong><br><a href=\"https://bialkowskaismail.com\" class=\"text-blue-600 underline\">https://bialkowskaismail.com</a><br>Tel. +48 600 855 431<br>E-mail: <a href=\"mailto:dsk.bis&#64;wp.pl\" class=\"text-blue-600 underline\">dsk.bis&#64;wp.pl</a>",
+      "effectiveDate": "Data wejścia w życie: {{date}}"
+    }
+  },
+  "footer": {
+    "rights": "Wszelkie prawa zastrzeżone",
+    "privacy": "Polityka prywatności",
+    "terms": "Regulamin",
+    "returns": "Zwroty",
+    "payments": "Płatności"
+  },
+  "lang": {
+    "switchTo": {
+      "pl": "Przełącz na polski",
+      "en": "Przełącz na angielski"
+    }
+  }
+}
