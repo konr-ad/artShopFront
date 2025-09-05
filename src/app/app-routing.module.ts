@@ -23,6 +23,7 @@ import { DiscountCodesComponent } from './components/admin-panel/discount-codes/
 import {TermsComponent} from "./components/terms/terms.component";
 
 const routes: Routes = [
+  { path: '', component: HomeComponent, pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
   { path: 'cart', component: CartComponent },
   { path: 'payment', component: PaymentComponent },
