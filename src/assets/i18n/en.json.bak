@@ -1,9 +1,0 @@
-{
-  "nav": {
-    "shop": "Shop",
-    "cart": "Cart",
-    "openMenu": "Open menu",
-    "closeMenu": "Close menu",
-    "shopLinkAria": "Go to shop"
-  }
-}

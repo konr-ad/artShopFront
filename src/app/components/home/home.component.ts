@@ -9,55 +9,54 @@ import { NgForm } from '@angular/forms';
 })
 export class HomeComponent implements OnInit {
   paintings: Painting[] = [];
-  newPainting: Partial<Painting> = {
-    type: '',
-    state: '',
-    name: '',
-    price: 0,
-    image: undefined,
-  };
-  selectedFile: File | undefined;
+
+  pageIndex = 0;
+  pageSize = 10;
+  totalPages = 0;
+  loading = false;
+  error?: string;
 
   constructor(private paintingService: PaintingService) {}
 
   ngOnInit(): void {
-    this.paintingService.getPaintings().subscribe((data: Painting[]) => {
-      this.paintings = data.map((painting) => ({
-        ...painting,
-        imageUrl: 'data:image/jpeg;base64,' + painting.image,
-      }));
+    this.loadPage(0);
+  }
+
+  loadPage(page: number) {
+    this.loading = true;
+    this.error = undefined;
+
+    this.paintingService.getPaintingsPage({
+      page,
+      size: this.pageSize,
+      sort: 'createdAt,desc'
+      // tutaj możesz dorzucić q/type/minPrice/maxPrice jeśli chcesz filtrów na home
+    }).subscribe({
+      next: (res) => {
+        // ADAPTER: mapujemy PaintingListItem -> Twój stary Painting (tylko pod to, co używasz w widoku)
+        this.paintings = res.content.map(item => ({
+          id: item.id,
+          type: item.type,
+          state: item.state ?? '',
+          name: item.name,
+          description: '',   // brak w liście – zostawiamy pusty
+          price: item.price,
+          image: '',         // nie używane już
+          imageUrl: item.thumbnailUrl ?? 'assets/placeholder.png'
+        }));
+        this.pageIndex = res.number;
+        this.pageSize = res.size;
+        this.totalPages = res.totalPages;
+        this.loading = false;
+      },
+      error: () => {
+        this.error = 'Nie udało się pobrać obrazów.';
+        this.loading = false;
+      }
     });
   }
 
-  onFileChange(event: any): void {
-    if (event.target.files.length > 0) {
-      this.selectedFile = event.target.files[0];
-    }
-  }
+  nextPage() { if (this.pageIndex + 1 < this.totalPages) this.loadPage(this.pageIndex + 1); }
+  prevPage() { if (this.pageIndex > 0) this.loadPage(this.pageIndex - 1); }
 
-  onSubmit(form: NgForm): void {
-    const formData = new FormData();
-    formData.append('type', this.newPainting.type || '');
-    formData.append('state', this.newPainting.state || '');
-    formData.append('name', this.newPainting.name || '');
-    formData.append('price', this.newPainting.price?.toString() || '0');
-    if (this.selectedFile) {
-      formData.append('image', this.selectedFile);
-    }
-
-    this.paintingService.createPainting(formData).subscribe(
-      (response) => {
-        console.log('Painting created successfully', response);
-        this.paintings.push({
-          ...response,
-          imageUrl: 'data:image/jpeg;base64,' + response.image,
-        }); // Add the new painting to the list with image URL
-        form.reset(); // Reset the form
-        this.selectedFile = undefined; // Reset the file input
-      },
-      (error) => {
-        console.error('Failed to create painting', error);
-      }
-    );
-  }
 }

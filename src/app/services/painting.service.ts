@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { ConfigService } from './config/ConfigService';
 
@@ -12,6 +12,25 @@ export interface Painting {
   price: number;
   image: string;
   imageUrl?: string;
+}
+
+export interface Page<T> {
+  content: T[];
+  number: number;
+  size: number;
+  totalPages: number;
+  totalElements: number;
+  first: boolean;
+  last: boolean;
+}
+
+export interface PaintingListItem {
+  id: number;
+  name: string;
+  type: string;
+  state: string | null;
+  price: number;
+  thumbnailUrl: string | null;
 }
 
 @Injectable({
@@ -37,5 +56,19 @@ export class PaintingService {
 
   createPainting(painting: FormData): Observable<Painting> {
     return this.http.post<Painting>(this.backendUrl, painting);
+  }
+
+  getPaintingsPage(opts: { page?: number; size?: number; sort?: string; q?: string; type?: string; minPrice?: number; maxPrice?: number } = {}) {
+    let params = new HttpParams()
+      .set('page', String(opts.page ?? 0))
+      .set('size', String(opts.size ?? 10))
+      .set('sort', opts.sort ?? 'createdAt,desc');
+
+    if (opts.q) params = params.set('q', opts.q);
+    if (opts.type) params = params.set('type', opts.type);
+    if (opts.minPrice != null) params = params.set('minPrice', String(opts.minPrice));
+    if (opts.maxPrice != null) params = params.set('maxPrice', String(opts.maxPrice));
+
+    return this.http.get<Page<PaintingListItem>>(this.backendUrl, { params });
   }
 }
