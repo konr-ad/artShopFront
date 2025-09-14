@@ -21,6 +21,7 @@ import { ProductsComponent } from './components/admin-panel/products/products.co
 import { NotfoundComponent } from './components/notfound/notfound.component';
 import { DiscountCodesComponent } from './components/admin-panel/discount-codes/discount-codes.component';
 import {TermsComponent} from "./components/terms/terms.component";
+import { AuthGuard} from "./services/AuthGuard";
 
 const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
@@ -38,12 +39,20 @@ const routes: Routes = [
   { path: 'contact', component: ContactComponent },
   { path: 'gallery', component: GalleryComponent },
   { path: 'thankyou', component: ThankyouComponent },
-  { path: 'login', component: LoginComponent },
+  { path: 'login', loadComponent: () => import('./components/admin-panel/login/login.component').then(m => m.LoginComponent) },
   { path: 'terms', component: TermsComponent },
-  { path: 'admin/dashboard', component: DashboardComponent },
-  { path: 'admin/orders', component: OrdersComponent },
-  { path: 'admin/products', component: ProductsComponent },
-  { path: 'admin/discountcodes', component: DiscountCodesComponent },
+  {
+    path: 'admin',
+    canActivate: [AuthGuard],
+    canActivateChild: [AuthGuard],
+    children: [
+      { path: 'dashboard', loadComponent: () => import('./components/admin-panel/dashboard.component').then(m => m.DashboardComponent) },
+      { path: 'orders',    loadComponent: () => import('./components/admin-panel/orders/orders.component').then(m => m.OrdersComponent) },
+      { path: 'products',  loadComponent: () => import('.//components/admin-panel/products/products.component').then(m => m.ProductsComponent) },
+      { path: 'discountcodes', loadComponent: () => import('./components/admin-panel/discount-codes/discount-codes.component').then(m => m.DiscountCodesComponent) },
+      { path: '', pathMatch: 'full', redirectTo: 'dashboard' }
+    ]
+  },
   // { path: 'admin/products', component:  },
   { path: '**', component: NotfoundComponent },
 ];

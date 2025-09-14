@@ -1,31 +1,23 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { firstValueFrom } from 'rxjs';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable({ providedIn: 'root' })
 export class ConfigService {
-  private config: any = null;
+  private config?: Record<string, any>;
 
   constructor(private http: HttpClient) {}
 
-  // Load config.json from assets directory
-  loadConfig(): Observable<any> {
-    return this.http.get('/assets/config/config.json').pipe(
-      map((config) => {
-        this.config = config;
-        return config;
-      })
-    );
+  load(): Promise<void> {
+    const url = 'assets/config/config.json';
+    return firstValueFrom(this.http.get<Record<string, any>>(url, { headers: { 'Cache-Control': 'no-store' } }))
+      .then(cfg => { this.config = cfg; });
   }
 
-  // Get a specific key from config.json
-  getConfig(key: string): any {
-    if (!this.config) {
-      throw new Error('Config file not loaded!');
-    }
-    return this.config[key];
+  getConfig<T = any>(key: string): T {
+    if (!this.config) throw new Error('Config file not loaded!');
+    const val = this.config[key];
+    if (val === undefined) throw new Error(`Missing config key: ${key}`);
+    return val as T;
   }
 }

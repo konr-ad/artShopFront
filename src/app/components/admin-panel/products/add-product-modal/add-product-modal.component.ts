@@ -1,77 +1,122 @@
-import { Component, Output, EventEmitter } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
-import { PaintingService, Painting } from 'src/app/services/painting.service';
-import { AbstractModalComponent } from '../../../abstract/AbstractModal';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  PaintingService,
+  CreatePaintingRequest,
+  PaintingDetailsDto,
+  PaintingType
+} from 'src/app/services/painting.service';
+import { of, switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-add-product-modal',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
-  templateUrl: './add-product-modal.component.html',
-  styleUrls: ['./add-product-modal.component.css'],
+  templateUrl: './add-product-modal.component.html'
 })
-export class AddProductModalComponent extends AbstractModalComponent {
+export class AddProductModalComponent {
+  @Input() isOpen = false;
+  @Output() closed = new EventEmitter<void>();
+  @Output() productAdded = new EventEmitter<PaintingDetailsDto>();
+
   productForm: FormGroup;
-  selectedFile: File | null = null;
+  primaryFile: File | null = null;
   additionalFiles: File[] = [];
 
-  @Output() productAdded = new EventEmitter<Painting>();
+  // Upewnij się, że wartości są spójne z backendowym EPaintingType
+  types: PaintingType[] = ['MONOTYPE','PRINT','OIL','ACRYLIC','WATERCOLOR','DIGITAL'];
 
-  constructor(
-    private fb: FormBuilder,
-    private paintingService: PaintingService
-  ) {
-    super();
+  busy = false;
+  errorMsg: string | null = null;
+  previewUrl: string | null = null;
+
+  constructor(private fb: FormBuilder, private paintingService: PaintingService) {
     this.productForm = this.fb.group({
       name: ['', Validators.required],
-      description: ['', Validators.required],
-      type: ['', [Validators.required, Validators.pattern(/^(?!\s*$).+/)]],
-      price: [0, [Validators.required, Validators.min(0)]],
-      image: [null, Validators.required],
+      description: [''],
+      type: ['', Validators.required],
+      price: [0, [Validators.required, Validators.min(0.01)]],
     });
   }
 
+  close() {
+    if (this.busy) return;
+    this.resetForm();
+    this.isOpen = false;
+    this.closed.emit();
+  }
+
+  onPrimaryImageChange(evt: Event) {
+    const input = evt.target as HTMLInputElement;
+    const file = input.files?.[0] ?? null;
+    this.primaryFile = file;
+
+    // podgląd
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = () => this.previewUrl = reader.result as string;
+      reader.readAsDataURL(file);
+    } else {
+      this.previewUrl = null;
+    }
+  }
+
+  onAdditionalImagesChange(evt: Event) {
+    const input = evt.target as HTMLInputElement;
+    this.additionalFiles = input.files ? Array.from(input.files) : [];
+  }
+
   onSubmit() {
-    if (this.productForm.valid) {
-      const formData = new FormData();
-      formData.append('name', this.productForm.get('name')?.value || '');
-      formData.append('description', this.productForm.get('description')?.value || '');
-      formData.append('type', this.productForm.get('type')?.value || '');
-      formData.append('price', this.productForm.get('price')?.value.toString() || '0');
+    this.errorMsg = null;
+    if (this.productForm.invalid) {
+      this.errorMsg = 'Uzupełnij wymagane pola.';
+      return;
+    }
+    if (!this.primaryFile) {
+      this.errorMsg = 'Dodaj zdjęcie główne.';
+      return;
+    }
 
-      if (this.selectedFile) {
-        formData.append('image', this.selectedFile);
+    const dto: CreatePaintingRequest = {
+      name: this.productForm.value.name,
+      description: this.productForm.value.description || undefined,
+      type: this.productForm.value.type,
+      price: Number(this.productForm.value.price),
+      // state pomijamy — backend ma domyślne/optional
+    };
+
+    this.busy = true;
+
+    // 1) create
+    this.paintingService.adminCreate(dto).pipe(
+      // 2) upload media (primary jako pierwszy, potem dodatkowe)
+      switchMap(created => {
+        const files: File[] = [this.primaryFile!, ...this.additionalFiles];
+        const primaryIndex = 0; // pierwszy jest główny
+        if (files.length === 0) return of(created);
+        return this.paintingService.adminUploadMedia(created.id, files, primaryIndex)
+          .pipe(switchMap(() => this.paintingService.details(created.id)));
+      })
+    ).subscribe({
+      next: (details) => {
+        this.productAdded.emit(details);
+        this.busy = false;
+        this.close();
+      },
+      error: (err) => {
+        this.busy = false;
+        this.errorMsg = 'Nie udało się dodać produktu. Sprawdź logi i połączenie.';
+        console.error(err);
       }
-
-      this.additionalFiles.forEach((file, index) => {
-        formData.append(`additionalImages`, file); // Append each additional image
-      });
-
-      this.paintingService.createPainting(formData).subscribe(
-        (newPainting) => {
-          this.productAdded.emit(newPainting);
-          this.close();
-        },
-        (error) => {
-          console.error('Failed to create product', error);
-        }
-      );
-    }
+    });
   }
 
-  onImageChange(event: Event) {
-    const input = event.target as HTMLInputElement;
-    if (input.files?.length) {
-      this.selectedFile = input.files[0];
-      this.productForm.patchValue({ image: this.selectedFile });
-    }
-  }
-
-  onAdditionalImagesChange(event: Event) {
-    const input = event.target as HTMLInputElement;
-    if (input.files?.length) {
-      this.additionalFiles = Array.from(input.files);
-    }
+  private resetForm() {
+    this.productForm.reset({ name: '', description: '', type: '', price: 0 });
+    this.primaryFile = null;
+    this.additionalFiles = [];
+    this.previewUrl = null;
+    this.errorMsg = null;
   }
 }

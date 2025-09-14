@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { APP_INITIALIZER, NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -26,9 +26,10 @@ import { ConfigService } from './services/config/ConfigService';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { HttpClient } from '@angular/common/http';
 import {AppTranslateLoader} from "./i18n/AppTranslateLoader";
+import {AuthInterceptor} from "./interceptors/AuthInterceptor";
 
-export function loadConfig(configService: ConfigService) {
-  return () => configService.loadConfig().toPromise();
+export function initConfig(cfg: ConfigService) {
+  return () => cfg.load();
 }
 @NgModule({
   declarations: [
@@ -66,12 +67,8 @@ export function loadConfig(configService: ConfigService) {
     }),
   ],
   providers: [
-    {
-      provide: APP_INITIALIZER,
-      useFactory: loadConfig,
-      deps: [ConfigService],
-      multi: true,
-    },
-  ],
+    { provide: APP_INITIALIZER, useFactory: initConfig, deps: [ConfigService], multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+  ]
 })
 export class AppModule {}

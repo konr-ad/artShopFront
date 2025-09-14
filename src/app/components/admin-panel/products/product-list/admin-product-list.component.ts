@@ -1,11 +1,12 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Painting, PaintingService } from 'src/app/services/painting.service';
+import {Painting, PaintingDetailsDto, PaintingService} from 'src/app/services/painting.service';
+import {AddProductModalComponent} from "../add-product-modal/add-product-modal.component";
 
 @Component({
   selector: 'app-admin-product-list',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, AddProductModalComponent],
   templateUrl: './admin-product-list.component.html',
   styleUrls: ['./admin-product-list.component.css'],
 })
@@ -14,6 +15,7 @@ export class AdminProductListComponent implements OnInit {
   selectedProductId: any;
   @Output() productSelected = new EventEmitter<any>();
   @Output() addProduct = new EventEmitter<void>();
+  isAddOpen: boolean = false;
 
   constructor(private paintingService: PaintingService) {}
 
@@ -40,6 +42,11 @@ export class AdminProductListComponent implements OnInit {
   }
 
   refreshProducts(): void {
+    this.loadProducts();
+  }
+
+  onProductAdded(p: PaintingDetailsDto) {
+    // odśwież listę / dopnij do tabeli
     this.loadProducts();
   }
 }

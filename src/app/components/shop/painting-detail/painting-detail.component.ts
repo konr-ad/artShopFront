@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Painting, PaintingService } from 'src/app/services/painting.service';
+import {Painting, PaintingDetailsDto, PaintingService} from 'src/app/services/painting.service';
 import { CartService } from 'src/app/services/cart.service'; // Import CartService
 
 @Component({
@@ -23,18 +23,18 @@ export class PaintingDetailComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
       const paintingId = +params['id'];
-      this.loadPainting(paintingId);
+      // this.loadPainting(paintingId);
     });
   }
 
-  loadPainting(id: number): void {
-    this.paintingService.getPaintingById(id).subscribe((painting: Painting) => {
-      this.painting = {
-        ...painting,
-        imageUrl: 'data:image/jpeg;base64,' + painting.image,
-      };
-    });
-  }
+  // loadPainting(id: number): void {
+  //   this.paintingService.getPaintingById(id).subscribe((painting: PaintingDetailsDto) => {
+  //     this.painting = {
+  //       ...painting,
+  //       imageUrl: 'data:image/jpeg;base64,' + painting.image,
+  //     };
+  //   });
+  // }
 
   addToCart(): void {
     if (this.painting) {

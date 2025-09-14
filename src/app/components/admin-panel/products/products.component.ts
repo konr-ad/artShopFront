@@ -27,9 +27,9 @@ export class ProductsComponent {
     console.log('Selected product:', product); // Debug log
   }
 
-  openAddProductModal() {
-    this.addProductModal.open();
-  }
+  // openAddProductModal() {
+  //   this.addProductModal.open();
+  // }
 
   handleProductAdded(newProduct: any) {
     console.log('Product added:', newProduct);
