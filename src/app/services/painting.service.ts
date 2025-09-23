@@ -125,4 +125,28 @@ export class PaintingService {
         }))
       ));
   }
+
+  // GET /api/paintings/{id}
+  details(id: number): Observable<PaintingDetailsDto> {
+    return this.http.get<PaintingDetailsDto>(`${this.publicUrl}/${id}`);
+  }
+
+  fullUrl(path?: string | null): string | null {
+    if (!path) return null;
+
+    // jeśli już absolutny (http/https, data:, blob:) – zostaw jak jest
+    if (/^(?:https?:|data:|blob:)/i.test(path)) return path;
+
+    try {
+      // baza bez końcowych slaszy + dokładamy jeden
+      const base = this.apiBase.replace(/\/+$/, '') + '/';
+      // ścieżka bez wiodących slaszy (żeby nie zrobić podwójnego //)
+      const rel  = path.replace(/^\/+/, '');
+      return new URL(rel, base).toString();
+    } catch {
+      // awaryjnie „na sztywno”
+      return `${this.apiBase.replace(/\/+$/, '')}/${path.replace(/^\/+/, '')}`;
+    }
+  }
+
 }
