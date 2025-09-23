@@ -3,7 +3,13 @@
     <h2 class="mt-10 text-center text-2xl font-bold">Logowanie do Panelu Administratora</h2>
   </div>
 
-  <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+  <div class="mt-4 sm:mx-auto sm:w-full sm:max-w-sm" *ngIf="banner">
+    <div class="rounded bg-yellow-50 border border-yellow-300 text-yellow-900 p-3 text-sm">
+      {{ banner }}
+    </div>
+  </div>
+
+  <div class="mt-6 sm:mx-auto sm:w-full sm:max-w-sm">
     <form class="space-y-6" [formGroup]="form" (ngSubmit)="submit()">
       <div>
         <label for="username" class="block text-sm font-medium">Email / login</label>

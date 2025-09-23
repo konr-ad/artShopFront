@@ -43,11 +43,11 @@ export class CartService {
   }
 
   private saveCartItems(items: CartItem[]) {
-    localStorage.setItem('cartItems', JSON.stringify(items));
+    sessionStorage.setItem('cartItems', JSON.stringify(items));
   }
 
   private loadCartItems(): CartItem[] {
-    const savedItems = localStorage.getItem('cartItems');
+    const savedItems = sessionStorage.getItem('cartItems');
     return savedItems ? JSON.parse(savedItems) : [];
   }
 
