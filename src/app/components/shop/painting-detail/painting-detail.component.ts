@@ -1,10 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import {
-  Painting,                 // legacy typ dla koszyka
-  PaintingDetailsDto,
-  PaintingService
-} from 'src/app/services/painting.service';
+import { PaintingDetailsDto, PaintingService } from 'src/app/services/painting.service';
 import { CartService } from 'src/app/services/cart.service';
 
 @Component({
@@ -13,14 +9,14 @@ import { CartService } from 'src/app/services/cart.service';
   styleUrls: ['./painting-detail.component.css'],
 })
 export class PaintingDetailComponent implements OnInit {
-  // do koszyka używamy legacy kształtu
-  painting?: Painting;
+  painting?: PaintingDetailsDto;
 
-  // galeria
-  mediaUrls: string[] = [];
+  // UI-only state
+  heroUrl: string | null = null;
+  thumbUrls: string[] = [];
   selectedIndex = 0;
+  selectedImgUrl?: string;
 
-  // UI
   buttonText = 'Add to Cart';
   isButtonDisabled = false;
   isExpanded = false;
@@ -32,51 +28,52 @@ export class PaintingDetailComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.route.params.subscribe(p => {
-      const id = +p['id'];
-      if (!Number.isFinite(id)) return;
+    this.route.params.subscribe(({ id }) => this.loadPainting(+id));
+  }
 
-      this.paintingService.details(id).subscribe((dto: PaintingDetailsDto) => {
-        // zbuduj listę URL-i do galerii
-        const urls = (dto.media ?? []).map(m => this.paintingService.fullUrl(m.url)).filter(Boolean) as string[];
-        this.mediaUrls = urls;
+  private loadPainting(id: number) {
+    this.paintingService.details(id).subscribe(dto => {
+      this.painting = dto;
 
-        // wybierz primary -> jeśli brak, to 0
-        const primaryIdx = (dto.media ?? []).findIndex(m => m.isPrimary);
-        this.selectedIndex = primaryIdx >= 0 ? primaryIdx : 0;
+      const sorted = (dto.media ?? [])
+        .sort((a, b) => (Number(b.isPrimary) - Number(a.isPrimary)) || (a.sortOrder - b.sortOrder));
 
-        // legacy „Painting” na potrzeby koszyka
-        this.painting = {
-          id: dto.id,
-          name: dto.name,
-          type: dto.type,
-          state: dto.state ?? null,
-          price: Number(dto.price),
-          description: dto.description ?? null,
-          image: '', // dawniej base64 – już nie używamy
-          imageUrl: this.mediaUrls[this.selectedIndex] ?? undefined,
-        };
-      });
+      this.thumbUrls = sorted
+        .map(m => this.paintingService.fullUrl(m.url)!)
+        .filter(Boolean);
+
+      this.selectedIndex = 0;
+      this.heroUrl = this.thumbUrls[0] ?? null;
+      this.selectedImgUrl = this.heroUrl ?? undefined;
     });
   }
 
-  select(i: number) {
+  selectThumb(i: number) {
     this.selectedIndex = i;
-    if (this.painting) {
-      this.painting.imageUrl = this.mediaUrls[i]; // aktualizuj miniaturę używaną w koszyku
-    }
+    this.selectedImgUrl = this.thumbUrls[i];
   }
 
   addToCart(): void {
     if (!this.painting) return;
-    this.cartService.addItem(this.painting);
+
+    // Dopasuj do modelu koszyka – tu przykład minimalny
+    this.cartService.addItem({
+      id: this.painting.id,
+      name: this.painting.name,
+      price: Number(this.painting.price),
+      imageUrl: this.selectedImgUrl || this.heroUrl || undefined,
+      quantity: 1,
+    } as any);
+
     this.buttonText = 'Added!';
     this.isButtonDisabled = true;
     setTimeout(() => {
       this.buttonText = 'Add to Cart';
       this.isButtonDisabled = false;
-    }, 2000);
+    }, 1500);
   }
 
   toggleList() { this.isExpanded = !this.isExpanded; }
+
+  trackByIndex = (_: number, __: unknown) => _;
 }
