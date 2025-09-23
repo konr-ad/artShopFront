@@ -1,48 +1,58 @@
-import { Component } from '@angular/core';
-import { NgClass } from '@angular/common';
-import {TranslatePipe} from "@ngx-translate/core";
+import { Component, HostListener } from '@angular/core';
+import {NgClass, NgForOf} from '@angular/common';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-exhibitions',
   standalone: true,
-  imports: [NgClass, TranslatePipe],
+  imports: [NgClass, TranslatePipe, NgForOf],
   templateUrl: './exhibitions.component.html',
   styleUrl: './exhibitions.component.css',
 })
 export class ExhibitionsComponent {
   lightboxOpen = false;
-  lightboxImage: string | undefined;
-  currentImageIndex: number = 0;
+  lightboxImage?: string;
+  currentImageIndex = 0;
+
   images: string[] = [
-    'assets/exhibitions/Wystawa1.jpg',
-    'assets/exhibitions/Wystawa2.jpg',
-    'assets/exhibitions/Wystawa3.jpg',
-    'assets/exhibitions/Wystawa4.jpg',
-    'assets/exhibitions/Wystawa5.jpg',
-    'assets/exhibitions/Wystawa6.jpg',
-    'assets/exhibitions/Wystawa7.jpg',
-    'assets/exhibitions/Wystawa8.jpg',
+    '/assets/exhibitions/Wystawa1.jpg',
+    '/assets/exhibitions/Wystawa2.jpg',
+    '/assets/exhibitions/Wystawa3.jpg',
+    '/assets/exhibitions/Wystawa4.jpg',
+    '/assets/exhibitions/Wystawa5.jpg',
+    '/assets/exhibitions/Wystawa6.jpg',
+    '/assets/exhibitions/Wystawa7.jpg',
+    '/assets/exhibitions/Wystawa8.jpg',
   ];
 
-  openLightbox(index: number): void {
+  onImgError(i: number) {
+    console.warn('Brak pliku obrazu:', this.images[i]);
+  }
+
+  openLightbox(index: number) {
     this.currentImageIndex = index;
     this.lightboxImage = this.images[index];
     this.lightboxOpen = true;
   }
+  closeLightbox() { this.lightboxOpen = false; }
 
-  closeLightbox(): void {
-    this.lightboxOpen = false;
+  prevImage() {
+    if (!this.lightboxOpen) return;
+    this.currentImageIndex = (this.currentImageIndex - 1 + this.images.length) % this.images.length;
+    this.lightboxImage = this.images[this.currentImageIndex];
   }
-
-  prevImage(): void {
-    this.currentImageIndex =
-      this.currentImageIndex === 0 ? this.images.length - 1 : this.currentImageIndex - 1;
+  nextImage() {
+    if (!this.lightboxOpen) return;
+    this.currentImageIndex = (this.currentImageIndex + 1) % this.images.length;
     this.lightboxImage = this.images[this.currentImageIndex];
   }
 
-  nextImage(): void {
-    this.currentImageIndex =
-      this.currentImageIndex === this.images.length - 1 ? 0 : this.currentImageIndex + 1;
-    this.lightboxImage = this.images[this.currentImageIndex];
+  // UX: ESC/←/→
+  @HostListener('window:keydown', ['$event'])
+  onKey(e: KeyboardEvent) {
+    if (!this.lightboxOpen) return;
+    if (e.key === 'Escape') this.closeLightbox();
+    if (e.key === 'ArrowLeft') this.prevImage();
+    if (e.key === 'ArrowRight') this.nextImage();
   }
 }
