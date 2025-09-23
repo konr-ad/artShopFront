@@ -1,8 +1,7 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { Router, NavigationEnd } from '@angular/router';
 import { CartService } from 'src/app/services/cart.service';
-import { Router } from '@angular/router';
-import {TranslateService} from "@ngx-translate/core";
-import {LanguageService} from "../../../services/language.service";
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-navbar',
@@ -10,39 +9,36 @@ import {LanguageService} from "../../../services/language.service";
   styleUrls: ['./navbar.component.css'],
 })
 export class NavbarComponent implements OnInit {
-  cartItemCount: number = 0;
-  menuOpen: boolean = false;
+  cartItemCount = 0;
+  menuOpen = false;
+  mobile = { shop: false, about: false };
 
   constructor(
     private cartService: CartService,
     private router: Router,
-    private changeDetector: ChangeDetectorRef,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
-    this.cartService.getItemCount().subscribe((count) => {
-      this.cartItemCount = count;
-    });
-  }
+    this.cartService.getItemCount().subscribe(count => this.cartItemCount = count);
 
-  navigateWithFilters(type: string): void {
-    this.router.navigate(['/shop'], { queryParams: { type } }).then(() => {
-      this.closeDropdown();
+    // zamykaj panel mobilny po nawigacji
+    this.router.events.pipe(filter(e => e instanceof NavigationEnd)).subscribe(() => {
+      this.menuOpen = false;
+      this.mobile = { shop: false, about: false };
+      this.cdr.markForCheck();
     });
-  }
-
-  closeDropdown(): void {
-    const dropdowns = document.querySelectorAll('.dropdown-menu');
-    dropdowns.forEach((dropdown) => {
-      dropdown.classList.add('hidden');
-    });
-    this.menuOpen = false;
-    this.changeDetector.detectChanges();
   }
 
   toggleMenu() {
-    this.menuOpen = !this.menuOpen; // Toggle the mobile menu open state
-    this.changeDetector.detectChanges();
-    console.log('Menu toggled:', this.menuOpen);
+    this.menuOpen = !this.menuOpen;
+  }
+
+  navigateWithFilters(type: string) {
+    this.router.navigate(['/shop'], { queryParams: type ? { type } : {} }).then(() => {
+      this.menuOpen = false;
+      this.mobile = { shop: false, about: false };
+      this.cdr.detectChanges();
+    });
   }
 }
