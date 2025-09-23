@@ -7,7 +7,6 @@ import {
   PaintingDetailsDto,
   PaintingType
 } from 'src/app/services/painting.service';
-import { of, switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-add-product-modal',
@@ -24,20 +23,43 @@ export class AddProductModalComponent {
   primaryFile: File | null = null;
   additionalFiles: File[] = [];
 
-  // Upewnij się, że wartości są spójne z backendowym EPaintingType
+  // Zgodne z EPaintingType w backendzie
   types: PaintingType[] = ['MONOTYPE','PRINT','OIL','ACRYLIC','WATERCOLOR','DIGITAL'];
 
   busy = false;
   errorMsg: string | null = null;
-  previewUrl: string | null = null;
+
+  // podglądy
+  previewUrl: string | null = null;              // dla primary
+  additionalPreviews: string[] = [];             // dla additional
+  selectedPrimaryIndex = 0;                      // domyślnie 0 = primaryFile
 
   constructor(private fb: FormBuilder, private paintingService: PaintingService) {
     this.productForm = this.fb.group({
       name: ['', Validators.required],
-      description: [''],
       type: ['', Validators.required],
       price: [0, [Validators.required, Validators.min(0.01)]],
+      // state nieobowiązkowe – domyślnie AVAILABLE
+      state: ['AVAILABLE'],
+      descriptionPl: [''],
+      descriptionEn: [''],
     });
+  }
+
+  /** Zbiór plików w kolejności: primary, ...additional */
+  get allFiles(): File[] {
+    const list: File[] = [];
+    if (this.primaryFile) list.push(this.primaryFile);
+    if (this.additionalFiles.length) list.push(...this.additionalFiles);
+    return list;
+  }
+
+  /** Podglądy w tej samej kolejności co allFiles */
+  get allPreviews(): string[] {
+    const list: string[] = [];
+    if (this.previewUrl) list.push(this.previewUrl);
+    if (this.additionalPreviews.length) list.push(...this.additionalPreviews);
+    return list;
   }
 
   close() {
@@ -57,66 +79,83 @@ export class AddProductModalComponent {
       const reader = new FileReader();
       reader.onload = () => this.previewUrl = reader.result as string;
       reader.readAsDataURL(file);
+      // jeżeli nie było primary — ustaw wybór na 0
+      this.selectedPrimaryIndex = 0;
     } else {
       this.previewUrl = null;
+      // jeśli nie ma primary, a są dodatkowe, niech primary będzie pierwszym z dodatkowych (index 0)
+      this.selectedPrimaryIndex = 0;
     }
   }
 
   onAdditionalImagesChange(evt: Event) {
     const input = evt.target as HTMLInputElement;
     this.additionalFiles = input.files ? Array.from(input.files) : [];
+    // podglądy
+    this.additionalPreviews = [];
+    this.additionalFiles.forEach(file => {
+      const reader = new FileReader();
+      reader.onload = () => this.additionalPreviews.push(reader.result as string);
+      reader.readAsDataURL(file);
+    });
+    // jeśli nie ma primaryFile i wybrano dodatkowe – primaryIndex = 0 (pierwsze dodatkowe)
+    if (!this.primaryFile && this.additionalFiles.length > 0) {
+      this.selectedPrimaryIndex = 0;
+    }
   }
 
   onSubmit() {
-    this.errorMsg = null;
-    if (this.productForm.invalid) {
-      this.errorMsg = 'Uzupełnij wymagane pola.';
-      return;
-    }
-    if (!this.primaryFile) {
-      this.errorMsg = 'Dodaj zdjęcie główne.';
+    if (this.productForm.invalid) return;
+    if (this.allFiles.length === 0) {
+      this.errorMsg = 'Dodaj przynajmniej jedno zdjęcie.';
       return;
     }
 
     const dto: CreatePaintingRequest = {
-      name: this.productForm.value.name,
-      description: this.productForm.value.description || undefined,
-      type: this.productForm.value.type,
+      name: this.productForm.value.name!,
+      type: this.productForm.value.type!,
+      state: this.productForm.value.state || 'AVAILABLE',
       price: Number(this.productForm.value.price),
-      // state pomijamy — backend ma domyślne/optional
+      descriptionPl: this.productForm.value.descriptionPl || null,
+      descriptionEn: this.productForm.value.descriptionEn || null,
     };
 
-    this.busy = true;
+    // primaryIndex liczymy względem tablicy [primaryFile?, ...additionalFiles]
+    // jeżeli nie ma primaryFile, wybrane radio odnosi się do pierwszego dodatkowego (index 0)
+    const files = this.allFiles;
+    let primaryIndex = this.selectedPrimaryIndex;
 
-    // 1) create
-    this.paintingService.adminCreate(dto).pipe(
-      // 2) upload media (primary jako pierwszy, potem dodatkowe)
-      switchMap(created => {
-        const files: File[] = [this.primaryFile!, ...this.additionalFiles];
-        const primaryIndex = 0; // pierwszy jest główny
-        if (files.length === 0) return of(created);
-        return this.paintingService.adminUploadMedia(created.id, files, primaryIndex)
-          .pipe(switchMap(() => this.paintingService.details(created.id)));
-      })
-    ).subscribe({
-      next: (details) => {
-        this.productAdded.emit(details);
+    this.busy = true;
+    this.errorMsg = null;
+
+    this.paintingService.createWithMedia(dto, files, primaryIndex).subscribe({
+      next: (created) => {
         this.busy = false;
+        this.productAdded.emit(created);
         this.close();
       },
-      error: (err) => {
+      error: (e) => {
         this.busy = false;
-        this.errorMsg = 'Nie udało się dodać produktu. Sprawdź logi i połączenie.';
-        console.error(err);
+        this.errorMsg = 'Nie udało się zapisać produktu.';
+        console.error(e);
       }
     });
   }
 
   private resetForm() {
-    this.productForm.reset({ name: '', description: '', type: '', price: 0 });
+    this.productForm.reset({
+      name: '',
+      type: '',
+      price: 0,
+      state: 'AVAILABLE',
+      descriptionPl: '',
+      descriptionEn: '',
+    });
     this.primaryFile = null;
     this.additionalFiles = [];
     this.previewUrl = null;
+    this.additionalPreviews = [];
+    this.selectedPrimaryIndex = 0;
     this.errorMsg = null;
   }
 }

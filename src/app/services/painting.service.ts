@@ -57,7 +57,8 @@ export interface CreatePaintingRequest {
   type: string;
   state?: string | null;
   price: number;
-  description?: string | null;
+  descriptionEn?: string | null;
+  descriptionPl?: string | null;
 }
 
 export type PaintingType = 'MONOTYPE'|'PRINT'|'OIL'|'ACRYLIC'|'WATERCOLOR'|'DIGITAL';
@@ -95,14 +96,6 @@ export class PaintingService {
     return this.http.get<Painting[]>(this.backendUrl);
   }
 
-  getPaintingById(id: number): Observable<PaintingDetailsDto> {
-    return this.http.get<PaintingDetailsDto>(`${this.publicUrl}/${id}`);
-  }
-
-  // createPainting(painting: FormData): Observable<Painting> {
-  //   return this.http.post<Painting>(this.backendUrl, painting);
-  // }
-
   getPaintingsPage(opts: {
     page?: number; size?: number; sort?: string; q?: string;
     type?: string; minPrice?: number; maxPrice?: number;
@@ -120,68 +113,18 @@ export class PaintingService {
     return this.http.get<Page<PaintingListDto>>(this.publicUrl, { params });
   }
 
-  createPainting(formData: FormData): Observable<PaintingDetailsDto> {
-    const name = String(formData.get('name') ?? '');
-    const type = String(formData.get('type') ?? '');
-    const price = Number(formData.get('price') ?? 0);
-    const descriptionVal = formData.get('description');
-    const description = descriptionVal ? String(descriptionVal) : undefined;
+  createWithMedia(dto: CreatePaintingRequest, files: File[], primaryIndex = 0) {
+    const fd = new FormData();
+    // meta jako JSON+Blob -> kluczowe!
+    fd.append('meta', new Blob([JSON.stringify(dto)], { type: 'application/json' }));
 
-    // pliki
-    const primary = (formData.get('image') as File) || null;
-    const additional = (formData.getAll('additionalImages') || [])
-      .filter((x): x is File => x instanceof File);
+    files.forEach(f => fd.append('files', f));
+    fd.append('primaryIndex', String(primaryIndex));
 
-    const dto: CreatePaintingRequest = { name, type, price, description };
-
-    // 1) create
-    return this.http.post<PaintingDetailsDto>(this.adminUrl, dto).pipe(
-      // 2) upload jeśli są pliki
-      switchMap(created => {
-        const files: File[] = [];
-        if (primary) files.push(primary);
-        if (additional?.length) files.push(...additional);
-
-        if (files.length === 0) {
-          return of(created);
-        }
-
-        const fd = new FormData();
-        files.forEach(f => fd.append('files', f));
-        fd.append('primaryIndex', '0');
-
-        return this.http.post(`${this.adminUrl}/${created.id}/media`, fd).pipe(
-          // 3) pobierz finalne detale (z mediami)
-          switchMap(() => this.getPaintingById(created.id))
-        );
-      })
-    );
-  }
-
-  adminCreate(dto: CreatePaintingRequest): Observable<PaintingDetailsDto> {
     return this.http.post<PaintingDetailsDto>(
       this.adminUrl,
-      dto,
-      { headers: this.authHeaders() }
+      fd
     );
-  }
-
-  adminUploadMedia(paintingId: number, files: File[], primaryIndex = 0): Observable<any> {
-    const form = new FormData();
-    files.forEach(f => form.append('files', f));          // NAZWA 'files' musi się zgadzać z backendem
-    form.append('primaryIndex', String(primaryIndex));    // pierwszy plik będzie primary
-
-    // UWAGA: NIE ustawiaj Content-Type ręcznie przy FormData (Angular doda boundary)
-    return this.http.post(
-      `${this.adminUrl}/${paintingId}/media`,
-      form,
-      { headers: this.authHeaders() }
-    );
-  }
-
-  details(id: number): Observable<PaintingDetailsDto> {
-    // publiczny endpoint GET /api/paintings/{id} (bez auth headera też zadziała)
-    return this.http.get<PaintingDetailsDto>(`${this.publicUrl}/${id}`);
   }
 
 }
