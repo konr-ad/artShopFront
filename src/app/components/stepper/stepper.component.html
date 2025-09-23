@@ -1,102 +1,102 @@
-<div class="w-full flex justify-center py-6 sm:gap-5">
-  <div class="sm:w-1/3 w-full mx-10">
-    <h2 class="sr-only">{{ 'stepper.srOnlySteps' | translate }}</h2>
+<div class="w-full px-4 py-6">
+  <div class="relative mx-auto max-w-3xl">
+    <!-- track -->
+    <div class="absolute inset-x-0 top-5 h-1.5 rounded-full bg-gray-200"></div>
 
-    <div class="after:mt-4 after:block after:h-1 after:w-full after:rounded-lg after:bg-gray-200">
-      <ol class="grid grid-cols-3 text-sm font-medium text-gray-500">
-        <!-- Cart step -->
-        <li
-          class="relative flex justify-start"
-          [class.text-blue-600]="
-            activeStep === 'cart' || activeStep === 'checkout' || activeStep === 'payment'
-          "
+    <!-- progress -->
+    <div
+      class="absolute top-5 h-1.5 rounded-full bg-gradient-to-r from-indigo-500 to-fuchsia-500 transition-all duration-500"
+      [ngStyle]="{
+        width: activeStep==='cart' ? '0%' : (activeStep==='checkout' ? '50%' : '100%')
+      }"
+    ></div>
+
+    <ol class="relative grid grid-cols-3 text-sm font-medium text-gray-600">
+      <!-- Cart -->
+      <li class="flex flex-col items-start">
+        <div
+          class="relative z-10 flex h-10 w-10 items-center justify-center rounded-full border-2 transition-all duration-300
+           shadow-sm ring-1 ring-black/5"
+          [ngClass]="{
+      'border-indigo-600 bg-indigo-600 text-white': ['cart','checkout','payment'].includes(activeStep),
+      'border-gray-300 bg-white text-gray-700': !['cart','checkout','payment'].includes(activeStep)
+    }"
+          [attr.aria-current]="activeStep==='cart' ? 'step' : null"
         >
-          <span
-            class="absolute -bottom-[1.75rem] start-0 rounded-full"
-            [class.bg-blue-600]="
-              activeStep === 'cart' || activeStep === 'checkout' || activeStep === 'payment'
-            "
-            [class.bg-gray-600]="
-              activeStep !== 'cart' && activeStep !== 'checkout' && activeStep !== 'payment'
-            "
-            [class.text-white]="
-              activeStep === 'cart' || activeStep === 'checkout' || activeStep === 'payment'
-            "
-          >
-            <!-- icon -->
-            <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-              <path
-                fill-rule="evenodd"
-                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                clip-rule="evenodd"
-              />
+          <ng-container *ngIf="activeStep==='cart'; else cartDone">1</ng-container>
+          <ng-template #cartDone>
+            <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd"
+                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.536-9.95a.75.75 0 00-1.06-1.06L9 10.414 7.586 9a.75.75 0 10-1.06 1.06l2 2a.75.75 0 001.06 0l3.95-3.95z"
+                    clip-rule="evenodd"/>
             </svg>
-          </span>
-          <span class="hidden sm:block">{{ 'stepper.cart' | translate }}</span>
-          <!-- mobile icon -->
-          <svg class="size-6 sm:hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-               stroke="currentColor" stroke-width="2">
-            <path stroke-linecap="round" stroke-linejoin="round"
-                  d="M10 6H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V8a2 2 0 00-2-2h-5m-4 0V5a2 2 0 114 0v1m-4 0a2 2 0 104 0m-5 8a2 2 0 100-4 2 2 0 000 4zm0 0c1.306 0 2.417.835 2.83 2M9 14a3.001 3.001 0 00-2.83 2M15 11h3m-3 4h2" />
-          </svg>
-        </li>
+          </ng-template>
+        </div>
+        <span class="mt-3 hidden sm:block"
+              [ngClass]="{ 'text-gray-900 font-semibold': ['cart','checkout','payment'].includes(activeStep) }">
+    {{ 'stepper.cart' | translate }}
+  </span>
+        <span class="mt-2 sm:hidden text-xs"
+              [ngClass]="{ 'text-gray-900 font-semibold': ['cart','checkout','payment'].includes(activeStep) }">
+    {{ 'stepper.cart' | translate }}
+  </span>
+      </li>
 
-        <!-- Checkout step -->
-        <li
-          class="relative flex justify-center"
-          [class.text-blue-600]="activeStep === 'checkout' || activeStep === 'payment'"
+      <!-- Checkout -->
+      <li class="flex flex-col items-center">
+        <div
+          class="relative z-10 flex h-10 w-10 items-center justify-center rounded-full border-2 transition-all duration-300
+                 shadow-sm ring-1 ring-black/5"
+          [ngClass]="{
+            'border-indigo-600 bg-indigo-600 text-white': activeStep!=='cart',
+            'border-gray-300 bg-white text-gray-700': activeStep==='cart'
+          }"
+          [attr.aria-current]="activeStep==='checkout' ? 'step' : null"
         >
-          <span
-            class="absolute -bottom-[1.75rem] left-1/2 -translate-x-1/2 rounded-full"
-            [class.bg-blue-600]="activeStep === 'checkout' || activeStep === 'payment'"
-            [class.bg-gray-600]="activeStep !== 'checkout' && activeStep !== 'payment'"
-            [class.text-white]="activeStep === 'checkout' || activeStep === 'payment'"
-          >
-            <!-- icon -->
-            <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-              <path
-                fill-rule="evenodd"
-                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                clip-rule="evenodd"
-              />
-            </svg>
-          </span>
-          <span class="hidden sm:block">{{ 'stepper.checkout' | translate }}</span>
-          <!-- mobile icon -->
-          <svg class="mx-auto size-6 sm:hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-               stroke="currentColor" stroke-width="2">
-            <path stroke-linecap="round" stroke-linejoin="round"
-                  d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-            <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-          </svg>
-        </li>
+          <ng-container *ngIf="activeStep==='checkout'; else checkoutDoneOrIdle">2</ng-container>
+          <ng-template #checkoutDoneOrIdle>
+            <ng-container *ngIf="activeStep==='payment'; else checkoutIdle">
+              <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd"
+                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.536-9.95a.75.75 0 00-1.06-1.06L9 10.414 7.586 9a.75.75 0 10-1.06 1.06l2 2a.75.75 0 001.06 0l3.95-3.95z"
+                      clip-rule="evenodd"/>
+              </svg>
+            </ng-container>
+            <ng-template #checkoutIdle>2</ng-template>
+          </ng-template>
+        </div>
+        <span class="mt-3 hidden sm:block"
+              [ngClass]="{ 'text-gray-900 font-semibold': activeStep!=='cart' }">
+          {{ 'stepper.checkout' | translate }}
+        </span>
+        <span class="mt-2 sm:hidden text-xs"
+              [ngClass]="{ 'text-gray-900 font-semibold': activeStep!=='cart' }">
+          {{ 'stepper.checkout' | translate }}
+        </span>
+      </li>
 
-        <!-- Payment step -->
-        <li class="relative flex justify-end" [class.text-blue-600]="activeStep === 'payment'">
-          <span
-            class="absolute -bottom-[1.75rem] end-0 rounded-full"
-            [class.bg-blue-600]="activeStep === 'payment'"
-            [class.bg-gray-600]="activeStep !== 'payment'"
-            [class.text-white]="activeStep === 'payment'"
-          >
-            <!-- icon -->
-            <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-              <path
-                fill-rule="evenodd"
-                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                clip-rule="evenodd"
-              />
-            </svg>
-          </span>
-          <span class="hidden sm:block">{{ 'stepper.payment' | translate }}</span>
-          <!-- mobile icon -->
-          <svg class="size-6 sm:hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-               stroke="currentColor" stroke-width="2">
-            <path stroke-linecap="round" stroke-linejoin="round"
-                  d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
-          </svg>
-        </li>
-      </ol>
-    </div>
+      <!-- Payment -->
+      <li class="flex flex-col items-end">
+        <div
+          class="relative z-10 flex h-10 w-10 items-center justify-center rounded-full border-2 transition-all duration-300
+                 shadow-sm ring-1 ring-black/5"
+          [ngClass]="{
+            'border-indigo-600 bg-indigo-600 text-white': activeStep==='payment',
+            'border-gray-300 bg-white text-gray-700': activeStep!=='payment'
+          }"
+          [attr.aria-current]="activeStep==='payment' ? 'step' : null"
+        >
+          3
+        </div>
+        <span class="mt-3 hidden sm:block"
+              [ngClass]="{ 'text-gray-900 font-semibold': activeStep==='payment' }">
+          {{ 'stepper.payment' | translate }}
+        </span>
+        <span class="mt-2 sm:hidden text-xs"
+              [ngClass]="{ 'text-gray-900 font-semibold': activeStep==='payment' }">
+          {{ 'stepper.payment' | translate }}
+        </span>
+      </li>
+    </ol>
   </div>
 </div>
