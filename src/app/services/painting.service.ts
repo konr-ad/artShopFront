@@ -1,18 +1,7 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
-import {Observable, of, switchMap} from 'rxjs';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import {map, Observable} from 'rxjs';
 import { ConfigService } from './config/ConfigService';
-
-export interface Painting {
-  id?: number;
-  type: string;
-  state: string;
-  name: string;
-  description: string;
-  price: number;
-  image: string;
-  imageUrl?: string;
-}
 
 export interface MediaFileDto {
   url: string;
@@ -32,13 +21,16 @@ export interface Page<T> {
   last: boolean;
 }
 
-export interface PaintingListDto {
-  id: number;
-  name: string;
+// --- LEGACY (compat) ---
+export interface Painting {
+  id?: number;
   type: string;
   state: string | null;
+  name: string;
+  description?: string | null;
   price: number;
-  thumbnailUrl: string | null;
+  image?: string;              // kiedyś tu był base64 – teraz opcjonalne
+  imageUrl?: string | null;    // pełny URL miniatury
 }
 
 export interface PaintingDetailsDto {
@@ -52,57 +44,50 @@ export interface PaintingDetailsDto {
   media: MediaFileDto[];
 }
 
-export interface CreatePaintingRequest {
+export interface PaintingListDto {
+  id: number;
   name: string;
   type: string;
-  state?: string | null;
+  state: string | null;
+  price: number;
+  thumbnailUrl: string | null;
+}
+export type PaintingListItem = PaintingListDto; // alias dla komponentu
+
+export interface CreatePaintingRequest {
+  name: string;
+  type: string;                 // EPaintingType jako string
+  state?: string | null;        // OPTIONAL
   price: number;
   descriptionEn?: string | null;
   descriptionPl?: string | null;
 }
 
-export type PaintingType = 'MONOTYPE'|'PRINT'|'OIL'|'ACRYLIC'|'WATERCOLOR'|'DIGITAL';
+export type PaintingType =
+  | 'MONOTYPE' | 'PRINT' | 'OIL' | 'ACRYLIC' | 'WATERCOLOR' | 'DIGITAL';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable({ providedIn: 'root' })
 export class PaintingService {
-  private backendUrl: string;
-  private readonly api = this.configService.getConfig('API_URL');
-  private readonly publicUrl = `${this.api}/api/paintings`;
-  private readonly adminUrl  = `${this.api}/api/admin/paintings`;
+  private apiBase = this.configService.getConfig('API_URL');
+  private publicUrl = `${this.apiBase}/api/paintings`;
+  private adminUrl  = `${this.apiBase}/api/admin/paintings`;
 
-  constructor(
-    private http: HttpClient,
-    private configService: ConfigService
-  ) {
-    this.backendUrl = this.configService.getConfig('API_URL') + '/api/paintings';
+  constructor(private http: HttpClient, private configService: ConfigService) {}
+
+  /** Zwróć pełny URL – jeśli względny z backendu (/media/...), doklej API_URL */
+  imageUrl(u: string | null | undefined): string | undefined {
+    if (!u) return undefined;
+    return u.startsWith('http') ? u : `${this.apiBase}${u}`;
   }
 
-  private authHeaders(): HttpHeaders {
-    const token = localStorage.getItem('token'); // zakładamy, że tu trzymasz JWT
-    let headers = new HttpHeaders();
-    return token ? headers.set('Authorization', `Bearer ${token}`) : headers;
-  }
-
-  /** HELPER: sklej pełny URL jeśli backend zwraca względny */
-  fullUrl(maybeRelative: string | null | undefined) {
-    if (!maybeRelative) return null;
-    return maybeRelative.startsWith('http')
-      ? maybeRelative
-      : `${this.api}${maybeRelative}`;
-  }
-  getPaintings(): Observable<Painting[]> {
-    return this.http.get<Painting[]>(this.backendUrl);
-  }
-
+  /** Listing stronicowany */
   getPaintingsPage(opts: {
     page?: number; size?: number; sort?: string; q?: string;
     type?: string; minPrice?: number; maxPrice?: number;
-  } = {}): Observable<Page<PaintingListDto>> {
+  } = {}): Observable<Page<PaintingListItem>> {
     let params = new HttpParams()
       .set('page', String(opts.page ?? 0))
-      .set('size', String(opts.size ?? 10))
+      .set('size', String(opts.size ?? 9))
       .set('sort', opts.sort ?? 'createdAt,desc');
 
     if (opts.q) params = params.set('q', opts.q);
@@ -110,21 +95,34 @@ export class PaintingService {
     if (opts.minPrice != null) params = params.set('minPrice', String(opts.minPrice));
     if (opts.maxPrice != null) params = params.set('maxPrice', String(opts.maxPrice));
 
-    return this.http.get<Page<PaintingListDto>>(this.publicUrl, { params });
+    return this.http.get<Page<PaintingListItem>>(this.publicUrl, { params });
   }
 
-  createWithMedia(dto: CreatePaintingRequest, files: File[], primaryIndex = 0) {
-    const fd = new FormData();
-    // meta jako JSON+Blob -> kluczowe!
-    fd.append('meta', new Blob([JSON.stringify(dto)], { type: 'application/json' }));
 
+  /** Tworzenie + media (multipart/form-data) */
+  createWithMedia(dto: CreatePaintingRequest, files: File[], primaryIndex = 0): Observable<PaintingDetailsDto> {
+    const fd = new FormData();
+    fd.append('meta', new Blob([JSON.stringify(dto)], { type: 'application/json' }));
     files.forEach(f => fd.append('files', f));
     fd.append('primaryIndex', String(primaryIndex));
-
-    return this.http.post<PaintingDetailsDto>(
-      this.adminUrl,
-      fd
-    );
+    return this.http.post<PaintingDetailsDto>(this.adminUrl, fd);
   }
 
+  /** @deprecated: użyj getPaintingsPage(..).
+   *  Zwraca kształt jak dawniej, mapując thumbnail->imageUrl. */
+  getPaintings(): Observable<Painting[]> {
+    return this.getPaintingsPage({ page: 0, size: 100, sort: 'createdAt,desc' })
+      .pipe(map(p =>
+        p.content.map(item => ({
+          id: item.id,
+          type: item.type,
+          state: item.state ?? null,
+          name: item.name,
+          description: null,              // w listingu nie mamy opisu
+          price: item.price,
+          image: '',                      // nie trzymamy już base64
+          imageUrl: this.imageUrl(item.thumbnailUrl) ?? null,
+        }))
+      ));
+  }
 }

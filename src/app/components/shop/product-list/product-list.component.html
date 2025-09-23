@@ -1,19 +1,33 @@
-<div class="container grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
-  <div
-    class="shadow-sm cursor-pointer border-2"
-    *ngFor="let painting of filteredPaintings"
-    (click)="painting.id && viewPainting(painting.id)"
-  >
-    <img
-      class="md:flex-1 w-full h-64 object-cover"
-      [src]="painting.imageUrl"
-      alt="{{ painting.name }}"
-    />
-    <div class="flex flex-col p-4">
-      <p class="text-lg font-semibold">{{ painting.name }}</p>
-      <div class="mt-auto flex justify-between items-center">
-        <small class="text-muted">{{ painting.price | currency: 'EUR' }}</small>
+<div class="p-4">
+  <div *ngIf="loading" class="text-center py-12">Ładowanie…</div>
+
+  <div *ngIf="!loading && items.length === 0" class="text-center py-12 text-gray-500">
+    Brak wyników dla wybranych filtrów.
+  </div>
+
+  <div *ngIf="!loading && items.length > 0"
+       class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div class="shadow-sm cursor-pointer border rounded overflow-hidden"
+         *ngFor="let p of items"
+         (click)="viewPainting(p.id)">
+      <img class="w-full h-64 object-cover"
+           [src]="p.imageUrl || 'assets/no-image.svg'"
+           [alt]="p.name" />
+      <div class="flex flex-col p-4">
+        <p class="text-lg font-semibold">{{ p.name }}</p>
+        <div class="mt-auto flex justify-between items-center">
+          <small class="text-muted">{{ p.price | currency: 'EUR' }}</small>
+          <small class="text-gray-500">{{ p.type }}</small>
+        </div>
       </div>
     </div>
+  </div>
+
+  <div *ngIf="pageData" class="flex items-center justify-between mt-6">
+    <button class="px-4 py-2 border rounded disabled:opacity-50"
+            (click)="prev()" [disabled]="pageData.first">« Poprzednia</button>
+    <div>Strona {{ pageData.number + 1 }} z {{ pageData.totalPages || 1 }}</div>
+    <button class="px-4 py-2 border rounded disabled:opacity-50"
+            (click)="next()" [disabled]="pageData.last">Następna »</button>
   </div>
 </div>

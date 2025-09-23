@@ -61,8 +61,7 @@ export class CartService {
         productId: painting.id!,
         productName: painting.name,
         price: painting.price,
-        quantity: 1,
-        imageUrl: painting.imageUrl,
+        quantity: 1
       };
       currentItems.push(newItem);
     }

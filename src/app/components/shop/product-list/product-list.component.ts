@@ -1,6 +1,7 @@
+// product-list.component.ts
 import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { Router } from '@angular/router';
-import { Painting, PaintingService } from 'src/app/services/painting.service';
+import { PaintingService, PaintingListItem, Page } from 'src/app/services/painting.service';
 
 @Component({
   selector: 'app-product-list',
@@ -9,8 +10,15 @@ import { Painting, PaintingService } from 'src/app/services/painting.service';
 })
 export class ProductListComponent implements OnInit, OnChanges {
   @Input() filters: any;
-  paintings: Painting[] = [];
-  filteredPaintings: Painting[] = [];
+
+  pageData?: Page<PaintingListItem>;
+  items: Array<PaintingListItem & { imageUrl?: string }> = [];
+  loading = false;
+
+  // paging
+  page = 0;
+  size = 9; // 9 = 3x3 w gridzie; zmień wg uznania
+  sort = 'createdAt,desc';
 
   constructor(
     private paintingService: PaintingService,
@@ -18,50 +26,61 @@ export class ProductListComponent implements OnInit, OnChanges {
   ) {}
 
   ngOnInit(): void {
-    this.fetchPaintings();
+    this.fetchPage(0);
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['filters']) {
-      this.applyFilters();
+    if (changes['filters'] && !changes['filters'].firstChange) {
+      this.fetchPage(0);
     }
   }
 
-  fetchPaintings(): void {
-    this.paintingService.getPaintings().subscribe((data: Painting[]) => {
-      this.paintings = data.map((painting) => ({
-        ...painting,
-        imageUrl: 'data:image/jpeg;base64,' + painting.image,
-      }));
-      this.applyFilters();
+  fetchPage(p: number): void {
+    this.loading = true;
+    this.page = p;
+
+    // Backend przyjmuje JEDEN type (EPaintingType). UI pozwala zaznaczyć wiele,
+    // więc tu bierzemy pierwszy wybrany, a jak jest >1 – nie wysyłamy type (pokaż wszystko).
+    const types: string[] = this.filters?.paintings || [];
+    const type = types.length === 1 ? types[0] : undefined;
+
+    const minPrice = this.filters?.priceFrom ?? undefined;
+    const maxPrice = this.filters?.priceTo ?? undefined;
+
+    this.paintingService.getPaintingsPage({
+      page: this.page,
+      size: this.size,
+      sort: this.sort,
+      type,
+      minPrice,
+      maxPrice
+    }).subscribe({
+      next: (pg) => {
+        this.pageData = pg;
+        // zmapuj url miniatury
+        this.items = pg.content.map(it => ({
+          ...it,
+          imageUrl: this.paintingService.imageUrl(it.thumbnailUrl || '')
+        }));
+        this.loading = false;
+      },
+      error: () => {
+        this.items = [];
+        this.loading = false;
+      }
     });
   }
 
-  applyFilters(): void {
-    this.filteredPaintings = this.paintings;
-
-    if (this.filters.paintings.length) {
-      this.filteredPaintings = this.filteredPaintings.filter((painting) =>
-        this.filters.paintings.includes(painting.type)
-      );
-    }
-
-    if (this.filters.priceFrom) {
-      this.filteredPaintings = this.filteredPaintings.filter(
-        (painting) => painting.price >= this.filters.priceFrom
-      );
-    }
-
-    if (this.filters.priceTo) {
-      this.filteredPaintings = this.filteredPaintings.filter(
-        (painting) => painting.price <= this.filters.priceTo
-      );
-    }
+  prev() {
+    if (!this.pageData || this.pageData.first) return;
+    this.fetchPage(this.page - 1);
+  }
+  next() {
+    if (!this.pageData || this.pageData.last) return;
+    this.fetchPage(this.page + 1);
   }
 
-  viewPainting(id: number | undefined): void {
-    if (id !== undefined) {
-      this.router.navigate(['/painting', id]);
-    }
+  viewPainting(id: number): void {
+    this.router.navigate(['/painting', id]);
   }
 }
