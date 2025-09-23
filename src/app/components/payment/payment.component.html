@@ -1,143 +1,158 @@
 <app-stepper></app-stepper>
-<div class="wrapper bg-gray text-black">
-  <div class="content container mx-auto p-4 max-w-4xl">
-    <h1 class="text-3xl font-bold text-black mb-4">
+
+<!-- Backdrop -->
+<div class="bg-gradient-to-b from-slate-50 to-white">
+  <div class="mx-auto max-w-7xl px-4 pb-24 pt-8 sm:px-6 lg:px-8">
+
+    <h1 class="text-center text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900">
       {{ 'payment.title' | translate }}
     </h1>
+    <p class="mt-2 text-center text-sm text-slate-500">
+      {{ 'checkout.summary.total' | translate }}:
+      <span class="font-semibold text-slate-700">{{ totalAmount | currency:'PLN':'symbol' }}</span>
+    </p>
 
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-      <div class="md:col-span-2 p-2 shadow-md">
-        <div class="mb-6">
-          <h3 class="text-lg font-bold text-black py-3">
-            {{ 'payment.contact.title' | translate }}
-          </h3>
-          <p class="text-sm text-black">
-            <strong>{{ 'payment.contact.email' | translate }}:</strong> {{ email }}
+    <!-- Main grid -->
+    <div class="mt-10 grid grid-cols-1 lg:grid-cols-12 lg:gap-x-12 xl:gap-x-16">
+
+      <!-- LEFT: Customer & Shipping -->
+      <div class="lg:col-span-7 space-y-8">
+
+        <!-- Contact card -->
+        <section
+          class="rounded-2xl bg-white/70 backdrop-blur shadow-[0_10px_35px_rgba(0,0,0,0.06)] ring-1 ring-black/5 p-6">
+          <div class="flex items-center gap-3">
+            <span class="inline-flex h-9 w-9 items-center justify-center rounded-full bg-indigo-100 text-indigo-600">
+              <!-- envelope icon -->
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M1.5 6.75A2.25 2.25 0 013.75 4.5h16.5a2.25 2.25 0 012.25 2.25v10.5A2.25 2.25 0 0120.25 19.5H3.75A2.25 2.25 0 011.5 17.25V6.75Zm3 .75l7.155 4.77a.75.75 0 00.69 0L19.5 7.5" />
+              </svg>
+            </span>
+            <h3 class="text-lg font-bold text-slate-900">
+              {{ 'payment.contact.title' | translate }}
+            </h3>
+          </div>
+
+          <div class="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
+            <div class="rounded-xl border border-slate-200 p-4">
+              <p class="text-slate-500">{{ 'payment.contact.email' | translate }}</p>
+              <p class="font-medium text-slate-900 break-all">{{ email }}</p>
+            </div>
+            <div class="rounded-xl border border-slate-200 p-4">
+              <p class="text-slate-500">{{ 'payment.contact.firstName' | translate }}</p>
+              <p class="font-medium text-slate-900">{{ firstName }}</p>
+            </div>
+            <div class="rounded-xl border border-slate-200 p-4">
+              <p class="text-slate-500">{{ 'payment.contact.lastName' | translate }}</p>
+              <p class="font-medium text-slate-900">{{ lastName }}</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Shipping card -->
+        <section
+          class="rounded-2xl bg-white/70 backdrop-blur shadow-[0_10px_35px_rgba(0,0,0,0.06)] ring-1 ring-black/5 p-6">
+          <div class="flex items-center gap-3">
+            <span class="inline-flex h-9 w-9 items-center justify-center rounded-full bg-emerald-100 text-emerald-600">
+              <!-- truck icon -->
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M3 6.75A1.75 1.75 0 014.75 5h8.5A1.75 1.75 0 0115 6.75V9h3.586c.464 0 .909.184 1.237.513l1.664 1.664c.329.328.513.773.513 1.237V16a2 2 0 01-2 2h-.35a2.75 2.75 0 11-5.3 0H8.35a2.75 2.75 0 11-5.3 0H3a2 2 0 01-2-2V8.5A1.75 1.75 0 013 6.75zM18 16.75a1.25 1.25 0 100 2.5 1.25 1.25 0 000-2.5zM6 18a1 1 0 112 0 1 1 0 01-2 0z"/>
+              </svg>
+            </span>
+            <h3 class="text-lg font-bold text-slate-900">
+              {{ 'payment.shipping.title' | translate }}
+            </h3>
+          </div>
+
+          <dl class="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
+            <div class="rounded-xl border border-slate-200 p-4">
+              <dt class="text-slate-500">{{ 'payment.shipping.country' | translate }}</dt>
+              <dd class="font-medium text-slate-900">{{ country }}</dd>
+            </div>
+            <div class="rounded-xl border border-slate-200 p-4">
+              <dt class="text-slate-500">{{ 'payment.shipping.state' | translate }}</dt>
+              <dd class="font-medium text-slate-900">{{ state }}</dd>
+            </div>
+            <div class="rounded-xl border border-slate-200 p-4 sm:col-span-2">
+              <dt class="text-slate-500">{{ 'payment.shipping.address' | translate }}</dt>
+              <dd class="font-medium text-slate-900">
+                {{ address }} <span *ngIf="apartmentNumber">/ {{ apartmentNumber }}</span>
+              </dd>
+            </div>
+            <div class="rounded-xl border border-slate-200 p-4">
+              <dt class="text-slate-500">{{ 'payment.shipping.city' | translate }}</dt>
+              <dd class="font-medium text-slate-900">{{ city }}</dd>
+            </div>
+            <div class="rounded-xl border border-slate-200 p-4">
+              <dt class="text-slate-500">{{ 'payment.shipping.postalCode' | translate }}</dt>
+              <dd class="font-medium text-slate-900">{{ zip }}</dd>
+            </div>
+          </dl>
+        </section>
+      </div>
+
+      <!-- RIGHT: Order summary -->
+      <aside class="mt-8 lg:mt-0 lg:col-span-5">
+        <div class="lg:sticky lg:top-8 rounded-2xl bg-white/80 backdrop-blur shadow-[0_10px_35px_rgba(0,0,0,0.06)] ring-1 ring-black/5 p-6">
+          <h2 class="text-xl font-bold text-slate-900 mb-4">
+            {{ 'payment.summary.title' | translate }}
+          </h2>
+
+          <!-- Items -->
+          <ul role="list" class="divide-y divide-slate-200">
+            <li *ngFor="let item of cartItems" class="flex items-center py-4">
+              <img [src]="item.imageUrl || 'assets/placeholder.png'"
+                   [alt]="item.productName"
+                   class="h-16 w-16 rounded-md object-cover ring-1 ring-black/5" />
+              <div class="ml-4 flex-1">
+                <p class="text-sm font-medium text-slate-900">{{ item.productName }}</p>
+                <p class="text-xs text-slate-500">
+                  {{ 'payment.summary.quantity' | translate }}: {{ item.quantity }}
+                </p>
+              </div>
+              <div class="text-sm font-semibold text-slate-900">
+                {{ item.price | currency:'PLN':'symbol' }}
+              </div>
+            </li>
+          </ul>
+
+          <!-- Totals -->
+          <dl class="mt-6 space-y-3 text-sm">
+            <div class="flex items-center justify-between">
+              <dt class="text-slate-600">{{ 'payment.summary.subtotal' | translate }}</dt>
+              <dd class="font-medium text-slate-900">
+                {{ totalAmount | currency:'PLN':'symbol' }}
+              </dd>
+            </div>
+            <div class="flex items-center justify-between">
+              <dt class="text-slate-600">{{ 'payment.summary.shipping' | translate }}</dt>
+              <dd class="italic text-slate-500">{{ 'payment.summary.pending' | translate }}</dd>
+            </div>
+            <div class="flex items-center justify-between">
+              <dt class="text-slate-600">{{ 'payment.summary.tax' | translate }}</dt>
+              <dd class="italic text-slate-500">{{ 'payment.summary.pending' | translate }}</dd>
+            </div>
+            <div class="flex items-center justify-between border-t border-slate-200 pt-4 text-base">
+              <dt class="font-bold text-slate-900">{{ 'payment.summary.total' | translate }}</dt>
+              <dd class="font-extrabold text-slate-900">
+                {{ totalAmount | currency:'PLN':'symbol':'1.0-2' }}
+              </dd>
+            </div>
+          </dl>
+
+          <button
+            (click)="proceedToPayment()"
+            class="mt-6 w-full inline-flex items-center justify-center rounded-xl bg-gray-900 px-5 py-3
+                   text-white shadow-lg hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+            {{ 'payment.actions.payWithPayU' | translate }}
+          </button>
+
+          <p class="mt-3 text-[11px] text-slate-500 text-center">
+            {{ 'payment.summary.note' | translate : { currency: 'PLN' } }}
           </p>
         </div>
+      </aside>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-          <div>
-            <p class="text-sm text-black">
-              <strong>{{ 'payment.contact.firstName' | translate }}:</strong> {{ firstName }}
-            </p>
-          </div>
-          <div>
-            <p class="text-sm text-black">
-              <strong>{{ 'payment.contact.lastName' | translate }}:</strong> {{ lastName }}
-            </p>
-          </div>
-        </div>
-
-        <h3 class="text-lg font-bold text-black py-3">
-          {{ 'payment.shipping.title' | translate }}
-        </h3>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-          <div>
-            <p class="text-sm text-black">
-              <strong>{{ 'payment.shipping.country' | translate }}:</strong> {{ country }}
-            </p>
-          </div>
-          <div>
-            <p class="text-sm text-black">
-              <strong>{{ 'payment.shipping.state' | translate }}:</strong> {{ state }}
-            </p>
-          </div>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-          <div>
-            <p class="text-sm text-black">
-              <strong>{{ 'payment.shipping.address' | translate }}:</strong> {{ address }}
-            </p>
-          </div>
-          <div>
-            <p class="text-sm text-black">
-              <strong>{{ 'payment.shipping.apartmentNumber' | translate }}:</strong> {{ apartmentNumber }}
-            </p>
-          </div>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-          <div>
-            <p class="text-sm text-black">
-              <strong>{{ 'payment.shipping.city' | translate }}:</strong> {{ city }}
-            </p>
-          </div>
-          <div>
-            <p class="text-sm text-black">
-              <strong>{{ 'payment.shipping.postalCode' | translate }}:</strong> {{ zip }}
-            </p>
-          </div>
-        </div>
-
-        <div class="grid grid-cols-1 justify-items-center mt-3">
-          <div>
-            <a
-              [routerLink]="['/checkout']"
-              [queryParams]="{
-                email: email,
-                firstName: firstName,
-                lastName: lastName,
-                country: country,
-                state: state,
-                address: address,
-                apartmentNumber: apartmentNumber,
-                city: city,
-                zip: zip
-              }"
-              class="w-48 block bg-gray-600 text-white py-1.5 px-3 hover:bg-gray-700 text-center rounded-lg mb-2"
-            >
-              {{ 'payment.actions.backToCheckout' | translate }}
-            </a>
-          </div>
-          <div>
-            <button
-              (click)="proceedToPayment()"
-              class="w-48 bg-red-600 text-white py-1.5 px-3 hover:bg-red-700 text-center rounded-lg mb-2"
-            >
-              {{ 'payment.actions.payWithPayU' | translate }}
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <div class="order-summary p-4 border border-gray-700 rounded-md">
-        <h2 class="text-xl font-bold mb-4">
-          {{ 'payment.summary.title' | translate }}
-        </h2>
-
-        <div *ngFor="let item of cartItems" class="flex items-center justify-between mb-4">
-          <img [src]="item.imageUrl" [alt]="item.productName" class="w-16 h-16 rounded-md" />
-          <div class="ml-4">
-            <p class="text-sm text-black">{{ item.productName }}</p>
-            <p class="text-sm text-black">€{{ item.price }}</p>
-            <p class="text-sm text-black">
-              {{ 'payment.summary.quantity' | translate }}: {{ item.quantity }}
-            </p>
-          </div>
-        </div>
-
-        <div class="border-t border-gray-700 pt-4">
-          <div class="flex items-center justify-between text-sm mb-2">
-            <span>{{ 'payment.summary.subtotal' | translate }}</span>
-            <span>€{{ totalAmount }}</span>
-          </div>
-          <div class="flex items-center justify-between text-sm mb-2">
-            <span>{{ 'payment.summary.shipping' | translate }}</span>
-            <span>{{ 'payment.summary.pending' | translate }}</span>
-          </div>
-          <div class="flex items-center justify-between text-sm mb-2">
-            <span>{{ 'payment.summary.tax' | translate }}</span>
-            <span>{{ 'payment.summary.pending' | translate }}</span>
-          </div>
-          <div class="flex items-center justify-between text-lg font-bold">
-            <span>{{ 'payment.summary.total' | translate }}</span>
-            <span>{{ 'payment.summary.currencyPrefix' | translate }} €{{ totalAmount }}</span>
-          </div>
-        </div>
-      </div>
     </div>
   </div>
 </div>
