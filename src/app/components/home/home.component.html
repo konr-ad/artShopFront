@@ -1,24 +1,102 @@
-<div class="container mx-auto p-4">
-  <div class="flex items-center justify-between mb-4">
-    <div class="text-sm text-gray-500">Strona {{ pageIndex + 1 }} z {{ totalPages }}</div>
-    <div class="space-x-2">
-      <button class="px-3 py-1 border rounded" (click)="prevPage()" [disabled]="pageIndex===0">←</button>
-      <button class="px-3 py-1 border rounded" (click)="nextPage()" [disabled]="pageIndex+1>=totalPages">→</button>
+<div class="mx-auto max-w-7xl px-4 py-6">
+  <!-- top bar -->
+  <div class="mb-6 flex items-center justify-between">
+    <div class="text-sm text-gray-500">
+      <span class="inline-flex items-center gap-2">
+        <span class="h-2 w-2 rounded-full bg-indigo-400"></span>
+        Strona {{ pageIndex + 1 }} z {{ totalPages }}
+      </span>
+    </div>
+
+    <div class="inline-flex overflow-hidden rounded-full shadow-sm ring-1 ring-black/5">
+      <button
+        class="px-3 py-1.5 text-gray-700 hover:bg-gray-50 disabled:opacity-40"
+        (click)="prevPage()"
+        [disabled]="pageIndex===0"
+        aria-label="Poprzednia strona"
+      >
+        ←
+      </button>
+      <button
+        class="px-3 py-1.5 border-l border-gray-200 text-gray-700 hover:bg-gray-50 disabled:opacity-40"
+        (click)="nextPage()"
+        [disabled]="pageIndex + 1 >= totalPages"
+        aria-label="Następna strona"
+      >
+        →
+      </button>
     </div>
   </div>
 
-  <div *ngIf="loading" class="text-sm text-gray-500">Ładowanie…</div>
-  <div *ngIf="error" class="text-sm text-red-600">{{ error }}</div>
+  <!-- states -->
+  <div *ngIf="error" class="mb-4 rounded-xl bg-red-50 p-3 text-sm text-red-700 ring-1 ring-red-200">
+    {{ error }}
+  </div>
 
-  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-    <div class="card shadow-sm" *ngFor="let painting of paintings">
-      <img class="w-full" [src]="painting.imageUrl" alt="{{ painting.name }}" />
-      <div class="flex flex-col p-4">
-        <p class="text-lg font-semibold">{{ painting.name }}</p>
-        <div class="mt-1 flex justify-between items-center">
-          <small class="text-muted">{{ painting.price | currency: 'USD':'symbol' }}</small>
+  <div *ngIf="loading" class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+    <div *ngFor="let _ of [0,1,2,3,4,5]" class="aspect-[4/5] animate-pulse rounded-2xl bg-gray-200"></div>
+  </div>
+
+  <!-- grid -->
+  <div *ngIf="!loading" class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+    <article
+      *ngFor="let painting of paintings"
+      (click)="painting.id && viewPainting(painting.id)"
+      class="group relative cursor-pointer overflow-hidden rounded-2xl bg-white shadow ring-1 ring-black/5 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl"
+    >
+      <figure class="relative aspect-[4/5]">
+        <img
+          [src]="painting.imageUrl || 'assets/placeholder.png'"
+          [alt]="painting.name"
+          loading="lazy"
+          class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+        />
+
+        <!-- gentle gradient to make text pop -->
+        <div class="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/60 via-black/0"></div>
+
+        <!-- type chip -->
+        <div class="absolute left-3 top-3">
+          <span
+            class="rounded-full bg-white/85 px-2.5 py-1 text-[10px] font-medium uppercase tracking-wide text-gray-800 backdrop-blur ring-1 ring-black/5"
+          >
+            {{ painting.type }}
+          </span>
         </div>
-      </div>
-    </div>
+
+        <!-- price badge -->
+        <div class="absolute right-3 top-3">
+          <span class="rounded-full bg-gray-900/85 px-3 py-1 text-sm text-white backdrop-blur">
+            {{ painting.price | currency:'USD':'symbol' }}
+          </span>
+        </div>
+
+        <!-- title -->
+        <figcaption class="absolute inset-x-0 bottom-0 p-3">
+          <h3 class="line-clamp-1 text-base font-semibold text-white drop-shadow">
+            {{ painting.name }}
+          </h3>
+        </figcaption>
+      </figure>
+    </article>
+  </div>
+
+  <!-- bottom pager (opcjonalnie, usuń jeśli nie chcesz) -->
+  <div class="mt-8 flex items-center justify-center gap-2">
+    <button
+      class="px-3 py-1.5 rounded-full ring-1 ring-black/10 text-gray-700 hover:bg-gray-50 disabled:opacity-40"
+      (click)="prevPage()"
+      [disabled]="pageIndex===0"
+    >
+      Poprzednia
+    </button>
+    <span class="text-sm text-gray-500">•</span>
+    <button
+      class="px-3 py-1.5 rounded-full ring-1 ring-black/10 text-gray-700 hover:bg-gray-50 disabled:opacity-40"
+      (click)="nextPage()"
+      [disabled]="pageIndex + 1 >= totalPages"
+    >
+      Następna
+    </button>
   </div>
 </div>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PaintingService, Painting } from '../../services/painting.service';
 import { NgForm } from '@angular/forms';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-home',
@@ -16,10 +17,14 @@ export class HomeComponent implements OnInit {
   loading = false;
   error?: string;
 
-  constructor(private paintingService: PaintingService) {}
+  constructor(private paintingService: PaintingService, private router: Router) {}
 
   ngOnInit(): void {
     this.loadPage(0);
+  }
+
+  viewPainting(id: number) {
+    this.router.navigate(['/painting', id]);
   }
 
   loadPage(page: number) {

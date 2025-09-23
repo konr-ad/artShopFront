@@ -1,33 +1,88 @@
 <div class="p-4">
-  <div *ngIf="loading" class="text-center py-12">Ładowanie…</div>
+  <!-- Loading -->
+  <div *ngIf="loading" class="py-16 text-center text-sm text-gray-500">Ładowanie…</div>
 
-  <div *ngIf="!loading && items.length === 0" class="text-center py-12 text-gray-500">
+  <!-- Empty -->
+  <div *ngIf="!loading && items.length === 0" class="py-16 text-center text-gray-500">
     Brak wyników dla wybranych filtrów.
   </div>
 
+  <!-- Grid -->
   <div *ngIf="!loading && items.length > 0"
        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-    <div class="shadow-sm cursor-pointer border rounded overflow-hidden"
-         *ngFor="let p of items"
-         (click)="viewPainting(p.id)">
-      <img class="w-full h-64 object-cover"
-           [src]="p.imageUrl || 'assets/no-image.svg'"
-           [alt]="p.name" />
-      <div class="flex flex-col p-4">
-        <p class="text-lg font-semibold">{{ p.name }}</p>
-        <div class="mt-auto flex justify-between items-center">
-          <small class="text-muted">{{ p.price | currency: 'EUR' }}</small>
-          <small class="text-gray-500">{{ p.type }}</small>
+    <article
+      *ngFor="let p of items"
+      (click)="viewPainting(p.id)"
+      class="group relative isolate cursor-pointer rounded-2xl border border-black/5 bg-white/70 backdrop-blur
+             shadow-sm hover:shadow-xl hover:bg-white ring-1 ring-black/5 hover:ring-black/10
+             overflow-hidden transition-all duration-300"
+    >
+      <!-- media -->
+      <figure class="relative aspect-[4/3] w-full overflow-hidden">
+        <img
+          [src]="p.imageUrl || 'assets/no-image.svg'"
+          [alt]="p.name"
+          loading="lazy"
+          class="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+        />
+
+        <!-- gradient overlay -->
+        <div class="pointer-events-none absolute inset-0 bg-gradient-to-t
+                    from-black/60 via-black/10 to-transparent
+                    opacity-80 group-hover:opacity-90 transition"></div>
+
+        <!-- type chip -->
+        <div class="absolute right-3 top-3">
+          <span
+            class="rounded-full bg-white/80 backdrop-blur px-2.5 py-1 text-[11px] font-medium
+                   tracking-wide text-gray-800 shadow-sm ring-1 ring-black/5">
+            {{ p.type }}
+          </span>
         </div>
-      </div>
-    </div>
+
+        <!-- caption -->
+        <figcaption class="absolute inset-x-0 bottom-0 p-4">
+          <div class="flex items-end justify-between gap-3">
+            <h3 class="text-white drop-shadow text-lg font-semibold leading-tight line-clamp-2">
+              {{ p.name }}
+            </h3>
+            <span class="shrink-0 rounded-full bg-white/90 backdrop-blur px-3 py-1 text-[12px] font-semibold
+                         text-gray-900 shadow-sm ring-1 ring-black/5">
+              {{ p.price | currency:'EUR' }}
+            </span>
+          </div>
+        </figcaption>
+      </figure>
+    </article>
   </div>
 
-  <div *ngIf="pageData" class="flex items-center justify-between mt-6">
-    <button class="px-4 py-2 border rounded disabled:opacity-50"
-            (click)="prev()" [disabled]="pageData.first">« Poprzednia</button>
-    <div>Strona {{ pageData.number + 1 }} z {{ pageData.totalPages || 1 }}</div>
-    <button class="px-4 py-2 border rounded disabled:opacity-50"
-            (click)="next()" [disabled]="pageData.last">Następna »</button>
+  <!-- Pagination -->
+  <div *ngIf="pageData" class="mt-8 flex items-center justify-between">
+    <button
+      class="inline-flex items-center gap-2 rounded-full border border-gray-300 bg-white/80 px-4 py-2
+             text-sm text-gray-700 shadow-sm transition hover:bg-white hover:shadow-md
+             disabled:opacity-40 disabled:hover:shadow-none"
+      (click)="prev()"
+      [disabled]="pageData.first"
+      aria-label="Poprzednia strona">
+      <span class="select-none">←</span>
+      Poprzednia
+    </button>
+
+    <div class="text-sm text-gray-600">
+      Strona <span class="font-semibold text-gray-900">{{ pageData.number + 1 }}</span>
+      z {{ pageData.totalPages || 1 }}
+    </div>
+
+    <button
+      class="inline-flex items-center gap-2 rounded-full border border-gray-300 bg-white/80 px-4 py-2
+             text-sm text-gray-700 shadow-sm transition hover:bg-white hover:shadow-md
+             disabled:opacity-40 disabled:hover:shadow-none"
+      (click)="next()"
+      [disabled]="pageData.last"
+      aria-label="Następna strona">
+      Następna
+      <span class="select-none">→</span>
+    </button>
   </div>
 </div>
