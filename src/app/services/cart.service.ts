@@ -51,24 +51,27 @@ export class CartService {
     return savedItems ? JSON.parse(savedItems) : [];
   }
 
-  addItem(painting: Painting) {
-    const currentItems = this.itemsSubject.value;
-    const existingItem = currentItems.find((i) => i.productId === painting.id);
-    if (existingItem) {
-      existingItem.quantity += 1;
+  addItem(p: { id: number; name: string; price: number; imageUrl?: string | null }) {
+    const items = [...this.itemsSubject.value];
+
+    const existing = items.find(i => i.productId === p.id);
+    if (existing) {
+      existing.quantity += 1;
     } else {
       const newItem: CartItem = {
-        productId: painting.id!,
-        productName: painting.name,
-        price: painting.price,
-        quantity: 1
+        productId: p.id,
+        productName: p.name,
+        price: p.price,
+        quantity: 1,
+        imageUrl: p.imageUrl ?? undefined
       };
-      currentItems.push(newItem);
+      items.push(newItem);
     }
-    this.itemsSubject.next(currentItems);
-    this.totalAmountSubject.next(this.calculateTotalAmount(currentItems));
-    this.itemCountSubject.next(this.calculateItemCount(currentItems));
-    this.saveCartItems(currentItems);
+
+    this.itemsSubject.next(items);
+    this.totalAmountSubject.next(this.calculateTotalAmount(items));
+    this.itemCountSubject.next(this.calculateItemCount(items));
+    this.saveCartItems(items);
   }
 
   updateItem(item: CartItem) {

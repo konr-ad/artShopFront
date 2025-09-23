@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { PaintingDetailsDto, PaintingService } from 'src/app/services/painting.service';
+import {
+  MediaFileDto,
+  PaintingDetailsDto,
+  PaintingService
+} from 'src/app/services/painting.service';
 import { CartService } from 'src/app/services/cart.service';
 
 @Component({
@@ -9,14 +13,14 @@ import { CartService } from 'src/app/services/cart.service';
   styleUrls: ['./painting-detail.component.css'],
 })
 export class PaintingDetailComponent implements OnInit {
-  painting?: PaintingDetailsDto;
+  details: PaintingDetailsDto | null = null;
 
-  // UI-only state
-  heroUrl: string | null = null;
+  // stan galerii
   thumbUrls: string[] = [];
   selectedIndex = 0;
-  selectedImgUrl?: string;
+  selectedImgUrl: string | null = null;
 
+  // UI
   buttonText = 'Add to Cart';
   isButtonDisabled = false;
   isExpanded = false;
@@ -28,52 +32,62 @@ export class PaintingDetailComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.route.params.subscribe(({ id }) => this.loadPainting(+id));
+    this.route.params.subscribe(params => {
+      const id = +params['id'];
+      this.paintingService.details(id).subscribe(dto => {
+        this.details = dto;
+        this.buildGallery(dto);
+      });
+    });
   }
 
-  private loadPainting(id: number) {
-    this.paintingService.details(id).subscribe(dto => {
-      this.painting = dto;
+  private buildGallery(dto: PaintingDetailsDto) {
+    const media = (dto.media ?? [])
+      .slice()
+      .sort((a, b) =>
+        Number(b.isPrimary) - Number(a.isPrimary) ||
+        (a.sortOrder ?? 0) - (b.sortOrder ?? 0)
+      );
 
-      const sorted = (dto.media ?? [])
-        .sort((a, b) => (Number(b.isPrimary) - Number(a.isPrimary)) || (a.sortOrder - b.sortOrder));
+    this.thumbUrls = media
+      .map(m => this.paintingService.fullUrl(m.url))
+      .filter((u): u is string => !!u);
 
-      this.thumbUrls = sorted
-        .map(m => this.paintingService.fullUrl(m.url)!)
-        .filter(Boolean);
-
-      this.selectedIndex = 0;
-      this.heroUrl = this.thumbUrls[0] ?? null;
-      this.selectedImgUrl = this.heroUrl ?? undefined;
-    });
+    this.selectedIndex = 0;
+    this.selectedImgUrl = this.thumbUrls[0] ?? null;
   }
 
   selectThumb(i: number) {
     this.selectedIndex = i;
-    this.selectedImgUrl = this.thumbUrls[i];
+    this.selectedImgUrl = this.thumbUrls[i] ?? null;
   }
 
   addToCart(): void {
-    if (!this.painting) return;
+    if (!this.details) return;
 
-    // Dopasuj do modelu koszyka – tu przykład minimalny
+    // spróbuj wziąć primary → pierwszy
+    const primaryUrl = this.details.media?.find((m: MediaFileDto) => m.isPrimary)?.url
+      ?? this.details.media?.[0]?.url
+      ?? null;
+
+    const full = this.paintingService.fullUrl(primaryUrl);
+
     this.cartService.addItem({
-      id: this.painting.id,
-      name: this.painting.name,
-      price: Number(this.painting.price),
-      imageUrl: this.selectedImgUrl || this.heroUrl || undefined,
-      quantity: 1,
-    } as any);
+      id: this.details.id,
+      name: this.details.name,
+      price: this.details.price,
+      imageUrl: full || undefined,
+    });
 
     this.buttonText = 'Added!';
     this.isButtonDisabled = true;
     setTimeout(() => {
       this.buttonText = 'Add to Cart';
       this.isButtonDisabled = false;
-    }, 1500);
+    }, 2000);
   }
 
   toggleList() { this.isExpanded = !this.isExpanded; }
 
-  trackByIndex = (_: number, __: unknown) => _;
+  trackByIndex = (i: number) => i;
 }
