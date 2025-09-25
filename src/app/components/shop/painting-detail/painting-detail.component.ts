@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import {
   MediaFileDto,
   PaintingDetailsDto,
-  PaintingService
+  PaintingService, PaintingType
 } from 'src/app/services/painting.service';
 import { CartService } from 'src/app/services/cart.service';
 
@@ -77,6 +77,7 @@ export class PaintingDetailComponent implements OnInit {
       name: this.details.name,
       price: this.details.price,
       imageUrl: full || undefined,
+      type: this.details.type as PaintingType
     });
 
     this.buttonText = 'Added!';

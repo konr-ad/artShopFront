@@ -1,17 +1,69 @@
-<div
-  class="thankyou-page container mx-auto p-4 text-center min-h-screen flex flex-col items-center justify-center bg-gray-100"
->
-  <img src="assets/thankyou.png" alt="Thank You" class="w-128 h-90 mb-4" />
-  <h1 class="text-4xl font-bold text-gray-800 mb-4">Thank You for Your Purchase!</h1>
-  <p class="text-lg text-gray-600 mb-8">
-    Your order has been placed successfully. We appreciate your business and hope you enjoy your new
-    artwork.
-  </p>
-  <div>
-    <a
-      routerLink="/home"
-      class="w-full block bg-gray-500 text-gray-100 py-1 px-3 hover:bg-gray-500 text-center rounded"
-      >Back to home</a
-    >
+<section class="relative isolate min-h-[70vh] flex items-center justify-center overflow-hidden bg-gradient-to-b from-gray-50 to-white">
+  <!-- Dekoracje tła -->
+  <div class="pointer-events-none absolute -top-24 -left-24 h-72 w-72 rounded-full bg-indigo-200/40 blur-3xl"></div>
+  <div class="pointer-events-none absolute -bottom-24 -right-24 h-80 w-80 rounded-full bg-rose-200/40 blur-3xl"></div>
+
+  <!-- Karta potwierdzenia -->
+  <div class="relative w-full max-w-2xl rounded-3xl bg-white/80 backdrop-blur-xl shadow-2xl ring-1 ring-black/5 p-8 sm:p-10">
+    <!-- Ikona ✔ -->
+    <div class="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-indigo-500 to-fuchsia-500 shadow-lg">
+      <svg class="h-7 w-7 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M20 7l-9 9-4-4"/>
+      </svg>
+    </div>
+
+    <h1 class="mt-6 text-center text-3xl font-extrabold tracking-tight text-gray-900">
+      Dziękujemy za zakup!
+    </h1>
+    <p class="mt-3 text-center text-gray-600">
+      Twoje zamówienie zostało złożone pomyślnie.
+      <span *ngIf="email; else genericEmail">Wyślemy potwierdzenie oraz szczegóły dostawy na <strong>{{ email }}</strong>.</span>
+    </p>
+    <ng-template #genericEmail>
+      <span>Wyślemy potwierdzenie oraz szczegóły dostawy na Twój adres e-mail.</span>
+    </ng-template>
+
+    <!-- Podsumowanie -->
+    <div class="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-3">
+      <div class="rounded-2xl border border-gray-200 bg-white p-4">
+        <div class="text-xs uppercase tracking-wider text-gray-500">Numer zamówienia</div>
+        <div class="mt-1 font-semibold text-gray-900">
+          {{ orderId || 'w trakcie przetwarzania' }}
+        </div>
+      </div>
+      <div class="rounded-2xl border border-gray-200 bg-white p-4">
+        <div class="text-xs uppercase tracking-wider text-gray-500">Płatność</div>
+        <div class="mt-1 font-semibold text-gray-900">PayU</div>
+      </div>
+      <div class="rounded-2xl border border-gray-200 bg-white p-4">
+        <div class="text-xs uppercase tracking-wider text-gray-500">Status</div>
+        <div class="mt-1 font-semibold text-emerald-600">Przyjęto</div>
+      </div>
+    </div>
+
+    <!-- Info o wysyłce maila -->
+    <div class="mt-6 rounded-2xl bg-indigo-50/70 p-4 ring-1 ring-indigo-100">
+      <p class="text-sm text-indigo-900">
+        W ciągu kilku minut otrzymasz e-mail z potwierdzeniem zamówienia, szczegółami płatności oraz informacjami o dostawie.
+        Jeśli wiadomość nie dotrze, sprawdź folder „Spam”/„Oferty”.
+      </p>
+    </div>
+
+    <!-- CTA -->
+    <div class="mt-8 flex flex-col-reverse items-center justify-center gap-3 sm:flex-row">
+      <a routerLink="/shop"
+         class="inline-flex items-center justify-center rounded-xl px-5 py-3 ring-1 ring-gray-200 text-gray-700 hover:bg-gray-50">
+        Kontynuuj zakupy
+      </a>
+      <a routerLink="/gallery"
+         class="inline-flex items-center justify-center rounded-xl px-5 py-3 bg-gray-900 text-white hover:bg-gray-800 shadow">
+        Zobacz galerię
+      </a>
+    </div>
+
+    <!-- Subtle signature -->
+    <p class="mt-6 text-center text-xs text-gray-400">
+      Dziękujemy za wspieranie niezależnej sztuki ✨
+    </p>
   </div>
-</div>
+</section>

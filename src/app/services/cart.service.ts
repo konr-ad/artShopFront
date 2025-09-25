@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { Painting } from 'src/app/services/painting.service';
+import {Painting, PaintingType} from 'src/app/services/painting.service';
 
 export interface CartItem {
   productId: number;
@@ -8,6 +8,7 @@ export interface CartItem {
   price: number;
   quantity: number;
   imageUrl?: string;
+  type: PaintingType;
 }
 
 @Injectable({
@@ -51,7 +52,7 @@ export class CartService {
     return savedItems ? JSON.parse(savedItems) : [];
   }
 
-  addItem(p: { id: number; name: string; price: number; imageUrl?: string | null }) {
+  addItem(p: { id: number; name: string; price: number; imageUrl?: string | null; type: PaintingType }) {
     const items = [...this.itemsSubject.value];
 
     const existing = items.find(i => i.productId === p.id);
@@ -63,7 +64,8 @@ export class CartService {
         productName: p.name,
         price: p.price,
         quantity: 1,
-        imageUrl: p.imageUrl ?? undefined
+        imageUrl: p.imageUrl ?? undefined,
+        type: p.type,
       };
       items.push(newItem);
     }

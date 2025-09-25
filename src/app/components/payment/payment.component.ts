@@ -20,6 +20,7 @@ export class PaymentComponent implements OnInit {
   zip: string;
   cartItems: CartItem[] = [];
   totalAmount: number = 0;
+  redirectUri?: string;
 
   constructor(
     private router: Router,
@@ -56,50 +57,47 @@ export class PaymentComponent implements OnInit {
 
   createOrderData() {
     const products = this.cartItems.map((item) => ({
+      paintingId: item.productId,
       name: item.productName,
-      unitPrice: (item.price * 100).toString(),
-      quantity: item.quantity.toString(),
+      paintingType: item.type,             // "OIL" | "MONOTYPE" | "PRINT"
+      unitPrice: item.price,
+      quantity: item.quantity
     }));
-    const totalAmount = this.cartItems
-      .reduce((sum, item) => sum + item.price * item.quantity * 100, 0)
-      .toString();
-    const orderData = {
-      description: this.cartItems.map((item) => item.productName).join(' + '),
-      currencyCode: 'PLN', // Currency code
-      totalAmount: totalAmount, // Total amount
-      extOrderId: 'abc' + Math.floor(Math.random() * 10000).toString(),
-      customer: {
+
+    return {
+      description: this.cartItems.map(i => i.productName).join(' + '),
+      currencyCode: 'PLN',
+      extOrderId: 'abc' + Date.now(),
+      contactEmail: this.email,
+      buyer: {
         email: this.email,
         firstName: this.firstName,
-        lastName: this.lastName,
-        country: this.country,
-        state: this.state,
-        address: this.address,
+        lastName: this.lastName
+      },
+      shippingAddress: {
+        street: this.address,
         apartmentNumber: this.apartmentNumber,
         city: this.city,
+        state: this.state,
         zip: this.zip,
+        country: this.country
       },
-      products: products,
+      products
     };
-    // console.log('Order Data:', orderData);
-    return orderData;
   }
 
   proceedToPayment() {
     const orderData = this.createOrderData();
     this.payuService.initiatePayment(orderData).subscribe({
-      next: (response) => {
-        console.log(response);
-        const redirectUri = response.redirectUri;
-        if (redirectUri) {
-          console.log(response);
-          window.location.href = redirectUri;
-        } else {
-          alert('No redirect URL provided');
+      next: (res) => {
+        sessionStorage.setItem('lastOrderId', res.orderId);
+        sessionStorage.setItem('lastOrderEmail', this.email);
+        this.redirectUri = res.redirectUri;
+        if (!this.redirectUri) {
+          alert('Brak adresu przekierowania');
         }
       },
-      error: (error) => {
-        console.error('Payment initiation error:', error);
+      error: () => {
         alert('Przepraszamy, płatność niedostępna - spróbuj później');
       },
     });
