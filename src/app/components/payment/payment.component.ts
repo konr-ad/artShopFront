@@ -21,6 +21,11 @@ export class PaymentComponent implements OnInit {
   cartItems: CartItem[] = [];
   totalAmount: number = 0;
   redirectUri?: string;
+  showRedirectModal = false;
+  redirectIn = 5;
+  private countdownHandle?: number;
+  private autoRedirectHandle?: number;
+  private hasRedirected = false;
 
   constructor(
     private router: Router,
@@ -90,10 +95,13 @@ export class PaymentComponent implements OnInit {
     const orderData = this.createOrderData();
     this.payuService.initiatePayment(orderData).subscribe({
       next: (res) => {
-        sessionStorage.setItem('lastOrderId', res.orderId);
-        sessionStorage.setItem('lastOrderEmail', this.email);
-        this.redirectUri = res.redirectUri;
-        if (!this.redirectUri) {
+        this.redirectUri = res?.redirectUri;
+        if (res?.orderId) sessionStorage.setItem('lastOrderId', res.orderId);
+        if (this.email)    sessionStorage.setItem('lastOrderEmail', this.email);
+
+        if (this.redirectUri) {
+          this.openRedirectModal();     // <-- nowy modal + autoprzekierowanie
+        } else {
           alert('Brak adresu przekierowania');
         }
       },
@@ -101,5 +109,50 @@ export class PaymentComponent implements OnInit {
         alert('Przepraszamy, płatność niedostępna - spróbuj później');
       },
     });
+  }
+
+  private openRedirectModal() {
+    this.showRedirectModal = true;
+    this.redirectIn = 3;
+    this.hasRedirected = false;
+
+    // odliczanie widoczne w UI
+    this.clearTimers();
+    this.countdownHandle = window.setInterval(() => {
+      this.redirectIn = Math.max(0, this.redirectIn - 1);
+    }, 1000);
+
+    // autoprzekierowanie po 3s
+    this.autoRedirectHandle = window.setTimeout(() => {
+      this.redirectToGateway();
+    }, 3000);
+  }
+
+  private redirectToGateway() {
+    if (this.hasRedirected || !this.redirectUri) return;
+    this.hasRedirected = true;
+    this.clearTimers();
+    window.location.href = this.redirectUri;
+  }
+
+  cancelRedirect() {
+    // opcjonalny „powrót”: po prostu chowamy modal
+    this.clearTimers();
+    this.showRedirectModal = false;
+  }
+
+  private clearTimers() {
+    if (this.countdownHandle) {
+      window.clearInterval(this.countdownHandle);
+      this.countdownHandle = undefined;
+    }
+    if (this.autoRedirectHandle) {
+      window.clearTimeout(this.autoRedirectHandle);
+      this.autoRedirectHandle = undefined;
+    }
+  }
+
+  ngOnDestroy(): void {
+    this.clearTimers();
   }
 }

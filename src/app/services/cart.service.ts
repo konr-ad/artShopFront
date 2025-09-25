@@ -96,4 +96,12 @@ export class CartService {
     this.itemCountSubject.next(this.calculateItemCount(currentItems));
     this.saveCartItems(currentItems);
   }
+
+  clearCart() {
+    const empty: CartItem[] = [];
+    this.itemsSubject.next(empty);
+    this.totalAmountSubject.next(0);
+    this.itemCountSubject.next(0);
+    this.saveCartItems(empty);
+  }
 }

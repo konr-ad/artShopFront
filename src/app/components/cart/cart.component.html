@@ -60,7 +60,7 @@
                 <div class="text-right">
                   <div class="text-sm text-gray-500">Cena</div>
                   <div class="text-base font-semibold text-gray-900">
-                    {{ item.price | currency:'EUR':'symbol' }}
+                    {{ item.price | currency:'PLN':'symbol' }}
                   </div>
                 </div>
               </div>
@@ -83,7 +83,7 @@
                 <div class="text-right">
                   <div class="text-sm text-gray-500">Razem</div>
                   <div class="text-base font-semibold text-gray-900">
-                    {{ (item.price * item.quantity) | currency:'EUR':'symbol' }}
+                    {{ (item.price * item.quantity) | currency:'PLN':'symbol' }}
                   </div>
                 </div>
               </div>
@@ -114,7 +114,7 @@
                 </p>
               </div>
               <div class="text-sm font-semibold text-gray-900">
-                {{ (item.price * item.quantity) | currency:'EUR':'symbol' }}
+                {{ (item.price * item.quantity) | currency:'PLN':'symbol' }}
               </div>
             </li>
           </ul>
@@ -124,7 +124,7 @@
             <div class="flex items-center justify-between">
               <dt class="text-gray-600">Suma produktów</dt>
               <dd class="font-medium text-gray-900">
-                {{ totalAmount | currency:'EUR':'symbol' }}
+                {{ totalAmount | currency:'PLN':'symbol' }}
               </dd>
             </div>
             <div class="flex items-center justify-between border-t border-gray-200 pt-3">
@@ -136,7 +136,7 @@
             <div class="flex items-center justify-between border-t border-gray-200 pt-3">
               <dt class="text-base font-semibold text-gray-900">{{ 'cart.orderTotal' | translate }}</dt>
               <dd class="text-base font-semibold text-gray-900">
-                {{ (totalAmount + 5) | currency:'EUR':'symbol' }}
+                {{ (totalAmount + 5) | currency:'PLN':'symbol' }}
               </dd>
             </div>
           </dl>
