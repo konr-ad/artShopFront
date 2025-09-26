@@ -80,21 +80,28 @@
     </article>
   </div>
 
-  <div class="mt-8 flex items-center justify-center gap-2">
-    <button
-      class="px-3 py-1.5 rounded-full ring-1 ring-black/10 text-gray-700 hover:bg-gray-50 disabled:opacity-40"
+  <!-- Pagination -->
+  <div class="mt-8 flex items-center justify-between">
+    <button *ngIf="pageIndex!==0"
+      class="inline-flex items-center gap-2 rounded-full border border-gray-300 bg-white/80 px-4 py-2
+             text-sm text-gray-700 shadow-sm transition hover:bg-white hover:shadow-md
+             disabled:opacity-40 disabled:hover:shadow-none"
       (click)="prevPage()"
       [disabled]="pageIndex===0"
-    >
+      aria-label="Poprzednia strona">
+      <span class="select-none">←</span>
       {{ 'home.back' | translate }}
     </button>
-    <span class="text-sm text-gray-500">•</span>
+
     <button
-      class="px-3 py-1.5 rounded-full ring-1 ring-black/10 text-gray-700 hover:bg-gray-50 disabled:opacity-40"
+      class="inline-flex items-center gap-2 rounded-full border border-gray-300 bg-white/80 px-4 py-2
+             text-sm text-gray-700 shadow-sm transition hover:bg-white hover:shadow-md
+             disabled:opacity-40 disabled:hover:shadow-none"
       (click)="nextPage()"
       [disabled]="pageIndex + 1 >= totalPages"
-    >
+      aria-label="Następna strona">
       {{ 'home.next' | translate }}
+      <span class="select-none">→</span>
     </button>
   </div>
 </div>
