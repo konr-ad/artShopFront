@@ -3,13 +3,13 @@
 
     <!-- SPIS TREŚCI -->
     <nav class="mb-6 border rounded-lg p-4 bg-gray-50">
-      <h2 class="text-lg font-semibold mb-2">{{ 'terms.toc.title' | translate }}</h2>
+      <h2 id="spisTresci" class="text-lg font-semibold mb-2">{{ 'terms.toc.title' | translate }}</h2>
       <ol class="list-decimal pl-5 space-y-1 text-sm sm:text-base">
-        <li><a class="text-blue-600 underline" href="#wstep">{{ 'terms.toc.items.intro' | translate }}</a></li>
-        <li><a class="text-blue-600 underline" href="#platnosci">{{ 'terms.toc.items.payments' | translate }}</a></li>
-        <li><a class="text-blue-600 underline" href="#dostawa">{{ 'terms.toc.items.delivery' | translate }}</a></li>
-        <li><a class="text-blue-600 underline" href="#reklamacje">{{ 'terms.toc.items.claims' | translate }}</a></li>
-        <li><a class="text-blue-600 underline" href="#final">{{ 'terms.toc.items.final' | translate }}</a></li>
+        <li><a href (click)="scrollTo('wstep', $event)" class="text-blue-600 underline">{{ 'terms.toc.items.intro' | translate }}</a></li>
+        <li><a href (click)="scrollTo('platnosci', $event)" class="text-blue-600 underline" >{{ 'terms.toc.items.payments' | translate }}</a></li>
+        <li><a href (click)="scrollTo('dostawa', $event)" class="text-blue-600 underline" >{{ 'terms.toc.items.delivery' | translate }}</a></li>
+        <li><a href (click)="scrollTo('reklamacje', $event)" class="text-blue-600 underline" >{{ 'terms.toc.items.claims' | translate }}</a></li>
+        <li><a href (click)="scrollTo('final', $event)" class="text-blue-600 underline" >{{ 'terms.toc.items.final' | translate }}</a></li>
       </ol>
     </nav>
 
@@ -19,9 +19,9 @@
 
     <!-- 1 -->
     <h2 id="wstep"
-        class="sticky top-0 sm:top-12 z-10 -mx-4 sm:-mx-6 px-4 sm:px-6 py-2
-               bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/60
-               border-b border-gray-200 text-xl font-semibold">
+        class="scroll-mt-24 sticky top-0 sm:top-12 z-10 -mx-4 sm:-mx-6 px-4 sm:px-6 py-2
+           bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/60
+           border-b border-gray-200 text-xl font-semibold">
       {{ 'terms.s1.heading' | translate }}
     </h2>
     <div class="mt-3 space-y-3">
@@ -34,7 +34,7 @@
 
     <!-- 2 -->
     <h2 id="platnosci"
-        class="sticky top-0 sm:top-12 z-10 -mx-4 sm:-mx-6 px-4 sm:px-6 py-2
+        class="scroll-mt-24 sticky top-0 sm:top-12 z-10 -mx-4 sm:-mx-6 px-4 sm:px-6 py-2
                bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/60
                border-b border-gray-200 text-xl font-semibold mt-8">
       {{ 'terms.s2.heading' | translate }}
@@ -53,7 +53,7 @@
 
     <!-- 3 -->
     <h2 id="dostawa"
-        class="sticky top-0 sm:top-12 z-10 -mx-4 sm:-mx-6 px-4 sm:px-6 py-2
+        class="scroll-mt-24 sticky top-0 sm:top-12 z-10 -mx-4 sm:-mx-6 px-4 sm:px-6 py-2
                bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/60
                border-b border-gray-200 text-xl font-semibold mt-8">
       {{ 'terms.s3.heading' | translate }}
@@ -78,7 +78,7 @@
 
     <!-- 4 -->
     <h2 id="reklamacje"
-        class="sticky top-0 sm:top-12 z-10 -mx-4 sm:-mx-6 px-4 sm:px-6 py-2
+        class="scroll-mt-24 sticky top-0 sm:top-12 z-10 -mx-4 sm:-mx-6 px-4 sm:px-6 py-2
                bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/60
                border-b border-gray-200 text-xl font-semibold mt-8">
       {{ 'terms.s4.heading' | translate }}
@@ -110,7 +110,7 @@
 
     <!-- 5 -->
     <h2 id="final"
-        class="sticky top-0 sm:top-12 z-10 -mx-4 sm:-mx-6 px-4 sm:px-6 py-2
+        class="scroll-mt-24 sticky top-0 sm:top-12 z-10 -mx-4 sm:-mx-6 px-4 sm:px-6 py-2
                bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/60
                border-b border-gray-200 text-xl font-semibold mt-8">
       {{ 'terms.s5.heading' | translate }}

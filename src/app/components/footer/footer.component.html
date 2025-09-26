@@ -25,15 +25,19 @@
 
       <!-- nawigacja -->
       <nav class="flex flex-col items-center gap-3 text-sm sm:flex-row sm:justify-center sm:gap-6">
-        <a routerLink="/terms"
+        <a [routerLink]="['/terms']"
+           [fragment]="'spisTresci'"
            class="text-slate-300 hover:text-white transition underline-offset-4 hover:underline">
           {{ 'footer.terms' | translate }}
         </a>
-        <a routerLink="/payment-shipping"
+        <a [routerLink]="['/terms']"
+           [fragment]="'platnosci'"
            class="text-slate-300 hover:text-white transition underline-offset-4 hover:underline">
           {{ 'footer.payments' | translate }}
         </a>
-        <a routerLink="/returns"
+
+        <a [routerLink]="['/terms']"
+           [fragment]="'reklamacje'"
            class="text-slate-300 hover:text-white transition underline-offset-4 hover:underline">
           {{ 'footer.returns' | translate }}
         </a>

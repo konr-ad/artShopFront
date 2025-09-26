@@ -117,3 +117,5 @@ h6 {
   position: relative;
   top: -10px;
 }
+
+html { scroll-behavior: smooth; }
