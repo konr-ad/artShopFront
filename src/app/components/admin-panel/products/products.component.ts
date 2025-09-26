@@ -1,5 +1,4 @@
 import { Component, ViewChild } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { SidebarComponent } from '../sidebar/sidebar.component';
 import { AdminProductListComponent } from './product-list/admin-product-list.component';
 import { AdminProductDetailsComponent } from './admin-product-details/admin-product-details.component';
@@ -9,7 +8,6 @@ import { AddProductModalComponent } from './add-product-modal/add-product-modal.
   selector: 'app-products',
   standalone: true,
   imports: [
-    CommonModule,
     SidebarComponent,
     AdminProductListComponent,
     AdminProductDetailsComponent,
@@ -19,21 +17,21 @@ import { AddProductModalComponent } from './add-product-modal/add-product-modal.
   styleUrls: ['./products.component.css'],
 })
 export class ProductsComponent {
-  @ViewChild(AddProductModalComponent) addProductModal!: AddProductModalComponent;
-  @ViewChild(AdminProductListComponent) adminProductListComponent!: AdminProductListComponent;
+  @ViewChild('adminList') adminProductListComponent!: AdminProductListComponent;
+
   selectedProduct: any;
+  isAddOpen = false;
+
   onProductSelected(product: any) {
     this.selectedProduct = product;
-    console.log('Selected product:', product); // Debug log
   }
 
-  // openAddProductModal() {
-  //   this.addProductModal.open();
-  // }
+  openAddProductModal() {
+    this.isAddOpen = true;
+  }
 
   handleProductAdded(newProduct: any) {
-    console.log('Product added:', newProduct);
+    this.isAddOpen = false;
     this.adminProductListComponent.refreshProducts();
-    this.addProductModal.close();
   }
 }

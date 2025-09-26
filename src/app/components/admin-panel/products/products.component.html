@@ -1,19 +1,28 @@
-<div class="flex min-h-screen w-full flex-col bg-white">
+<div class="flex min-h-screen w-full flex-col bg-gradient-to-br from-slate-50 to-white">
   <app-sidebar></app-sidebar>
-  <div class="flex flex-1 px-20">
-    <div class="w-2/3">
-      <app-admin-product-list>
-<!--        (productSelected)="onProductSelected($event)"-->
-<!--        (addProduct)="openAddProductModal()"-->
-      ></app-admin-product-list>
-      <app-add-product-modal
-        (productAdded)="handleProductAdded($event)"
-        (close)="addProductModal.close()"
-      >
-      </app-add-product-modal>
-    </div>
-    <div class="w-1/3 pl-6">
-      <app-admin-product-details [product]="selectedProduct"></app-admin-product-details>
-    </div>
-  </div>
+
+  <main class="mx-auto max-w-7xl px-6 py-6 flex flex-1 gap-6">
+    <!-- LISTA -->
+    <section class="w-full lg:w-2/3">
+      <app-admin-product-list
+        (productSelected)="onProductSelected($event)"
+        (addProduct)="openAddProductModal()"
+        #adminList>
+      </app-admin-product-list>
+    </section>
+
+    <!-- SZCZEGÓŁY -->
+    <aside class="hidden lg:block lg:w-1/3">
+      <div class="sticky top-20">
+        <app-admin-product-details [product]="selectedProduct"></app-admin-product-details>
+      </div>
+    </aside>
+  </main>
+
+  <!-- JEDEN modal na poziomie rodzica -->
+  <app-add-product-modal
+    [isOpen]="isAddOpen"
+    (closed)="isAddOpen = false"
+    (productAdded)="handleProductAdded($event)">
+  </app-add-product-modal>
 </div>

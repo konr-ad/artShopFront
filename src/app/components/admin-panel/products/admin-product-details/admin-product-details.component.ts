@@ -1,19 +1,21 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
-import { CommonModule, NgForOf, NgIf } from '@angular/common';
+import { CommonModule, NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-admin-product-details',
   standalone: true,
-  imports: [CommonModule, NgIf, NgForOf],
+  imports: [CommonModule, NgIf],
   templateUrl: './admin-product-details.component.html',
-  styleUrl: './admin-product-details.component.css',
+  styleUrls: ['./admin-product-details.component.css'],
 })
 export class AdminProductDetailsComponent implements OnChanges {
   @Input() product: any;
-
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes['product']) {
-      console.log('Product detail input:', this.product);
-    }
+  imageSrc = 'assets/placeholder.png';
+  ngOnChanges(): void {
+    const p = this.product;
+    this.imageSrc =
+      (p?.imageUrl && p.imageUrl.trim()) ||
+      (p?.image ? `data:image/jpeg;base64,${p.image}` : 'assets/placeholder.png');
   }
+
 }

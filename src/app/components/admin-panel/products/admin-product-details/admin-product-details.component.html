@@ -1,24 +1,60 @@
-<div *ngIf="product; else noProduct" class="w-full p-6 bg-white text-black shadow-lg rounded-lg">
-  <h2 class="text-2xl font-bold mb-4 text-center">{{ product.name }}</h2>
-  <div class="flex justify-center items-center">
-    <img
-      [src]="product.imageUrl"
-      alt="{{ product.name }}"
-      class="w-1/2 mb-4 rounded-lg shadow-md"
-    />
+<!-- Gdy jest produkt -->
+<div *ngIf="product; else empty"
+     class="rounded-2xl bg-white/80 backdrop-blur ring-1 ring-black/5 p-6 shadow-[0_8px_30px_rgba(0,0,0,0.06)]">
+
+  <!-- Header -->
+  <div class="flex items-start justify-between gap-3">
+    <div>
+      <h2 class="text-xl font-bold text-slate-900">{{ product.name }}</h2>
+      <div class="mt-2 flex flex-wrap items-center gap-2">
+        <span class="rounded-full bg-slate-100 px-2.5 py-1 text-[11px] font-medium text-slate-700 ring-1 ring-slate-200">
+          {{ product.type || '—' }}
+        </span>
+        <span *ngIf="product.state"
+              class="rounded-full bg-emerald-50 px-2.5 py-1 text-[11px] font-medium text-emerald-700 ring-1 ring-emerald-200">
+          {{ product.state }}
+        </span>
+        <span class="text-xs text-slate-500">#{{ product.id }}</span>
+      </div>
+    </div>
+
+    <div class="flex items-center gap-2">
+      <button class="inline-flex items-center rounded-xl bg-white px-3 py-2 text-sm text-slate-700 ring-1 ring-slate-200 hover:bg-slate-50">
+        <span class="material-icons-outlined mr-1 text-base">visibility</span> Podgląd
+      </button>
+      <button class="inline-flex items-center rounded-xl bg-slate-900 px-3 py-2 text-sm text-white hover:bg-slate-800">
+        <span class="material-icons-outlined mr-1 text-base">edit</span> Edytuj
+      </button>
+    </div>
   </div>
-  <div class="flex justify-between mb-4">
-    <span>Opis</span>
-    <span>{{ product.description }}</span>
+
+  <!-- Image -->
+  <div class="mt-4 overflow-hidden rounded-xl ring-1 ring-black/5">
+    <img [src]="imageSrc" [alt]="product?.name" class="w-full aspect-[4/3] object-cover" />
+
   </div>
-  <div class="flex justify-between mb-4">
-    <span>Cena</span>
-    <span>{{ product.price | currency: 'PLN' : 'symbol' : '1.0-2' }}</span>
-  </div>
+
+  <!-- Meta -->
+  <dl class="mt-5 space-y-3 text-sm">
+    <div class="flex items-start justify-between gap-4">
+      <dt class="text-slate-500">Opis</dt>
+      <dd class="text-right text-slate-900 max-w-[65%]">
+        {{ product.description || '—' }}
+      </dd>
+    </div>
+    <div class="flex items-center justify-between gap-4">
+      <dt class="text-slate-500">Cena</dt>
+      <dd class="font-semibold text-slate-900">
+        {{ product.price | currency:'PLN':'symbol':'1.0-2' }}
+      </dd>
+    </div>
+  </dl>
 </div>
 
-<ng-template #noProduct>
-  <div class="w-full p-12 bg-white text-black shadow-lg rounded-lg">
-    <h2 class="text-3xl font-bold mb-4 text-center">Brak Wybranego Produktu</h2>
+<!-- Pusty stan -->
+<ng-template #empty>
+  <div class="rounded-2xl bg-white/70 backdrop-blur ring-1 ring-black/5 p-10 text-center text-slate-600 shadow-[0_8px_30px_rgba(0,0,0,0.06)]">
+    <h3 class="text-lg font-semibold text-slate-900">Brak wybranego produktu</h3>
+    <p class="mt-1 text-sm">Zaznacz pozycję z listy po lewej, aby zobaczyć szczegóły.</p>
   </div>
 </ng-template>
