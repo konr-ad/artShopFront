@@ -14,6 +14,7 @@ import { CartService } from 'src/app/services/cart.service';
 })
 export class PaintingDetailComponent implements OnInit {
   details: PaintingDetailsDto | null = null;
+  added: boolean = false;
 
   // stan galerii
   thumbUrls: string[] = [];
@@ -21,7 +22,6 @@ export class PaintingDetailComponent implements OnInit {
   selectedImgUrl: string | null = null;
 
   // UI
-  buttonText = 'Add to Cart';
   isButtonDisabled = false;
   isExpanded = false;
 
@@ -80,10 +80,11 @@ export class PaintingDetailComponent implements OnInit {
       type: this.details.type as PaintingType
     });
 
-    this.buttonText = 'Added!';
+    this.added = true;
     this.isButtonDisabled = true;
+
     setTimeout(() => {
-      this.buttonText = 'Add to Cart';
+      this.added = false;
       this.isButtonDisabled = false;
     }, 2000);
   }

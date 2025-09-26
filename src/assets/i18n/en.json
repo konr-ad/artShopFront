@@ -4,6 +4,7 @@
       "_": "Shop",
       "paintingType": "Painting type",
       "price": "Price",
+      "total": "Total",
       "menu": {
         "all": "All",
         "oils": "Oils",
@@ -15,17 +16,46 @@
     "about": {
       "_": "About me",
       "menu": {
-        "bio": "Biography",
+        "bio": "Bio",
         "exhibitions": "Exhibitions",
-        "contact": "Contact"
+        "contact": {
+          "_": "Contact",
+          "address": "Address",
+          "country": "Poland"
+        }
       }
-    },
-    "cart": "Cart"
+    }
+  },
+  "home": {
+    "back": "Previous",
+    "next": "Next"
+  },
+  "painting": {
+    "types": {
+      "oil": "OIL",
+      "monotype": "MONOTYPE",
+      "print": "PRINT"
+    }
   },
   "bio": {
     "p1": "Born in Poland in 1969, where she currently works. From 1989 to 1995 she studied at the Moscow Higher Institute of Monumental and Decorative Applied Arts. There she graduated with a rector’s distinction in the specialty of conservation of monumental painting, obtaining the qualification of conservation artist and the academic title of Master of Art History.",
     "p2": "From 1996 to 1998 she pursued doctoral studies at the Russian State University for the Humanities in Moscow, Faculty of Museology. She works in painting, drawing, printmaking, and illustration. In her creative practice she does not impose uniform boundaries or use standard technologies. She has developed her own technique, combining monotype prints with painting.",
     "p3": "Human and private visions of objects and the world are the themes she most willingly explores. Since 1999, Kamila Białkowska-Ismaił has been a member of the graphics section of the Association of Polish Artists and Designers."
+  },
+  "cart": {
+    "_": "Cart",
+    "empty": "Your cart is empty",
+    "backToShopButton": "Back to shop",
+    "orderSummary": "Order Summary",
+    "quantity": "Quantity",
+    "shipping": "Shipping",
+    "orderSubtotal": "Subtotal",
+    "orderTotal": "Order total",
+    "placeholder": "Type your code",
+    "doYouHaveDiscountCode": "Do you have a discount code?",
+    "addDiscountCode": "Add a discount code",
+    "applyCode": "Apply a discount code",
+    "proceed": "Checkout"
   },
   "checkout": {
     "title": "Checkout",
@@ -225,12 +255,17 @@
       "effectiveDate": "Effective date: {{date}}"
     }
   },
+  "paintingDetail": {
+    "addToCart": "Add to Cart",
+    "added": "Added!"
+  },
   "footer": {
     "rights": "All rights reserved",
     "privacy": "Privacy Policy",
     "terms": "Terms & Conditions",
     "returns": "Returns",
-    "payments": "Payments"
+    "payments": "Payments",
+    "3": "paintings • graphics • monotypes"
   },
   "lang": {
     "switchTo": {

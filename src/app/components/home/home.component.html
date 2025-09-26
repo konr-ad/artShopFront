@@ -1,32 +1,32 @@
 <div class="mx-auto max-w-7xl px-4 py-6">
   <!-- top bar -->
-  <div class="mb-6 flex items-center justify-between">
-    <div class="text-sm text-gray-500">
-      <span class="inline-flex items-center gap-2">
-        <span class="h-2 w-2 rounded-full bg-indigo-400"></span>
-        Strona {{ pageIndex + 1 }} z {{ totalPages }}
-      </span>
-    </div>
+<!--  <div class="mb-6 flex items-center justify-between">-->
+<!--    <div class="text-sm text-gray-500">-->
+<!--      <span class="inline-flex items-center gap-2">-->
+<!--        <span class="h-2 w-2 rounded-full bg-indigo-400"></span>-->
+<!--        Strona {{ pageIndex + 1 }} z {{ totalPages }}-->
+<!--      </span>-->
+<!--    </div>-->
 
-    <div class="inline-flex overflow-hidden rounded-full shadow-sm ring-1 ring-black/5">
-      <button
-        class="px-3 py-1.5 text-gray-700 hover:bg-gray-50 disabled:opacity-40"
-        (click)="prevPage()"
-        [disabled]="pageIndex===0"
-        aria-label="Poprzednia strona"
-      >
-        ←
-      </button>
-      <button
-        class="px-3 py-1.5 border-l border-gray-200 text-gray-700 hover:bg-gray-50 disabled:opacity-40"
-        (click)="nextPage()"
-        [disabled]="pageIndex + 1 >= totalPages"
-        aria-label="Następna strona"
-      >
-        →
-      </button>
-    </div>
-  </div>
+<!--    <div class="inline-flex overflow-hidden rounded-full shadow-sm ring-1 ring-black/5">-->
+<!--      <button-->
+<!--        class="px-3 py-1.5 text-gray-700 hover:bg-gray-50 disabled:opacity-40"-->
+<!--        (click)="prevPage()"-->
+<!--        [disabled]="pageIndex===0"-->
+<!--        aria-label="Poprzednia strona"-->
+<!--      >-->
+<!--        ←-->
+<!--      </button>-->
+<!--      <button-->
+<!--        class="px-3 py-1.5 border-l border-gray-200 text-gray-700 hover:bg-gray-50 disabled:opacity-40"-->
+<!--        (click)="nextPage()"-->
+<!--        [disabled]="pageIndex + 1 >= totalPages"-->
+<!--        aria-label="Następna strona"-->
+<!--      >-->
+<!--        →-->
+<!--      </button>-->
+<!--    </div>-->
+<!--  </div>-->
 
   <!-- states -->
   <div *ngIf="error" class="mb-4 rounded-xl bg-red-50 p-3 text-sm text-red-700 ring-1 ring-red-200">
@@ -52,7 +52,6 @@
           class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
         />
 
-        <!-- gentle gradient to make text pop -->
         <div class="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/60 via-black/0"></div>
 
         <!-- type chip -->
@@ -60,7 +59,7 @@
           <span
             class="rounded-full bg-white/85 px-2.5 py-1 text-[10px] font-medium uppercase tracking-wide text-gray-800 backdrop-blur ring-1 ring-black/5"
           >
-            {{ painting.type }}
+            {{ ('painting.types.' + (painting.type | lowercase)) | translate }}
           </span>
         </div>
 
@@ -81,14 +80,13 @@
     </article>
   </div>
 
-  <!-- bottom pager (opcjonalnie, usuń jeśli nie chcesz) -->
   <div class="mt-8 flex items-center justify-center gap-2">
     <button
       class="px-3 py-1.5 rounded-full ring-1 ring-black/10 text-gray-700 hover:bg-gray-50 disabled:opacity-40"
       (click)="prevPage()"
       [disabled]="pageIndex===0"
     >
-      Poprzednia
+      {{ 'home.back' | translate }}
     </button>
     <span class="text-sm text-gray-500">•</span>
     <button
@@ -96,7 +94,7 @@
       (click)="nextPage()"
       [disabled]="pageIndex + 1 >= totalPages"
     >
-      Następna
+      {{ 'home.next' | translate }}
     </button>
   </div>
 </div>

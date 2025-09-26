@@ -4,6 +4,7 @@
       "_": "Sklep",
       "paintingType": "Typ obrazu",
       "price": "Cena",
+      "total": "Razem",
       "menu": {
         "all": "Wszystko",
         "oils": "Oleje",
@@ -17,10 +18,24 @@
       "menu": {
         "bio": "Biografia",
         "exhibitions": "Wystawy",
-        "contact": "Kontakt"
+        "contact": {
+          "_": "Kontakt",
+          "address": "Adres",
+          "country": "Polska"
+        }
       }
-    },
-    "cart": "Koszyk"
+    }
+  },
+  "home": {
+    "back": "Poprzednia",
+    "next": "Następna"
+  },
+  "painting": {
+    "types": {
+      "oil": "OLEJ",
+      "monotype": "MONOTYP",
+      "print": "DRUK"
+    }
   },
   "bio": {
     "p1": "Urodzona w Polsce w 1969, gdzie obecnie pracuje. W latach 1989 -1995 studiowała w Wyższym Moskiewskim Instytucie Sztuki Monumentalno-Dekoracyjnej i Stosowanej. Uzyskała tam dyplom z wyróżnieniem rektorskim w specjalności konserwacja malarstwa monumentalnego i otrzymała kwalifikację artysty konserwatora oraz tytuł naukowy magistra historii sztuki. ",
@@ -29,10 +44,14 @@
   },
   "cart": {
     "_": "Koszyk",
+    "empty": "Twój koszyk jest pusty",
+    "backToShopButton": "Powrót do sklepu",
     "orderSummary": "Podsumowanie zamówienia",
     "quantity": "Ilość",
     "shipping": "Dostawa",
+    "orderSubtotal": "Suma produktów",
     "orderTotal": "Razem",
+    "placeholder": "Wpisz kod",
     "doYouHaveDiscountCode": "Czy posiadasz kod zniżkowy?",
     "addDiscountCode": "Dodaj kod zniżkowy",
     "applyCode": "Zastosuj kod zniżkowy",
@@ -236,12 +255,17 @@
       "effectiveDate": "Data wejścia w życie: {{date}}"
     }
   },
+  "paintingDetail": {
+    "addToCart": "Dodaj do koszyka",
+    "added": "Dodano!"
+  },
   "footer": {
     "rights": "Wszelkie prawa zastrzeżone",
     "privacy": "Polityka prywatności",
     "terms": "Regulamin",
     "returns": "Zwroty",
-    "payments": "Płatności"
+    "payments": "Płatności",
+    "3": "malarstwo • grafika • monotypia"
   },
   "lang": {
     "switchTo": {
