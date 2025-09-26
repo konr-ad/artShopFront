@@ -13,6 +13,7 @@ import { AuthService } from '../../../services/AuthService';
 })
 export class LoginComponent implements OnInit {
   loading = false;
+  showPwd = false;
   error: string | null = null;
   banner: string | null = null;
   private returnUrl = '/admin/dashboard';
@@ -45,7 +46,7 @@ export class LoginComponent implements OnInit {
       this.router.navigateByUrl(this.returnUrl);
     }
   }
-
+  togglePwd() { this.showPwd = !this.showPwd; }
   submit() {
     if (this.form.invalid) {
       this.form.markAllAsTouched();

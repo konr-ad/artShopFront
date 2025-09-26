@@ -1,35 +1,114 @@
-<div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
-  <div class="sm:mx-auto sm:w-full sm:max-w-sm">
-    <h2 class="mt-10 text-center text-2xl font-bold">Logowanie do Panelu Administratora</h2>
-  </div>
-
-  <div class="mt-4 sm:mx-auto sm:w-full sm:max-w-sm" *ngIf="banner">
-    <div class="rounded bg-yellow-50 border border-yellow-300 text-yellow-900 p-3 text-sm">
-      {{ banner }}
+<div class="min-h-screen bg-gradient-to-br from-rose-50 via-indigo-50 to-sky-50
+            flex items-center justify-center px-6 py-12">
+  <div class="w-full max-w-md">
+    <!-- Header -->
+    <div class="text-center">
+      <div class="mx-auto h-12 w-12 rounded-2xl bg-gradient-to-br from-indigo-500 to-rose-500
+                  text-white grid place-items-center shadow-lg ring-1 ring-black/5">
+        <!-- palette icon -->
+        <svg class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M12 2a10 10 0 100 20 3 3 0 003-3 2 2 0 012-2h1a2 2 0 000-4h-1a2 2 0 01-2-2 3 3 0 00-3-3h-1a2 2 0 110-4h1z"/>
+        </svg>
+      </div>
+      <h2 class="mt-6 text-2xl font-black tracking-tight text-slate-900">
+        Logowanie do Panelu Administratora
+      </h2>
+      <p class="mt-1 text-sm text-slate-500">Wprowadź dane dostępowe, aby kontynuować.</p>
     </div>
-  </div>
 
-  <div class="mt-6 sm:mx-auto sm:w-full sm:max-w-sm">
-    <form class="space-y-6" [formGroup]="form" (ngSubmit)="submit()">
-      <div>
-        <label for="username" class="block text-sm font-medium">Email / login</label>
-        <input id="username" type="text" formControlName="username"
-               class="mt-1 block w-full rounded-md border ring-1 ring-gray-300" />
+    <!-- Banner -->
+    <div class="mt-6" *ngIf="banner">
+      <div class="rounded-xl bg-amber-50 border border-amber-200 text-amber-900 p-3 text-sm
+                  shadow-sm ring-1 ring-black/5">
+        {{ banner }}
       </div>
+    </div>
 
-      <div>
-        <label for="password" class="block text-sm font-medium">Hasło</label>
-        <input id="password" type="password" formControlName="password"
-               class="mt-1 block w-full rounded-md border ring-1 ring-gray-300" />
-      </div>
+    <!-- Card -->
+    <div class="mt-6 rounded-2xl bg-white/80 backdrop-blur shadow-[0_10px_35px_rgba(0,0,0,0.06)]
+                ring-1 ring-black/5 p-6">
+      <form class="space-y-5" [formGroup]="form" (ngSubmit)="submit()">
+        <!-- USERNAME -->
+        <div>
+          <label for="username" class="block text-sm font-medium text-slate-700">Email / login</label>
+          <div class="mt-1 relative">
+            <span class="pointer-events-none absolute inset-y-0 left-0 pl-3 grid place-items-center">
+              <svg class="h-5 w-5 text-slate-400" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M2.25 6.75A2.25 2.25 0 014.5 4.5h15a2.25 2.25 0 012.25 2.25v.38l-9.24 5.3a2.25 2.25 0 01-2.22 0L2.25 7.13v-.38z"/>
+                <path d="M2.25 8.9l8.66 4.97a3.75 3.75 0 003.18 0l8.66-4.97V17.25A2.25 2.25 0 0120.5 19.5h-16A2.25 2.25 0 012.25 17.25V8.9z"/>
+              </svg>
+            </span>
+            <input id="username" type="text" formControlName="username"
+                   [attr.aria-invalid]="form.get('username')?.invalid && form.get('username')?.touched"
+                   class="block w-full rounded-xl border-0 bg-white/60 pl-10 pr-3 py-2.5
+                          ring-1 ring-slate-200 focus:ring-2 focus:ring-indigo-500 focus:outline-none
+                          placeholder:text-slate-400"
+                   placeholder="jan.kowalski@example.com"/>
+          </div>
+          <p *ngIf="form.get('username')?.invalid && form.get('username')?.touched"
+             class="mt-1 text-xs text-rose-600">
+            Nieprawidłowy login lub wymagane pole.
+          </p>
+        </div>
 
-      <div *ngIf="error" class="text-red-600 text-sm">{{ error }}</div>
+        <!-- PASSWORD -->
+        <div>
+          <label for="password" class="block text-sm font-medium text-slate-700">Hasło</label>
+          <div class="mt-1 relative">
+            <span class="pointer-events-none absolute inset-y-0 left-0 pl-3 grid place-items-center">
+              <svg class="h-5 w-5 text-slate-400" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 1.5a5.25 5.25 0 00-5.25 5.25v2.25H5.25A2.25 2.25 0 003 11.25v7.5A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75v-7.5A2.25 2.25 0 0018.75 9h-1.5V6.75A5.25 5.25 0 0012 1.5z"/>
+              </svg>
+            </span>
+            <input id="password"
+                   [type]="showPwd ? 'text' : 'password'"
+                   formControlName="password"
+                   [attr.aria-invalid]="form.get('password')?.invalid && form.get('password')?.touched"
+                   class="block w-full rounded-xl border-0 bg-white/60 pl-10 pr-11 py-2.5
+                          ring-1 ring-slate-200 focus:ring-2 focus:ring-indigo-500 focus:outline-none
+                          placeholder:text-slate-400"
+                   placeholder="••••••••"/>
+            <button type="button"
+                    (click)="togglePwd()"
+                    [attr.aria-label]="showPwd ? 'Ukryj hasło' : 'Pokaż hasło'"
+                    class="absolute inset-y-0 right-0 pr-3 grid place-items-center text-slate-400 hover:text-slate-600">
+              <svg *ngIf="!showPwd" class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 5c-7 0-10 7-10 7s3 7 10 7 10-7 10-7-3-7-10-7zm0 11a4 4 0 110-8 4 4 0 010 8z"/>
+              </svg>
+              <svg *ngIf="showPwd" class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M3.53 2.47 2.47 3.53l18 18 1.06-1.06-3.02-3.02A12.4 12.4 0 0022 12s-3-7-10-7c-2.02 0-3.78.5-5.26 1.28L3.53 2.47zM12 18c-7 0-10-6-10-6a19.6 19.6 0 014.16-4.66l2.02 2.02A4 4 0 0012 16a3.98 3.98 0 003.64-2.32l2.16 2.16A11.6 11.6 0 0112 18z"/>
+              </svg>
+            </button>
+          </div>
+          <p *ngIf="form.get('password')?.invalid && form.get('password')?.touched"
+             class="mt-1 text-xs text-rose-600">
+            Hasło jest wymagane.
+          </p>
+        </div>
 
-      <button type="submit"
-              [disabled]="loading || form.invalid"
-              class="w-full rounded-md bg-indigo-600 px-3 py-1.5 text-white disabled:opacity-50">
-        {{ loading ? 'Logowanie…' : 'Zaloguj się' }}
-      </button>
-    </form>
+        <!-- Global error -->
+        <div *ngIf="error" class="rounded-xl bg-rose-50 border border-rose-200 text-rose-700 p-3 text-sm
+                                 ring-1 ring-black/5">
+          {{ error }}
+        </div>
+
+        <!-- Submit -->
+        <button type="submit"
+                [disabled]="loading || form.invalid"
+                class="w-full inline-flex items-center justify-center rounded-xl
+                       bg-gradient-to-r from-indigo-600 to-rose-600 px-5 py-3 text-white
+                       shadow-lg hover:from-indigo-500 hover:to-rose-500
+                       focus:outline-none focus:ring-2 focus:ring-indigo-500
+                       disabled:opacity-50 disabled:cursor-not-allowed transition">
+          <svg *ngIf="loading" class="mr-2 h-4 w-4 animate-spin"
+               viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+               aria-hidden="true">
+            <circle cx="12" cy="12" r="9" class="opacity-25" />
+            <path d="M21 12a9 9 0 00-9-9" class="opacity-75" />
+          </svg>
+          {{ loading ? 'Logowanie…' : 'Zaloguj się' }}
+        </button>
+      </form>
+    </div>
   </div>
 </div>
