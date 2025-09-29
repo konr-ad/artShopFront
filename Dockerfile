@@ -1,35 +1,29 @@
-# Stage 1: Build Angular App
-FROM node:lts as build
+# Stage 1: build Angular
+FROM node:lts AS build
 WORKDIR /app
-
-# Install Angular CLI globally
 RUN npm install -g @angular/cli
 
-# Copy package.json and package-lock.json
 COPY package*.json ./
-
-# Install dependencies
 RUN npm install --legacy-peer-deps
 
-# Copy the rest of the application code
 COPY . .
-
-# Build the Angular app in production mode
+# produkcyjny build (zmień nazwę projektu, jeśli inna niż 'paintings-app')
 RUN ng build --configuration=production
 
-# Stage 2: Serve Angular App with NGINX
+# Stage 2: NGINX
 FROM nginx:latest
 
-# Copy the build output to Nginx
-COPY --from=build /app/dist/paintings-app /usr/share/nginx/html
+# Skopiuj ZAWARTOŚĆ katalogu 'browser' do katalogu serwowanego przez nginx
+COPY --from=build /app/dist/paintings-app/browser/ /usr/share/nginx/html/
 
-# Copy the config.json template (with placeholder)
-COPY src/assets/config/config.json /usr/share/nginx/html/assets/config.json.template
+# Template konfigu: używamy zmiennych środowiskowych
+# UWAGA: zmień zawartość src/assets/config/config.json jak niżej w sekcji 2)
+COPY src/assets/config/config.json /usr/share/nginx/html/assets/config/config.json.template
 
-# Copy nginx.conf
+# Nginx config
 COPY nginx.conf /etc/nginx/nginx.conf
 
-# Replace ENV_API_URL in the config.json using envsubst when the container starts
-CMD ["/bin/sh", "-c", "envsubst < /usr/share/nginx/html/assets/config.json.template > /usr/share/nginx/html/assets/config.json && nginx -g 'daemon off;'"]
+# Start: podstaw ENV w template i odpal Nginx
+CMD ["/bin/sh", "-c", "envsubst < /usr/share/nginx/html/assets/config/config.json.template > /usr/share/nginx/html/assets/config/config.json && exec nginx -g 'daemon off;'"]
 
 EXPOSE 80

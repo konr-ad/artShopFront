@@ -1,5 +1,6 @@
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, Output, SimpleChanges} from '@angular/core';
 import { CommonModule, NgIf } from '@angular/common';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-admin-product-details',
@@ -10,7 +11,9 @@ import { CommonModule, NgIf } from '@angular/common';
 })
 export class AdminProductDetailsComponent implements OnChanges {
   @Input() product: any;
+  @Output() edit = new EventEmitter<number>();
   imageSrc = 'assets/placeholder.png';
+  constructor(private router: Router) {}
   ngOnChanges(): void {
     const p = this.product;
     this.imageSrc =
@@ -18,4 +21,8 @@ export class AdminProductDetailsComponent implements OnChanges {
       (p?.image ? `data:image/jpeg;base64,${p.image}` : 'assets/placeholder.png');
   }
 
+  goToPublic(id?: number) {
+    if (!id) return;
+    this.router.navigate(['/painting', id]); // absolutny route
+  }
 }

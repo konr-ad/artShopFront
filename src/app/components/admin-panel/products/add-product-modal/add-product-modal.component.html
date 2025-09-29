@@ -1,19 +1,18 @@
-<div *ngIf="isOpen" class="fixed inset-0 z-50">
-  <!-- Backdrop -->
-  <div class="absolute inset-0 bg-slate-900/40 backdrop-blur-sm" (click)="close()"></div>
+<div *ngIf="isOpen" class="fixed inset-0 bg-black/50 flex justify-center items-center z-50">
+  <div class="bg-white p-6 rounded-2xl shadow-lg w-full max-w-xl">
+    <h2 class="text-xl font-bold mb-4">
+      {{ mode === 'edit' ? 'Edytuj produkt' : 'Dodaj Nowy Produkt' }}
+    </h2>
 
-  <!-- Dialog -->
-  <div class="relative mx-auto mt-10 w-full max-w-2xl rounded-2xl bg-white p-6 shadow-2xl ring-1 ring-black/5
-              animate-[fadeIn_200ms_ease-out]">
-    <!-- Header -->
-    <div class="flex items-start justify-between">
-      <h2 class="text-xl font-bold text-slate-900">Dodaj nowy produkt</h2>
-      <button (click)="close()" class="rounded-lg p-2 text-slate-500 hover:bg-slate-100">
-        <span class="material-icons">close</span>
-      </button>
+    <!-- info dla edycji -->
+    <div *ngIf="mode==='edit'" class="mb-3 text-sm text-slate-600">
+      ID: #{{ editModel?.id }} •
+      <span class="rounded-full bg-slate-100 px-2 py-0.5 text-[11px] ring-1 ring-slate-200">
+        Obecne zdjęcia zostaną zachowane, jeśli nie dodasz nowych.
+      </span>
     </div>
 
-    <form class="mt-4 space-y-4" [formGroup]="productForm" (ngSubmit)="onSubmit()">
+    <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
 
       <!-- Nazwa + Typ -->
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -98,43 +97,56 @@
           </div>
         </div>
 
-        <!-- Podglądy + wybór głównego -->
-        <div *ngIf="allPreviews.length" class="mt-4">
-          <p class="text-sm text-slate-700 mb-2">Wybierz zdjęcie główne:</p>
-
+        <!-- Podgląd istniejących mediów (read-only) -->
+        <div *ngIf="mode==='edit' && editModel?.media?.length && !allPreviews.length" class="mb-4">
+          <p class="text-sm text-gray-700 mb-2">Aktualne zdjęcia:</p>
           <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
-            <button
-              type="button"
-              *ngFor="let src of allPreviews; let i = index"
-              (click)="selectedPrimaryIndex = i"
-              class="group relative overflow-hidden rounded-lg ring-1 ring-black/5">
-              <img [src]="src" class="h-32 w-full object-cover" />
-              <div class="absolute inset-0"
-                   [class.ring-2]="selectedPrimaryIndex===i"
-                   [class.ring-indigo-500]="selectedPrimaryIndex===i"></div>
-              <div class="absolute right-2 top-2 rounded-full bg-white/90 p-1 ring-1 ring-black/5">
-                <span class="material-icons-outlined text-sm"
-                      [class.text-indigo-600]="selectedPrimaryIndex===i">star</span>
-              </div>
-            </button>
+            <div *ngFor="let mf of editModel?.media" class="border rounded-md overflow-hidden">
+              <img [src]="img(mf.url)" class="w-full h-32 object-cover" />
+              <div class="p-2 text-xs text-slate-600" *ngIf="mf.isPrimary">Główne</div>
+            </div>
           </div>
         </div>
-      </div>
 
-      <div *ngIf="errorMsg" class="text-sm text-rose-600">{{ errorMsg }}</div>
+        <!-- Wgrywanie (jak było) + wybór primary – tylko jeśli dodajesz nowe -->
+        <div class="mb-4">
+          <label class="block text-sm font-medium text-gray-700">
+            {{ mode === 'edit' ? 'Nowe zdjęcia (opcjonalnie – podmieni wszystkie)' : 'Zdjęcie główne *' }}
+          </label>
+          <input type="file" accept="image/png, image/jpeg" (change)="onPrimaryImageChange($event)" class="mt-1 block w-full"/>
+        </div>
 
-      <!-- Actions -->
-      <div class="flex justify-end gap-2 pt-2">
-        <button type="button" (click)="close()"
-                class="rounded-xl bg-white px-4 py-2 text-slate-700 ring-1 ring-slate-200 hover:bg-slate-50"
-                [disabled]="busy">
-          Anuluj
-        </button>
-        <button type="submit"
-                class="rounded-xl bg-slate-900 px-4 py-2 text-white hover:bg-slate-800 disabled:opacity-50"
-                [disabled]="busy || productForm.invalid || allFiles.length === 0">
-          {{ busy ? 'Zapisywanie…' : 'Dodaj' }}
-        </button>
+        <div class="mb-2">
+          <label class="block text-sm font-medium text-gray-700">Dodatkowe zdjęcia</label>
+          <input type="file" multiple accept="image/png, image/jpeg" (change)="onAdditionalImagesChange($event)" class="mt-1 block w-full"/>
+        </div>
+
+        <div *ngIf="allPreviews.length" class="mb-4">
+          <p class="text-sm text-gray-700 mb-2">Wybierz zdjęcie główne:</p>
+          <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
+            <label *ngFor="let src of allPreviews; let i = index"
+                   class="block border rounded-md overflow-hidden cursor-pointer hover:ring-2 hover:ring-indigo-400">
+              <img [src]="src" class="w-full h-32 object-cover"/>
+              <div class="flex items-center gap-2 p-2">
+                <input type="radio" name="primary" [checked]="selectedPrimaryIndex === i" (change)="selectedPrimaryIndex = i"/>
+                <span class="text-sm">{{ i === 0 ? 'Główne (z 1. pola)' : 'Dodatkowe ' + i }}</span>
+              </div>
+            </label>
+          </div>
+        </div>
+
+        <div *ngIf="errorMsg" class="mb-3 text-red-600 text-sm">{{ errorMsg }}</div>
+
+        <div class="flex justify-end gap-2">
+          <button type="button" (click)="close()" class="bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold py-2 px-4 rounded" [disabled]="busy">
+            Anuluj
+          </button>
+          <button type="submit"
+                  class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded disabled:opacity-50"
+                  [disabled]="busy || productForm.invalid || (mode==='create' && allFiles.length === 0)">
+            {{ busy ? (mode==='edit' ? 'Zapisywanie…' : 'Dodawanie…') : (mode==='edit' ? 'Zapisz zmiany' : 'Dodaj') }}
+          </button>
+        </div>
       </div>
     </form>
   </div>

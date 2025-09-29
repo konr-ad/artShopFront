@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output, HostListener } from '@angular/core';
+import {Component, EventEmitter, Input, Output, HostListener, SimpleChanges} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { PaintingService, CreatePaintingRequest, PaintingDetailsDto, PaintingType } from 'src/app/services/painting.service';
@@ -13,6 +13,10 @@ export class AddProductModalComponent {
   @Input() isOpen = false;
   @Output() closed = new EventEmitter<void>();
   @Output() productAdded = new EventEmitter<PaintingDetailsDto>();
+  @Input() mode: 'create' | 'edit' = 'create';
+  @Input() editModel?: PaintingDetailsDto;
+
+  img = (u: string) => this.paintingService.imageUrl(u) ?? u;
 
   productForm: FormGroup;
   primaryFile: File | null = null;
@@ -115,12 +119,29 @@ export class AddProductModalComponent {
     }
   }
 
+  ngOnChanges(ch: SimpleChanges) {
+    if (ch['editModel'] && this.mode === 'edit' && this.editModel) {
+      // wypełnij formularz
+      this.productForm.patchValue({
+        name: this.editModel.name,
+        type: this.editModel.type,
+        price: this.editModel.price,
+        state: this.editModel.state ?? 'AVAILABLE',
+        descriptionPl: this.editModel.description ?? '',
+        descriptionEn: '' // jeśli trzymasz rozdzielnie — dostosuj
+      });
+
+      // wyczyść ewentualne nowe pliki/preview (bo na start pokazujemy istniejące)
+      this.primaryFile = null;
+      this.additionalFiles = [];
+      this.previewUrl = null;
+      this.additionalPreviews = [];
+      this.selectedPrimaryIndex = 0;
+    }
+  }
+
   onSubmit() {
     if (this.productForm.invalid) return;
-    if (this.allFiles.length === 0) {
-      this.errorMsg = 'Dodaj przynajmniej jedno zdjęcie.';
-      return;
-    }
 
     const dto: CreatePaintingRequest = {
       name: this.productForm.value.name!,

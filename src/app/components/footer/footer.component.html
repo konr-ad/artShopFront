@@ -1,11 +1,16 @@
-﻿<footer class="relative mt-16 overflow-hidden text-slate-100
-                bg-gradient-to-br from-slate-900 via-slate-900 to-slate-800
-                ring-1 ring-white/5">
+﻿<footer class="relative mt-16 overflow-hidden text-slate-700
+                bg-gradient-to-br from-white via-indigo-50 to-rose-50
+                ring-1 ring-slate-900/5">
 
-  <!-- dekoracyjne „plamy” -->
+  <!-- dekoracyjne „plamy” / pastelowe bloby -->
   <div class="pointer-events-none absolute inset-0">
-    <div class="absolute -top-24 -right-16 h-64 w-64 rounded-full bg-indigo-400/20 blur-3xl"></div>
-    <div class="absolute -bottom-28 -left-10 h-72 w-72 rounded-full bg-emerald-300/20 blur-3xl"></div>
+    <div class="absolute -top-24 -right-16 h-64 w-64 rounded-full bg-indigo-300/25 blur-3xl"></div>
+    <div class="absolute -bottom-28 -left-10 h-72 w-72 rounded-full bg-rose-300/25 blur-3xl"></div>
+    <div class="absolute left-1/2 top-1/3 -translate-x-1/2 h-40 w-40 rounded-full bg-emerald-300/20 blur-3xl"></div>
+    <!-- subtelna faktura -->
+    <div class="absolute inset-0 opacity-40
+                [mask-image:radial-gradient(1000px_500px_at_50%_120%,black,transparent)]
+                bg-[radial-gradient(ellipse_at_top,rgba(2,6,23,.08),transparent_60%)]"></div>
   </div>
 
   <div class="relative mx-auto max-w-7xl px-6 py-12">
@@ -14,31 +19,27 @@
       <!-- brand -->
       <div class="flex sm:block justify-center text-center sm:text-left">
         <div>
-          <div class="inline-flex items-center gap-2 rounded-xl bg-white/5 px-3 py-1 ring-1 ring-white/10">
-            <span class="inline-block h-2 w-2 rounded-full bg-indigo-400"></span>
-            <span class="text-xs tracking-wider uppercase">Studio</span>
-          </div>
-          <h3 class="mt-3 text-xl font-semibold tracking-tight">Kamila Białkowska-Ismaił</h3>
-          <p class="mt-1 text-sm text-slate-300">{{ 'footer.3' | translate }}</p>
+<!--          <div class="inline-flex items-center gap-2 rounded-xl bg-white/60 px-3 py-1 ring-1 ring-slate-900/10 backdrop-blur">-->
+<!--            <span class="inline-block h-2 w-2 rounded-full bg-indigo-400"></span>-->
+<!--            <span class="text-xs tracking-wider uppercase text-slate-700">Studio</span>-->
+<!--          </div>-->
+          <h3 class="mt-3 text-xl font-semibold tracking-tight text-slate-900">Kamila Białkowska-Ismaił</h3>
+          <p class="mt-1 text-sm text-slate-600">{{ 'footer.3' | translate }}</p>
         </div>
       </div>
 
       <!-- nawigacja -->
       <nav class="flex flex-col items-center gap-3 text-sm sm:flex-row sm:justify-center sm:gap-6">
-        <a [routerLink]="['/terms']"
-           [fragment]="'spisTresci'"
-           class="text-slate-300 hover:text-white transition underline-offset-4 hover:underline">
+        <a [routerLink]="['/terms']" [fragment]="'spisTresci'"
+           class="text-slate-600 hover:text-slate-900 transition underline-offset-4 hover:underline rounded-lg px-2 py-1">
           {{ 'footer.terms' | translate }}
         </a>
-        <a [routerLink]="['/terms']"
-           [fragment]="'platnosci'"
-           class="text-slate-300 hover:text-white transition underline-offset-4 hover:underline">
+        <a [routerLink]="['/terms']" [fragment]="'platnosci'"
+           class="text-slate-600 hover:text-slate-900 transition underline-offset-4 hover:underline rounded-lg px-2 py-1">
           {{ 'footer.payments' | translate }}
         </a>
-
-        <a [routerLink]="['/terms']"
-           [fragment]="'reklamacje'"
-           class="text-slate-300 hover:text-white transition underline-offset-4 hover:underline">
+        <a [routerLink]="['/terms']" [fragment]="'reklamacje'"
+           class="text-slate-600 hover:text-slate-900 transition underline-offset-4 hover:underline rounded-lg px-2 py-1">
           {{ 'footer.returns' | translate }}
         </a>
       </nav>
@@ -47,47 +48,38 @@
       <div class="flex sm:justify-end justify-center gap-3">
         <a href="https://www.instagram.com/kamila_bialkowskaismail/" target="_blank" rel="noopener"
            class="group inline-flex items-center justify-center h-10 w-10 rounded-full
-                  bg-white/5 ring-1 ring-white/10 hover:bg-white/10 transition"
+                  bg-white/60 ring-1 ring-slate-900/10 hover:bg-white hover:shadow-sm transition backdrop-blur"
            aria-label="Instagram">
-          <!-- ig icon -->
-          <svg viewBox="0 0 24 24" class="h-5 w-5 text-slate-300 group-hover:text-white" fill="currentColor">
+          <svg viewBox="0 0 24 24" class="h-5 w-5 text-slate-600 group-hover:text-slate-900" fill="currentColor">
             <path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm10 2H7a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3zm-5 4.5A5.5 5.5 0 1 1 6.5 14 5.5 5.5 0 0 1 12 8.5zm0 2A3.5 3.5 0 1 0 15.5 14 3.5 3.5 0 0 0 12 10.5zM17.25 6a1.25 1.25 0 1 1-1.25 1.25A1.25 1.25 0 0 1 17.25 6z"/>
           </svg>
         </a>
         <a href="mailto:dsk.bis&#64;wp.pl"
            class="group inline-flex items-center justify-center h-10 w-10 rounded-full
-                  bg-white/5 ring-1 ring-white/10 hover:bg-white/10 transition"
+                  bg-white/60 ring-1 ring-slate-900/10 hover:bg-white hover:shadow-sm transition backdrop-blur"
            aria-label="Email">
-          <!-- mail icon -->
-          <svg viewBox="0 0 24 24" class="h-5 w-5 text-slate-300 group-hover:text-white" fill="currentColor">
+          <svg viewBox="0 0 24 24" class="h-5 w-5 text-slate-600 group-hover:text-slate-900" fill="currentColor">
             <path d="M2 7a3 3 0 0 1 3-3h14a3 3 0 0 1 3 3v10a3 3 0 0 1-3 3H5a3 3 0 0 1-3-3zm3-.5 7 4.5 7-4.5V7H5z"/>
-          </svg>
-        </a>
-        <a href="https://facebook.com/" target="_blank" rel="noopener"
-           class="group inline-flex items-center justify-center h-10 w-10 rounded-full
-                  bg-white/5 ring-1 ring-white/10 hover:bg-white/10 transition"
-           aria-label="Facebook">
-          <!-- fb icon -->
-          <svg viewBox="0 0 24 24" class="h-5 w-5 text-slate-300 group-hover:text-white" fill="currentColor">
-            <path d="M13.5 9H15V6h-1.5A3.5 3.5 0 0 0 10 9.5V11H8v3h2v7h3v-7h2.1l.4-3H13v-1.2c0-.5.2-.8.5-.8z"/>
           </svg>
         </a>
       </div>
     </div>
 
     <!-- cienka linia -->
-    <div class="my-8 h-px w-full bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
+    <div class="my-8 h-px w-full bg-gradient-to-r from-transparent via-slate-900/10 to-transparent"></div>
 
     <!-- dolny pasek -->
     <div class="flex flex-col-reverse items-center gap-3 sm:flex-row sm:justify-between">
-      <p class="text-xs text-slate-400">
+      <p class="text-xs text-slate-500">
         &copy; 2025 Kamila Białkowska-Ismaił · {{ 'footer.rights' | translate }}
       </p>
-
-      <div class="inline-flex items-center gap-2 text-xs text-slate-400">
-        <span class="h-1.5 w-1.5 rounded-full bg-emerald-400/80"></span>
+      <!-- opcjonalna “pieczęć” -->
+      <!--
+      <div class="inline-flex items-center gap-2 text-xs text-slate-500">
+        <span class="h-1.5 w-1.5 rounded-full bg-emerald-400/70"></span>
         <span>Handcrafted on the Vistula</span>
       </div>
+      -->
     </div>
   </div>
 </footer>

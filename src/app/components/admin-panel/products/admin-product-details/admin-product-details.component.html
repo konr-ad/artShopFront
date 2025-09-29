@@ -19,12 +19,21 @@
     </div>
 
     <div class="flex items-center gap-2">
-      <button class="inline-flex items-center rounded-xl bg-white px-3 py-2 text-sm text-slate-700 ring-1 ring-slate-200 hover:bg-slate-50">
-        <span class="material-icons-outlined mr-1 text-base">visibility</span> Podgląd
+      <button
+        class="inline-flex items-center rounded-xl bg-white px-3 py-2 text-sm text-slate-700
+         ring-1 ring-slate-200 hover:bg-slate-50"
+        (click)="goToPublic(product?.id)"
+        [disabled]="!product?.id"
+      >
+        Podgląd
       </button>
-      <button class="inline-flex items-center rounded-xl bg-slate-900 px-3 py-2 text-sm text-white hover:bg-slate-800">
-        <span class="material-icons-outlined mr-1 text-base">edit</span> Edytuj
-      </button>
+<!--      <button-->
+<!--        class="inline-flex items-center rounded-xl bg-slate-900 px-3 py-2 text-sm text-white hover:bg-slate-800"-->
+<!--        (click)="edit.emit(product?.id)"-->
+<!--        [disabled]="!product?.id">-->
+<!--        <span class="material-icons-outlined mr-1 text-base">edit</span>-->
+<!--        Edytuj-->
+<!--      </button>-->
     </div>
   </div>
 
