@@ -59,19 +59,6 @@
             </label>
           </li>
         </ul>
-
-        <div class="mt-4 flex justify-between items-center">
-          <button type="button"
-                  class="text-xs text-gray-500 hover:text-gray-700 underline underline-offset-4"
-                  (click)="filters.paintings=[]; applyFilters()">
-            {{ 'common.clear' | translate : { default: 'Clear' } }}
-          </button>
-          <button type="button"
-                  class="text-xs text-gray-700 hover:text-gray-900"
-                  (click)="paintingTypeDropdownOpen=false">
-            {{ 'common.close' | translate : { default: 'Close' } }}
-          </button>
-        </div>
       </div>
     </div>
 
@@ -119,18 +106,6 @@
           </label>
         </div>
 
-        <div class="mt-4 flex justify-between items-center">
-          <button type="button"
-                  class="text-xs text-gray-500 hover:text-gray-700 underline underline-offset-4"
-                  (click)="filters.priceFrom=null; filters.priceTo=null; applyFilters()">
-            {{ 'common.clear' | translate : { default: 'Clear' } }}
-          </button>
-          <button type="button"
-                  class="text-xs text-gray-700 hover:text-gray-900"
-                  (click)="priceDropdownOpen=false">
-            {{ 'common.close' | translate : { default: 'Close' } }}
-          </button>
-        </div>
       </div>
     </div>
   </div>
@@ -160,13 +135,6 @@
       <svg class="h-3 w-3" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2">
         <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
       </svg>
-    </button>
-
-    <!-- reset wszystkiego -->
-    <button type="button"
-            class="ml-1 text-xs text-gray-500 hover:text-gray-700 underline underline-offset-4"
-            (click)="resetFilters()">
-      {{ 'common.resetAll' | translate : { default: 'Reset all' } }}
     </button>
   </div>
 </div>
