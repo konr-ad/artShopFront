@@ -34,7 +34,9 @@
     "types": {
       "oil": "OLEJ",
       "monotype": "MONOTYP",
-      "print": "DRUK"
+      "print": "DRUK",
+      "acrylic": "AKRYL",
+      "watercolor": "FARBY WODNE"
     }
   },
   "bio": {

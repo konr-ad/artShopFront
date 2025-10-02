@@ -12,7 +12,7 @@ export class HomeComponent implements OnInit {
   paintings: Painting[] = [];
 
   pageIndex = 0;
-  pageSize = 10;
+  pageSize = 9;
   totalPages = 0;
   loading = false;
   error?: string;
@@ -44,9 +44,7 @@ export class HomeComponent implements OnInit {
           type: item.type,
           state: item.state ?? '',
           name: item.name,
-          description: '',   // brak w liście – zostawiamy pusty
           price: item.price,
-          image: '',         // nie używane już
           imageUrl: item.thumbnailUrl ?? 'assets/placeholder.png'
         }));
         this.pageIndex = res.number;

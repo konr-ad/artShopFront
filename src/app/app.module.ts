@@ -27,6 +27,7 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { HttpClient } from '@angular/common/http';
 import {AppTranslateLoader} from "./i18n/AppTranslateLoader";
 import {AuthInterceptor} from "./interceptors/AuthInterceptor";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 export function initConfig(cfg: ConfigService) {
   return () => cfg.load();
@@ -52,6 +53,7 @@ export function initConfig(cfg: ConfigService) {
   ],
   bootstrap: [AppComponent],
   imports: [
+    BrowserAnimationsModule,
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,

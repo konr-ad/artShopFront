@@ -34,7 +34,9 @@
     "types": {
       "oil": "OIL",
       "monotype": "MONOTYPE",
-      "print": "PRINT"
+      "print": "PRINT",
+      "acrylic": "ACRYLIC",
+      "watercolor": "WATERCOLOR"
     }
   },
   "bio": {

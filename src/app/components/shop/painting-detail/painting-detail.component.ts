@@ -6,6 +6,7 @@ import {
   PaintingService, PaintingType
 } from 'src/app/services/painting.service';
 import { CartService } from 'src/app/services/cart.service';
+import {LanguageService} from "../../../services/language.service";
 
 @Component({
   selector: 'app-painting-detail',
@@ -28,7 +29,8 @@ export class PaintingDetailComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private paintingService: PaintingService,
-    private cartService: CartService
+    private cartService: CartService,
+    private lang: LanguageService
   ) {}
 
   ngOnInit(): void {
@@ -40,6 +42,15 @@ export class PaintingDetailComponent implements OnInit {
       });
     });
   }
+
+  get description(): string {
+    const pl = this.details?.descriptionPl ?? '';
+    const en = this.details?.descriptionEn ?? '';
+
+    if (this.lang.currentLang === 'pl') return pl || en;
+    return en || pl;
+  }
+
 
   private buildGallery(dto: PaintingDetailsDto) {
     const media = (dto.media ?? [])

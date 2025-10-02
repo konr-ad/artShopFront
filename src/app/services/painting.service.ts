@@ -39,7 +39,8 @@ export interface PaintingDetailsDto {
   type: string;
   state: string | null;
   price: number;
-  description: string | null;
+  descriptionEn: string | null;
+  descriptionPl: string | null;
   quantity: number;
   media: MediaFileDto[];
 }

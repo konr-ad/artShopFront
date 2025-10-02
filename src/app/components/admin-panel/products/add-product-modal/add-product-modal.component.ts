@@ -127,8 +127,8 @@ export class AddProductModalComponent {
         type: this.editModel.type,
         price: this.editModel.price,
         state: this.editModel.state ?? 'AVAILABLE',
-        descriptionPl: this.editModel.description ?? '',
-        descriptionEn: '' // jeśli trzymasz rozdzielnie — dostosuj
+        descriptionPl: this.editModel.descriptionPl ?? '',
+        descriptionEn: this.editModel.descriptionEn ?? ''
       });
 
       // wyczyść ewentualne nowe pliki/preview (bo na start pokazujemy istniejące)

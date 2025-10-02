@@ -2,9 +2,13 @@
   <header *ngIf="showHeader">
     <app-header></app-header>
   </header>
+
   <main class="flex-grow">
-    <router-outlet></router-outlet>
+    <div [@routeAnim]="o.isActivated ? (o.activatedRoute?.snapshot?.routeConfig?.path || routerUrl) : ''">
+      <router-outlet #o="outlet"></router-outlet>
+    </div>
   </main>
+
   <footer *ngIf="showFooter" class="mt-auto">
     <app-footer></app-footer>
   </footer>

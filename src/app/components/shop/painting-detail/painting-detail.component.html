@@ -47,7 +47,7 @@
         </p>
 
         <div class="mt-6 prose prose-indigo max-w-none text-gray-700">
-          <p *ngIf="details?.description as d; else noDesc">{{ d }}</p>
+          <p *ngIf="description; else noDesc">{{ description }}</p>
           <ng-template #noDesc>
             <p class="italic text-gray-500">Opis wkrótce…</p>
           </ng-template>
