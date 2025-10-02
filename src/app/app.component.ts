@@ -25,7 +25,7 @@ import {filter} from "rxjs/operators";
 export class AppComponent implements OnInit {
   showHeader = true;
   showFooter = true;
-  title = 'Bialkowskaismail.';
+  title = 'Bialkowskaismail';
   routerUrl = '';
 
   constructor(private router: Router, private lang: LanguageService) {}

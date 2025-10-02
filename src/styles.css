@@ -123,3 +123,10 @@ html { scroll-behavior: smooth; }
 @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); }
   to   { opacity: 1; transform: translateY(0); } }
 
+.cdk-overlay-container,
+.pswp,               /* PhotoSwipe */
+.lg-backdrop, .lg-outer, /* lightGallery */
+.ngx-lightbox, .ngx-lightbox-backdrop,
+.modal, .modal-backdrop {
+  z-index: 60 !important; /* > z-30 z headera */
+}
