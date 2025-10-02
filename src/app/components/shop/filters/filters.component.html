@@ -18,7 +18,7 @@
       </button>
 
       <!-- Dropdown -->
-      <div class="z-50 absolute left-0 mt-2 w-80 rounded-2xl bg-white/90 backdrop-blur shadow-xl ring-1 ring-black/5 p-4"
+      <div class="z-50 absolute left-0 mt-2 w-30 lg:w-80 rounded-2xl bg-white/90 backdrop-blur shadow-xl ring-1 ring-black/5 p-4"
            [ngClass]="{ 'hidden': !paintingTypeDropdownOpen, 'block': paintingTypeDropdownOpen }"
            (mouseenter)="onDropdownEnter()"
            (mouseleave)="onDropdownLeave()"
@@ -79,7 +79,7 @@
       </button>
 
       <!-- Dropdown -->
-      <div class="z-50 absolute left-0 mt-2 w-80 rounded-2xl bg-white/90 backdrop-blur shadow-xl ring-1 ring-black/5 p-4"
+      <div class="z-50 absolute left-0 mt-2 w-40 rounded-2xl bg-white/90 backdrop-blur shadow-xl ring-1 ring-black/5 p-4"
            [ngClass]="{ 'hidden': !priceDropdownOpen, 'block': priceDropdownOpen }"
            (mouseenter)="onDropdownEnter()"
            (mouseleave)="onDropdownLeave()"
@@ -88,7 +88,7 @@
           {{ 'nav.shop.price' | translate }}
         </div>
 
-        <div class="grid grid-cols-2 gap-3">
+        <div class="grid grid-cols-1 gap-3">
           <label class="flex items-center gap-2 rounded-lg ring-1 ring-black/10 bg-white px-3 py-2">
             <span class="text-xs text-gray-500">PLN</span>
             <input type="number" inputmode="decimal" min="0" placeholder="Min"
