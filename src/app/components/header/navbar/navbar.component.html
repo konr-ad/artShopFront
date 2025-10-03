@@ -20,7 +20,7 @@
           </button>
 
           <!-- Dropdown -->
-          <div class="absolute z-50 left-0 top-full pt-2 w-64 transition-all duration-200"
+          <div class="absolute z-50 left-0 top-full pt-2 w-30 transition-all duration-200"
                (mouseenter)="enter('shop')" (mouseleave)="leave('shop')"
                [ngClass]="{
                  'opacity-100 translate-y-0 scale-100 pointer-events-auto': openShop,
@@ -64,7 +64,7 @@
           </button>
 
           <!-- Dropdown -->
-          <div class="absolute z-50 left-0 top-full pt-2 w-64 transition-all duration-200"
+          <div class="absolute z-50 left-0 top-full pt-2 w-30 transition-all duration-200"
                (mouseenter)="enter('about')" (mouseleave)="leave('about')"
                [ngClass]="{
                  'opacity-100 translate-y-0 scale-100 pointer-events-auto': openAbout,
@@ -140,11 +140,11 @@
         <a class="block px-4 py-3 rounded-xl hover:bg-gray-50" routerLink="/exhibitions">
           {{ 'nav.about.menu.exhibitions' | translate }}
         </a>
-        <a class="block px-4 py-3 rounded-xl hover:bg-gray-50" routerLink="/contact">
-          {{ 'nav.about.menu.contact._' | translate }}
-        </a>
         <a class="block px-4 py-3 rounded-xl hover:bg-gray-50" routerLink="/gallery">
           {{ 'nav.gallery' | translate }}
+        </a>
+        <a class="block px-4 py-3 rounded-xl hover:bg-gray-50" routerLink="/contact">
+          {{ 'nav.about.menu.contact._' | translate }}
         </a>
       </div>
     </div>
