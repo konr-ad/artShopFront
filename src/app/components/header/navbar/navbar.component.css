@@ -58,8 +58,8 @@
 }
 
 button svg {
-  width: 3rem; /* Increase button icon size */
-  height: 3rem;
+  width: 1.5rem; /* Increase button icon size */
+  height: 1.5rem;
 }
 
 .dropdown-menu.show {
