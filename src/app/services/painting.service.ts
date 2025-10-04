@@ -85,11 +85,13 @@ export class PaintingService {
   getPaintingsPage(opts: {
     page?: number; size?: number; sort?: string; q?: string;
     type?: string; minPrice?: number; maxPrice?: number;
+    state?: string;
   } = {}): Observable<Page<PaintingListItem>> {
     let params = new HttpParams()
       .set('page', String(opts.page ?? 0))
       .set('size', String(opts.size ?? 9))
-      .set('sort', opts.sort ?? 'createdAt,desc');
+      .set('sort', opts.sort ?? 'createdAt,desc')
+      .set('state', String('AVAILABLE'));
 
     if (opts.q) params = params.set('q', opts.q);
     if (opts.type) params = params.set('type', opts.type);
