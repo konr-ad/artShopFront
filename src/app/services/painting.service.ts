@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable, numberAttribute} from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import {map, Observable} from 'rxjs';
 import { ConfigService } from './config/ConfigService';
@@ -150,6 +150,14 @@ export class PaintingService {
       // awaryjnie „na sztywno”
       return `${this.apiBase.replace(/\/+$/, '')}/${path.replace(/^\/+/, '')}`;
     }
+  }
+
+  lockPaintings(ids: number[]) {
+    return this.http.post<number[]>(`${this.publicUrl}/lock`, ids);
+  }
+
+  unlockPaintings(ids: number[]) {
+    return this.http.post<void>(`${this.publicUrl}/unlock`, ids);
   }
 
 }
