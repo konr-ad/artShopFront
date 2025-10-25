@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { ConfigService } from './config/ConfigService';
-import { Painting } from './painting.service';
+import {MediaFileDto, Painting} from './painting.service';
 import { Customer } from './customer.service';
 
 export interface Order {
@@ -19,6 +19,36 @@ export interface Order {
   paintings: Painting[];
 }
 
+export interface OrderItem {
+  paintingId: number;
+  paintingName: string;
+  paintingType: string;
+  quantity: number;
+  unitPriceAtPurchase: number;
+  lineTotal: number;
+}
+
+export interface AdminOrderDto {
+  id: number;
+  paymentStatus: string;
+  totalAmount: number;
+  currencyCode: string;
+  contactEmail: string;
+  createdAt: string;
+  shippingAddress: ShippingAddressDto;
+  items: OrderItem[];
+  customer: Customer;
+}
+
+export interface ShippingAddressDto {
+  street: string;
+  apartmentNumber: string;
+  city: string;
+  state: string;
+  zip: string;
+  country: string;
+}
+
 @Injectable({
   providedIn: 'root',
 })
@@ -32,7 +62,7 @@ export class OrderService {
     this.backendUrl = this.configService.getConfig('API_URL') + '/api/orders';
   }
 
-  getOrders(): Observable<Order[]> {
-    return this.http.get<Order[]>(this.backendUrl);
+  getOrders(): Observable<AdminOrderDto[]> {
+    return this.http.get<AdminOrderDto[]>(this.backendUrl);
   }
 }

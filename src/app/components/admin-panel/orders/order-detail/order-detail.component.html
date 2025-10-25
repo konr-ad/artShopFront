@@ -1,62 +1,108 @@
-<div *ngIf="order; else noOrder" class="w-full p-6 bg-white text-black shadow-lg rounded-lg">
-  <h2 class="text-2xl font-bold mb-4 text-center">Szczegóły Zamówienia</h2>
-  <div class="border-t border-gray-200 pt-4">
-    <div class="mb-4">
-      <h3 class="font-semibold">Przedmioty w Zamówieniu</h3>
-      <ul>
-        <li *ngFor="let painting of order.paintings" class="flex justify-between">
-          <span>{{ painting.name }} x {{ painting.quantity || '1' }}</span>
-          <span>{{ painting.price | currency: 'PLN' : 'symbol-narrow' : '1.0-2' }}</span>
-        </li>
-      </ul>
-    </div>
-    <div class="border-t border-gray-200 pt-4">
-      <div class="flex justify-between mb-4">
-        <span>Kwota netto</span>
-        <span>{{ order.totalAmount | currency: 'PLN' : 'symbol-narrow' : '1.0-2' }}</span>
-      </div>
-      <div class="flex justify-between mb-4">
-        <span>Wysyłka</span>
-        <span>{{ order.shipping || '0' | currency: 'PLN' : 'symbol-narrow' : '1.0-2' }}</span>
-      </div>
-      <div class="flex justify-between mb-4">
-        <span>Podatek</span>
-        <span>{{ order.tax || '0' | currency: 'PLN' : 'symbol-narrow' : '1.0-2' }}</span>
-      </div>
-      <div class="flex justify-between font-semibold">
-        <span>Kwota całkowita</span>
-        <span>{{ order.totalAmount | currency: 'PLN' : 'symbol-narrow' : '1.0-2' }}</span>
-      </div>
-    </div>
-  </div>
-  <div class="border-t border-gray-200 pt-4">
-    <div class="mb-4">
-      <h3 class="font-semibold">Informacje o Wysyłce</h3>
-      <address class="not-italic text-right">
-        <span>{{ order.customer.firstName }} {{ order.customer.lastName }}</span
-        ><br />
-        <span>{{ order.customer?.address }}</span
-        ><br />
+<div *ngIf="order; else empty"
+     class="rounded-2xl bg-white/80 backdrop-blur ring-1 ring-black/5 p-10 shadow-[0_8px_30px_rgba(0,0,0,0.06)]">
+
+  <!-- HEADER -->
+  <div class="grid grid-cols-[1fr_auto] items-start gap-3">
+    <div>
+      <h2 class="text-xl font-bold text-slate-900">Zamówienie #{{ order.id }}</h2>
+
+      <!-- STATUS + EMAIL -->
+      <div class="mt-2 grid grid-cols-[auto_auto] gap-2 justify-items-start">
         <span
-          >{{ order.customer?.city }}, {{ order.customer?.state }} {{ order.customer?.zip }}</span
-        >
-      </address>
+          class="rounded-full px-2.5 py-1 text-[11px] font-medium ring-1"
+          [class.bg-emerald-50]="order.paymentStatus === 'COMPLETED'"
+          [class.text-emerald-700]="order.paymentStatus === 'COMPLETED'"
+          [class.ring-emerald-200]="order.paymentStatus === 'COMPLETED'"
+          [class.bg-yellow-50]="order.paymentStatus === 'NEW'"
+          [class.text-yellow-700]="order.paymentStatus === 'NEW'"
+          [class.ring-yellow-200]="order.paymentStatus === 'NEW'"
+          [class.bg-red-50]="order.paymentStatus === 'FAILED'"
+          [class.text-red-700]="order.paymentStatus === 'FAILED'"
+          [class.ring-red-200]="order.paymentStatus === 'FAILED'">
+          {{ order.paymentStatus }}
+        </span>
+
+<!--        <div class="rounded-full bg-slate-100 px-2.5 py-1 text-[11px] font-medium text-slate-700 ring-1 ring-slate-200">-->
+<!--          {{ order.contactEmail || '—' }}-->
+<!--        </div>-->
+      </div>
+    </div>
+
+    <!-- DATA -->
+<!--    <div class="mt-2 justify-self-end text-xs text-slate-500">-->
+<!--      {{ order.createdAt | date:'short' }}-->
+<!--    </div>-->
+  </div>
+
+  <!-- ITEMS -->
+  <div class="mt-5">
+    <h3 class="text-sm font-semibold text-slate-700">Pozycje</h3>
+    <div class="mt-2 overflow-hidden rounded-xl ring-1 ring-black/5">
+      <table class="min-w-full text-sm">
+        <thead class="bg-slate-50 text-slate-500">
+        <tr>
+          <th class="py-2 pl-4 pr-2 text-left">Produkt</th>
+          <th class="py-2 px-2 text-right">Ilość</th>
+          <th class="py-2 px-2 text-right hidden sm:table-cell">Cena szt.</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let it of order.items" class="border-t">
+          <td class="py-3 pl-4 pr-2">
+            <div class="font-medium text-slate-900">{{ it.paintingName }}</div>
+            <div class="text-[11px] text-slate-500">ID: {{ it.paintingId }}</div>
+          </td>
+          <td class="py-3 px-2 text-right">{{ it.quantity }}</td>
+          <td class="py-3 px-2 text-right hidden sm:table-cell">
+            {{ it.unitPriceAtPurchase | currency:(order.currencyCode || 'PLN') }}
+          </td>
+        </tr>
+        </tbody>
+      </table>
     </div>
   </div>
-  <div class="border-t border-gray-200 pt-4">
-    <div class="mb-4">
-      <h3 class="font-semibold">Informacje o Kliencie</h3>
-      <dl>
-        <dd>{{ order.customer.firstName }} {{ order.customer.lastName }}</dd>
-        <dd>{{ order.customer.email }}</dd>
-        <dd>{{ order.customer.phone || 'N/A' }}</dd>
-      </dl>
+
+  <!-- PODSUMOWANIE -->
+  <dl class="mt-5 grid grid-cols-2 gap-y-3 text-sm">
+    <dt class="text-slate-500">Suma pozycji</dt>
+    <dd class="text-right text-slate-900">{{ order.totalAmount | currency:(order.currencyCode || 'PLN') }}</dd>
+
+    <dt class="text-slate-500">Wysyłka</dt>
+    <dd class="text-right text-slate-900">{{ 0 | currency:(order.currencyCode || 'PLN') }}</dd>
+
+    <dt class="text-slate-500">Podatek</dt>
+    <dd class="text-right text-slate-900">{{ 0 | currency:(order.currencyCode || 'PLN') }}</dd>
+
+    <dt class="text-slate-500">Waluta</dt>
+    <dd class="text-right text-slate-900">{{ order.currencyCode || 'PLN' }}</dd>
+
+    <dt class="text-slate-500">Razem</dt>
+    <dd class="text-right font-semibold text-slate-900">{{ order.totalAmount | currency:(order.currencyCode || 'PLN') }}</dd>
+  </dl>
+
+  <!-- ADRES WYSYŁKI -->
+  <div class="mt-6">
+    <h3 class="text-sm font-semibold text-slate-700">Adres wysyłki</h3>
+    <div class="mt-2 rounded-xl bg-white ring-1 ring-slate-200 p-4">
+      <div class="grid grid-cols-2 gap-2 text-sm">
+        <div>
+          <div>{{ order.shippingAddress?.street }}</div>
+          <div *ngIf="order.shippingAddress?.apartmentNumber">/ {{ order.shippingAddress?.apartmentNumber }}</div>
+          <div>{{ order.shippingAddress?.zip }} {{ order.shippingAddress?.city }}</div>
+          <div *ngIf="order.shippingAddress?.state">{{ order.shippingAddress?.state }}</div>
+          <div>{{ order.shippingAddress?.country }}</div>
+        </div>
+        <div class="text-right font-medium">
+          {{ order.customer.firstName }} {{ order.customer.lastName }}
+        </div>
+      </div>
     </div>
   </div>
 </div>
 
-<ng-template #noOrder>
-  <div class="w-full p-12 bg-white text-black shadow-lg rounded-lg">
-    <h2 class="text-3xl font-bold mb-4 text-center">Brak Wybranego Zamówienia</h2>
+<ng-template #empty>
+  <div class="rounded-2xl bg-white/70 backdrop-blur ring-1 ring-black/5 p-10 text-center text-slate-600 shadow-[0_8px_30px_rgba(0,0,0,0.06)]">
+    <h3 class="text-lg font-semibold text-slate-900">Brak wybranego zamówienia</h3>
+    <p class="mt-1 text-sm">Zaznacz zamówienie z listy po lewej, aby zobaczyć szczegóły.</p>
   </div>
 </ng-template>
