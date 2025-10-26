@@ -2,22 +2,40 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { ConfigService } from './config/ConfigService';
-import { List } from 'postcss/lib/list';
-import { Painting } from './painting.service';
 
 export interface DiscountCodeDto {
   id: number;
   code: string;
-  valid: boolean;
-  message: string;
   discountValue: number;
   discountType: string;
   minimumOrderValue: number;
   usageLimit: number;
   timesUsed: number;
-  active: boolean;
+  isActive: boolean;
   validTo: Date;
   validFrom: Date;
+}
+
+export interface DiscountCodeCreateRequest {
+  code: string;
+  discountType: 'PERCENTAGE' | 'FIXED';
+  discountValue: number;
+  minimumOrderValue: number;
+  isActive: boolean;
+  usageLimit: number;
+  validFrom: string; // 'YYYY-MM-DD'
+  validTo: string;   // 'YYYY-MM-DD'
+}
+
+export interface DiscountCodeRequest {
+  code: string;
+  orderValue: number;
+}
+
+export interface DiscountCodeResponse {
+  message: string;
+  discountValue: number;
+  valid: boolean;
 }
 
 @Injectable({
@@ -33,17 +51,13 @@ export class DiscountCodeService {
     this.backendUrl = configService.getConfig('API_URL') + '/api/discountcodes';
   }
 
-  createDiscountCode(discountCode: any): Observable<DiscountCodeDto> {
-    return this.http.post<DiscountCodeDto>(this.backendUrl + '/add', discountCode, {
-      headers: { 'Content-Type': 'application/json' },
-    });
+  createDiscountCode(discountCode: DiscountCodeCreateRequest): Observable<DiscountCodeDto> {
+    return this.http.post<DiscountCodeDto>(this.backendUrl, discountCode);
   }
 
-  validateDiscountCode(code: string): Observable<DiscountCodeDto> {
-    const body = {
-      code: code,
-    };
-    return this.http.post<DiscountCodeDto>(this.backendUrl + '/validate', body);
+  validateDiscountCode(code: string, orderValue: number): Observable<DiscountCodeResponse> {
+    const body: DiscountCodeRequest = { code, orderValue };
+    return this.http.post<DiscountCodeResponse>(`${this.backendUrl}/validate`, body);
   }
 
   getAllDiscountCodes(): Observable<DiscountCodeDto[]> {
@@ -51,9 +65,7 @@ export class DiscountCodeService {
   }
 
   deleteDiscountCodes(ids: number[]): Observable<void> {
-    const body = {
-      body: ids,
-    };
-    return this.http.delete<void>(this.backendUrl + '/delete', body);
+    return this.http.request<void>('DELETE', this.backendUrl, { body: ids });
   }
+
 }

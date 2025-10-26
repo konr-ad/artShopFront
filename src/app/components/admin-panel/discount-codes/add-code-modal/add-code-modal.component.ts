@@ -2,7 +2,11 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { AbstractModalComponent } from '../../../abstract/AbstractModal';
 import { NgClass, NgIf } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { DiscountCodeDto, DiscountCodeService } from '../../../../services/discount-code.service';
+import {
+  DiscountCodeCreateRequest,
+  DiscountCodeDto,
+  DiscountCodeService
+} from '../../../../services/discount-code.service';
 import { Painting } from '../../../../services/painting.service';
 
 @Component({
@@ -30,36 +34,40 @@ export class AddCodeModalComponent extends AbstractModalComponent implements OnI
       discountValue: [0, [Validators.required, Validators.min(1)]],
       discountType: ['PERCENTAGE', [Validators.required]],
       minimumOrderValue: [0, [Validators.required, Validators.min(0)]],
-      usageLimit: [0, [Validators.required, Validators.min(1)]],
-      validFrom: [new Date(), [Validators.required]],
-      validTo: [new Date(), [Validators.required]],
-      active: [true],
+      usageLimit: [1, [Validators.required, Validators.min(1)]],
+      validFrom: [this.todayString()], // helper do 'YYYY-MM-DD'
+      validTo: [this.todayString()],
+      isActive: [true],
     });
   }
 
   onSubmit() {
-    if (this.discountCodeForm.valid) {
-      const discountCode = {
-        code: this.discountCodeForm.get('code')?.value || '',
-        description: this.discountCodeForm.get('description')?.value || '',
-        type: this.discountCodeForm.get('type')?.value || '',
-        discountValue: this.discountCodeForm.get('discountValue')?.value.toString() || '0',
-        minimumOrderValue: this.discountCodeForm.get('minimumOrderValue')?.value.toString() || '0',
-        usageLimit: this.discountCodeForm.get('usageLimit')?.value.toString() || '0',
-        validFrom: this.discountCodeForm.get('validFrom')?.value || '',
-        validTo: this.discountCodeForm.get('validTo')?.value || '',
-        active: this.discountCodeForm.get('active')?.value || false,
-      };
+    if (this.discountCodeForm.invalid) return;
 
-      this.discountCodeService.createDiscountCode(discountCode).subscribe(
-        (newDiscountCode) => {
-          this.discountCodeAdded.emit(newDiscountCode);
-          this.close();
-        },
-        (error) => {
-          console.error('Failed to create discount code', error);
-        }
-      );
-    }
+    const v = this.discountCodeForm.value;
+    const payload: DiscountCodeCreateRequest = {
+      code: v.code,
+      discountType: v.discountType, // 'PERCENTAGE' | 'FIXED'
+      discountValue: Number(v.discountValue),
+      minimumOrderValue: Number(v.minimumOrderValue),
+      isActive: !!v.isActive,
+      usageLimit: Number(v.usageLimit),
+      validFrom: v.validFrom, // 'YYYY-MM-DD'
+      validTo: v.validTo
+    };
+
+    this.discountCodeService.createDiscountCode(payload).subscribe({
+      next: (created) => {
+        this.discountCodeAdded.emit(created);
+        this.close();
+      },
+      error: (e) => console.error('Failed to create discount code', e)
+    });
   }
+
+  private todayString(): string {
+    const d = new Date();
+    return d.toISOString().slice(0, 10); // 'YYYY-MM-DD'
+  }
+
 }

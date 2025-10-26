@@ -45,24 +45,29 @@ export class CartComponent implements OnInit {
   applyDiscountCode() {
     if (!this.isDiscountCodeApplied) {
       this.resultMessage = '';
-      this.discountCodeService.validateDiscountCode(this.discountCode).subscribe(
-        (response) => {
-          this.isDiscountCodeValid = response.valid;
-          if (this.isDiscountCodeValid) {
-            if (!this.isDiscountCodeApplied) {
-              this.isDiscountCodeApplied = true;
-              this.totalAmount -= response.discountValue;
+
+      this.discountCodeService.validateDiscountCode(this.discountCode, this.totalAmount)
+        .subscribe({
+          next: (response) => {
+            this.isDiscountCodeValid = response.valid;
+
+            if (response.valid) {
+              if (!this.isDiscountCodeApplied) {
+                this.isDiscountCodeApplied = true;
+
+                const discount = Number(response.discountValue) || 0;
+                this.totalAmount = Math.max(0, this.totalAmount - discount);
+              }
+              this.resultMessage = response.message || 'Discount code applied!';
+            } else {
+              this.resultMessage = response.message || 'Invalid discount code';
             }
-            this.resultMessage = 'Discount code applied!';
-          } else {
-            this.resultMessage = response.message;
+          },
+          error: () => {
+            this.isDiscountCodeValid = false;
+            this.resultMessage = 'An error occurred while validating the discount code';
           }
-        },
-        (error) => {
-          this.isDiscountCodeValid = false;
-          this.resultMessage = 'An error occurred while validating the discount code';
-        }
-      );
+        });
     }
   }
 

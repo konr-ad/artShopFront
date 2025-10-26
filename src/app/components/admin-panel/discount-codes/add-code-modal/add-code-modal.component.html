@@ -72,38 +72,27 @@
         />
       </div>
 
+      <!-- Valid From -->
       <div class="mb-4">
         <label class="block text-sm font-medium text-gray-700">Valid From</label>
-        <input
-          type="date"
-          formControlName="validFrom"
-          class="mt-1 block w-full p-2 border border-gray-300 rounded-md"
-        />
+        <input type="date" formControlName="validFrom"
+               class="mt-1 block w-full p-2 border border-gray-300 rounded-md" />
       </div>
 
+      <!-- Valid To -->
       <div class="mb-4">
         <label class="block text-sm font-medium text-gray-700">Valid To</label>
-        <input
-          type="date"
-          formControlName="validTo"
-          class="mt-1 block w-full p-2 border border-gray-300 rounded-md"
-        />
+        <input type="date" formControlName="validTo"
+               class="mt-1 block w-full p-2 border border-gray-300 rounded-md" />
       </div>
 
-      <div class="relative flex items-start">
-        <div class="flex h-6 items-center">
-          <input
-            id="comments"
-            aria-describedby="comments-description"
-            name="comments"
-            type="checkbox"
-            class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
-          />
-        </div>
-        <div class="ml-3 text-sm leading-6">
-          <label for="comments" class="font-medium text-gray-900">Ważny od dzisiaj</label>
-        </div>
+      <!-- Active -->
+      <div class="mb-4 flex items-center gap-2">
+        <input id="isActive" type="checkbox" formControlName="isActive"
+               class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" />
+        <label for="isActive" class="text-sm font-medium text-gray-700">Aktywny</label>
       </div>
+
 
       <div class="flex justify-end">
         <button

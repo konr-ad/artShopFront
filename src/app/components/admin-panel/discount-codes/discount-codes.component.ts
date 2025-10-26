@@ -6,6 +6,7 @@ import { DiscountCodeDto, DiscountCodeService } from '../../../services/discount
 import { CurrencyPipe, DatePipe, NgForOf, NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AddCodeModalComponent } from './add-code-modal/add-code-modal.component';
+import {DiscountCodeListComponent} from "./discount-code-list/discount-code-list.component";
 
 @Component({
   selector: 'app-discount-codes',
@@ -20,6 +21,7 @@ import { AddCodeModalComponent } from './add-code-modal/add-code-modal.component
     FormsModule,
     NgIf,
     AddCodeModalComponent,
+    DiscountCodeListComponent,
   ],
   templateUrl: './discount-codes.component.html',
   styleUrl: './discount-codes.component.css',
