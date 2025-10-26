@@ -16,7 +16,6 @@ export class DiscountCodeListComponent implements OnInit, OnDestroy {
   @Output() addCode = new EventEmitter<void>();
 
   message: string | null = null;
-  checkedIndexes: boolean[] = [];
   discountCodes: DiscountCodeDto[] = [];
   searchTerm = '';
   selected: Record<number, boolean> = {};
@@ -35,7 +34,7 @@ export class DiscountCodeListComponent implements OnInit, OnDestroy {
   }
 
   load(): void {
-    this.sub = this.discountCodeService.getAllDiscountCodes().subscribe((res: DiscountCodeDto[]) => {
+    this.sub = this.discountCodeService.getAllDiscountCodes().subscribe((res) => {
       this.discountCodes = res ?? [];
       this.selected = {};
     });
@@ -46,40 +45,33 @@ export class DiscountCodeListComponent implements OnInit, OnDestroy {
   toggleAll(checked: boolean) {
     this.discountCodes.forEach(c => this.selected[c.id] = checked);
   }
+
   anySelected(): boolean {
-    return Object.entries(this.selected).some(([_, v]) => v);
+    return Object.values(this.selected).some(Boolean);
   }
+
   selectedIds(): number[] {
     return Object.entries(this.selected)
-      .filter(([_, v]) => v)
+      .filter(([, v]) => v)
       .map(([k]) => +k);
   }
 
   removeCheckedItems(): void {
-    const selectedDiscountCodes = this.getSelectedDiscountCodes();
+    const ids = this.selectedIds();
+    if (ids.length === 0) return;
 
-    const selectedIds = selectedDiscountCodes.map((code) => code.id);
-
-    this.discountCodeService.deleteDiscountCodes(selectedIds).subscribe(
-      () => {
-        this.discountCodes = this.discountCodes.filter((code) => !selectedIds.includes(code.id));
-        this.checkedIndexes = new Array(this.discountCodes.length).fill(false);
+    this.discountCodeService.deleteDiscountCodes(ids).subscribe({
+      next: () => {
+        this.discountCodes = this.discountCodes.filter(c => !ids.includes(c.id));
+        this.selected = {};
         this.message = 'Wybrane kody zostały pomyślnie usunięte.';
-        setTimeout(() => {
-          this.message = null;
-        }, 4000);
+        setTimeout(() => this.message = null, 4000);
       },
-      () => {
+      error: () => {
         this.message = 'Wystąpił błąd przy usuwaniu kodów.';
-        setTimeout(() => {
-          this.message = null;
-        }, 4000);
+        setTimeout(() => this.message = null, 4000);
       }
-    );
-  }
-
-  getSelectedDiscountCodes(): DiscountCodeDto[] {
-    return this.discountCodes.filter((_, index) => this.checkedIndexes[index]);
+    });
   }
 
   sortBy(key: SortKey) {
@@ -104,15 +96,16 @@ export class DiscountCodeListComponent implements OnInit, OnDestroy {
     return [...filtered].sort((a, b) => {
       const ka = (a as any)[this.sortKey];
       const kb = (b as any)[this.sortKey];
-
-      // Daty jako porównywalne liczby
-      const va = (ka instanceof Date) ? +ka : (typeof ka === 'string' ? ka.toLowerCase() : ka);
-      const vb = (kb instanceof Date) ? +kb : (typeof kb === 'string' ? kb.toLowerCase() : kb);
-
+      const va = ka instanceof Date ? +ka : (typeof ka === 'string' ? ka.toLowerCase() : ka);
+      const vb = kb instanceof Date ? +kb : (typeof kb === 'string' ? kb.toLowerCase() : kb);
       if (va == null && vb == null) return 0;
       if (va == null) return -1 * dir;
       if (vb == null) return  1 * dir;
       return va > vb ? dir : va < vb ? -dir : 0;
     });
+  }
+
+  allChecked(): boolean {
+    return this.discountCodes.length > 0 && this.discountCodes.every(c => !!this.selected[c.id]);
   }
 }

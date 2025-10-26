@@ -44,7 +44,7 @@ export class DiscountCodesComponent implements OnInit {
   }
 
   onModalClosed() {
-    this.getDiscountCodes(); // Example: refresh the discount codes list
+    this.getDiscountCodes();
   }
 
   getDiscountCodes(): void {
@@ -56,37 +56,6 @@ export class DiscountCodesComponent implements OnInit {
       },
       (error) => {
         this.message = 'Error fetching discount codes';
-      }
-    );
-  }
-
-  getSelectedDiscountCodes(): DiscountCodeDto[] {
-    return this.discountCodes.filter((_, index) => this.checkedIndexes[index]);
-  }
-
-  isRemoveButtonVisible(): boolean {
-    return this.checkedIndexes.some((checked) => checked);
-  }
-
-  removeCheckedItems(): void {
-    const selectedDiscountCodes = this.getSelectedDiscountCodes();
-
-    const selectedIds = selectedDiscountCodes.map((code) => code.id);
-
-    this.discountCodeService.deleteDiscountCodes(selectedIds).subscribe(
-      () => {
-        this.discountCodes = this.discountCodes.filter((code) => !selectedIds.includes(code.id));
-        this.checkedIndexes = new Array(this.discountCodes.length).fill(false);
-        this.message = 'Wybrane kody zostały pomyślnie usunięte.';
-        setTimeout(() => {
-          this.message = null;
-        }, 4000);
-      },
-      () => {
-        this.message = 'Wystąpił błąd przy usuwaniu kodów.';
-        setTimeout(() => {
-          this.message = null;
-        }, 4000);
       }
     );
   }
