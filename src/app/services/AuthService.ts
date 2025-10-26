@@ -22,5 +22,34 @@ export class AuthService {
 
   logout() { sessionStorage.removeItem(this.key); }
 
-  isLoggedIn() { return !!this.getToken(); }
+  private decodePayload(): any | null {
+    const token = this.getToken();
+    if (!token) return null;
+
+    try {
+      const payload = atob(token.split('.')[1]);
+      return JSON.parse(payload);
+    } catch (_) {
+      return null;
+    }
+  }
+
+  isTokenExpired(): boolean {
+    const payload = this.decodePayload();
+    if (!payload || !payload.exp) return true;
+    const now = Math.floor(Date.now() / 1000);
+    return payload.exp < now;
+  }
+
+  cleanIfExpired() {
+    if (this.isTokenExpired()) {
+      sessionStorage.removeItem(this.key);
+    }
+  }
+
+  isLoggedIn(): boolean {
+    this.cleanIfExpired();
+    return !!this.getToken();
+  }
+
 }

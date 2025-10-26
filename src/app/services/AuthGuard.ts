@@ -6,7 +6,13 @@ import { AuthService} from "./AuthService";
 @Injectable({ providedIn: 'root' })
 export class AuthGuard implements CanActivate, CanActivateChild {
   constructor(private auth: AuthService, private router: Router) {}
-  canActivate()       { return this.check(); }
+  canActivate(): boolean {
+    if (this.auth.isLoggedIn()) return true;
+
+    this.auth.logout();
+    this.router.navigate(['/login'], { queryParams: { reason: 'expired' } });
+    return false;
+  }
   canActivateChild()  { return this.check(); }
 
   private check(): boolean {
