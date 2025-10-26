@@ -18,12 +18,12 @@
              overflow-hidden transition-all duration-300"
     >
       <!-- media -->
-      <figure class="relative aspect-[4/3] w-full overflow-hidden">
+      <figure class="relative w-full h-[300px] flex justify-center items-center overflow-hidden bg-gray-50">
         <img
           [src]="p.imageUrl || 'assets/no-image.svg'"
           [alt]="p.name"
           loading="lazy"
-          class="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+          class="max-h-full max-w-full object-contain"
         />
 
         <!-- gradient overlay -->

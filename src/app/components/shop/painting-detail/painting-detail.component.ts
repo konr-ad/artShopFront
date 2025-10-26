@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, ElementRef, HostListener, OnInit, ViewChild} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import {
   MediaFileDto,
@@ -14,6 +14,8 @@ import {LanguageService} from "../../../services/language.service";
   styleUrls: ['./painting-detail.component.css'],
 })
 export class PaintingDetailComponent implements OnInit {
+  @ViewChild('mainImg') mainImgRef!: ElementRef<HTMLImageElement>;
+  @ViewChild('imgWrap') imgWrapRef!: ElementRef<HTMLDivElement>;
   details: PaintingDetailsDto | null = null;
   added: boolean = false;
 
@@ -25,6 +27,10 @@ export class PaintingDetailComponent implements OnInit {
   // UI
   isButtonDisabled = false;
   isExpanded = false;
+
+  fillMode: 'object-contain' | 'object-cover' = 'object-contain';
+  private naturalW = 0;
+  private naturalH = 0
 
   constructor(
     private route: ActivatedRoute,
@@ -41,6 +47,30 @@ export class PaintingDetailComponent implements OnInit {
         this.buildGallery(dto);
       });
     });
+  }
+
+  onMainImgLoad(e: Event) {
+    const img = e.target as HTMLImageElement;
+    this.naturalW = img.naturalWidth || 0;
+    this.naturalH = img.naturalHeight || 0;
+    this.computeFillMode();
+  }
+
+  @HostListener('window:resize')
+  onResize() {
+    this.computeFillMode();
+  }
+
+  private computeFillMode() {
+    const wrap = this.imgWrapRef?.nativeElement;
+    if (!wrap || !this.naturalW || !this.naturalH) return;
+
+    const r = wrap.getBoundingClientRect();
+    const imgRatio = this.naturalW / this.naturalH;
+    const boxRatio = r.width / Math.min(r.height, 600); // bo masz max-h:600px
+
+    // Jeśli obraz jest „węższy” niż ramka → użyj cover, żeby nie było pasów
+    this.fillMode = imgRatio < boxRatio ? 'object-cover' : 'object-contain';
   }
 
   get description(): string {

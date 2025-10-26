@@ -1,33 +1,4 @@
 <div class="mx-auto max-w-7xl px-4 py-6">
-  <!-- top bar -->
-<!--  <div class="mb-6 flex items-center justify-between">-->
-<!--    <div class="text-sm text-gray-500">-->
-<!--      <span class="inline-flex items-center gap-2">-->
-<!--        <span class="h-2 w-2 rounded-full bg-indigo-400"></span>-->
-<!--        Strona {{ pageIndex + 1 }} z {{ totalPages }}-->
-<!--      </span>-->
-<!--    </div>-->
-
-<!--    <div class="inline-flex overflow-hidden rounded-full shadow-sm ring-1 ring-black/5">-->
-<!--      <button-->
-<!--        class="px-3 py-1.5 text-gray-700 hover:bg-gray-50 disabled:opacity-40"-->
-<!--        (click)="prevPage()"-->
-<!--        [disabled]="pageIndex===0"-->
-<!--        aria-label="Poprzednia strona"-->
-<!--      >-->
-<!--        ←-->
-<!--      </button>-->
-<!--      <button-->
-<!--        class="px-3 py-1.5 border-l border-gray-200 text-gray-700 hover:bg-gray-50 disabled:opacity-40"-->
-<!--        (click)="nextPage()"-->
-<!--        [disabled]="pageIndex + 1 >= totalPages"-->
-<!--        aria-label="Następna strona"-->
-<!--      >-->
-<!--        →-->
-<!--      </button>-->
-<!--    </div>-->
-<!--  </div>-->
-
   <!-- states -->
   <div *ngIf="error" class="mb-4 rounded-xl bg-red-50 p-3 text-sm text-red-700 ring-1 ring-red-200">
     {{ error }}
@@ -38,43 +9,49 @@
   </div>
 
   <!-- grid -->
-  <div *ngIf="!loading" class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+  <div *ngIf="!loading && paintings.length > 0"
+       class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
     <article
       *ngFor="let painting of paintings"
       (click)="painting.id && viewPainting(painting.id)"
-      class="group relative cursor-pointer overflow-hidden rounded-2xl bg-white shadow ring-1 ring-black/5 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl"
+      class="group relative isolate cursor-pointer rounded-2xl border border-black/5 bg-white/70 backdrop-blur
+           shadow-sm hover:shadow-xl hover:bg-white ring-1 ring-black/5 hover:ring-black/10
+           overflow-hidden transition-all duration-300"
     >
-      <figure class="relative aspect-[4/5]">
+      <!-- media -->
+      <figure class="relative w-full h-[300px] flex justify-center items-center overflow-hidden bg-gray-50">
         <img
           [src]="painting.imageUrl || 'assets/placeholder.png'"
           [alt]="painting.name"
           loading="lazy"
-          class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+          class="max-h-full max-w-full object-contain transition-transform duration-700 group-hover:scale-105"
         />
 
-        <div class="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/60 via-black/0"></div>
+        <!-- gradient overlay -->
+        <div class="pointer-events-none absolute inset-0 bg-gradient-to-t
+                  from-black/60 via-black/10 to-transparent
+                  opacity-80 group-hover:opacity-90 transition"></div>
 
         <!-- type chip -->
-        <div class="absolute left-3 top-3">
-          <span
-            class="rounded-full bg-white/85 px-2.5 py-1 text-[10px] font-medium uppercase tracking-wide text-gray-800 backdrop-blur ring-1 ring-black/5"
-          >
-            {{ ('painting.types.' + (painting.type | lowercase)) | translate }}
-          </span>
-        </div>
-
-        <!-- price badge -->
         <div class="absolute right-3 top-3">
-          <span class="rounded-full bg-gray-900/85 px-3 py-1 text-sm text-white backdrop-blur">
-            {{ painting.price | currency:'PLN':'symbol' }}
-          </span>
+        <span
+          class="rounded-full bg-white/80 backdrop-blur px-2.5 py-1 text-[11px] font-medium
+                 tracking-wide text-gray-800 shadow-sm ring-1 ring-black/5">
+          {{ ('painting.types.' + (painting.type | lowercase)) | translate }}
+        </span>
         </div>
 
-        <!-- title -->
-        <figcaption class="absolute inset-x-0 bottom-0 p-3">
-          <h3 class="line-clamp-1 text-base font-semibold text-white drop-shadow">
-            {{ painting.name }}
-          </h3>
+        <!-- caption -->
+        <figcaption class="absolute inset-x-0 bottom-0 p-4">
+          <div class="flex items-end justify-between gap-3">
+            <h3 class="text-white drop-shadow text-lg font-semibold leading-tight line-clamp-2">
+              {{ painting.name }}
+            </h3>
+            <span class="shrink-0 rounded-full bg-white/90 backdrop-blur px-3 py-1 text-[12px] font-semibold
+                       text-gray-900 shadow-sm ring-1 ring-black/5">
+            {{ painting.price | currency:'PLN' }}
+          </span>
+          </div>
         </figcaption>
       </figure>
     </article>
