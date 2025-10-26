@@ -2,6 +2,7 @@ import { ChangeDetectorRef, Component, ElementRef, HostListener, OnInit } from '
 import { Router, NavigationEnd } from '@angular/router';
 import { CartService } from 'src/app/services/cart.service';
 import { filter } from 'rxjs/operators';
+import {AuthService} from "../../../services/AuthService";
 
 @Component({
   selector: 'app-navbar',
@@ -24,7 +25,8 @@ export class NavbarComponent implements OnInit {
     private cartService: CartService,
     private router: Router,
     private cdr: ChangeDetectorRef,
-    private el: ElementRef<HTMLElement>
+    private el: ElementRef<HTMLElement>,
+    public auth: AuthService
   ) {}
 
   ngOnInit(): void {
