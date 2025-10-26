@@ -8,7 +8,6 @@
       <div class="relative w-full sm:max-w-sm">
         <input [(ngModel)]="searchTerm" type="text" placeholder="Szukaj po kodzie lub typie…"
                class="w-full rounded-xl border border-slate-200 bg-white px-3 py-2 pr-9 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500"/>
-        <span class="material-icons-outlined absolute right-2 top-2.5 text-slate-400 text-base">search</span>
       </div>
 
       <!-- actions -->
@@ -28,51 +27,47 @@
   <!-- LISTA -->
   <div
     class="mt-4 overflow-x-auto rounded-2xl bg-white/80 backdrop-blur ring-1 ring-black/5 shadow-[0_8px_30px_rgba(0,0,0,0.06)]">
-    <table class="min-w-full text-sm">
+    <table class="min-w-full text-sm table-fixed">
       <thead>
       <tr class="text-left text-slate-500 border-b">
-        <th class="py-3 pl-4 pr-2">
+        <th class="w-10 py-3 pl-4 pr-2">
           <input
             type="checkbox"
             [ngModel]="allChecked()"
             (ngModelChange)="toggleAll($event)"
             class="h-4 w-4 rounded border-slate-300"/>
         </th>
-        <th class="py-3 px-2 cursor-pointer select-none" (click)="sortBy('code')">
+        <th class="w-40 py-3 px-2" (click)="sortBy('code')">
           Kod <span class="text-[11px]" *ngIf="sortKey==='code'">{{ sortDir === 'asc' ? '▲' : '▼' }}</span>
         </th>
 
-        <th class="py-3 px-2 cursor-pointer select-none" (click)="sortBy('isActive')">
+        <th class="w-24 py-3 px-2" (click)="sortBy('isActive')">
           Aktywny <span class="text-[11px]" *ngIf="sortKey==='isActive'">{{ sortDir === 'asc' ? '▲' : '▼' }}</span>
         </th>
 
-        <th class="py-3 px-2 cursor-pointer select-none hidden md:table-cell" (click)="sortBy('discountType')">
+        <th class="w-24 py-3 px-2 hidden md:table-cell" (click)="sortBy('discountType')">
           Typ <span class="text-[11px]" *ngIf="sortKey==='discountType'">{{ sortDir === 'asc' ? '▲' : '▼' }}</span>
         </th>
 
-        <th class="py-3 px-2 cursor-pointer select-none text-right" (click)="sortBy('discountValue')">
+        <th class="w-24 py-3 px-2 text-right" (click)="sortBy('discountValue')">
           Wartość <span class="text-[11px]" *ngIf="sortKey==='discountValue'">{{ sortDir === 'asc' ? '▲' : '▼' }}</span>
         </th>
 
-        <th class="py-3 px-2 cursor-pointer select-none text-right hidden lg:table-cell"
+        <th class="w-24 py-3 px-2 text-right hidden lg:table-cell"
             (click)="sortBy('minimumOrderValue')">
           Min. zamówienie <span class="text-[11px]"
                                 *ngIf="sortKey==='minimumOrderValue'">{{ sortDir === 'asc' ? '▲' : '▼' }}</span>
         </th>
 
-        <th class="py-3 px-2 cursor-pointer select-none hidden md:table-cell" (click)="sortBy('timesUsed')">
-          Użyto <span class="text-[11px]" *ngIf="sortKey==='timesUsed'">{{ sortDir === 'asc' ? '▲' : '▼' }}</span>
+        <th class="w-24 py-3 px-2 hidden md:table-cell" (click)="sortBy('timesUsed')">
+          Ilość użyć <span class="text-[11px]" *ngIf="sortKey==='timesUsed'">{{ sortDir === 'asc' ? '▲' : '▼' }}</span>
         </th>
 
-        <th class="py-3 px-2 cursor-pointer select-none hidden md:table-cell" (click)="sortBy('usageLimit')">
-          Limit <span class="text-[11px]" *ngIf="sortKey==='usageLimit'">{{ sortDir === 'asc' ? '▲' : '▼' }}</span>
-        </th>
-
-        <th class="py-3 px-2 cursor-pointer select-none hidden lg:table-cell" (click)="sortBy('validFrom')">
+        <th class="w-24 py-3 px-2 hidden lg:table-cell" (click)="sortBy('validFrom')">
           Od <span class="text-[11px]" *ngIf="sortKey==='validFrom'">{{ sortDir === 'asc' ? '▲' : '▼' }}</span>
         </th>
 
-        <th class="py-3 px-4 text-right cursor-pointer select-none hidden lg:table-cell" (click)="sortBy('validTo')">
+        <th class="w-24 py-3 px-4 text-right hidden lg:table-cell" (click)="sortBy('validTo')">
           Do <span class="text-[11px]" *ngIf="sortKey==='validTo'">{{ sortDir === 'asc' ? '▲' : '▼' }}</span>
         </th>
       </tr>
@@ -107,7 +102,7 @@
         </td>
 
         <!-- type -->
-        <td class="py-3 px-2 hidden md:table-cell">
+        <td class="py-3 px-2 md:table-cell">
           <ng-container [ngSwitch]="c.discountType">
             <!-- PROCENT -->
             <span *ngSwitchCase="'PERCENTAGE'"
@@ -125,7 +120,7 @@
 
             <!-- fallback -->
             <span *ngSwitchDefault
-                  class="rounded-full px-2.5 py-1 text-[11px] font-medium ring-1
+                  class="rounded-full px-2.5 py-1 text-[11px] font-medium ring-1ż
                  bg-sky-50 text-sky-700 ring-sky-200">
       {{ c.discountType || '—' }}
     </span>
@@ -148,8 +143,7 @@
         </td>
 
         <!-- usage -->
-        <td class="py-3 px-2 hidden md:table-cell">{{ c.timesUsed }}</td>
-        <td class="py-3 px-2 hidden md:table-cell">{{ c.usageLimit }}</td>
+        <td class="py-3 px-8 hidden md:table-cell">{{ c.timesUsed }}</td>
 
         <!-- dates -->
         <td class="py-3 px-2 hidden lg:table-cell">{{ c.validFrom | date:'dd.MM.yyyy' }}</td>
