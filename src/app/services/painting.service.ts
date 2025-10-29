@@ -152,12 +152,27 @@ export class PaintingService {
     }
   }
 
-  lockPaintings(ids: number[]) {
-    return this.http.post<number[]>(`${this.publicUrl}/lock`, ids);
+  lockPaintings(ids: number[]): Observable<void> {
+    return this.http.post<void>(`${this.adminUrl}/lock`, ids);
   }
 
-  unlockPaintings(ids: number[]) {
-    return this.http.post<void>(`${this.publicUrl}/unlock`, ids);
+  unlockPaintings(ids: number[]): Observable<void> {
+    return this.http.post<void>(`${this.adminUrl}/unlock`, ids);
+  }
+
+  getAllAdminPaintings(): Observable<Painting[]> {
+    return this.http.get<PaintingListDto[]>(this.adminUrl).pipe(
+      map(list => list.map(item => ({
+        id: item.id,
+        type: item.type,
+        state: item.state ?? null,
+        name: item.name,
+        description: null, // w listingu nie ma opisu
+        price: item.price,
+        image: '', // nie używamy już base64
+        imageUrl: this.imageUrl(item.thumbnailUrl) ?? null,
+      })))
+    );
   }
 
 }

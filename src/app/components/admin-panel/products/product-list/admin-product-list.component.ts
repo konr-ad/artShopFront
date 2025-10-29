@@ -14,6 +14,8 @@ export class AdminProductListComponent implements OnInit {
   @Output() productSelected = new EventEmitter<Painting>();
   @Output() addProduct = new EventEmitter<void>();
 
+  selected: Record<number, boolean> = {};
+  message: string | null = null;
   products: (Painting & { imageUrl?: string })[] = [];
   selectedProductId?: number;
 
@@ -32,7 +34,7 @@ export class AdminProductListComponent implements OnInit {
   }
 
   loadProducts(): void {
-    this.paintingService.getPaintings().subscribe((items: Painting[]) => {
+    this.paintingService.getAllAdminPaintings().subscribe((items: Painting[]) => {
       this.products = items.map(p => ({
         ...p,
         imageUrl: p.imageUrl ?? (p.image ? `data:image/jpeg;base64,${p.image}` : undefined),
@@ -92,5 +94,63 @@ export class AdminProductListComponent implements OnInit {
     }
   }
 
+  allChecked(): boolean {
+    const rows = this.filteredAndSorted();
+    if (rows.length === 0) return false;
+    return rows.every(p => this.selected[p.id!]);
+  }
+
+  toggleAll(checked: boolean) {
+    this.filteredAndSorted().forEach(p => this.selected[p.id!] = checked);
+  }
+
   trackById = (_: number, p: Painting) => p.id;
+  anySelected(): boolean {
+    return Object.values(this.selected).some(Boolean);
+  }
+
+  selectedIds(): number[] {
+    return Object.entries(this.selected)
+      .filter(([, v]) => v)
+      .map(([k]) => +k);
+  }
+
+  lockSelected() {
+    const ids = this.selectedIds();
+    if (ids.length === 0) return;
+
+    this.paintingService.lockPaintings(ids).subscribe({
+      next: () => {
+        this.message = 'Zablokowano zaznaczone obrazy.';
+        // opcjonalnie: odśwież listę (jeśli stan widoku zależy od blokady)
+        this.refreshProducts();
+        // odznacz po akcji
+        ids.forEach(id => delete this.selected[id]);
+        setTimeout(() => this.message = null, 3000);
+      },
+      error: () => {
+        this.message = 'Nie udało się zablokować obrazów.';
+        setTimeout(() => this.message = null, 3000);
+      }
+    });
+  }
+
+  unlockSelected() {
+    const ids = this.selectedIds();
+    if (ids.length === 0) return;
+
+    this.paintingService.unlockPaintings(ids).subscribe({
+      next: () => {
+        this.message = 'Odblokowano zaznaczone obrazy.';
+        this.refreshProducts();
+        ids.forEach(id => delete this.selected[id]);
+        setTimeout(() => this.message = null, 3000);
+      },
+      error: () => {
+        this.message = 'Nie udało się odblokować obrazów.';
+        setTimeout(() => this.message = null, 3000);
+      }
+    });
+  }
+
 }
