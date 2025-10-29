@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { ConfigService } from './config/ConfigService';
 import {MediaFileDto, Painting} from './painting.service';
-import { Customer } from './customer.service';
+import { CustomerDto } from './customer.service';
 
 export interface Order {
   id: number;
@@ -15,7 +15,7 @@ export interface Order {
   redirectUri: string;
   payuOrderId: string;
   creationDate: string;
-  customer: Customer;
+  customer: CustomerDto;
   paintings: Painting[];
 }
 
@@ -37,7 +37,7 @@ export interface AdminOrderDto {
   createdAt: string;
   shippingAddress: ShippingAddressDto;
   items: OrderItem[];
-  customer: Customer;
+  customer: CustomerDto;
 }
 
 export interface ShippingAddressDto {

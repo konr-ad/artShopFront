@@ -50,6 +50,7 @@ const routes: Routes = [
       { path: 'orders',    loadComponent: () => import('./components/admin-panel/orders/orders.component').then(m => m.OrdersComponent) },
       { path: 'products',  loadComponent: () => import('.//components/admin-panel/products/products.component').then(m => m.ProductsComponent) },
       { path: 'discountcodes', loadComponent: () => import('./components/admin-panel/discount-codes/discount-codes.component').then(m => m.DiscountCodesComponent) },
+      { path: 'customers', loadComponent: () => import('./components/admin-panel/customers/admin-customers.component').then(m => m.AdminCustomersComponent) },
       { path: '', pathMatch: 'full', redirectTo: 'dashboard' }
     ]
   },

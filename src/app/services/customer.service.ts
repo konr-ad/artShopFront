@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import { ConfigService } from './config/ConfigService';
+import {Page} from "./painting.service";
+import {AdminOrderDto} from "./order.service";
 
-export interface Customer {
+export interface CustomerDto {
   id: number;
   email: string;
   firstName: string;
@@ -19,12 +21,22 @@ export interface Customer {
   providedIn: 'root',
 })
 export class CustomerService {
-  private backendUrl: string;
+  private apiBase = this.configService.getConfig('API_URL');
+  private adminUrl  = `${this.apiBase}/api/admin/customers`;
 
-  constructor(
-    private http: HttpClient,
-    private configService: ConfigService
-  ) {
-    this.backendUrl = this.configService.getConfig('API_URL') + '/api/paintings';
+  constructor(private http: HttpClient, private configService: ConfigService) {}
+
+  getCustomers(page = 0, size = 20) {
+    const params = new HttpParams().set('page', page).set('size', size);
+    return this.http.get<Page<CustomerDto>>(this.adminUrl, { params });
+  }
+
+  getCustomer(id: number) {
+    return this.http.get<CustomerDto>(`${this.adminUrl}/${id}`);
+  }
+
+  getCustomerOrders(customerId: number, page = 0, size = 10) {
+    const params = new HttpParams().set('page', page).set('size', size);
+    return this.http.get<Page<AdminOrderDto>>(`${this.adminUrl}/${customerId}/orders`, { params });
   }
 }
