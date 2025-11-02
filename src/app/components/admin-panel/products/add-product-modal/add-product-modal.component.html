@@ -21,7 +21,7 @@
 
     <!-- Scrollowalna treść -->
     <div class="overflow-y-auto p-4 sm:p-6">
-      <form [formGroup]="productForm" (ngSubmit)="onSubmit()" class="grid gap-6">
+      <form [formGroup]="productForm" (ngSubmit)="onSubmit()" id="addProductForm" class="grid gap-6">
 
         <!-- Nazwa + Typ -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -141,10 +141,12 @@
               [disabled]="busy">
         Anuluj
       </button>
-      <button type="submit"
-      class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded disabled:opacity-50"
-      [disabled]="busy || productForm.invalid || (mode==='create' && allFiles.length === 0)">
-      Dodaj
+      <button
+        type="submit"
+        form="addProductForm"
+        class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded disabled:opacity-50"
+        [disabled]="busy || productForm.invalid || (mode==='create' && allFiles.length === 0)">
+        Dodaj
       </button>
     </div>
   </div>
