@@ -1,111 +1,101 @@
-<div
-  *ngIf="isOpen"
-  class="fixed min-w-5 inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50"
->
-  <div
-    class="bg-white p-6 rounded-lg shadow-lg transform transition-transform duration-300 ease-in-out scale-95 opacity-0 w-full max-w-3xl"
-    [ngClass]="{ 'scale-100 opacity-100': isOpen }"
-  >
-    <h2 class="text-lg font-bold mb-4">Add New Discount Code</h2>
+<div *ngIf="isOpen"
+     class="fixed inset-0 z-50 bg-black/50 flex items-start justify-center overflow-y-auto p-4 sm:p-6 md:p-8"
+     role="dialog" aria-modal="true" tabindex="0">
 
-    <!-- Discount Code Form -->
-    <form [formGroup]="discountCodeForm" (ngSubmit)="onSubmit()">
-      <div class="mb-4">
-        <label class="block text-sm font-medium text-gray-700">Code</label>
-        <input
-          type="text"
-          formControlName="code"
-          class="mt-1 block w-full p-2 border border-gray-300 rounded-md"
-        />
-        <div
-          *ngIf="discountCodeForm.get('code')?.invalid && discountCodeForm.get('code')?.touched"
-          class="text-red-500 text-sm"
-        >
-          Code is required.
+  <!-- Karta modala -->
+  <div class="w-full max-w-3xl bg-white rounded-2xl shadow-xl grid grid-rows-[auto,1fr,auto] max-h-[90vh]">
+
+    <!-- HEADER -->
+    <div class="flex items-start justify-between gap-4 p-4 sm:p-6 border-b">
+      <h2 class="text-lg sm:text-xl font-bold">Nowy kod rabatowy</h2>
+      <button type="button" (click)="close()"
+              class="shrink-0 rounded-xl p-2 ring-1 ring-slate-200 hover:bg-slate-50 focus:outline-none">✕</button>
+    </div>
+
+    <!-- BODY (scrollowalne) -->
+    <div class="overflow-y-auto p-4 sm:p-6">
+      <form [formGroup]="form" (ngSubmit)="onSubmit()" class="grid gap-6">
+
+        <!-- Kod + Typ -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div class="md:col-span-2">
+            <label class="block text-sm font-medium text-slate-700">Kod *</label>
+            <input type="text" formControlName="code"
+                   class="mt-1 w-full rounded-xl border border-slate-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                   placeholder="np. LETNIA10" />
+            <p class="mt-1 text-xs text-rose-600" *ngIf="f['code'].touched && f['code'].invalid">Podaj kod.</p>
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-slate-700">Typ rabatu *</label>
+            <select formControlName="discountType"
+                    class="mt-1 w-full rounded-xl border border-slate-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
+              <option value="PERCENTAGE">Procent</option>
+              <option value="FIXED">Kwota stała</option>
+            </select>
+          </div>
         </div>
-      </div>
 
-      <div class="mb-4">
-        <label class="block text-sm font-medium text-gray-700">Discount Value</label>
-        <input
-          type="number"
-          formControlName="discountValue"
-          class="mt-1 block w-full p-2 border border-gray-300 rounded-md"
-        />
-        <div
-          *ngIf="
-            discountCodeForm.get('discountValue')?.invalid &&
-            discountCodeForm.get('discountValue')?.touched
-          "
-          class="text-red-500 text-sm"
-        >
-          Discount value must be at least 1.
+        <!-- Wartości -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div>
+            <label class="block text-sm font-medium text-slate-700">
+              Wartość rabatu * <span class="text-xs text-slate-500">({{ isPercentage ? '%' : 'PLN' }})</span>
+            </label>
+            <input type="number" formControlName="discountValue" [min]="1" [max]="isPercentage ? 100 : null"
+                   class="mt-1 w-full rounded-xl border border-slate-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                   placeholder="{{ isPercentage ? 'np. 10 (czyli 10%)' : 'np. 50 (PLN)' }}" />
+            <p class="mt-1 text-xs text-rose-600" *ngIf="f['discountValue'].touched && f['discountValue'].errors?.['min']">
+              Minimalna wartość to 1 {{ isPercentage ? '%' : 'PLN' }}.
+            </p>
+            <p class="mt-1 text-xs text-rose-600" *ngIf="f['discountValue'].touched && f['discountValue'].errors?.['max']">
+              Maksymalnie 100% dla rabatu procentowego.
+            </p>
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-slate-700">Minimalna wartość zamówienia</label>
+            <input type="number" formControlName="minimumOrderValue" min="0"
+                   class="mt-1 w-full rounded-xl border border-slate-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                   placeholder="np. 200" />
+          </div>
         </div>
-      </div>
 
-      <div class="mb-4">
-        <label class="block text-sm font-medium text-gray-700">Discount Type</label>
-        <select
-          formControlName="discountType"
-          class="mt-1 block w-full p-2 border border-gray-300 rounded-md"
-        >
-          <option value="PERCENTAGE">Percentage</option>
-          <option value="FIXED">Fixed</option>
-        </select>
-      </div>
+        <!-- Daty (LocalDateTime) -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-sm font-medium text-slate-700">Ważny od *</label>
+            <input type="datetime-local" formControlName="validFrom"
+                   class="mt-1 w-full rounded-xl border border-slate-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-slate-700">Ważny do *</label>
+            <input type="datetime-local" formControlName="validTo"
+                   class="mt-1 w-full rounded-xl border border-slate-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+            <p class="mt-1 text-xs text-rose-600" *ngIf="form.touched && form.errors?.['range']">
+              Data „Ważny do” musi być późniejsza lub równa „Ważny od”.
+            </p>
+          </div>
+        </div>
 
-      <div class="mb-4">
-        <label class="block text-sm font-medium text-gray-700">Minimum Order Value</label>
-        <input
-          type="number"
-          formControlName="minimumOrderValue"
-          class="mt-1 block w-full p-2 border border-gray-300 rounded-md"
-        />
-      </div>
+        <div *ngIf="errorMsg" class="text-sm text-rose-600">{{ errorMsg }}</div>
+      </form>
+    </div>
 
-      <div class="mb-4">
-        <label class="block text-sm font-medium text-gray-700">Usage Limit</label>
-        <input
-          type="number"
-          formControlName="usageLimit"
-          class="mt-1 block w-full p-2 border border-gray-300 rounded-md"
-        />
-      </div>
-
-      <!-- Valid From -->
-      <div class="mb-4">
-        <label class="block text-sm font-medium text-gray-700">Valid From</label>
-        <input type="date" formControlName="validFrom"
-               class="mt-1 block w-full p-2 border border-gray-300 rounded-md" />
-      </div>
-
-      <!-- Valid To -->
-      <div class="mb-4">
-        <label class="block text-sm font-medium text-gray-700">Valid To</label>
-        <input type="date" formControlName="validTo"
-               class="mt-1 block w-full p-2 border border-gray-300 rounded-md" />
-      </div>
-
-      <!-- Active -->
-      <div class="mb-4 flex items-center gap-2">
-        <input id="isActive" type="checkbox" formControlName="isActive"
-               class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600" />
-        <label for="isActive" class="text-sm font-medium text-gray-700">Aktywny</label>
-      </div>
-
-
-      <div class="flex justify-end">
-        <button
-          type="submit"
-          class="px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700"
-        >
-          Submit
-        </button>
-      </div>
-    </form>
-
-    <button (click)="close()" class="mt-4 px-4 py-2 bg-red-500 text-white rounded hover:bg-red-700">
-      Close
-    </button>
+    <!-- FOOTER -->
+    <div class="flex justify-end gap-2 p-4 sm:p-6 border-t">
+      <button type="button" (click)="close()"
+              class="bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold py-2 px-4 rounded"
+              [disabled]="busy">
+        Anuluj
+      </button>
+      <button type="submit"
+              class="hidden"></button>
+      <button (click)="onSubmit()"
+              class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded disabled:opacity-50"
+              [disabled]="busy || form.invalid">
+        Zapisz kod
+      </button>
+    </div>
   </div>
 </div>

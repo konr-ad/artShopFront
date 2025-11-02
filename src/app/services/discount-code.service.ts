@@ -22,7 +22,6 @@ export interface DiscountCodeCreateRequest {
   discountValue: number;
   minimumOrderValue: number;
   isActive: boolean;
-  usageLimit: number;
   validFrom: string; // 'YYYY-MM-DD'
   validTo: string;   // 'YYYY-MM-DD'
 }
