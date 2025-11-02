@@ -43,32 +43,42 @@ export class CartComponent implements OnInit {
   }
 
   applyDiscountCode() {
-    if (!this.isDiscountCodeApplied) {
-      this.resultMessage = '';
+    if (this.isDiscountCodeApplied) return;
 
-      this.discountCodeService.validateDiscountCode(this.discountCode, this.totalAmount)
-        .subscribe({
-          next: (response) => {
-            this.isDiscountCodeValid = response.valid;
+    this.resultMessage = '';
 
-            if (response.valid) {
-              if (!this.isDiscountCodeApplied) {
-                this.isDiscountCodeApplied = true;
+    this.discountCodeService.validateDiscountCode(this.discountCode, this.totalAmount)
+      .subscribe({
+        next: (response) => {
+          this.isDiscountCodeValid = response.valid;
 
-                const discount = Number(response.discountValue) || 0;
-                this.totalAmount = Math.max(0, this.totalAmount - discount);
-              }
-              this.resultMessage = response.message || 'Discount code applied!';
-            } else {
-              this.resultMessage = response.message || 'Invalid discount code';
+          if (response.valid) {
+            this.isDiscountCodeApplied = true;
+
+            const discountValue = Number(response.discountValue) || 0;
+            const discountType = response.discountType?.toUpperCase();
+
+            let discountAmount = 0;
+
+            if (discountType === 'PERCENTAGE') {
+              discountAmount = (this.totalAmount * discountValue) / 100;
+            } else if (discountType === 'FIXED') {
+              discountAmount = discountValue;
             }
-          },
-          error: () => {
-            this.isDiscountCodeValid = false;
-            this.resultMessage = 'An error occurred while validating the discount code';
+
+            // Nie pozwól zejść poniżej zera
+            this.totalAmount = Math.max(0, this.totalAmount - discountAmount);
+
+            this.resultMessage = response.message || 'Kod rabatowy został zastosowany.';
+          } else {
+            this.resultMessage = response.message || 'Nieprawidłowy kod rabatowy.';
           }
-        });
-    }
+        },
+        error: () => {
+          this.isDiscountCodeValid = false;
+          this.resultMessage = 'Wystąpił błąd podczas weryfikacji kodu rabatowego.';
+        }
+      });
   }
 
   showDiscountCode() {

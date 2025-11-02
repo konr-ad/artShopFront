@@ -36,6 +36,7 @@ export interface DiscountCodeResponse {
   message: string;
   discountValue: number;
   valid: boolean;
+  discountType: string;
 }
 
 @Injectable({
