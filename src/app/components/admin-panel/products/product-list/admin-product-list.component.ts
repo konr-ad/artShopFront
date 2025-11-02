@@ -1,7 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Painting, PaintingService } from 'src/app/services/painting.service';
+import {Painting, PaintingService, PaintingType} from 'src/app/services/painting.service';
 
 @Component({
   selector: 'app-admin-product-list',
@@ -25,7 +25,22 @@ export class AdminProductListComponent implements OnInit {
   sortKey: 'id' | 'name' | 'price' = 'id';
   sortDir: 'asc' | 'desc' = 'desc';
 
-  paintingTypes: string[] = ['OIL', 'MONOTYPE', 'PRINT'];
+  paintingTypes: PaintingType[] = ['MONOTYPE','PRINT','OIL','ACRYLIC','WATERCOLOR','DIGITAL'];
+
+  stateLabels: Record<string, string> = {
+    'AVAILABLE': 'DOSTĘPNY',
+    'RESERVED': 'ZABLOKOWANY'
+  }
+
+  typeLabels: Record<PaintingType, string> = {
+    MONOTYPE: 'Monotypia',
+    PRINT: 'Druk',
+    OIL: 'Olej',
+    ACRYLIC: 'Akryl',
+    WATERCOLOR: 'Akwarela',
+    DIGITAL: 'Cyfrowy',
+  };
+  typeLabelsMap: Record<string, string> = this.typeLabels;
 
   constructor(private paintingService: PaintingService) {}
 
@@ -151,6 +166,10 @@ export class AdminProductListComponent implements OnInit {
         setTimeout(() => this.message = null, 3000);
       }
     });
+  }
+
+  labelForType(t: string): string {
+    return this.typeLabelsMap[t] ?? t;
   }
 
 }

@@ -65,7 +65,12 @@ export interface CreatePaintingRequest {
 }
 
 export type PaintingType =
-  | 'MONOTYPE' | 'PRINT' | 'OIL' | 'ACRYLIC' | 'WATERCOLOR' | 'DIGITAL';
+  | 'MONOTYPE'
+  | 'PRINT'
+  | 'OIL'
+  | 'ACRYLIC'
+  | 'WATERCOLOR'
+  | 'DIGITAL';
 
 @Injectable({ providedIn: 'root' })
 export class PaintingService {
