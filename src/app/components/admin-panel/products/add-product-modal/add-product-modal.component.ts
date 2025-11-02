@@ -13,8 +13,7 @@ export class AddProductModalComponent {
   @Input() isOpen = false;
   @Output() closed = new EventEmitter<void>();
   @Output() productAdded = new EventEmitter<PaintingDetailsDto>();
-  @Input() mode: 'create' | 'edit' = 'create';
-  @Input() editModel?: PaintingDetailsDto;
+  @Input() mode = 'create';
 
   img = (u: string) => this.paintingService.imageUrl(u) ?? u;
 
@@ -23,6 +22,14 @@ export class AddProductModalComponent {
   additionalFiles: File[] = [];
 
   types: PaintingType[] = ['MONOTYPE','PRINT','OIL','ACRYLIC','WATERCOLOR','DIGITAL'];
+  typeLabels: Record<PaintingType, string> = {
+    MONOTYPE: 'Monotypia',
+    PRINT: 'Druk',
+    OIL: 'Olej',
+    ACRYLIC: 'Akryl',
+    WATERCOLOR: 'Akwaforta / Akwarela',
+    DIGITAL: 'Cyfrowy'
+  };
 
   busy = false;
   errorMsg: string | null = null;
@@ -40,6 +47,12 @@ export class AddProductModalComponent {
       descriptionPl: [''],
       descriptionEn: [''],
     });
+  }
+
+
+
+  onPrimaryPicked(index: number) {
+    this.selectedPrimaryIndex = index;
   }
 
   get allFiles(): File[] {
@@ -111,33 +124,13 @@ export class AddProductModalComponent {
   onAdditionalImagesChange(evt: Event) {
     const input = evt.target as HTMLInputElement;
     const files = input.files ? Array.from(input.files) : [];
-    this.additionalFiles = files;
-    this.additionalPreviews = [];
+    if (!files.length) return;
+    this.additionalFiles.push(...files);
     files.forEach(f => this.readPreview(f, false));
-    if (!this.primaryFile && files.length > 0) {
+    if (!this.primaryFile && this.additionalFiles.length > 0) {
       this.selectedPrimaryIndex = 0;
     }
-  }
-
-  ngOnChanges(ch: SimpleChanges) {
-    if (ch['editModel'] && this.mode === 'edit' && this.editModel) {
-      // wypełnij formularz
-      this.productForm.patchValue({
-        name: this.editModel.name,
-        type: this.editModel.type,
-        price: this.editModel.price,
-        state: this.editModel.state ?? 'AVAILABLE',
-        descriptionPl: this.editModel.descriptionPl ?? '',
-        descriptionEn: this.editModel.descriptionEn ?? ''
-      });
-
-      // wyczyść ewentualne nowe pliki/preview (bo na start pokazujemy istniejące)
-      this.primaryFile = null;
-      this.additionalFiles = [];
-      this.previewUrl = null;
-      this.additionalPreviews = [];
-      this.selectedPrimaryIndex = 0;
-    }
+    input.value = '';
   }
 
   onSubmit() {
@@ -173,5 +166,33 @@ export class AddProductModalComponent {
     this.additionalPreviews = [];
     this.selectedPrimaryIndex = 0;
     this.errorMsg = null;
+  }
+
+  removeImage(index: number, event: Event) {
+    event.stopPropagation(); // nie zaznaczaj jako "główne"
+
+    // Usuń zarówno z files, jak i previews
+    const isPrimary = (index === 0 && !!this.primaryFile);
+
+    if (isPrimary) {
+      // usuwamy zdjęcie główne
+      this.primaryFile = null;
+      this.previewUrl = null;
+    } else {
+      // przesunięcie indeksów — bo index 0 to primary, reszta to additional
+      const adjustedIndex = this.primaryFile ? index - 1 : index;
+      this.additionalFiles.splice(adjustedIndex, 1);
+      this.additionalPreviews.splice(adjustedIndex, 1);
+    }
+
+    // aktualizacja indeksu głównego, jeśli usunięto wybrane
+    if (this.selectedPrimaryIndex === index) {
+      this.selectedPrimaryIndex = 0;
+    }
+
+    // bezpieczeństwo: jeśli brak zdjęć, resetuj
+    if (!this.primaryFile && this.additionalFiles.length === 0) {
+      this.selectedPrimaryIndex = 0;
+    }
   }
 }

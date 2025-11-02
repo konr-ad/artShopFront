@@ -1,153 +1,151 @@
-<div *ngIf="isOpen" class="fixed inset-0 bg-black/50 flex justify-center items-center z-50">
-  <div class="bg-white p-6 rounded-2xl shadow-lg w-full max-w-xl">
-    <h2 class="text-xl font-bold mb-4">
-      {{ mode === 'edit' ? 'Edytuj produkt' : 'Dodaj Nowy Produkt' }}
-    </h2>
+<!-- Modal -->
+<div
+  *ngIf="isOpen"
+  class="fixed inset-0 z-50 bg-black/50 flex items-start justify-center overflow-y-auto p-4 sm:p-6 md:p-8"
+  role="dialog" aria-modal="true"
+  (keydown.escape)="close()"
+  tabindex="0"
+>
+  <!-- Kontener -->
+  <div class="relative w-full max-w-3xl bg-white rounded-2xl shadow-xl grid grid-rows-[auto,1fr,auto] max-h-[85vh]">
 
-    <!-- info dla edycji -->
-    <div *ngIf="mode==='edit'" class="mb-3 text-sm text-slate-600">
-      ID: #{{ editModel?.id }} •
-      <span class="rounded-full bg-slate-100 px-2 py-0.5 text-[11px] ring-1 ring-slate-200">
-        Obecne zdjęcia zostaną zachowane, jeśli nie dodasz nowych.
-      </span>
+    <!-- Header -->
+    <div class="flex items-start justify-between gap-4 p-4 sm:p-6 border-b">
+      <h2 class="text-lg sm:text-xl font-bold">Dodaj Nowy Produkt</h2>
+      <button type="button"
+              (click)="close()"
+              class="shrink-0 rounded-xl p-2 ring-1 ring-slate-200 hover:bg-slate-50 focus:outline-none">
+        ✕
+      </button>
     </div>
 
-    <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+    <!-- Scrollowalna treść -->
+    <div class="overflow-y-auto p-4 sm:p-6">
+      <form [formGroup]="productForm" (ngSubmit)="onSubmit()" class="grid gap-6">
 
-      <!-- Nazwa + Typ -->
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div>
-          <label class="block text-sm font-medium text-slate-700">Nazwa *</label>
-          <input type="text" formControlName="name"
-                 class="mt-1 w-full rounded-xl border border-slate-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500" />
-          <p class="mt-1 text-xs text-rose-600" *ngIf="productForm.get('name')?.touched && productForm.get('name')?.invalid">
-            Wpisz nazwę.
-          </p>
-        </div>
-
-        <div>
-          <label class="block text-sm font-medium text-slate-700">Typ *</label>
-          <select formControlName="type"
-                  class="mt-1 w-full rounded-xl border border-slate-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
-            <option value="" disabled hidden>Wybierz typ</option>
-            <option *ngFor="let t of types" [value]="t">{{ t }}</option>
-          </select>
-          <p class="mt-1 text-xs text-rose-600" *ngIf="productForm.get('type')?.touched && productForm.get('type')?.invalid">
-            Wybierz typ.
-          </p>
-        </div>
-      </div>
-
-      <!-- Cena -->
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div class="md:col-span-1">
-          <label class="block text-sm font-medium text-slate-700">Cena *</label>
-          <input type="number" formControlName="price" step="0.01" min="0.01"
-                 class="mt-1 w-full rounded-xl border border-slate-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500" />
-          <p class="mt-1 text-xs text-rose-600" *ngIf="productForm.get('price')?.touched && productForm.get('price')?.invalid">
-            Podaj cenę &gt; 0.
-          </p>
-        </div>
-        <div class="md:col-span-2">
-          <label class="block text-sm font-medium text-slate-700">Status</label>
-          <select formControlName="state"
-                  class="mt-1 w-full rounded-xl border border-slate-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
-            <option value="AVAILABLE">AVAILABLE</option>
-            <option value="SOLD">SOLD</option>
-          </select>
-        </div>
-      </div>
-
-      <!-- Opisy -->
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div>
-          <label class="block text-sm font-medium text-slate-700">Opis (PL)</label>
-          <textarea formControlName="descriptionPl"
-                    class="mt-1 min-h-24 w-full rounded-xl border border-slate-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"></textarea>
-        </div>
-        <div>
-          <label class="block text-sm font-medium text-slate-700">Opis (EN)</label>
-          <textarea formControlName="descriptionEn"
-                    class="mt-1 min-h-24 w-full rounded-xl border border-slate-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"></textarea>
-        </div>
-      </div>
-
-      <!-- Uploader: drag&drop + inputy -->
-      <div class="rounded-xl border border-dashed border-slate-300 p-4">
-        <p class="text-sm font-medium text-slate-700 mb-2">Zdjęcia</p>
-
-        <div
-          class="relative grid place-items-center rounded-lg bg-slate-50 p-6 text-center ring-1 ring-inset ring-slate-200
-                 hover:bg-slate-100 transition"
-          (dragover)="onDragOver($event)"
-          (drop)="onDrop($event)">
+        <!-- Nazwa + Typ -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
-            <p class="text-sm text-slate-600">Przeciągnij i upuść pliki tutaj</p>
-            <p class="text-xs text-slate-500">lub</p>
-            <div class="mt-2 flex flex-wrap items-center justify-center gap-2">
-              <label class="cursor-pointer inline-flex items-center rounded-xl bg-white px-3 py-2 text-sm text-slate-700 ring-1 ring-slate-200 hover:bg-slate-50">
-                <input type="file" accept="image/*" class="hidden" (change)="onPrimaryImageChange($event)" />
-                Zdjęcie główne
-              </label>
-              <label class="cursor-pointer inline-flex items-center rounded-xl bg-white px-3 py-2 text-sm text-slate-700 ring-1 ring-slate-200 hover:bg-slate-50">
-                <input type="file" multiple accept="image/*" class="hidden" (change)="onAdditionalImagesChange($event)" />
-                Dodatkowe zdjęcia
-              </label>
-            </div>
+            <label class="block text-sm font-medium text-slate-700">Nazwa *</label>
+            <input type="text" formControlName="name"
+                   class="mt-1 w-full rounded-xl border border-slate-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"/>
+            <p class="mt-1 text-xs text-rose-600" *ngIf="productForm.get('name')?.touched && productForm.get('name')?.invalid">
+              Wpisz nazwę.
+            </p>
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-slate-700">Typ *</label>
+            <select formControlName="type"
+                    class="mt-1 w-full rounded-xl border border-slate-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
+              <option value="" disabled hidden>Wybierz typ</option>
+              <option *ngFor="let t of types" [value]="t">{{ typeLabels[t] }}</option>
+            </select>
+            <p class="mt-1 text-xs text-rose-600" *ngIf="productForm.get('type')?.touched && productForm.get('type')?.invalid">
+              Wybierz typ.
+            </p>
           </div>
         </div>
 
-        <!-- Podgląd istniejących mediów (read-only) -->
-        <div *ngIf="mode==='edit' && editModel?.media?.length && !allPreviews.length" class="mb-4">
-          <p class="text-sm text-gray-700 mb-2">Aktualne zdjęcia:</p>
-          <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
-            <div *ngFor="let mf of editModel?.media" class="border rounded-md overflow-hidden">
-              <img [src]="img(mf.url)" class="w-full h-32 object-cover" />
-              <div class="p-2 text-xs text-slate-600" *ngIf="mf.isPrimary">Główne</div>
-            </div>
+        <!-- Cena + Status -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div>
+            <label class="block text-sm font-medium text-slate-700">Cena *</label>
+            <input type="number" formControlName="price" step="0.01" min="0.01"
+                   class="mt-1 w-full rounded-xl border border-slate-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"/>
+            <p class="mt-1 text-xs text-rose-600" *ngIf="productForm.get('price')?.touched && productForm.get('price')?.invalid">
+              Podaj cenę &gt; 0.
+            </p>
+          </div>
+
+          <div class="md:col-span-2">
+            <label class="block text-sm font-medium text-slate-700">Status</label>
+            <select formControlName="state"
+                    class="mt-1 w-full rounded-xl border border-slate-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
+              <option value="AVAILABLE">Dostępny</option>
+              <option value="SOLD">Zablokowany</option>
+            </select>
           </div>
         </div>
 
-        <!-- Wgrywanie (jak było) + wybór primary – tylko jeśli dodajesz nowe -->
-        <div class="mb-4">
-          <label class="block text-sm font-medium text-gray-700">
-            {{ mode === 'edit' ? 'Nowe zdjęcia (opcjonalnie – podmieni wszystkie)' : 'Zdjęcie główne *' }}
-          </label>
-          <input type="file" accept="image/png, image/jpeg" (change)="onPrimaryImageChange($event)" class="mt-1 block w-full"/>
+        <!-- Opisy -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-sm font-medium text-slate-700">Opis (PL)</label>
+            <textarea formControlName="descriptionPl"
+                      class="mt-1 min-h-24 w-full rounded-xl border border-slate-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"></textarea>
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-slate-700">Opis (EN)</label>
+            <textarea formControlName="descriptionEn"
+                      class="mt-1 min-h-24 w-full rounded-xl border border-slate-200 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"></textarea>
+          </div>
         </div>
 
-        <div class="mb-2">
-          <label class="block text-sm font-medium text-gray-700">Dodatkowe zdjęcia</label>
-          <input type="file" multiple accept="image/png, image/jpeg" (change)="onAdditionalImagesChange($event)" class="mt-1 block w-full"/>
-        </div>
+        <!-- Uploader -->
+        <div class="rounded-xl border border-dashed border-slate-300 p-4">
+          <p class="text-sm font-medium text-slate-700 mb-2">Zdjęcia</p>
 
-        <div *ngIf="allPreviews.length" class="mb-4">
-          <p class="text-sm text-gray-700 mb-2">Wybierz zdjęcie główne:</p>
-          <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
-            <label *ngFor="let src of allPreviews; let i = index"
-                   class="block border rounded-md overflow-hidden cursor-pointer hover:ring-2 hover:ring-indigo-400">
-              <img [src]="src" class="w-full h-32 object-cover"/>
-              <div class="flex items-center gap-2 p-2">
-                <input type="radio" name="primary" [checked]="selectedPrimaryIndex === i" (change)="selectedPrimaryIndex = i"/>
-                <span class="text-sm">{{ i === 0 ? 'Główne (z 1. pola)' : 'Dodatkowe ' + i }}</span>
+          <div
+            class="relative grid place-items-center rounded-lg bg-slate-50 p-6 text-center ring-1 ring-inset ring-slate-200 hover:bg-slate-100 transition"
+            (dragover)="onDragOver($event)" (drop)="onDrop($event)">
+            <div>
+              <p class="text-sm text-slate-600">Przeciągnij i upuść pliki tutaj</p>
+              <p class="text-xs text-slate-500">lub</p>
+              <div class="mt-2 grid items-center justify-center">
+                <label class="cursor-pointer inline-flex items-center rounded-xl bg-white px-3 py-2 text-sm text-slate-700 ring-1 ring-slate-200 hover:bg-slate-50">
+                  <input type="file" multiple accept="image/*" class="hidden" (change)="onAdditionalImagesChange($event)"/>
+                  Dodaj zdjęcia
+                </label>
               </div>
-            </label>
+            </div>
           </div>
-        </div>
 
-        <div *ngIf="errorMsg" class="mb-3 text-red-600 text-sm">{{ errorMsg }}</div>
+          <!-- Scrollowalne miniatury -->
+          <div class="grid grid-cols-2 md:grid-cols-3 gap-3 max-h-128 overflow-y-auto pr-1">
+            <div *ngFor="let src of allPreviews; let i = index"
+                 class="relative border rounded-md overflow-hidden group">
 
-        <div class="flex justify-end gap-2">
-          <button type="button" (click)="close()" class="bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold py-2 px-4 rounded" [disabled]="busy">
-            Anuluj
-          </button>
-          <button type="submit"
-                  class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded disabled:opacity-50"
-                  [disabled]="busy || productForm.invalid || (mode==='create' && allFiles.length === 0)">
-            {{ busy ? (mode==='edit' ? 'Zapisywanie…' : 'Dodawanie…') : (mode==='edit' ? 'Zapisz zmiany' : 'Dodaj') }}
-          </button>
+              <!-- Miniatura -->
+              <img [src]="src" class="w-full h-32 object-cover" />
+
+              <!-- Przycisk usuń -->
+              <button type="button"
+                      (click)="removeImage(i, $event)"
+                      class="absolute top-1 right-1 bg-red-600 text-white text-xs rounded-full w-6 h-6 flex items-center justify-center opacity-100">
+                ✕
+              </button>
+
+              <!-- Wybór głównego -->
+              <div class="flex items-center gap-2 p-2 cursor-pointer hover:bg-slate-50"
+                   (click)="onPrimaryPicked(i)">
+                <input type="radio" name="primaryIdx"
+                       [value]="i"
+                       [checked]="selectedPrimaryIndex === i"
+                       class="cursor-pointer" />
+                <span class="text-sm">{{ i === 0 ? 'Zdjęcie' : 'Zdjęcie' + i }}</span>
+              </div>
+            </div>
+          </div>
+
+
+          <div *ngIf="errorMsg" class="mt-3 text-red-600 text-sm">{{ errorMsg }}</div>
         </div>
-      </div>
-    </form>
+      </form>
+    </div>
+
+    <!-- Footer -->
+    <div class="flex justify-end gap-2 p-4 sm:p-6 border-t">
+      <button type="button" (click)="close()"
+              class="bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold py-2 px-4 rounded"
+              [disabled]="busy">
+        Anuluj
+      </button>
+      <button type="submit"
+      class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded disabled:opacity-50"
+      [disabled]="busy || productForm.invalid || (mode==='create' && allFiles.length === 0)">
+      Dodaj
+      </button>
+    </div>
   </div>
 </div>

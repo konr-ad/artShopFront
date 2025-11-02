@@ -22,27 +22,23 @@ export class ProductsComponent {
 
   selectedProduct: any;
   isAddOpen = false;
-  editModel?: PaintingDetailsDto;
   constructor(private paintingService: PaintingService) {}
   onProductSelected(product: any) {
     this.selectedProduct = product;
   }
 
   openAddProductModal() {
-    this.editModel = undefined;
     this.isAddOpen = true;
   }
 
   openEditProductModal(id: number) {
     // pobierz pełne DTO z mediami do modala
     this.paintingService.details(id).subscribe(dto => {
-      this.editModel = dto;
       this.isAddOpen = true;
     });
   }
   handleProductAdded(_: any) {
     this.isAddOpen = false;
-    this.editModel = undefined;
     this.adminProductListComponent.refreshProducts();
   }
 }

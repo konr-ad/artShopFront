@@ -25,9 +25,7 @@
   <!-- Modal na poziomie rodzica -->
   <app-add-product-modal
     [isOpen]="isAddOpen"
-    [mode]="editModel ? 'edit' : 'create'"
-    [editModel]="editModel"
-    (closed)="isAddOpen = false; editModel = undefined"
+    (closed)="isAddOpen = false;"
     (productAdded)="handleProductAdded($event)">
   </app-add-product-modal>
 </div>
