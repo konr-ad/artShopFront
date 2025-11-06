@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CartService, CartItem } from '../../services/cart.service';
 import { PayuService } from '../../services/payu.service';
+import {firstValueFrom} from "rxjs";
 
 @Component({
   selector: 'app-payment',
@@ -26,6 +27,8 @@ export class PaymentComponent implements OnInit {
   private countdownHandle?: number;
   private autoRedirectHandle?: number;
   private hasRedirected = false;
+  private subtotal = 0;
+  private discountAmount = 0;
 
   constructor(
     private router: Router,
@@ -55,19 +58,16 @@ export class PaymentComponent implements OnInit {
     this.zip = state?.zip || '';
   }
 
+
   ngOnInit(): void {
-    this.cartService.getItems().subscribe((items) => (this.cartItems = items));
-    this.cartService.getTotalAmount().subscribe((amount) => (this.totalAmount = amount));
+    this.cartService.getItems().subscribe(items => this.cartItems = items);
+    this.cartService.getTotalAmount().subscribe(total => this.totalAmount = total);      // total po rabacie
+    this.cartService.getSubtotal().subscribe(s => this.subtotal = s);                    // przed rabatem
+    this.cartService.getDiscountAmount().subscribe(d => this.discountAmount = d);        // kwota rabatu
   }
 
   createOrderData() {
-    const products = this.cartItems.map((item) => ({
-      paintingId: item.productId,
-      name: item.productName,
-      paintingType: item.type,             // "OIL" | "MONOTYPE" | "PRINT"
-      unitPrice: item.price,
-      quantity: item.quantity
-    }));
+    const products = this.buildDiscountedProducts(this.cartItems, this.subtotal, this.discountAmount);
 
     return {
       description: this.cartItems.map(i => i.productName).join(' + '),
@@ -87,8 +87,22 @@ export class PaymentComponent implements OnInit {
         zip: this.zip,
         country: this.country
       },
-      products
+      products,
+      totals: {
+        subtotal: this.round2(this.subtotal),
+        discount: this.round2(this.discountAmount),
+        total:    this.round2(this.totalAmount)
+      },
+      // (opcjonalnie – jeśli chcesz przekazać kod rabatowy do backendu)
+      discount: this.buildDiscountMeta()
     };
+  }
+
+  private async buildDiscountMeta() {
+    let code = '';
+    const d = await firstValueFrom(this.cartService.getDiscountState());
+    if (d) code = d.code;
+    return code ? { code } : undefined;
   }
 
   proceedToPayment() {
@@ -100,7 +114,7 @@ export class PaymentComponent implements OnInit {
         if (this.email)    sessionStorage.setItem('lastOrderEmail', this.email);
 
         if (this.redirectUri) {
-          this.openRedirectModal();     // <-- nowy modal + autoprzekierowanie
+          this.openRedirectModal();
         } else {
           alert('Brak adresu przekierowania');
         }
@@ -154,5 +168,57 @@ export class PaymentComponent implements OnInit {
 
   ngOnDestroy(): void {
     this.clearTimers();
+  }
+
+  private round2(n: number): number {
+    return Math.round(n * 100) / 100;
+  }
+
+  private buildDiscountedProducts(items: CartItem[], subtotal: number, discountAmount: number) {
+    if (subtotal <= 0 || discountAmount <= 0) {
+      // nic do korygowania
+      return items.map(it => ({
+        paintingId: it.productId,
+        name: it.productName,
+        paintingType: it.type,
+        unitPrice: this.round2(it.price),   // bez zmian
+        quantity: it.quantity
+      }));
+    }
+
+    const totalBefore = this.round2(items.reduce((s, it) => s + it.price * it.quantity, 0));
+    const totalAfter  = this.round2(Math.max(0, totalBefore - discountAmount));
+
+    // proporcja udziału wartości pozycji w subtotalu
+    const shares = items.map(it => (it.price * it.quantity) / subtotal);
+
+    // obniż pozycje proporcjonalnie i pilnuj sumy (korekta na ostatniej pozycji)
+    const out = items.map((it, idx) => {
+      const part = this.round2(discountAmount * shares[idx]); // część rabatu dla pozycji
+      const itemTotalAfter = this.round2(it.price * it.quantity - part);
+      // aby uzyskać unitPrice po rabacie:
+      const unitAfter = this.round2(itemTotalAfter / it.quantity);
+      return {
+        paintingId: it.productId,
+        name: it.productName,
+        paintingType: it.type,
+        unitPrice: unitAfter,
+        quantity: it.quantity
+      };
+    });
+
+    // korekta sumy (różnice zaokrągleń)
+    const sumOut = this.round2(out.reduce((s, p) => s + p.unitPrice * p.quantity, 0));
+    const diff   = this.round2(totalAfter - sumOut);
+    if (Math.abs(diff) >= 0.01) {
+      // dorzuć różnicę do ostatniej pozycji (lub pierwszej, jak wolisz)
+      const last = out[out.length - 1];
+      out[out.length - 1] = {
+        ...last,
+        unitPrice: this.round2(last.unitPrice + diff / last.quantity)
+      };
+    }
+
+    return out;
   }
 }

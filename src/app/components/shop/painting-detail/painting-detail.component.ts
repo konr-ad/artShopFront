@@ -18,6 +18,7 @@ export class PaintingDetailComponent implements OnInit {
   @ViewChild('imgWrap') imgWrapRef!: ElementRef<HTMLDivElement>;
   details: PaintingDetailsDto | null = null;
   added: boolean = false;
+  canAddMore = true;
 
   // stan galerii
   thumbUrls: string[] = [];
@@ -47,8 +48,60 @@ export class PaintingDetailComponent implements OnInit {
       this.paintingService.details(id).subscribe(dto => {
         this.details = dto;
         this.buildGallery(dto);
+        this.recomputeAddState();
       });
     });
+
+    // nasłuchuj zmian koszyka, aby dynamicznie blokować/przywracać przycisk
+    this.cartService.getItems().subscribe(() => this.recomputeAddState());
+  }
+
+  addToCart(): void {
+    if (!this.details) return;
+
+    const type = this.details.type as PaintingType;
+    if (!this.cartService.canAddMore(this.details.id, type)) {
+      // już w koszyku i typ pojedynczy – nic nie rób
+      this.added = true;
+      this.isButtonDisabled = true;
+      return;
+    }
+
+    const primaryUrl = this.details.media?.find(m => m.isPrimary)?.url
+      ?? this.details.media?.[0]?.url ?? null;
+    const full = this.paintingService.fullUrl(primaryUrl);
+
+    this.cartService.addItem({
+      id: this.details.id,
+      name: this.details.name,
+      price: this.details.price,
+      imageUrl: full || undefined,
+      type
+    });
+
+    // feedback UI
+    this.added = true;
+
+    // dla typów pojedynczych – zostaw przycisk trwale zablokowany
+    if (type !== 'PRINT' && type !== 'DIGITAL') {
+      this.isButtonDisabled = true;
+      return;
+    }
+
+    // dla PRINT/DIGITAL – krótki „toast” i odblokowanie jak u Ciebie
+    this.isButtonDisabled = true;
+    setTimeout(() => {
+      this.added = false;
+      this.isButtonDisabled = false;
+    }, 2000);
+  }
+
+  private recomputeAddState() {
+    if (!this.details) { this.canAddMore = false; return; }
+    const type = this.details.type as PaintingType;
+    this.canAddMore = this.cartService.canAddMore(this.details.id, type);
+    this.isButtonDisabled = !this.canAddMore;
+    this.added = !this.canAddMore;
   }
 
   onMainImgLoad(e: Event) {
@@ -92,33 +145,6 @@ export class PaintingDetailComponent implements OnInit {
   selectThumb(i: number) {
     this.selectedIndex = i;
     this.selectedImgUrl = this.thumbUrls[i] ?? null;
-  }
-
-  addToCart(): void {
-    if (!this.details) return;
-
-    // spróbuj wziąć primary → pierwszy
-    const primaryUrl = this.details.media?.find((m: MediaFileDto) => m.isPrimary)?.url
-      ?? this.details.media?.[0]?.url
-      ?? null;
-
-    const full = this.paintingService.fullUrl(primaryUrl);
-
-    this.cartService.addItem({
-      id: this.details.id,
-      name: this.details.name,
-      price: this.details.price,
-      imageUrl: full || undefined,
-      type: this.details.type as PaintingType
-    });
-
-    this.added = true;
-    this.isButtonDisabled = true;
-
-    setTimeout(() => {
-      this.added = false;
-      this.isButtonDisabled = false;
-    }, 2000);
   }
 
   toggleList() { this.isExpanded = !this.isExpanded; }

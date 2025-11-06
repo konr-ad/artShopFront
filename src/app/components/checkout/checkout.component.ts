@@ -162,8 +162,8 @@ export class CheckoutComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.cartService.getItems().subscribe((items) => (this.cartItems = items));
-    this.cartService.getTotalAmount().subscribe((amount) => (this.totalAmount = amount));
+    this.cartService.getItems().subscribe(items => this.cartItems = items);
+    this.cartService.getTotalAmount().subscribe(total => this.totalAmount = total);
 
     // Populate form with data from query parameters
     this.route.queryParams.subscribe((params) => {

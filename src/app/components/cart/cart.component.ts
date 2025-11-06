@@ -42,43 +42,38 @@ export class CartComponent implements OnInit {
     }
   }
 
+
   applyDiscountCode() {
     if (this.isDiscountCodeApplied) return;
-
     this.resultMessage = '';
 
-    this.discountCodeService.validateDiscountCode(this.discountCode, this.totalAmount)
-      .subscribe({
-        next: (response) => {
-          this.isDiscountCodeValid = response.valid;
+    // Uwaga: przekaż SUBTOTAL a nie total po rabacie (żeby procent liczył się od wartości koszyka)
+    let currentSubtotal = 0;
+    const sub = this.cartService.getSubtotal().subscribe(v => currentSubtotal = v);
+    sub.unsubscribe();
 
-          if (response.valid) {
-            this.isDiscountCodeApplied = true;
+    this.discountCodeService.validateDiscountCode(this.discountCode, currentSubtotal).subscribe({
+      next: (response) => {
+        this.isDiscountCodeValid = response.valid;
+        if (response.valid) {
+          this.isDiscountCodeApplied = true;
 
-            const discountValue = Number(response.discountValue) || 0;
-            const discountType = response.discountType?.toUpperCase();
+          const type = (response.discountType || '').toUpperCase() as 'PERCENTAGE' | 'FIXED';
+          const value = Number(response.discountValue) || 0;
 
-            let discountAmount = 0;
+          // zapisz rabat w źródle prawdy
+          this.cartService.applyDiscount(this.discountCode, type, value);
 
-            if (discountType === 'PERCENTAGE') {
-              discountAmount = (this.totalAmount * discountValue) / 100;
-            } else if (discountType === 'FIXED') {
-              discountAmount = discountValue;
-            }
-
-            // Nie pozwól zejść poniżej zera
-            this.totalAmount = Math.max(0, this.totalAmount - discountAmount);
-
-            this.resultMessage = response.message || 'Kod rabatowy został zastosowany.';
-          } else {
-            this.resultMessage = response.message || 'Nieprawidłowy kod rabatowy.';
-          }
-        },
-        error: () => {
-          this.isDiscountCodeValid = false;
-          this.resultMessage = 'Wystąpił błąd podczas weryfikacji kodu rabatowego.';
+          this.resultMessage = response.message || 'Kod rabatowy został zastosowany.';
+        } else {
+          this.resultMessage = response.message || 'Nieprawidłowy kod rabatowy.';
         }
-      });
+      },
+      error: () => {
+        this.isDiscountCodeValid = false;
+        this.resultMessage = 'Wystąpił błąd podczas weryfikacji kodu rabatowego.';
+      }
+    });
   }
 
   showDiscountCode() {
