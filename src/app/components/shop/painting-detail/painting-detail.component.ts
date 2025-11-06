@@ -28,6 +28,8 @@ export class PaintingDetailComponent implements OnInit {
   isButtonDisabled = false;
   isExpanded = false;
 
+  lightboxOpen = false;
+
   fillMode: 'object-contain' | 'object-cover' = 'object-contain';
   private naturalW = 0;
   private naturalH = 0
@@ -50,10 +52,7 @@ export class PaintingDetailComponent implements OnInit {
   }
 
   onMainImgLoad(e: Event) {
-    const img = e.target as HTMLImageElement;
-    this.naturalW = img.naturalWidth || 0;
-    this.naturalH = img.naturalHeight || 0;
-    this.computeFillMode();
+    this.fillMode = 'object-contain';
   }
 
   @HostListener('window:resize')
@@ -62,15 +61,7 @@ export class PaintingDetailComponent implements OnInit {
   }
 
   private computeFillMode() {
-    const wrap = this.imgWrapRef?.nativeElement;
-    if (!wrap || !this.naturalW || !this.naturalH) return;
-
-    const r = wrap.getBoundingClientRect();
-    const imgRatio = this.naturalW / this.naturalH;
-    const boxRatio = r.width / Math.min(r.height, 600); // bo masz max-h:600px
-
-    // Jeśli obraz jest „węższy” niż ramka → użyj cover, żeby nie było pasów
-    this.fillMode = imgRatio < boxRatio ? 'object-cover' : 'object-contain';
+    this.fillMode = 'object-contain';
   }
 
   get description(): string {
@@ -133,4 +124,29 @@ export class PaintingDetailComponent implements OnInit {
   toggleList() { this.isExpanded = !this.isExpanded; }
 
   trackByIndex = (i: number) => i;
+
+  openLightbox() { if (this.thumbUrls.length) this.lightboxOpen = true; }
+  closeLightbox() { this.lightboxOpen = false; }
+
+  // Nawigacja w obrębie listy obrazów
+  nextImage() {
+    if (!this.thumbUrls.length) return;
+    this.selectedIndex = (this.selectedIndex + 1) % this.thumbUrls.length;
+    this.selectedImgUrl = this.thumbUrls[this.selectedIndex];
+  }
+  prevImage() {
+    if (!this.thumbUrls.length) return;
+    this.selectedIndex = (this.selectedIndex - 1 + this.thumbUrls.length) % this.thumbUrls.length;
+    this.selectedImgUrl = this.thumbUrls[this.selectedIndex];
+  }
+
+  // Klawiatura: Esc zamyka, strzałki nawigują
+  @HostListener('document:keydown', ['$event'])
+  onKeydown(e: KeyboardEvent) {
+    if (!this.lightboxOpen) return;
+    if (e.key === 'Escape') this.closeLightbox();
+    if (e.key === 'ArrowRight') this.nextImage();
+    if (e.key === 'ArrowLeft') this.prevImage();
+  }
+
 }
