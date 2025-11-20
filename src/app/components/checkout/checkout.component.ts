@@ -138,14 +138,12 @@ export class CheckoutComponent implements OnInit {
   showNoteInput: boolean = false;
   checkoutForm: FormGroup;
   formSubmitted: boolean = false;
-  locking: boolean = false;
 
   constructor(
     private fb: FormBuilder,
     private cartService: CartService,
     private router: Router,
     private route: ActivatedRoute,
-    private paintingService: PaintingService
   ) {
     this.checkoutForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
@@ -209,29 +207,5 @@ export class CheckoutComponent implements OnInit {
     });
     this.selectedCountry = 'United States';
     this.availableStates = this.statesProvinces[this.selectedCountry];
-  }
-
-  lockCartPaintings() {
-    const ids = Array.from(new Set(this.cartItems.map(i => i.productId).filter(Number.isFinite)));
-    if (!ids.length) {
-      // nic do zablokowania -> spróbuj od razu submitnąć
-      this.onSubmit();
-      return;
-    }
-    if (!this.checkoutForm.valid) {
-      return
-    }
-    this.locking = true;
-    this.paintingService.lockPaintings(ids).pipe(
-      take(1),
-      finalize(() => this.locking = false)
-    ).subscribe({
-      next: () => this.onSubmit(),
-      error: (err) => {
-        console.error(err);
-        if (err?.status === 409) {
-        }
-      }
-    });
   }
 }

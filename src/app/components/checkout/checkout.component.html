@@ -296,7 +296,7 @@
                 </p>
               </div>
               <div class="text-sm font-medium text-gray-900 whitespace-nowrap">
-                €{{ item.price }}
+                PLN{{ item.price }}
               </div>
             </li>
           </ul>
@@ -305,27 +305,30 @@
           <dl class="mt-6 space-y-3 border-t border-gray-200 pt-6">
             <div class="flex items-center justify-between text-sm">
               <dt class="text-gray-600">{{ 'checkout.summary.subtotal' | translate }}</dt>
-              <dd class="font-medium text-gray-900">€{{ totalAmount }}</dd>
+              <dd class="font-medium text-gray-900">{{ totalAmount | currency:'PLN':'symbol' }}</dd>
             </div>
             <div class="flex items-center justify-between text-sm">
               <dt class="text-gray-600">{{ 'checkout.summary.shipping' | translate }}</dt>
-              <dd class="font-medium text-gray-900">€5.00</dd>
-            </div>
-            <div class="flex items-center justify-between text-sm">
-              <dt class="text-gray-600">{{ 'checkout.summary.taxes' | translate }}</dt>
-              <dd class="font-medium text-gray-900">€5.52</dd>
+              <dd class="font-medium text-gray-900">
+                <ng-container *ngIf="checkoutForm.get('country')?.value !== 'Poland'; else paidShipping">
+                  {{ 'checkout.summary.freeShipping' | translate }}
+                </ng-container>
+                <ng-template #paidShipping>
+                  {{ 'checkout.summary.paidShipping' | translate }}
+                </ng-template>
+              </dd>
             </div>
             <div class="flex items-center justify-between border-t border-gray-200 pt-4">
               <dt class="text-base font-bold text-gray-900">{{ 'checkout.summary.total' | translate }}</dt>
               <dd class="text-base font-extrabold text-gray-900">
-                €{{ totalAmount + 5 + 5.52 | number:'1.2-2' }}
+                PLN{{ totalAmount | number:'1.2-2' }}
               </dd>
             </div>
           </dl>
 
           <button
             type="submit"
-            (click)="lockCartPaintings()"
+            (click)="onSubmit()"
             class="mt-6 w-full inline-flex items-center justify-center rounded-xl bg-gray-900 px-6 py-3 text-white shadow-lg
                    hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-indigo-500"
           >

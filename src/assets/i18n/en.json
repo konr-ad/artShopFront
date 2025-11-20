@@ -113,6 +113,8 @@
       "quantity": "Quantity",
       "subtotal": "Subtotal",
       "shipping": "Shipping",
+      "paidShipping": "Pending",
+      "freeShipping": "Free of charge",
       "taxes": "Taxes",
       "total": "Total",
       "payment": "Payment"
@@ -203,7 +205,7 @@
 
     "s1": {
       "heading": "1. GENERAL INFORMATION",
-      "p1_html": "The online store available at <a href=\"https://bialkowskaismail.com\" class=\"text-blue-600 underline\">https://bialkowskaismail.com</a> (hereinafter the “Store”) is operated by:<br>K-BIS STUDIO<br>ul. Matejki 7/14, 05-400 Otwock, Poland<br>VAT ID (NIP): 5321748319<br>e-mail: <a href=\"mailto:dsk.bis&#64;wp.pl\" class=\"text-blue-600 underline\">dsk.bis&#64;wp.pl</a><br>Bank account: &lt;&lt;accountProvidedByPayUOrNotApplicable&gt;&gt;",
+      "p1_html": "The online store available at <a href=\"https://bialkowskaismail.com\" class=\"text-blue-600 underline\">https://bialkowskaismail.com</a> (hereinafter the “Store”) is operated by:<br>K-BIS STUDIO<br>ul. Matejki 7/14, 05-400 Otwock, Poland<br>VAT ID (NIP): 5321748319<br>e-mail: <a href=\"mailto:contact&#64;bialkowskaismail.com\" class=\"text-blue-600 underline\">contact&#64;bialkowskaismail.com</a>",
       "p2": "The buyer may be an adult natural person, a legal person or an organisational unit without legal personality (hereinafter the “Client”).",
       "p3": "Using the Store constitutes acceptance of these Terms and Conditions.",
       "p4": "Copyright notice: All paintings available in the Store are original works by Kamila Białkowska-Ismaił and are protected by copyright. Copying, reproduction or distribution of images of the works without the Store’s consent is prohibited.",

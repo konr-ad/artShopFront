@@ -25,6 +25,8 @@ export class ShopComponent implements OnInit {
         this.filters.paintings = [];
       }
     });
+    sessionStorage.removeItem('lastOrderId');
+    sessionStorage.removeItem('lastOrderEmail');
   }
 
   onFiltersChange(filters: any): void {

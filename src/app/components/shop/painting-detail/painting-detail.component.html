@@ -40,10 +40,13 @@
       </div>
 
       <!-- RIGHT: Info -->
-      <div class="mt-10 lg:mt-0 lg:col-span-5">
+      <div *ngIf="!isLocked" class="mt-10 lg:mt-0 lg:col-span-5">
+
         <div class="inline-flex items-center gap-2">
           <span class="inline-block h-2 w-2 rounded-full bg-indigo-400"></span>
-          <span class="uppercase tracking-wider text-xs text-gray-500">{{ ('painting.types.' + (details?.type | lowercase)) | translate }}</span>
+          <span class="uppercase tracking-wider text-xs text-gray-500">
+      {{ ('painting.types.' + (details?.type | lowercase)) | translate }}
+    </span>
         </div>
 
         <h1 class="mt-2 text-4xl font-extrabold tracking-tight text-gray-900">
@@ -67,14 +70,33 @@
             (click)="addToCart()"
             [disabled]="isButtonDisabled"
             class="inline-flex items-center justify-center rounded-xl bg-gray-800 px-6 py-3 text-white shadow-lg
-         hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 disabled:opacity-50"
+             hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 disabled:opacity-50"
             aria-live="polite"
           >
             {{ (added ? 'paintingDetail.added' : 'paintingDetail.addToCart') | translate }}
           </button>
         </div>
 
-<!--        <section class="mt-10 border-t border-gray-200 pt-6">-->
+      </div>
+        <div *ngIf="isLocked" class="mt-10 lg:mt-0 lg:col-span-5">
+
+          <h1 class="mt-2 text-4xl font-extrabold tracking-tight text-gray-900">
+            {{ details?.name }}
+          </h1>
+
+          <div class="mt-6 rounded-xl border border-red-200 bg-red-50 px-4 py-4 text-red-700 text-lg font-medium">
+            Ten obraz jest obecnie niedostępny.
+          </div>
+
+          <p class="mt-4 text-gray-600">
+            Prawdopodobnie został zarezerwowany lub sprzedany.
+            Zachęcamy do zobaczenia innych prac artysty.
+          </p>
+
+        </div>
+
+
+      <!--        <section class="mt-10 border-t border-gray-200 pt-6">-->
 <!--          <button type="button"-->
 <!--                  (click)="toggleList()"-->
 <!--                  [attr.aria-expanded]="isExpanded"-->
@@ -95,7 +117,7 @@
 <!--            </ul>-->
 <!--          </div>-->
 <!--        </section>-->
-      </div>
+
 
     </div>
   </div>

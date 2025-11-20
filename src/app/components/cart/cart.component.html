@@ -137,13 +137,13 @@
             <div class="flex items-center justify-between border-t border-gray-200 pt-3">
               <dt class="text-gray-600">{{ 'cart.shipping' | translate }}</dt>
               <dd class="font-medium text-gray-900">
-                €5.00
+                {{ 'payment.summary.pending' | translate }}
               </dd>
             </div>
             <div class="flex items-center justify-between border-t border-gray-200 pt-3">
               <dt class="text-base font-semibold text-gray-900">{{ 'cart.orderTotal' | translate }}</dt>
               <dd class="text-base font-semibold text-gray-900">
-                {{ (totalAmount + 5) | currency:'PLN':'symbol' }}
+                {{ totalAmount| currency:'PLN':'symbol' }}
               </dd>
             </div>
           </dl>

@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CartService, CartItem } from '../../services/cart.service';
 import { PayuService } from '../../services/payu.service';
-import {firstValueFrom} from "rxjs";
+import { firstValueFrom } from "rxjs";
+import { v4 as uuidv4 } from 'uuid';
 
 @Component({
   selector: 'app-payment',
@@ -68,11 +69,11 @@ export class PaymentComponent implements OnInit {
 
   createOrderData() {
     const products = this.buildDiscountedProducts(this.cartItems, this.subtotal, this.discountAmount);
-
+    const myUuid: string = uuidv4();
     return {
       description: this.cartItems.map(i => i.productName).join(' + '),
       currencyCode: 'PLN',
-      extOrderId: 'abc' + Date.now(),
+      extOrderId: 'abc' + myUuid + 'abc',
       contactEmail: this.email,
       buyer: {
         email: this.email,
@@ -130,13 +131,11 @@ export class PaymentComponent implements OnInit {
     this.redirectIn = 3;
     this.hasRedirected = false;
 
-    // odliczanie widoczne w UI
     this.clearTimers();
     this.countdownHandle = window.setInterval(() => {
       this.redirectIn = Math.max(0, this.redirectIn - 1);
     }, 1000);
 
-    // autoprzekierowanie po 3s
     this.autoRedirectHandle = window.setTimeout(() => {
       this.redirectToGateway();
     }, 3000);
@@ -150,7 +149,6 @@ export class PaymentComponent implements OnInit {
   }
 
   cancelRedirect() {
-    // opcjonalny „powrót”: po prostu chowamy modal
     this.clearTimers();
     this.showRedirectModal = false;
   }
@@ -176,12 +174,11 @@ export class PaymentComponent implements OnInit {
 
   private buildDiscountedProducts(items: CartItem[], subtotal: number, discountAmount: number) {
     if (subtotal <= 0 || discountAmount <= 0) {
-      // nic do korygowania
       return items.map(it => ({
         paintingId: it.productId,
         name: it.productName,
         paintingType: it.type,
-        unitPrice: this.round2(it.price),   // bez zmian
+        unitPrice: this.round2(it.price),
         quantity: it.quantity
       }));
     }
@@ -189,10 +186,8 @@ export class PaymentComponent implements OnInit {
     const totalBefore = this.round2(items.reduce((s, it) => s + it.price * it.quantity, 0));
     const totalAfter  = this.round2(Math.max(0, totalBefore - discountAmount));
 
-    // proporcja udziału wartości pozycji w subtotalu
     const shares = items.map(it => (it.price * it.quantity) / subtotal);
 
-    // obniż pozycje proporcjonalnie i pilnuj sumy (korekta na ostatniej pozycji)
     const out = items.map((it, idx) => {
       const part = this.round2(discountAmount * shares[idx]); // część rabatu dla pozycji
       const itemTotalAfter = this.round2(it.price * it.quantity - part);
@@ -207,11 +202,9 @@ export class PaymentComponent implements OnInit {
       };
     });
 
-    // korekta sumy (różnice zaokrągleń)
     const sumOut = this.round2(out.reduce((s, p) => s + p.unitPrice * p.quantity, 0));
     const diff   = this.round2(totalAfter - sumOut);
     if (Math.abs(diff) >= 0.01) {
-      // dorzuć różnicę do ostatniej pozycji (lub pierwszej, jak wolisz)
       const last = out[out.length - 1];
       out[out.length - 1] = {
         ...last,

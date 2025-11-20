@@ -18,6 +18,7 @@ export class PaintingDetailComponent implements OnInit {
   @ViewChild('imgWrap') imgWrapRef!: ElementRef<HTMLDivElement>;
   details: PaintingDetailsDto | null = null;
   added: boolean = false;
+  isLocked = false;
   canAddMore = true;
 
   // stan galerii
@@ -47,6 +48,8 @@ export class PaintingDetailComponent implements OnInit {
       const id = +params['id'];
       this.paintingService.details(id).subscribe(dto => {
         this.details = dto;
+        this.isLocked = dto.state !== 'AVAILABLE';
+        console.log('this.isLocked',this.isLocked)
         this.buildGallery(dto);
         this.recomputeAddState();
       });

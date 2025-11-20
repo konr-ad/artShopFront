@@ -113,6 +113,8 @@
       "quantity": "Ilość",
       "subtotal": "Suma częściowa",
       "shipping": "Dostawa",
+      "paidShipping": "Wycena w toku",
+      "freeShipping": "Darmowa",
       "taxes": "Podatki",
       "total": "Razem",
       "payment": "Płatność"
@@ -203,7 +205,7 @@
 
     "s1": {
       "heading": "1. INFORMACJE WSTĘPNE",
-      "p1_html": "Sklep internetowy dostępny pod adresem <a href=\"https://bialkowskaismail.com\" class=\"text-blue-600 underline\">https://bialkowskaismail.com</a> (zwany dalej „Sklepem”) prowadzony jest przez:<br>K-BIS STUDIO<br>ul. Matejki 7/14, 05-400 Otwock<br>NIP: 5321748319<br>e-mail: <a href=\"mailto:dsk.bis&#64;wp.pl\" class=\"text-blue-600 underline\">dsk.bis&#64;wp.pl</a><br>Konto bankowe: &lt;&lt;kontoKtoreDostaniemyOdPayUAlboTegoNieBedzie&gt;&gt;",
+      "p1_html": "Sklep internetowy dostępny pod adresem <a href=\"https://bialkowskaismail.com\" class=\"text-blue-600 underline\">https://bialkowskaismail.com</a> (zwany dalej „Sklepem”) prowadzony jest przez:<br>K-BIS STUDIO<br>ul. Matejki 7/14, 05-400 Otwock<br>NIP: 5321748319<br>e-mail: <a href=\"mailto:dsk.bis&#64;wp.pl\" class=\"text-blue-600 underline\">dsk.bis&#64;wp.pl</a>",
       "p2": "Kupującym może być pełnoletnia osoba fizyczna, osoba prawna lub jednostka organizacyjna nieposiadająca osobowości prawnej (dalej „Klient”).",
       "p3": "Korzystanie ze Sklepu oznacza akceptację niniejszego Regulaminu.",
       "p4": "Ochrona praw autorskich: Wszystkie obrazy dostępne w Sklepie są oryginalnymi dziełami autorstwa Kamili Białkowskiej-Ismaił i objęte są prawami autorskimi. Kopiowanie, reprodukcja lub rozpowszechnianie wizerunków dzieł bez zgody Sklepu jest zabronione.",

@@ -116,7 +116,7 @@ export class PaintingService {
     return this.http.post<PaintingDetailsDto>(this.adminUrl, fd);
   }
 
-  /** @deprecated: użyj getPaintingsPage(..).
+  /** @deprecated:
    *  Zwraca kształt jak dawniej, mapując thumbnail->imageUrl. */
   getPaintings(): Observable<Painting[]> {
     return this.getPaintingsPage({ page: 0, size: 100, sort: 'createdAt,desc' })
@@ -155,6 +155,10 @@ export class PaintingService {
       // awaryjnie „na sztywno”
       return `${this.apiBase.replace(/\/+$/, '')}/${path.replace(/^\/+/, '')}`;
     }
+  }
+
+  checkIfLocked(id: number): Observable<PaintingDetailsDto> {
+    return this.http.get<PaintingDetailsDto>(`${this.publicUrl}/${id}`);
   }
 
   lockPaintings(ids: number[]): Observable<void> {
