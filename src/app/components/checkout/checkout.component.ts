@@ -186,9 +186,17 @@ export class CheckoutComponent implements OnInit {
   }
 
   onSubmit() {
+    this.formSubmitted = true;
     this.checkoutForm.markAllAsTouched();
+
     if (this.checkoutForm.valid) {
-      this.router.navigate(['/payment'], { state: { ...this.checkoutForm.value } });
+      const data = this.checkoutForm.value;
+
+      // 1) zapis do sessionStorage
+      sessionStorage.setItem('checkoutData', JSON.stringify(data));
+
+      // 2) nawigacja z state (dla natychmiastowego przejścia)
+      this.router.navigate(['/payment'], { state: data });
     }
   }
 

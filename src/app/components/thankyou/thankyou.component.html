@@ -31,8 +31,23 @@
       </div>
       <div class="rounded-2xl border border-gray-200 bg-white p-4">
         <div class="text-xs uppercase tracking-wider text-gray-500">Status</div>
-        <div class="mt-1 font-semibold text-emerald-600">Przyjęto</div>
+
+        <div class="mt-1 font-semibold"
+             [ngClass]="{
+         'text-emerald-600': paymentStatus === 'COMPLETED',
+         'text-amber-600': paymentStatus === 'PENDING',
+         'text-red-600': paymentStatus === 'CANCELED' || paymentStatus === 'ERROR'
+       }">
+          <ng-container [ngSwitch]="paymentStatus">
+            <span *ngSwitchCase="'COMPLETED'">Przyjęto / opłacone</span>
+            <span *ngSwitchCase="'PENDING'">Oczekuje na potwierdzenie</span>
+            <span *ngSwitchCase="'CANCELED'">Płatność przerwana</span>
+            <span *ngSwitchCase="'ERROR'">Błąd płatności</span>
+            <span *ngSwitchDefault>w trakcie sprawdzania...</span>
+          </ng-container>
+        </div>
       </div>
+
     </div>
 
     <!-- Info o wysyłce maila -->
@@ -57,7 +72,7 @@
 
     <!-- Subtle signature -->
     <p class="mt-6 text-center text-xs text-gray-400">
-      Dziękujemy za wspieranie niezależnej sztuki ✨
+      Dziękujemy za wspieranie niezależnej sztuki
     </p>
   </div>
 </section>

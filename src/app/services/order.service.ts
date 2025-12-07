@@ -1,23 +1,8 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { ConfigService } from './config/ConfigService';
-import {MediaFileDto, Painting} from './painting.service';
-import { CustomerDto } from './customer.service';
-
-export interface Order {
-  id: number;
-  description: string;
-  currencyCode: string;
-  totalAmount: string;
-  extOrderId: string;
-  paymentStatus: string;
-  redirectUri: string;
-  payuOrderId: string;
-  creationDate: string;
-  customer: CustomerDto;
-  paintings: Painting[];
-}
+import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {Observable} from 'rxjs';
+import {ConfigService} from './config/ConfigService';
+import {CustomerDto} from './customer.service';
 
 export interface OrderItem {
   paintingId: number;
@@ -49,20 +34,33 @@ export interface ShippingAddressDto {
   country: string;
 }
 
+export interface PublicOrderStatusDto {
+  extOrderId: string;
+  paymentStatus: string;
+}
+
 @Injectable({
   providedIn: 'root',
 })
 export class OrderService {
-  private backendUrl: string;
+  private adminUrl: string;
+  private publicUrl: string;
 
   constructor(
     private http: HttpClient,
     private configService: ConfigService
   ) {
-    this.backendUrl = this.configService.getConfig('API_URL') + '/api/orders';
+    this.adminUrl = this.configService.getConfig('API_URL') + '/api/orders';
+    this.publicUrl = this.configService.getConfig('API_URL') + '/api/public/orders';
   }
 
   getOrders(): Observable<AdminOrderDto[]> {
-    return this.http.get<AdminOrderDto[]>(this.backendUrl);
+    return this.http.get<AdminOrderDto[]>(this.adminUrl);
+  }
+
+  getPublicOrderStatus(extOrderId: string): Observable<PublicOrderStatusDto> {
+    return this.http.get<PublicOrderStatusDto>(
+      `${this.publicUrl}/${extOrderId}/status`
+    );
   }
 }

@@ -37,26 +37,31 @@ export class PaymentComponent implements OnInit {
     private payuService: PayuService
   ) {
     const navigation = this.router.getCurrentNavigation();
-    const state = navigation?.extras.state as {
-      email: string;
-      firstName: string;
-      lastName: string;
-      country: string;
-      state: string;
-      address: string;
-      apartmentNumber: string;
-      city: string;
-      zip: string;
-    };
-    this.email = state?.email || '';
-    this.firstName = state?.firstName || '';
-    this.lastName = state?.lastName || '';
-    this.country = state?.country || '';
-    this.state = state?.state || '';
-    this.address = state?.address || '';
-    this.apartmentNumber = state?.apartmentNumber || '';
-    this.city = state?.city || '';
-    this.zip = state?.zip || '';
+    const navState = navigation?.extras.state as any | undefined;
+
+    let data: any | null = navState;
+
+    // jeśli brak state (np. reload / wejście z URL), spróbuj sessionStorage
+    if (!data) {
+      const raw = sessionStorage.getItem('checkoutData');
+      if (raw) {
+        try {
+          data = JSON.parse(raw);
+        } catch {
+          data = null;
+        }
+      }
+    }
+
+    this.email           = data?.email ?? '';
+    this.firstName       = data?.firstName ?? '';
+    this.lastName        = data?.lastName ?? '';
+    this.country         = data?.country ?? '';
+    this.state           = data?.state ?? '';
+    this.address         = data?.address ?? '';
+    this.apartmentNumber = data?.apartmentNumber ?? '';
+    this.city            = data?.city ?? '';
+    this.zip             = data?.zip ?? '';
   }
 
 
