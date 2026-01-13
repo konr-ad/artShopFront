@@ -22,6 +22,7 @@ import { NotfoundComponent } from './components/notfound/notfound.component';
 import { DiscountCodesComponent } from './components/admin-panel/discount-codes/discount-codes.component';
 import {TermsComponent} from "./components/terms/terms.component";
 import { AuthGuard} from "./services/AuthGuard";
+import {PrivacyComponent} from "./components/privacy/privacy.component";
 
 const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
@@ -41,6 +42,7 @@ const routes: Routes = [
   { path: 'thankyou', component: ThankyouComponent },
   { path: 'login', loadComponent: () => import('./components/admin-panel/login/login.component').then(m => m.LoginComponent) },
   { path: 'terms', component: TermsComponent },
+  { path: 'privacy', component: PrivacyComponent },
   {
     path: 'admin',
     canActivate: [AuthGuard],

@@ -278,9 +278,128 @@
     }
   },
   "cookies": {
-    "text": "Serwis wykorzystuje pliki cookies w celu zapewnienia prawidłowego działania strony oraz celów analitycznych. Kliknięcie przycisku „Akceptuję” oznacza wyrażenie zgody na ich zapis lub odczyt zgodnie z naszą",
-    "accept": "Akceptuję",
-    "privacyPolicy": "Polityką Prywatności"
+    "text": "Serwis wykorzystuje wyłącznie techniczne pliki cookies niezbędne do prawidłowego działania strony. Pliki te nie służą do celów analitycznych ani marketingowych. Szczegółowe informacje znajdują się w",
+    "accept": "OK",
+    "privacyPolicy": "Polityce Prywatności"
+  },
+  "privacy": {
+    "title": "Polityka Prywatności",
+    "toc": {
+      "title": "Spis treści",
+      "items": {
+        "s1": "Postanowienia ogólne",
+        "s2": "Zakres przetwarzanych danych",
+        "s3": "Cele i podstawy prawne",
+        "s4": "Odbiorcy danych",
+        "s5": "Przekazywanie danych poza UE",
+        "s6": "Okres przechowywania danych",
+        "s7": "Prawa użytkownika",
+        "s8": "Pliki cookies",
+        "s9": "Zabezpieczenia danych",
+        "s10": "Kontakt",
+        "s11": "Zmiany Polityki Prywatności"
+      }
+    },
+
+    "s1": {
+      "heading": "1. Postanowienia ogólne",
+      "p1": "Niniejsza Polityka Prywatności określa zasady przetwarzania danych osobowych użytkowników korzystających z serwisu internetowego bialkowskaismail.com (dalej: „Serwis”).",
+      "admin_html": "<strong>Administratorem danych osobowych jest:</strong><br>K-BIS STUDIO<br>ul. Matejki 7/14, 05-400 Otwock<br>NIP: 5321748319<br>E-mail: dsk.bis@wp.pl",
+      "p2": "Administrator przetwarza dane osobowe zgodnie z Rozporządzeniem Parlamentu Europejskiego i Rady (UE) 2016/679 z dnia 27 kwietnia 2016 r. („RODO”)."
+    },
+
+    "s2": {
+      "heading": "2. Zakres przetwarzanych danych",
+      "provided": {
+        "heading": "Dane podawane podczas zakupów:",
+        "name": "imię i nazwisko",
+        "email": "adres e-mail",
+        "address": "adres dostawy",
+        "phone": "numer telefonu"
+      },
+      "auto": {
+        "heading": "Dane zbierane automatycznie:",
+        "ip": "adres IP (jeżeli jest zbierany)",
+        "cookies": "pliki cookies"
+      }
+    },
+
+
+    "s3": {
+      "heading": "3. Cele i podstawy prawne przetwarzania danych",
+      "intro": "Dane osobowe użytkownika mogą być przetwarzane w następujących celach:",
+      "li1": "realizacji zamówień – art. 6 ust. 1 lit. b RODO.",
+      "li2": "obsługi zapytań kierowanych przez formularz kontaktowy lub e-mail – art. 6 ust. 1 lit. f RODO.",
+      "li3": "analizy statystycznej ruchu na stronie i ulepszania Serwisu – art. 6 ust. 1 lit. f RODO.",
+      "li4": "dochodzenia, ustalenia lub obrony roszczeń – art. 6 ust. 1 lit. f RODO."
+    },
+
+    "s4": {
+      "heading": "4. Odbiorcy danych",
+      "p1": "Dane osobowe użytkowników mogą być przekazywane następującym kategoriom odbiorców:",
+      "li1": "firmom kurierskim realizującym dostawy,",
+      "li2": "podmiotom obsługującym płatności (np. PayU),",
+      "li3": "firmom świadczącym usługi księgowe,",
+      "li4": "firmom hostingowym i IT,",
+      "p2": "Odbiorcy przetwarzają dane na podstawie umów powierzenia i wyłącznie zgodnie z poleceniami Administratora."
+    },
+
+    "s5": {
+      "heading": "5. Przekazywanie danych poza Unię Europejską",
+      "p1": "Jeżeli wykorzystywane są usługi podmiotów mających siedzibę poza Unią Europejską (np. Google), dane osobowe mogą być przekazywane do państw trzecich.",
+      "p2": "Dostawcy tych usług zapewniają odpowiedni stopień ochrony danych osobowych poprzez stosowanie wymaganych prawem zabezpieczeń, takich jak Standardowe Klauzule Umowne (SCC)."
+    },
+
+    "s6": {
+      "heading": "6. Okres przechowywania danych",
+      "li1": "dane związane z realizacją zamówień – do 5 lat (zgodnie z przepisami podatkowymi)",
+      "li2": "dane techniczne i pliki cookies – zgodnie z ustawieniami cookies (zwykle od 30 dni do 2 lat)",
+      "li3": "dane niezbędne do dochodzenia lub obrony roszczeń – do 6 lat"
+    },
+
+    "s7": {
+      "heading": "7. Prawa użytkownika",
+      "p1": "Użytkownikowi przysługują następujące prawa:",
+      "li1": "prawo dostępu do swoich danych osobowych,",
+      "li2": "prawo do sprostowania danych osobowych,",
+      "li3": "prawo do usunięcia danych („prawo do bycia zapomnianym”),",
+      "li4": "prawo do ograniczenia przetwarzania danych,",
+      "li5": "prawo do przenoszenia danych (prawo do przenoszalności danych),",
+      "li6": "prawo wniesienia sprzeciwu wobec przetwarzania danych,",
+      "li7": "prawo do cofnięcia zgody w dowolnym momencie (bez wpływu na legalność wcześniejszego przetwarzania),",
+      "li8": "prawo wniesienia skargi do Prezesa Urzędu Ochrony Danych Osobowych (PUODO),",
+      "li9": "prawo kontaktu z Administratorem w sprawach związanych z realizacją przysługujących praw."
+    },
+
+    "s8": {
+      "heading": "8. Pliki cookies",
+      "p1": "Serwis korzysta z plików cookies w celu:",
+      "li1": "zapewnienia prawidłowego działania strony,",
+      "p2": "Użytkownik może zarządzać plikami cookies za pomocą ustawień swojej przeglądarki.",
+      "p3": "Korzystanie z Serwisu bez zmiany ustawień przeglądarki oznacza zgodę na używanie plików cookies."
+    },
+
+    "s9": {
+      "heading": "9. Zabezpieczenia danych",
+      "p1": "Administrator stosuje środki techniczne i organizacyjne w celu ochrony danych osobowych, w tym:",
+      "li1": "szyfrowanie połączenia za pomocą protokołu SSL,",
+      "li2": "regularne aktualizacje oprogramowania,",
+      "li3": "ograniczony dostęp do danych osobowych wyłącznie dla upoważnionych osób,",
+      "li4": "regularne wykonywanie kopii zapasowych danych."
+    },
+
+    "s10": {
+      "heading": "10. Kontakt w sprawach danych osobowych",
+      "p1_html": "Wszelkie pytania dotyczące ochrony danych osobowych można kierować na adres e-mail: <a href=\"mailto:dsk.bis@wp.pl\" class=\"text-blue-600 underline\">dsk.bis@wp.pl</a>."
+    },
+
+    "s11": {
+      "heading": "11. Zmiany Polityki Prywatności",
+      "p1": "Administrator zastrzega sobie prawo do zmiany niniejszej Polityki Prywatności. Aktualna wersja dokumentu będzie publikowana na stronie Serwisu."
+    },
+
+    "effectiveDate": "Data wejścia w życie: {{date}}"
   }
+
 
 }
