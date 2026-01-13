@@ -276,5 +276,10 @@
       "pl": "Switch to Polish",
       "en": "Switch to English"
     }
+  },
+  "cookies": {
+    "text": "This website uses cookies to ensure proper operation of the site and for analytical purposes. Clicking the “Accept” button means that you consent to their storage or access in accordance with our",
+    "accept": "Accept",
+    "privacyPolicy": "Privacy Policy"
   }
 }

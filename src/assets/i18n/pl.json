@@ -276,5 +276,11 @@
       "pl": "Przełącz na polski",
       "en": "Przełącz na angielski"
     }
+  },
+  "cookies": {
+    "text": "Serwis wykorzystuje pliki cookies w celu zapewnienia prawidłowego działania strony oraz celów analitycznych. Kliknięcie przycisku „Akceptuję” oznacza wyrażenie zgody na ich zapis lub odczyt zgodnie z naszą",
+    "accept": "Akceptuję",
+    "privacyPolicy": "Polityką Prywatności"
   }
+
 }

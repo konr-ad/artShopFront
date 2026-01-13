@@ -2,7 +2,7 @@
   <header *ngIf="showHeader">
     <app-header></app-header>
   </header>
-
+  <app-cookie-banner></app-cookie-banner>
   <main class="flex-grow">
     <div [@routeAnim]="o.isActivated ? (o.activatedRoute.snapshot.routeConfig?.path || routerUrl) : ''">
       <router-outlet #o="outlet"></router-outlet>

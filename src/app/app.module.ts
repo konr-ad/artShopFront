@@ -28,6 +28,7 @@ import { HttpClient } from '@angular/common/http';
 import {AppTranslateLoader} from "./i18n/AppTranslateLoader";
 import {AuthInterceptor} from "./interceptors/AuthInterceptor";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {CookieBannerComponent} from "./components/cookie-banner/cookie-banner.component";
 
 export function initConfig(cfg: ConfigService) {
   return () => cfg.load();
@@ -52,22 +53,23 @@ export function initConfig(cfg: ConfigService) {
     GalleryComponent,
   ],
   bootstrap: [AppComponent],
-  imports: [
-    BrowserAnimationsModule,
-    BrowserModule,
-    AppRoutingModule,
-    ReactiveFormsModule,
-    HttpClientModule,
-    FormsModule,
-    CommonModule,
-    TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useClass: AppTranslateLoader,
-        deps: [HttpClient]
-      },
-    }),
-  ],
+    imports: [
+        BrowserAnimationsModule,
+        BrowserModule,
+        AppRoutingModule,
+        ReactiveFormsModule,
+        HttpClientModule,
+        FormsModule,
+        CommonModule,
+        TranslateModule.forRoot({
+            loader: {
+                provide: TranslateLoader,
+                useClass: AppTranslateLoader,
+                deps: [HttpClient]
+            },
+        }),
+        CookieBannerComponent,
+    ],
   providers: [
     { provide: APP_INITIALIZER, useFactory: initConfig, deps: [ConfigService], multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
