@@ -91,7 +91,6 @@ export class PaintingDetailComponent implements OnInit {
       return;
     }
 
-    // dla PRINT/DIGITAL – krótki „toast” i odblokowanie jak u Ciebie
     this.isButtonDisabled = true;
     setTimeout(() => {
       this.added = false;

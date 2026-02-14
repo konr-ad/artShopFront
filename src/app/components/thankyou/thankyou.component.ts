@@ -41,7 +41,7 @@ export class ThankyouComponent implements OnInit, OnDestroy {
       this.errorMessage = 'Nie udało się odczytać numeru zamówienia.';
       return;
     }
-
+    this.cart.clearCart();
     this.startPollingStatus(this.orderId);
   }
 
@@ -52,7 +52,7 @@ export class ThankyouComponent implements OnInit, OnDestroy {
   private startPollingStatus(extOrderId: string) {
     this.loading = true;
 
-    this.pollSub = timer(0, 7000) // od razu (0), a potem co 7000 ms
+    this.pollSub = timer(0, 3000) // od razu (0), a potem co 7000 ms
       .pipe(
         switchMap(() => this.orderService.getPublicOrderStatus(extOrderId))
       )

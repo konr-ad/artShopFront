@@ -41,7 +41,7 @@ export class PaymentComponent implements OnInit {
 
     let data: any | null = navState;
 
-    // jeśli brak state (np. reload / wejście z URL), spróbuj sessionStorage
+    // jeśli brak state zaciagnij z sessionStorage
     if (!data) {
       const raw = sessionStorage.getItem('checkoutData');
       if (raw) {

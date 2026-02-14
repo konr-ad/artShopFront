@@ -36,7 +36,8 @@
       "monotype": "MONOTYP",
       "print": "DRUK",
       "acrylic": "AKRYL",
-      "watercolor": "FARBY WODNE"
+      "watercolor": "FARBY WODNE",
+      "digital": "CYFROWY"
     }
   },
   "bio": {

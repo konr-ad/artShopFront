@@ -58,9 +58,9 @@ export class OrderService {
     return this.http.get<AdminOrderDto[]>(this.adminUrl);
   }
 
-  getPublicOrderStatus(extOrderId: string): Observable<PublicOrderStatusDto> {
+  getPublicOrderStatus(orderId: string): Observable<PublicOrderStatusDto> {
     return this.http.get<PublicOrderStatusDto>(
-      `${this.publicUrl}/${extOrderId}/status`
+      `${this.publicUrl}/${orderId}/status`
     );
   }
 }
