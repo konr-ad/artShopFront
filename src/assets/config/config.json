@@ -1,0 +1,4 @@
+{
+  "API_URL": "${API_URL}",
+  "ADMIN_API_URL": "${ADMIN_API_URL}"
+}
