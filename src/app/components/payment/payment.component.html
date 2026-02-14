@@ -1,147 +1,164 @@
-<app-stepper></app-stepper>
+<div class="bg-white">
+  <div class="mx-auto max-w-5xl px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
 
-<!-- Backdrop -->
-<div class="bg-gradient-to-b from-slate-50 to-white">
-  <div class="mx-auto max-w-7xl px-4 pb-24 pt-8 sm:px-6 lg:px-8">
-
-    <h1 class="text-center text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900">
-      {{ 'payment.title' | translate }}
-    </h1>
-    <p class="mt-2 text-center text-sm text-slate-500">
-      {{ 'checkout.summary.total' | translate }}:
-      <span class="font-semibold text-slate-700">{{ totalAmount | currency:'PLN':'symbol' }}</span>
-    </p>
+    <!-- Header -->
+    <header class="text-center md:text-left">
+      <h1 class="text-3xl font-bold tracking-wide text-gray-900">
+        {{ 'payment.title' | translate }}
+      </h1>
+      <p class="mt-2 text-sm text-gray-500">
+        {{ 'checkout.summary.total' | translate }}:
+        <span class="font-medium text-gray-900">{{ totalAmount | currency:'PLN':'symbol' }}</span>
+      </p>
+    </header>
 
     <!-- Main grid -->
-    <div class="mt-10 grid grid-cols-1 lg:grid-cols-12 lg:gap-x-12 xl:gap-x-16">
+    <div class="mt-12 grid grid-cols-1 gap-10 lg:grid-cols-12">
 
       <!-- LEFT: Customer & Shipping -->
-      <div class="lg:col-span-7 space-y-8">
+      <div class="lg:col-span-7 space-y-10">
 
-        <!-- Contact card -->
-        <section
-          class="rounded-2xl bg-white/70 backdrop-blur shadow-[0_10px_35px_rgba(0,0,0,0.06)] ring-1 ring-black/5 p-6">
-          <div class="flex items-center gap-3">
-            <span class="inline-flex h-9 w-9 items-center justify-center rounded-full bg-indigo-100 text-indigo-600">
-              <!-- envelope icon -->
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M1.5 6.75A2.25 2.25 0 013.75 4.5h16.5a2.25 2.25 0 012.25 2.25v10.5A2.25 2.25 0 0120.25 19.5H3.75A2.25 2.25 0 011.5 17.25V6.75Zm3 .75l7.155 4.77a.75.75 0 00.69 0L19.5 7.5" />
-              </svg>
-            </span>
-            <h3 class="text-lg font-bold text-slate-900">
-              {{ 'payment.contact.title' | translate }}
-            </h3>
-          </div>
+        <!-- Contact -->
+        <section class="rounded-lg border border-gray-200 bg-white px-4 py-6 sm:p-6 lg:p-8">
+          <h2 class="text-lg font-semibold tracking-wide text-gray-900">
+            {{ 'payment.contact.title' | translate }}
+          </h2>
 
-          <div class="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
-            <div class="rounded-xl border border-slate-200 p-4">
-              <p class="text-slate-500">{{ 'payment.contact.email' | translate }}</p>
-              <p class="font-medium text-slate-900 break-all">{{ email }}</p>
+          <div class="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 text-sm">
+            <div class="rounded-md border border-gray-200 p-4">
+              <p class="text-gray-500">{{ 'payment.contact.email' | translate }}</p>
+              <p class="mt-1 font-medium text-gray-900 break-all">{{ email }}</p>
             </div>
-            <div class="rounded-xl border border-slate-200 p-4">
-              <p class="text-slate-500">{{ 'payment.contact.firstName' | translate }}</p>
-              <p class="font-medium text-slate-900">{{ firstName }}</p>
+
+            <div class="rounded-md border border-gray-200 p-4">
+              <p class="text-gray-500">{{ 'payment.contact.firstName' | translate }}</p>
+              <p class="mt-1 font-medium text-gray-900">{{ firstName }}</p>
             </div>
-            <div class="rounded-xl border border-slate-200 p-4">
-              <p class="text-slate-500">{{ 'payment.contact.lastName' | translate }}</p>
-              <p class="font-medium text-slate-900">{{ lastName }}</p>
+
+            <div class="rounded-md border border-gray-200 p-4">
+              <p class="text-gray-500">{{ 'payment.contact.lastName' | translate }}</p>
+              <p class="mt-1 font-medium text-gray-900">{{ lastName }}</p>
             </div>
           </div>
         </section>
 
-        <!-- Shipping card -->
-        <section
-          class="rounded-2xl bg-white/70 backdrop-blur shadow-[0_10px_35px_rgba(0,0,0,0.06)] ring-1 ring-black/5 p-6">
-          <div class="flex items-center gap-3">
-            <span class="inline-flex h-9 w-9 items-center justify-center rounded-full bg-emerald-100 text-emerald-600">
-              <!-- truck icon -->
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M3 6.75A1.75 1.75 0 014.75 5h8.5A1.75 1.75 0 0115 6.75V9h3.586c.464 0 .909.184 1.237.513l1.664 1.664c.329.328.513.773.513 1.237V16a2 2 0 01-2 2h-.35a2.75 2.75 0 11-5.3 0H8.35a2.75 2.75 0 11-5.3 0H3a2 2 0 01-2-2V8.5A1.75 1.75 0 013 6.75zM18 16.75a1.25 1.25 0 100 2.5 1.25 1.25 0 000-2.5zM6 18a1 1 0 112 0 1 1 0 01-2 0z"/>
-              </svg>
-            </span>
-            <h3 class="text-lg font-bold text-slate-900">
-              {{ 'payment.shipping.title' | translate }}
-            </h3>
-          </div>
+        <!-- Shipping -->
+        <section class="rounded-lg border border-gray-200 bg-white px-4 py-6 sm:p-6 lg:p-8">
+          <h2 class="text-lg font-semibold tracking-wide text-gray-900">
+            {{ 'payment.shipping.title' | translate }}
+          </h2>
 
-          <dl class="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
-            <div class="rounded-xl border border-slate-200 p-4">
-              <dt class="text-slate-500">{{ 'payment.shipping.country' | translate }}</dt>
-              <dd class="font-medium text-slate-900">{{ country }}</dd>
+          <dl class="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 text-sm">
+
+            <div class="rounded-md border border-gray-200 p-4">
+              <dt class="text-gray-500">{{ 'payment.shipping.country' | translate }}</dt>
+              <dd class="mt-1 font-medium text-gray-900">{{ country }}</dd>
             </div>
-            <div class="rounded-xl border border-slate-200 p-4">
-              <dt class="text-slate-500">{{ 'payment.shipping.state' | translate }}</dt>
-              <dd class="font-medium text-slate-900">{{ state }}</dd>
+
+            <div class="rounded-md border border-gray-200 p-4">
+              <dt class="text-gray-500">{{ 'payment.shipping.state' | translate }}</dt>
+              <dd class="mt-1 font-medium text-gray-900">{{ state }}</dd>
             </div>
-            <div class="rounded-xl border border-slate-200 p-4 sm:col-span-2">
-              <dt class="text-slate-500">{{ 'payment.shipping.address' | translate }}</dt>
-              <dd class="font-medium text-slate-900">
+
+            <div class="rounded-md border border-gray-200 p-4 sm:col-span-2">
+              <dt class="text-gray-500">{{ 'payment.shipping.address' | translate }}</dt>
+              <dd class="mt-1 font-medium text-gray-900">
                 {{ address }} <span *ngIf="apartmentNumber">/ {{ apartmentNumber }}</span>
               </dd>
             </div>
-            <div class="rounded-xl border border-slate-200 p-4">
-              <dt class="text-slate-500">{{ 'payment.shipping.city' | translate }}</dt>
-              <dd class="font-medium text-slate-900">{{ city }}</dd>
+
+            <div class="rounded-md border border-gray-200 p-4">
+              <dt class="text-gray-500">{{ 'payment.shipping.city' | translate }}</dt>
+              <dd class="mt-1 font-medium text-gray-900">{{ city }}</dd>
             </div>
-            <div class="rounded-xl border border-slate-200 p-4">
-              <dt class="text-slate-500">{{ 'payment.shipping.postalCode' | translate }}</dt>
-              <dd class="font-medium text-slate-900">{{ zip }}</dd>
+
+            <div class="rounded-md border border-gray-200 p-4">
+              <dt class="text-gray-500">{{ 'payment.shipping.postalCode' | translate }}</dt>
+              <dd class="mt-1 font-medium text-gray-900">{{ zip }}</dd>
             </div>
+
           </dl>
         </section>
       </div>
 
       <!-- RIGHT: Order summary -->
-      <aside class="mt-8 lg:mt-0 lg:col-span-5">
-        <div class="lg:sticky lg:top-8 rounded-2xl bg-white/80 backdrop-blur shadow-[0_10px_35px_rgba(0,0,0,0.06)] ring-1 ring-black/5 p-6">
-          <h2 class="text-xl font-bold text-slate-900 mb-4">
+      <aside class="lg:col-span-5">
+        <div class="lg:sticky lg:top-8 rounded-lg border border-gray-200 bg-white px-4 py-6 sm:p-6 lg:p-8">
+          <h2 class="text-lg font-semibold tracking-wide text-gray-900">
             {{ 'payment.summary.title' | translate }}
           </h2>
 
           <!-- Items -->
-          <ul role="list" class="divide-y divide-slate-200">
-            <li *ngFor="let item of cartItems" class="flex items-center py-4">
-              <img [src]="item.imageUrl || 'assets/placeholder.png'"
-                   [alt]="item.productName"
-                   class="h-16 w-16 rounded-md object-cover ring-1 ring-black/5" />
-              <div class="ml-4 flex-1">
-                <p class="text-sm font-medium text-slate-900">{{ item.productName }}</p>
-                <p class="text-xs text-slate-500">
+          <ul role="list" class="mt-6 divide-y divide-gray-200 border-t border-b border-gray-200">
+            <li *ngFor="let item of cartItems" class="flex items-center gap-4 py-4">
+
+              <!-- stable image -->
+              <div class="shrink-0">
+                <div class="h-16 w-16 rounded-md bg-gray-100 ring-1 ring-black/5 overflow-hidden grid place-items-center">
+                  <img
+                    [src]="item.imageUrl || 'assets/no-image.svg'"
+                    [alt]="item.productName"
+                    class="h-full w-full object-contain"
+                    draggable="false"
+                  />
+                </div>
+              </div>
+
+              <div class="min-w-0 flex-1">
+                <p class="truncate text-sm font-medium text-gray-900">
+                  {{ item.productName }}
+                </p>
+                <p class="mt-1 text-xs text-gray-500">
                   {{ 'payment.summary.quantity' | translate }}: {{ item.quantity }}
                 </p>
               </div>
-              <div class="text-sm font-semibold text-slate-900">
-                {{ item.price | currency:'PLN':'symbol' }}
-              </div>
+
+              <p class="text-sm font-medium text-gray-900 whitespace-nowrap">
+                {{ (item.price * item.quantity) | currency:'PLN':'symbol' }}
+              </p>
             </li>
           </ul>
 
           <!-- Totals -->
-          <dl class="mt-6 space-y-3 text-sm">
+          <dl class="mt-6 space-y-4 text-sm">
             <div class="flex items-center justify-between">
-              <dt class="text-slate-600">{{ 'payment.summary.subtotal' | translate }}</dt>
-              <dd class="font-medium text-slate-900">
+              <dt class="text-gray-600">{{ 'payment.summary.subtotal' | translate }}</dt>
+              <dd class="font-medium text-gray-900">
                 {{ totalAmount | currency:'PLN':'symbol' }}
               </dd>
             </div>
-            <div class="flex items-center justify-between">
-              <dt class="text-slate-600">{{ 'payment.summary.shipping' | translate }}</dt>
-              <dd class="italic text-slate-500">{{ 'payment.summary.pending' | translate }}</dd>
+
+            <div class="flex items-center justify-between border-t border-gray-200 pt-4">
+              <dt class="text-gray-600">{{ 'payment.summary.shipping' | translate }}</dt>
+              <dd class="text-gray-500">
+                {{ 'payment.summary.pending' | translate }}
+              </dd>
             </div>
-            <div class="flex items-center justify-between border-t border-slate-200 pt-4 text-base">
-              <dt class="font-bold text-slate-900">{{ 'payment.summary.total' | translate }}</dt>
-              <dd class="font-extrabold text-slate-900">
+
+            <div class="flex items-center justify-between border-t border-gray-200 pt-4">
+              <dt class="text-base font-semibold text-gray-900">
+                {{ 'payment.summary.total' | translate }}
+              </dt>
+              <dd class="text-base font-semibold text-gray-900">
                 {{ totalAmount | currency:'PLN':'symbol':'1.0-2' }}
               </dd>
             </div>
           </dl>
 
-          <button (click)="proceedToPayment()"
-                  class="mt-6 w-full inline-flex items-center justify-center rounded-xl bg-gray-900 px-5 py-3
-                   text-white shadow-lg hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+          <button
+            type="button"
+            (click)="proceedToPayment()"
+            class="mt-8 w-full rounded-md bg-black px-4 py-3 text-base font-medium text-white
+                   hover:bg-gray-900 transition focus:outline-none focus:ring-2 focus:ring-black/30"
+          >
             {{ 'payment.actions.payWithPayU' | translate }}
           </button>
 
+          <p class="mt-6 text-center text-sm text-gray-500">
+            <a routerLink="/checkout" class="font-medium text-gray-700 hover:text-black transition">
+              ← Wróć do danych
+            </a>
+          </p>
         </div>
       </aside>
 
@@ -149,16 +166,16 @@
   </div>
 </div>
 
+<!-- Redirect modal -->
 <div *ngIf="showRedirectModal" class="fixed inset-0 z-[70]">
-  <div class="absolute inset-0 bg-black/40 backdrop-blur-sm"></div>
+  <div class="absolute inset-0 bg-black/50"></div>
 
-  <!-- okno -->
   <div class="relative h-full flex items-center justify-center p-4">
-    <div class="w-full max-w-md rounded-2xl bg-white/90 backdrop-blur-xl shadow-2xl ring-1 ring-black/5
-                animate-pop px-6 py-6">
+    <div class="w-full max-w-md rounded-lg border border-gray-200 bg-white px-6 py-6 shadow-xl">
       <div class="flex items-start gap-4">
+
         <!-- spinner -->
-        <div class="mt-1 inline-flex h-10 w-10 items-center justify-center rounded-full bg-indigo-50 ring-1 ring-indigo-100">
+        <div class="mt-1 inline-flex h-10 w-10 items-center justify-center rounded-full bg-gray-50 ring-1 ring-black/5">
           <svg class="h-5 w-5 animate-spin" viewBox="0 0 24 24" fill="none"
                stroke="currentColor" stroke-width="2" aria-hidden="true">
             <path stroke-linecap="round" stroke-linejoin="round"
@@ -167,26 +184,26 @@
         </div>
 
         <div class="flex-1">
-          <h3 class="text-xl font-semibold text-gray-900">Przekierowujemy do płatności…</h3>
+          <h3 class="text-lg font-semibold text-gray-900">
+            Przekierowujemy do płatności…
+          </h3>
+
           <p class="mt-2 text-sm text-gray-600">
             Za chwilę nastąpi automatyczne przekierowanie
             (<span class="tabular-nums">{{ redirectIn }}</span>s).
             Jeśli nie nastąpi, kliknij przycisk poniżej.
           </p>
 
-          <a *ngIf="redirectUri"
-             [href]="redirectUri"
-             class="mt-4 inline-flex items-center justify-center rounded-xl bg-indigo-600 px-5 py-2.5
-                    text-white font-medium shadow hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+          <a
+            *ngIf="redirectUri"
+            [href]="redirectUri"
+            class="mt-4 inline-flex w-full items-center justify-center rounded-md bg-black px-4 py-2.5
+                   text-white font-medium hover:bg-gray-900 transition focus:outline-none focus:ring-2 focus:ring-black/30"
+          >
             Przejdź do płatności
           </a>
-
-<!--          <button type="button"-->
-<!--                  class="mt-2 text-xs text-gray-500 hover:text-gray-700 underline underline-offset-2"-->
-<!--                  (click)="cancelRedirect()">-->
-<!--            Anuluj i wróć-->
-<!--          </button>-->
         </div>
+
       </div>
     </div>
   </div>

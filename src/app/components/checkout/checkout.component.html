@@ -1,17 +1,9 @@
-<app-stepper></app-stepper>
+<div class="bg-white">
+  <div class="mx-auto max-w-5xl px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
 
-<div class="bg-gradient-to-b from-white to-gray-50">
-  <div class="mx-auto max-w-7xl px-4 pt-10 pb-24 sm:px-6 lg:px-8">
-
-    <!-- Tytuł -->
-    <header class="text-center mb-10">
-      <div class="inline-flex items-center gap-2">
-        <span class="h-2 w-2 rounded-full bg-indigo-400"></span>
-        <span class="uppercase tracking-widest text-xs text-gray-500">
-          {{ 'checkout.title' | translate }}
-        </span>
-      </div>
-      <h1 class="mt-2 text-4xl font-extrabold tracking-tight text-gray-900">
+    <!-- Header -->
+    <header class="text-center md:text-left">
+      <h1 class="text-3xl font-bold tracking-wide text-gray-900">
         {{ 'checkout.title' | translate }}
       </h1>
       <p class="mt-2 text-sm text-gray-500">
@@ -22,15 +14,15 @@
     <form
       [formGroup]="checkoutForm"
       (ngSubmit)="onSubmit()"
-      class="lg:grid lg:grid-cols-12 lg:gap-10 xl:gap-14"
+      class="mt-12 grid grid-cols-1 gap-5 lg:grid-cols-12"
     >
-      <!-- LEWA KOLUMNA: Formularz -->
-      <div class="lg:col-span-7 space-y-10">
 
-        <!-- Kontakt -->
-        <section class="rounded-2xl bg-white shadow-xl ring-1 ring-black/5 p-6 sm:p-8">
-          <h2 class="text-lg font-bold text-gray-900 flex items-center gap-2">
-            <span class="inline-block h-5 w-1.5 rounded bg-indigo-500"></span>
+      <!-- LEFT: FORM -->
+      <div class="lg:col-span-7 space-y-5">
+
+        <!-- CONTACT -->
+        <section class="rounded-lg border border-gray-200 bg-white px-4 py-6 sm:p-6 lg:p-8">
+          <h2 class="text-lg font-semibold tracking-wide text-gray-900">
             {{ 'checkout.contactInfo.title' | translate }}
           </h2>
 
@@ -38,36 +30,48 @@
             <label for="email-address" class="block text-sm font-medium text-gray-700">
               {{ 'checkout.contactInfo.email.label' | translate }}
             </label>
+
             <input
               id="email-address"
               type="email"
               formControlName="email"
               autocomplete="email"
-              class="mt-1 block w-full rounded-xl border-0 ring-1 ring-inset ring-gray-300 px-3 py-2 shadow-sm
-                     focus:ring-2 focus:ring-indigo-500 outline-none sm:text-sm
-                     transition"
+              class="mt-2 block w-full rounded-md border border-gray-300 px-3 py-2 text-gray-900 shadow-sm
+                     outline-none focus:border-black focus:ring-1 focus:ring-black transition"
               [ngClass]="{
-                'ring-red-400': checkoutForm.get('email')?.invalid && (checkoutForm.get('email')?.touched || formSubmitted)
+                'border-red-400 focus:border-red-500 focus:ring-red-500':
+                  checkoutForm.get('email')?.invalid && (checkoutForm.get('email')?.touched || formSubmitted)
               }"
             />
+
             <p
               *ngIf="checkoutForm.get('email')?.invalid && (checkoutForm.get('email')?.touched || formSubmitted)"
-              class="text-red-600 text-xs mt-1"
+              class="mt-2 text-xs text-red-600"
             >
               {{ 'checkout.contactInfo.email.error' | translate }}
             </p>
           </div>
         </section>
 
-        <!-- Adres wysyłki -->
-        <section class="rounded-2xl bg-white shadow-xl ring-1 ring-black/5 p-6 sm:p-8">
-          <h2 class="text-lg font-bold text-gray-900 flex items-center gap-2">
-            <span class="inline-block h-5 w-1.5 rounded bg-indigo-500"></span>
-            {{ 'checkout.shippingInfo.title' | translate }}
-          </h2>
+        <!-- SHIPPING -->
+        <section class="rounded-lg border border-gray-200 bg-white px-4 py-6 sm:p-6 lg:p-8">
+          <div class="flex items-center justify-between gap-4">
+            <h2 class="text-lg font-semibold tracking-wide text-gray-900">
+              {{ 'checkout.shippingInfo.title' | translate }}
+            </h2>
+
+            <button
+              type="button"
+              (click)="fillTestData()"
+              class="text-sm font-medium text-gray-600 hover:text-black transition"
+            >
+              {{ 'checkout.shippingInfo.fillTestData' | translate }}
+            </button>
+          </div>
 
           <div class="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2">
-            <!-- Imię -->
+
+            <!-- First name -->
             <div>
               <label for="first-name" class="block text-sm font-medium text-gray-700">
                 {{ 'checkout.shippingInfo.firstName.label' | translate }}
@@ -77,19 +81,22 @@
                 type="text"
                 formControlName="firstName"
                 autocomplete="given-name"
-                class="mt-1 block w-full rounded-xl border-0 ring-1 ring-inset ring-gray-300 px-3 py-2 shadow-sm
-                       focus:ring-2 focus:ring-indigo-500 outline-none sm:text-sm transition"
+                class="mt-2 block w-full rounded-md border border-gray-300 px-3 py-2 text-gray-900 shadow-sm
+                       outline-none focus:border-black focus:ring-1 focus:ring-black transition"
                 [ngClass]="{
-                  'ring-red-400': checkoutForm.get('firstName')?.invalid && (checkoutForm.get('firstName')?.touched || formSubmitted)
+                  'border-red-400 focus:border-red-500 focus:ring-red-500':
+                    checkoutForm.get('firstName')?.invalid && (checkoutForm.get('firstName')?.touched || formSubmitted)
                 }"
               />
-              <p *ngIf="checkoutForm.get('firstName')?.invalid && (checkoutForm.get('firstName')?.touched || formSubmitted)"
-                 class="text-red-600 text-xs mt-1">
+              <p
+                *ngIf="checkoutForm.get('firstName')?.invalid && (checkoutForm.get('firstName')?.touched || formSubmitted)"
+                class="mt-2 text-xs text-red-600"
+              >
                 {{ 'checkout.shippingInfo.firstName.error' | translate }}
               </p>
             </div>
 
-            <!-- Nazwisko -->
+            <!-- Last name -->
             <div>
               <label for="last-name" class="block text-sm font-medium text-gray-700">
                 {{ 'checkout.shippingInfo.lastName.label' | translate }}
@@ -99,19 +106,22 @@
                 type="text"
                 formControlName="lastName"
                 autocomplete="family-name"
-                class="mt-1 block w-full rounded-xl border-0 ring-1 ring-inset ring-gray-300 px-3 py-2 shadow-sm
-                       focus:ring-2 focus:ring-indigo-500 outline-none sm:text-sm transition"
+                class="mt-2 block w-full rounded-md border border-gray-300 px-3 py-2 text-gray-900 shadow-sm
+                       outline-none focus:border-black focus:ring-1 focus:ring-black transition"
                 [ngClass]="{
-                  'ring-red-400': checkoutForm.get('lastName')?.invalid && (checkoutForm.get('lastName')?.touched || formSubmitted)
+                  'border-red-400 focus:border-red-500 focus:ring-red-500':
+                    checkoutForm.get('lastName')?.invalid && (checkoutForm.get('lastName')?.touched || formSubmitted)
                 }"
               />
-              <p *ngIf="checkoutForm.get('lastName')?.invalid && (checkoutForm.get('lastName')?.touched || formSubmitted)"
-                 class="text-red-600 text-xs mt-1">
+              <p
+                *ngIf="checkoutForm.get('lastName')?.invalid && (checkoutForm.get('lastName')?.touched || formSubmitted)"
+                class="mt-2 text-xs text-red-600"
+              >
                 {{ 'checkout.shippingInfo.lastName.error' | translate }}
               </p>
             </div>
 
-            <!-- Ulica -->
+            <!-- Address -->
             <div class="sm:col-span-2">
               <label for="address" class="block text-sm font-medium text-gray-700">
                 {{ 'checkout.shippingInfo.address.label' | translate }}
@@ -121,19 +131,22 @@
                 type="text"
                 formControlName="address"
                 autocomplete="street-address"
-                class="mt-1 block w-full rounded-xl border-0 ring-1 ring-inset ring-gray-300 px-3 py-2 shadow-sm
-                       focus:ring-2 focus:ring-indigo-500 outline-none sm:text-sm transition"
+                class="mt-2 block w-full rounded-md border border-gray-300 px-3 py-2 text-gray-900 shadow-sm
+                       outline-none focus:border-black focus:ring-1 focus:ring-black transition"
                 [ngClass]="{
-                  'ring-red-400': checkoutForm.get('address')?.invalid && (checkoutForm.get('address')?.touched || formSubmitted)
+                  'border-red-400 focus:border-red-500 focus:ring-red-500':
+                    checkoutForm.get('address')?.invalid && (checkoutForm.get('address')?.touched || formSubmitted)
                 }"
               />
-              <p *ngIf="checkoutForm.get('address')?.invalid && (checkoutForm.get('address')?.touched || formSubmitted)"
-                 class="text-red-600 text-xs mt-1">
+              <p
+                *ngIf="checkoutForm.get('address')?.invalid && (checkoutForm.get('address')?.touched || formSubmitted)"
+                class="mt-2 text-xs text-red-600"
+              >
                 {{ 'checkout.shippingInfo.address.error' | translate }}
               </p>
             </div>
 
-            <!-- Mieszkanie -->
+            <!-- Apartment -->
             <div class="sm:col-span-2">
               <label for="apartment" class="block text-sm font-medium text-gray-700">
                 {{ 'checkout.shippingInfo.apartmentNumber.label' | translate }}
@@ -142,12 +155,12 @@
                 id="apartment"
                 type="text"
                 formControlName="apartmentNumber"
-                class="mt-1 block w-full rounded-xl border-0 ring-1 ring-inset ring-gray-300 px-3 py-2 shadow-sm
-                       focus:ring-2 focus:ring-indigo-500 outline-none sm:text-sm transition"
+                class="mt-2 block w-full rounded-md border border-gray-300 px-3 py-2 text-gray-900 shadow-sm
+                       outline-none focus:border-black focus:ring-1 focus:ring-black transition"
               />
             </div>
 
-            <!-- Miasto -->
+            <!-- City -->
             <div>
               <label for="city" class="block text-sm font-medium text-gray-700">
                 {{ 'checkout.shippingInfo.city.label' | translate }}
@@ -157,19 +170,22 @@
                 type="text"
                 formControlName="city"
                 autocomplete="address-level2"
-                class="mt-1 block w-full rounded-xl border-0 ring-1 ring-inset ring-gray-300 px-3 py-2 shadow-sm
-                       focus:ring-2 focus:ring-indigo-500 outline-none sm:text-sm transition"
+                class="mt-2 block w-full rounded-md border border-gray-300 px-3 py-2 text-gray-900 shadow-sm
+                       outline-none focus:border-black focus:ring-1 focus:ring-black transition"
                 [ngClass]="{
-                  'ring-red-400': checkoutForm.get('city')?.invalid && (checkoutForm.get('city')?.touched || formSubmitted)
+                  'border-red-400 focus:border-red-500 focus:ring-red-500':
+                    checkoutForm.get('city')?.invalid && (checkoutForm.get('city')?.touched || formSubmitted)
                 }"
               />
-              <p *ngIf="checkoutForm.get('city')?.invalid && (checkoutForm.get('city')?.touched || formSubmitted)"
-                 class="text-red-600 text-xs mt-1">
+              <p
+                *ngIf="checkoutForm.get('city')?.invalid && (checkoutForm.get('city')?.touched || formSubmitted)"
+                class="mt-2 text-xs text-red-600"
+              >
                 {{ 'checkout.shippingInfo.city.error' | translate }}
               </p>
             </div>
 
-            <!-- Kraj -->
+            <!-- Country -->
             <div>
               <label for="country" class="block text-sm font-medium text-gray-700">
                 {{ 'checkout.shippingInfo.country.label' | translate }}
@@ -178,21 +194,26 @@
                 id="country"
                 formControlName="country"
                 autocomplete="country-name"
-                class="mt-1 block w-full rounded-xl border-0 ring-1 ring-inset ring-gray-300 px-3 py-2 shadow-sm
-                       focus:ring-2 focus:ring-indigo-500 outline-none sm:text-sm transition bg-white"
+                class="mt-2 block w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-gray-900 shadow-sm
+                       outline-none focus:border-black focus:ring-1 focus:ring-black transition"
                 [ngClass]="{
-                  'ring-red-400': checkoutForm.get('country')?.invalid && (checkoutForm.get('country')?.touched || formSubmitted)
+                  'border-red-400 focus:border-red-500 focus:ring-red-500':
+                    checkoutForm.get('country')?.invalid && (checkoutForm.get('country')?.touched || formSubmitted)
                 }"
               >
-                <option *ngFor="let country of countries" [value]="country">{{ country }}</option>
+                <option *ngFor="let country of countries" [value]="country">
+                  {{ country }}
+                </option>
               </select>
-              <p *ngIf="checkoutForm.get('country')?.invalid && (checkoutForm.get('country')?.touched || formSubmitted)"
-                 class="text-red-600 text-xs mt-1">
+              <p
+                *ngIf="checkoutForm.get('country')?.invalid && (checkoutForm.get('country')?.touched || formSubmitted)"
+                class="mt-2 text-xs text-red-600"
+              >
                 {{ 'checkout.shippingInfo.country.error' | translate }}
               </p>
             </div>
 
-            <!-- Województwo/Stan -->
+            <!-- State -->
             <div>
               <label for="state" class="block text-sm font-medium text-gray-700">
                 {{ 'checkout.shippingInfo.state.label' | translate }}
@@ -201,21 +222,26 @@
                 id="state"
                 formControlName="state"
                 autocomplete="address-level1"
-                class="mt-1 block w-full rounded-xl border-0 ring-1 ring-inset ring-gray-300 px-3 py-2 shadow-sm
-                       focus:ring-2 focus:ring-indigo-500 outline-none sm:text-sm transition bg-white"
+                class="mt-2 block w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-gray-900 shadow-sm
+                       outline-none focus:border-black focus:ring-1 focus:ring-black transition"
                 [ngClass]="{
-                  'ring-red-400': checkoutForm.get('state')?.invalid && (checkoutForm.get('state')?.touched || formSubmitted)
+                  'border-red-400 focus:border-red-500 focus:ring-red-500':
+                    checkoutForm.get('state')?.invalid && (checkoutForm.get('state')?.touched || formSubmitted)
                 }"
               >
-                <option *ngFor="let state of availableStates" [value]="state">{{ state }}</option>
+                <option *ngFor="let state of availableStates" [value]="state">
+                  {{ state }}
+                </option>
               </select>
-              <p *ngIf="checkoutForm.get('state')?.invalid && (checkoutForm.get('state')?.touched || formSubmitted)"
-                 class="text-red-600 text-xs mt-1">
+              <p
+                *ngIf="checkoutForm.get('state')?.invalid && (checkoutForm.get('state')?.touched || formSubmitted)"
+                class="mt-2 text-xs text-red-600"
+              >
                 {{ 'checkout.shippingInfo.state.error' | translate }}
               </p>
             </div>
 
-            <!-- Kod pocztowy -->
+            <!-- Zip -->
             <div>
               <label for="postal-code" class="block text-sm font-medium text-gray-700">
                 {{ 'checkout.shippingInfo.postalCode.label' | translate }}
@@ -225,19 +251,22 @@
                 type="text"
                 formControlName="zip"
                 autocomplete="postal-code"
-                class="mt-1 block w-full rounded-xl border-0 ring-1 ring-inset ring-gray-300 px-3 py-2 shadow-sm
-                       focus:ring-2 focus:ring-indigo-500 outline-none sm:text-sm transition"
+                class="mt-2 block w-full rounded-md border border-gray-300 px-3 py-2 text-gray-900 shadow-sm
+                       outline-none focus:border-black focus:ring-1 focus:ring-black transition"
                 [ngClass]="{
-                  'ring-red-400': checkoutForm.get('zip')?.invalid && (checkoutForm.get('zip')?.touched || formSubmitted)
+                  'border-red-400 focus:border-red-500 focus:ring-red-500':
+                    checkoutForm.get('zip')?.invalid && (checkoutForm.get('zip')?.touched || formSubmitted)
                 }"
               />
-              <p *ngIf="checkoutForm.get('zip')?.invalid && (checkoutForm.get('zip')?.touched || formSubmitted)"
-                 class="text-red-600 text-xs mt-1">
+              <p
+                *ngIf="checkoutForm.get('zip')?.invalid && (checkoutForm.get('zip')?.touched || formSubmitted)"
+                class="mt-2 text-xs text-red-600"
+              >
                 {{ 'checkout.shippingInfo.postalCode.error' | translate }}
               </p>
             </div>
 
-            <!-- Telefon + przycisk testowy -->
+            <!-- Phone -->
             <div class="sm:col-span-2">
               <label for="phone" class="block text-sm font-medium text-gray-700">
                 {{ 'checkout.shippingInfo.phone.label' | translate }}
@@ -247,67 +276,73 @@
                 type="text"
                 formControlName="phone"
                 autocomplete="tel"
-                class="mt-1 block w-full rounded-xl border-0 ring-1 ring-inset ring-gray-300 px-3 py-2 shadow-sm
-                       focus:ring-2 focus:ring-indigo-500 outline-none sm:text-sm transition"
+                class="mt-2 block w-full rounded-md border border-gray-300 px-3 py-2 text-gray-900 shadow-sm
+                       outline-none focus:border-black focus:ring-1 focus:ring-black transition"
                 [ngClass]="{
-                  'ring-red-400': checkoutForm.get('phone')?.invalid && (checkoutForm.get('phone')?.touched || formSubmitted)
+                  'border-red-400 focus:border-red-500 focus:ring-red-500':
+                    checkoutForm.get('phone')?.invalid && (checkoutForm.get('phone')?.touched || formSubmitted)
                 }"
               />
-              <p *ngIf="checkoutForm.get('phone')?.invalid && (checkoutForm.get('phone')?.touched || formSubmitted)"
-                 class="text-red-600 text-xs mt-1">
+              <p
+                *ngIf="checkoutForm.get('phone')?.invalid && (checkoutForm.get('phone')?.touched || formSubmitted)"
+                class="mt-2 text-xs text-red-600"
+              >
                 {{ 'checkout.shippingInfo.phone.error' | translate }}
               </p>
-
-              <button
-                type="button"
-                (click)="fillTestData()"
-                class="mt-4 inline-flex items-center gap-2 text-indigo-600 hover:text-indigo-800 text-sm font-medium"
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M12 2a10 10 0 1 0 .001 20.001A10 10 0 0 0 12 2Zm1 14H11v-2h2v2Zm0-4H11V7h2v5Z"/>
-                </svg>
-                {{ 'checkout.shippingInfo.fillTestData' | translate }}
-              </button>
             </div>
+
           </div>
         </section>
       </div>
 
-      <!-- PRAWA KOLUMNA: Podsumowanie -->
-      <aside class="mt-10 lg:mt-0 lg:col-span-5">
-        <div class="lg:sticky lg:top-8 rounded-2xl bg-white shadow-xl ring-1 ring-black/5 p-6 sm:p-8">
-          <h2 class="text-lg font-bold text-gray-900 flex items-center gap-2">
-            <span class="inline-block h-5 w-1.5 rounded bg-indigo-500"></span>
+      <!-- RIGHT: SUMMARY -->
+      <aside class="lg:col-span-5">
+        <div class="lg:sticky lg:top-8 rounded-lg border border-gray-200 bg-white px-4 py-6 sm:p-6 lg:p-8">
+          <h2 class="text-lg font-semibold tracking-wide text-gray-900">
             {{ 'checkout.summary.title' | translate }}
           </h2>
 
-          <!-- Lista produktów -->
-          <ul role="list" class="mt-6 divide-y divide-gray-200">
+          <!-- Items -->
+          <ul role="list" class="mt-6 divide-y divide-gray-200 border-t border-b border-gray-200">
             <li *ngFor="let item of cartItems" class="flex items-center gap-4 py-4">
-              <img
-                [src]="item.imageUrl || 'assets/no-image.svg'"
-                [alt]="item.productName"
-                class="h-20 w-20 rounded-xl object-cover ring-1 ring-black/5"
-              />
-              <div class="flex-1 min-w-0">
-                <p class="text-sm font-semibold text-gray-900 truncate">{{ item.productName }}</p>
-                <p class="text-xs text-gray-500 mt-0.5">
+
+              <!-- stable image -->
+              <div class="shrink-0">
+                <div class="h-20 w-20 rounded-lg bg-gray-100 ring-1 ring-black/5 overflow-hidden grid place-items-center">
+                  <img
+                    [src]="item.imageUrl || 'assets/no-image.svg'"
+                    [alt]="item.productName"
+                    class="h-full w-full object-contain"
+                    draggable="false"
+                  />
+                </div>
+              </div>
+
+              <div class="min-w-0 flex-1">
+                <p class="truncate text-sm font-medium text-gray-900">
+                  {{ item.productName }}
+                </p>
+                <p class="mt-1 text-xs text-gray-500">
                   {{ 'checkout.summary.quantity' | translate }}: {{ item.quantity }}
                 </p>
               </div>
-              <div class="text-sm font-medium text-gray-900 whitespace-nowrap">
-                PLN{{ item.price }}
-              </div>
+
+              <p class="text-sm font-medium text-gray-900 whitespace-nowrap">
+                {{ (item.price * item.quantity) | currency:'PLN':'symbol' }}
+              </p>
             </li>
           </ul>
 
-          <!-- Suma -->
-          <dl class="mt-6 space-y-3 border-t border-gray-200 pt-6">
-            <div class="flex items-center justify-between text-sm">
+          <!-- Totals -->
+          <dl class="mt-6 space-y-4 text-sm">
+            <div class="flex justify-between">
               <dt class="text-gray-600">{{ 'checkout.summary.subtotal' | translate }}</dt>
-              <dd class="font-medium text-gray-900">{{ totalAmount | currency:'PLN':'symbol' }}</dd>
+              <dd class="font-medium text-gray-900">
+                {{ totalAmount | currency:'PLN':'symbol' }}
+              </dd>
             </div>
-            <div class="flex items-center justify-between text-sm">
+
+            <div class="flex justify-between border-t border-gray-200 pt-4">
               <dt class="text-gray-600">{{ 'checkout.summary.shipping' | translate }}</dt>
               <dd class="font-medium text-gray-900">
                 <ng-container *ngIf="checkoutForm.get('country')?.value !== 'Poland'; else paidShipping">
@@ -318,23 +353,31 @@
                 </ng-template>
               </dd>
             </div>
-            <div class="flex items-center justify-between border-t border-gray-200 pt-4">
-              <dt class="text-base font-bold text-gray-900">{{ 'checkout.summary.total' | translate }}</dt>
-              <dd class="text-base font-extrabold text-gray-900">
-                PLN{{ totalAmount | number:'1.2-2' }}
+
+            <div class="flex justify-between border-t border-gray-200 pt-4">
+              <dt class="text-base font-semibold text-gray-900">{{ 'checkout.summary.total' | translate }}</dt>
+              <dd class="text-base font-semibold text-gray-900">
+                {{ totalAmount | currency:'PLN':'symbol':'1.2-2' }}
               </dd>
             </div>
           </dl>
 
           <button
             type="submit"
-            class="mt-6 w-full inline-flex items-center justify-center rounded-xl bg-gray-900 px-6 py-3 text-white shadow-lg
-                   hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            class="mt-8 w-full rounded-md bg-black px-4 py-3 text-base font-medium text-white
+                   hover:bg-gray-900 transition focus:outline-none focus:ring-2 focus:ring-black/30"
           >
             {{ 'checkout.summary.payment' | translate }}
           </button>
+
+          <p class="mt-6 text-center text-sm text-gray-500">
+            <a routerLink="/cart" class="font-medium text-gray-700 hover:text-black transition">
+              ← Wróć do koszyka
+            </a>
+          </p>
         </div>
       </aside>
+
     </form>
   </div>
 </div>
