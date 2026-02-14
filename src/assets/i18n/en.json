@@ -58,7 +58,8 @@
     "doYouHaveDiscountCode": "Do you have a discount code?",
     "addDiscountCode": "Add a discount code",
     "applyCode": "Apply a discount code",
-    "proceed": "Checkout"
+    "proceed": "Checkout",
+    "backToShopping": "Continue shopping →"
   },
   "checkout": {
     "title": "Checkout",
