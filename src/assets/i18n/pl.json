@@ -59,7 +59,8 @@
     "addDiscountCode": "Dodaj kod zniżkowy",
     "applyCode": "Zastosuj kod zniżkowy",
     "proceed": "Do kasy",
-    "backToShopping": "Kontynuuj zakupy →"
+    "backToShopping": "Kontynuuj zakupy →",
+    "remove": "Usuń"
   },
   "checkout": {
     "title": "Do kasy",

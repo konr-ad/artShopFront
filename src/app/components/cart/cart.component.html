@@ -100,7 +100,7 @@
                     (click)="removeItem(item.productId)"
                     class="text-sm font-medium text-gray-600 hover:text-black transition"
                   >
-                    Usuń
+                    {{ 'cart.remove' | translate }}
                   </button>
 
                   <!-- suma za item -->
@@ -205,7 +205,7 @@
               routerLink="/shop"
               class="font-medium text-gray-700 hover:text-black transition"
             >
-              Kontynuuj zakupy →{{ 'cart.backToShopping' | translate }}
+              {{ 'cart.backToShopping' | translate }}
             </a>
           </div>
 

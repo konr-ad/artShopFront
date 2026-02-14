@@ -59,7 +59,8 @@
     "addDiscountCode": "Add a discount code",
     "applyCode": "Apply a discount code",
     "proceed": "Checkout",
-    "backToShopping": "Continue shopping →"
+    "backToShopping": "Continue shopping →",
+    "remove": "Remove"
   },
   "checkout": {
     "title": "Checkout",
