@@ -44,5 +44,5 @@ Thumbs.db
 **/config.json
 
 .env
-
+!src/assets/config/config.json
 
