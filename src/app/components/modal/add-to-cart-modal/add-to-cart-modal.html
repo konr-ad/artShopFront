@@ -1,0 +1,87 @@
+<!-- BACKDROP -->
+<div
+  class="fixed inset-0 z-50 flex items-center justify-center bg-black/60
+         transition-opacity duration-300"
+  [class.opacity-100]="entered()"
+  [class.opacity-0]="!entered()"
+  (click)="modalService.close()"
+>
+  <!-- MODAL -->
+  <div
+    class="bg-white max-w-3xl w-full shadow-2xl
+           transform transition-all duration-300 ease-out"
+    [class.opacity-100]="entered()"
+    [class.translate-y-0]="entered()"
+    [class.scale-100]="entered()"
+    [class.opacity-0]="!entered()"
+    [class.-translate-y-20]="!entered()"
+    [class.scale-95]="!entered()"
+    (click)="$event.stopPropagation()"
+  >
+    <!-- HEADER -->
+    <div class="flex items-center justify-between border-b px-8 py-5">
+      <h2 class="text-lg font-semibold tracking-wide text-gray-900">
+        Dodano do koszyka
+      </h2>
+
+      <button
+        type="button"
+        class="text-gray-400 hover:text-gray-600"
+        (click)="modalService.close()"
+        aria-label="Close"
+      >
+        ✕
+      </button>
+    </div>
+
+    <!-- CONTENT -->
+    <div class="grid grid-cols-1 gap-8 px-8 py-8 md:grid-cols-2">
+      <!-- IMAGE COLUMN -->
+      <div class="flex justify-center">
+        <img
+          [src]="data.imgUrl"
+          alt=""
+          class="max-h-[420px] w-auto object-contain"
+        />
+      </div>
+
+      <!-- INFO COLUMN -->
+      <div class="flex flex-col justify-center">
+
+        <h3 class="mt-1 text-sl font-semibold text-gray-900">
+          {{ data.title }}
+        </h3>
+
+        <p class="mt-2 text-sm text-gray-600">
+          {{ data.quantity || '' }} x {{data.price }} zł
+        </p>
+
+        <p class="mt-4 text-lg font-semibold text-gray-900">
+          Razem: {{ data.price*data.quantity }} zł
+        </p>
+
+        <!-- ACTIONS -->
+        <div class="mt-8 grid gap-4">
+          <div>
+            <button
+              routerLink="/shop/cart"
+              (click)="modalService.close()"
+              class="w-full rounded-md bg-black px-6 py-3 text-center text-sm font-medium text-white hover:bg-gray-900 transition"
+            >
+              PRZEJDŹ DO KOSZYKA
+            </button>
+          </div>
+          <div>
+            <button
+              type="button"
+              (click)="modalService.close()"
+              class="w-full rounded-md border border-black px-6 py-3 text-sm font-medium text-black hover:bg-black hover:text-white transition"
+            >
+              KONTYNUUJ ZAKUPY
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

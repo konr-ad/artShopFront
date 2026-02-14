@@ -29,6 +29,7 @@ import {AppTranslateLoader} from "./i18n/AppTranslateLoader";
 import {AuthInterceptor} from "./interceptors/AuthInterceptor";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {CookieBannerComponent} from "./components/cookie-banner/cookie-banner.component";
+import {ModalHost} from "./components/modal/modal-host/modal-host";
 
 export function initConfig(cfg: ConfigService) {
   return () => cfg.load();
@@ -69,6 +70,7 @@ export function initConfig(cfg: ConfigService) {
             },
         }),
         CookieBannerComponent,
+        ModalHost,
     ],
   providers: [
     { provide: APP_INITIALIZER, useFactory: initConfig, deps: [ConfigService], multi: true },

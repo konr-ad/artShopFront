@@ -1,6 +1,7 @@
-import { Injectable } from '@angular/core';
+import {inject, Injectable} from '@angular/core';
 import { BehaviorSubject, combineLatest, map } from 'rxjs';
 import { PaintingType } from 'src/app/services/painting.service';
+import {ModalService} from "./modal/modal-service.service";
 
 export interface CartItem {
   productId: number;
@@ -28,6 +29,7 @@ export class CartService {
   private readonly ITEMS_KEY = 'cartItems';
   private readonly DISC_KEY  = 'cartDiscount';
 
+  protected modalService: ModalService = inject(ModalService);
   private itemsSubject = new BehaviorSubject<CartItem[]>(this.load<CartItem[]>(this.ITEMS_KEY, []));
   private discountSubject = new BehaviorSubject<DiscountState | null>(this.load<DiscountState | null>(this.DISC_KEY, null));
 
@@ -84,6 +86,12 @@ export class CartService {
     }
 
     this.updateItems(items);
+    this.modalService.open('ADD_TO_CART', {
+      title: p.name,
+      price: p.price,
+      imgUrl: p.imageUrl,
+      quantity: 1,
+    })
   }
 
   updateItem(item: CartItem) {
