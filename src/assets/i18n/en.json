@@ -60,7 +60,9 @@
     "applyCode": "Apply a discount code",
     "proceed": "Checkout",
     "backToShopping": "Continue shopping →",
-    "remove": "Remove"
+    "remove": "Remove",
+    "successMessageDiscountCode": "Discount code has been applied.",
+    "errorMessageDiscountCode": "An error occurred while verifying the discount code."
   },
   "checkout": {
     "title": "Checkout",

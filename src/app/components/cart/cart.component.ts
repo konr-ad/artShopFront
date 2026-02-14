@@ -64,14 +64,14 @@ export class CartComponent implements OnInit {
           // zapisz rabat w źródle prawdy
           this.cartService.applyDiscount(this.discountCode, type, value);
 
-          this.resultMessage = response.message || 'Kod rabatowy został zastosowany.';
+          this.resultMessage = response.message || 'cart.successMessageDiscountCode';
         } else {
-          this.resultMessage = response.message || 'Nieprawidłowy kod rabatowy.';
+          this.resultMessage = response.message || 'cart.errorMessageDiscountCode';
         }
       },
       error: () => {
         this.isDiscountCodeValid = false;
-        this.resultMessage = 'Wystąpił błąd podczas weryfikacji kodu rabatowego.';
+        this.resultMessage = 'cart.errorMessageDiscountCode';
       }
     });
   }

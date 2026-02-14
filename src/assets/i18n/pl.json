@@ -60,7 +60,9 @@
     "applyCode": "Zastosuj kod zniżkowy",
     "proceed": "Do kasy",
     "backToShopping": "Kontynuuj zakupy →",
-    "remove": "Usuń"
+    "remove": "Usuń",
+    "successMessageDiscountCode": "Kod rabatowy został zastosowany.",
+    "errorMessageDiscountCode": "Wystąpił błąd podczas weryfikacji kodu rabatowego."
   },
   "checkout": {
     "title": "Do kasy",
