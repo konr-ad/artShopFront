@@ -24,7 +24,7 @@ export class AddToCartModalComponent implements AfterViewInit {
   entered = signal(false);
 
   ngAfterViewInit() {
-    requestAnimationFrame(() => {
+    setTimeout(() => {
       this.entered.set(true);
     });
   }
