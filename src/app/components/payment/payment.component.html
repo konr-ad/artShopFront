@@ -185,13 +185,14 @@
 
         <div class="flex-1">
           <h3 class="text-lg font-semibold text-gray-900">
-            Przekierowujemy do płatności…
+            {{ 'paymentRedirect.title' | translate }}
           </h3>
 
           <p class="mt-2 text-sm text-gray-600">
-            Za chwilę nastąpi automatyczne przekierowanie
-            (<span class="tabular-nums">{{ redirectIn }}</span>s).
-            Jeśli nie nastąpi, kliknij przycisk poniżej.
+            {{
+            'paymentRedirect.description'
+              | translate:{ seconds: redirectIn }
+            }}
           </p>
 
           <a
@@ -200,7 +201,7 @@
             class="mt-4 inline-flex w-full items-center justify-center rounded-md bg-black px-4 py-2.5
                    text-white font-medium hover:bg-gray-900 transition focus:outline-none focus:ring-2 focus:ring-black/30"
           >
-            Przejdź do płatności
+            {{ 'paymentRedirect.button' | translate }}
           </a>
         </div>
 

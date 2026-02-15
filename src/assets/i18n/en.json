@@ -427,5 +427,10 @@
   },
   "address": "Matejki street 7 m.14",
   "phone": "phone",
-  "mobilePhone": "mobile phone"
+  "mobilePhone": "mobile phone",
+  "paymentRedirect": {
+    "title": "Redirecting to payment…",
+    "description": "You will be automatically redirected in ({{seconds}}s). If it does not happen, please click the button below.",
+    "button": "Proceed to payment"
+  }
 }

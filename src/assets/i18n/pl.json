@@ -429,7 +429,10 @@
   },
   "address": "ul.Matejki 7 m.14",
   "phone": "tel.",
-  "mobilePhone": "tel. kom."
-
-
+  "mobilePhone": "tel. kom.",
+  "paymentRedirect": {
+    "title": "Przekierowujemy do płatności…",
+    "description": "Za chwilę nastąpi automatyczne przekierowanie ({{seconds}}s). Jeśli nie nastąpi, kliknij przycisk poniżej.",
+    "button": "Przejdź do płatności"
+  }
 }
