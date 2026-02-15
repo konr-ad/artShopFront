@@ -62,7 +62,12 @@
     "backToShopping": "Kontynuuj zakupy →",
     "remove": "Usuń",
     "successMessageDiscountCode": "Kod rabatowy został zastosowany.",
-    "errorMessageDiscountCode": "Wystąpił błąd podczas weryfikacji kodu rabatowego."
+    "errorMessageDiscountCode": "Wystąpił błąd podczas weryfikacji kodu rabatowego.",
+    "modal": {
+      "addedToCart": "Dodano do koszyka",
+      "proceedToCart": "Przejdź do koszyka",
+      "total": "Razem"
+    }
   },
   "checkout": {
     "title": "Do kasy",
@@ -151,10 +156,10 @@
       "quantity": "Ilość",
       "subtotal": "Suma częściowa",
       "shipping": "Dostawa",
-      "pending": "Wycena w toku",
+      "pending": "Darmowa",
       "tax": "Podatek",
       "total": "Razem",
-      "currencyPrefix": "EUR"
+      "currencyPrefix": "PLN"
     }
   },
   "stepper": {
@@ -214,7 +219,7 @@
       "p2": "Kupującym może być pełnoletnia osoba fizyczna, osoba prawna lub jednostka organizacyjna nieposiadająca osobowości prawnej (dalej „Klient”).",
       "p3": "Korzystanie ze Sklepu oznacza akceptację niniejszego Regulaminu.",
       "p4": "Ochrona praw autorskich: Wszystkie obrazy dostępne w Sklepie są oryginalnymi dziełami autorstwa Kamili Białkowskiej-Ismaił i objęte są prawami autorskimi. Kopiowanie, reprodukcja lub rozpowszechnianie wizerunków dzieł bez zgody Sklepu jest zabronione.",
-      "p5": "Ceny podane w Sklepie wyrażone są w EUR i zawierają podatek VAT (jeśli dotyczy)."
+      "p5": "Ceny podane w Sklepie wyrażone są w PLN i zawierają podatek VAT (jeśli dotyczy)."
     },
 
     "s2": {
@@ -404,7 +409,27 @@
     },
 
     "effectiveDate": "Data wejścia w życie: {{date}}"
-  }
+  },
+  "thankYou": {
+    "title": "Dziękujemy za zakup!",
+    "subtitle": "Twoje zamówienie zostało złożone pomyślnie. Wyślemy potwierdzenie oraz szczegóły dostawy na Twój adres e-mail.",
+    "orderNumber": "NUMER ZAMÓWIENIA",
+    "payment": "PŁATNOŚĆ",
+    "contentMessage": "W ciągu kilku minut otrzymasz e-mail z potwierdzeniem zamówienia, szczegółami płatności oraz informacjami o dostawie. Jeśli wiadomość nie dotrze, sprawdź folder „Spam”/„Oferty”.",
+    "continueShopping": "Kontunuuj zakupy",
+    "seeGallery": "Zobacz galerię",
+    "processing": "w trakcie przetwarzania",
+    "independentArt": "Dziękujemy za wspieranie niezależnej sztuki",
+    "status": {
+      "completed": "ZAKOŃCZONA",
+      "pending": "W TRAKCIE PRZETWARZANIA",
+      "cancelled": "ANULOWANA",
+      "error": "BŁĄD"
+    }
+  },
+  "address": "ul.Matejki 7 m.14",
+  "phone": "tel.",
+  "mobilePhone": "tel. kom."
 
 
 }

@@ -5,6 +5,8 @@ import { CartService } from '../../services/cart.service';
 import { OrderService, PublicOrderStatusDto } from '../../services/order.service';
 import { Subscription, timer } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
+import { translate } from "@angular/localize/tools";
+import {TranslatePipe} from "@ngx-translate/core";
 
 function isFinalStatus(s: string | null | undefined): boolean {
   return s === 'COMPLETED' || s === 'CANCELED' || s === 'ERROR';
@@ -13,7 +15,7 @@ function isFinalStatus(s: string | null | undefined): boolean {
 @Component({
   selector: 'app-thankyou',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, TranslatePipe],
   templateUrl: './thankyou.component.html',
   styleUrl: './thankyou.component.css',
 })

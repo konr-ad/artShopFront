@@ -62,7 +62,12 @@
     "backToShopping": "Continue shopping →",
     "remove": "Remove",
     "successMessageDiscountCode": "Discount code has been applied.",
-    "errorMessageDiscountCode": "An error occurred while verifying the discount code."
+    "errorMessageDiscountCode": "An error occurred while verifying the discount code.",
+    "modal": {
+      "addedToCart": "Item added to cart",
+      "proceedToCart": "Proceed to cart",
+      "total": "Total"
+    }
   },
   "checkout": {
     "title": "Checkout",
@@ -151,10 +156,10 @@
       "quantity": "Quantity",
       "subtotal": "Subtotal",
       "shipping": "Shipping",
-      "pending": "Pending",
+      "pending": "Free of charge",
       "tax": "Tax",
       "total": "Total",
-      "currencyPrefix": "EUR"
+      "currencyPrefix": "PLN"
     }
   },
   "stepper": {
@@ -210,11 +215,11 @@
 
     "s1": {
       "heading": "1. GENERAL INFORMATION",
-      "p1_html": "The online store available at <a href=\"https://bialkowskaismail.com\" class=\"text-blue-600 underline\">https://bialkowskaismail.com</a> (hereinafter the “Store”) is operated by:<br>K-BIS STUDIO<br>ul. Matejki 7/14, 05-400 Otwock, Poland<br>VAT ID (NIP): 5321748319<br>e-mail: <a href=\"mailto:contact&#64;bialkowskaismail.com\" class=\"text-blue-600 underline\">contact&#64;bialkowskaismail.com</a>",
+      "p1_html": "The online store available at <a href=\"https://bialkowskaismail.com\" class=\"text-blue-600 underline\">https://bialkowskaismail.com</a> (hereinafter the “Store”) is operated by:<br>K-BIS STUDIO<br>Matejki street 7/14, 05-400 Otwock, Poland<br>VAT ID (NIP): 5321748319<br>e-mail: <a href=\"mailto:contact&#64;bialkowskaismail.com\" class=\"text-blue-600 underline\">contact&#64;bialkowskaismail.com</a>",
       "p2": "The buyer may be an adult natural person, a legal person or an organisational unit without legal personality (hereinafter the “Client”).",
       "p3": "Using the Store constitutes acceptance of these Terms and Conditions.",
       "p4": "Copyright notice: All paintings available in the Store are original works by Kamila Białkowska-Ismaił and are protected by copyright. Copying, reproduction or distribution of images of the works without the Store’s consent is prohibited.",
-      "p5": "Prices in the Store are expressed in EUR and include VAT (where applicable)."
+      "p5": "Prices in the Store are expressed in PLN and include VAT (where applicable)."
     },
 
     "s2": {
@@ -230,7 +235,7 @@
       "heading": "3. DELIVERY",
       "p1": "Delivery methods:",
       "li1": "The Client will be informed by e-mail or phone about the selected delivery method.",
-      "li2_html": "Personal pickup (by prior arrangement – studio address: ul. Matejki 7/14, 05-400 Otwock, Poland).",
+      "li2_html": "Personal pickup (by prior arrangement – studio address: Matejki street 7/14, 05-400 Otwock, Poland).",
       "p2": "Delivery cost:",
       "li3": "Within Poland, delivery cost is included in the price of the painting.",
       "li4": "Outside Poland, delivery cost is determined individually via e-mail contact.",
@@ -309,7 +314,7 @@
     "s1": {
       "heading": "1. General provisions",
       "p1": "This Privacy Policy sets out the principles for processing the personal data of users of the online store bialkowskaismail.com (hereinafter: the “Service”).",
-      "admin_html": "<strong>Data Controller:</strong><br>K-BIS STUDIO<br>Address: ul. Matejki 7/14, 05-400 Otwock, Poland<br>Tax ID (NIP): 5321748319<br>E-mail: <a href=\"mailto:dsk.bis@wp.pl\" class=\"text-blue-600 underline\">dsk.bis@wp.pl</a><br>(hereinafter: the “Controller”).",
+      "admin_html": "<strong>Data Controller:</strong><br>K-BIS STUDIO<br>Address: Matejki street 7/14, 05-400 Otwock, Poland<br>Tax ID (NIP): 5321748319<br>E-mail: <a href=\"mailto:dsk.bis@wp.pl\" class=\"text-blue-600 underline\">dsk.bis@wp.pl</a><br>(hereinafter: the “Controller”).",
       "p2": "The Controller processes personal data in accordance with Regulation (EU) 2016/679 of the European Parliament and of the Council (GDPR)."
     },
 
@@ -402,6 +407,25 @@
     },
 
     "effectiveDate": "Effective date: {{date}}"
-  }
-
+  },
+  "thankYou": {
+    "title": "Thank you for your purchase!",
+    "subtitle": "Your order has been successfully placed. We will send a confirmation and delivery details to your email address.",
+    "orderNumber": "ORDER NUMBER",
+    "payment": "PAYMENT",
+    "contentMessage": "Within a few minutes, you will receive an email with your order confirmation, payment details, and delivery information. If you don’t see the message, please check your “Spam” or “Promotions” folder.",
+    "continueShopping": "Continue shopping",
+    "seeGallery": "View gallery",
+    "processing": "Processing",
+    "independentArt": "Thank you for supporting independent art",
+    "status": {
+      "completed": "COMPLETED",
+      "pending": "PENDING",
+      "cancelled": "CANCELED",
+      "error": "ERROR"
+    }
+  },
+  "address": "Matejki street 7 m.14",
+  "phone": "phone",
+  "mobilePhone": "mobile phone"
 }

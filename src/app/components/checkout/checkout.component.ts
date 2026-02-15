@@ -180,11 +180,6 @@ export class CheckoutComponent implements OnInit {
     });
   }
 
-  onCountryChange(event: any) {
-    this.selectedCountry = event.target.value;
-    this.availableStates = this.statesProvinces[this.selectedCountry] || [];
-  }
-
   onSubmit() {
     this.formSubmitted = true;
     this.checkoutForm.markAllAsTouched();

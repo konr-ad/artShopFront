@@ -21,7 +21,7 @@
     <!-- HEADER -->
     <div class="flex items-center justify-between border-b px-8 py-5">
       <h2 class="text-lg font-semibold tracking-wide text-gray-900">
-        Dodano do koszyka
+        {{ 'cart.modal.addedToCart' | translate }}
       </h2>
 
       <button
@@ -57,7 +57,7 @@
         </p>
 
         <p class="mt-4 text-lg font-semibold text-gray-900">
-          Razem: {{ data.price*data.quantity }} zł
+          {{ 'cart.modal.total' | translate }}: {{ data.price*data.quantity }} zł
         </p>
 
         <!-- ACTIONS -->
@@ -68,7 +68,7 @@
               (click)="modalService.close()"
               class="w-full rounded-md bg-black px-6 py-3 text-center text-sm font-medium text-white hover:bg-gray-900 transition"
             >
-              PRZEJDŹ DO KOSZYKA
+              {{ 'cart.modal.proceedToCart' | translate }}
             </button>
           </div>
           <div>
@@ -77,7 +77,7 @@
               (click)="modalService.close()"
               class="w-full rounded-md border border-black px-6 py-3 text-sm font-medium text-black hover:bg-black hover:text-white transition"
             >
-              KONTYNUUJ ZAKUPY
+              {{ 'cart.backToShopping' | translate }}
             </button>
           </div>
         </div>
