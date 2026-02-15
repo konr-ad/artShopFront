@@ -347,12 +347,7 @@
             <div class="flex justify-between border-t border-gray-200 pt-4">
               <dt class="text-gray-600">{{ 'checkout.summary.shipping' | translate }}</dt>
               <dd class="font-medium text-gray-900">
-                <ng-container *ngIf="checkoutForm.get('country')?.value !== 'Poland'; else paidShipping">
                   {{ 'checkout.summary.freeShipping' | translate }}
-                </ng-container>
-                <ng-template #paidShipping>
-                  {{ 'checkout.summary.paidShipping' | translate }}
-                </ng-template>
               </dd>
             </div>
 
