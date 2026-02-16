@@ -271,7 +271,9 @@
   },
   "paintingDetail": {
     "addToCart": "Add to Cart",
-    "added": "Added!"
+    "added": "Added!",
+    "lockedTitle": "This painting is currenly unavailable",
+    "lockedSubTitle": "It has likely been reserved or sold. We encourage you to view the artist's other works."
   },
   "footer": {
     "rights": "All rights reserved",

@@ -271,7 +271,9 @@
   },
   "paintingDetail": {
     "addToCart": "Dodaj do koszyka",
-    "added": "Dodano!"
+    "added": "Dodano!",
+    "lockedTitle": "Ten obraz jest obecnie niedostępny",
+    "lockedSubTitle": "Prawdopodobnie został zarezerwowany lub sprzedany. Zachęcamy do zobaczenia innych prac artysty."
   },
   "footer": {
     "rights": "Wszelkie prawa zastrzeżone",
