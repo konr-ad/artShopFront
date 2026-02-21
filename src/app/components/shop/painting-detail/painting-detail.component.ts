@@ -49,7 +49,6 @@ export class PaintingDetailComponent implements OnInit {
       this.paintingService.details(id).subscribe(dto => {
         this.details = dto;
         this.isLocked = dto.state !== 'AVAILABLE';
-        console.log('this.isLocked',this.isLocked)
         this.buildGallery(dto);
         this.recomputeAddState();
       });
