@@ -138,6 +138,7 @@ export class CheckoutComponent implements OnInit {
   showNoteInput: boolean = false;
   checkoutForm: FormGroup;
   formSubmitted: boolean = false;
+  isTestEnvironment: boolean = false;
 
   constructor(
     private fb: FormBuilder,

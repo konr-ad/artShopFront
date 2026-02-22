@@ -59,14 +59,15 @@
             <h2 class="text-lg font-semibold tracking-wide text-gray-900">
               {{ 'checkout.shippingInfo.title' | translate }}
             </h2>
-
-            <button
-              type="button"
-              (click)="fillTestData()"
-              class="text-sm font-medium text-gray-600 hover:text-black transition"
-            >
-              {{ 'checkout.shippingInfo.fillTestData' | translate }}
-            </button>
+            <div *ngIf="isTestEnvironment">
+              <button
+                type="button"
+                (click)="fillTestData()"
+                class="text-sm font-medium text-gray-600 hover:text-black transition"
+              >
+                {{ 'checkout.shippingInfo.fillTestData' | translate }}
+              </button>
+            </div>
           </div>
 
           <div class="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2">
@@ -369,7 +370,7 @@
 
           <p class="mt-6 text-center text-sm text-gray-500">
             <a routerLink="/cart" class="font-medium text-gray-700 hover:text-black transition">
-              ← Wróć do koszyka
+              ← {{ 'checkout.backToCart' | translate }}
             </a>
           </p>
         </div>

@@ -71,6 +71,7 @@
   },
   "checkout": {
     "title": "Do kasy",
+    "backToCart": "Wróć do koszyka",
     "contactInfo": {
       "title": "Dane kontaktowe",
       "email": {
